@@ -1,0 +1,52 @@
+@use "global" as *;
+
+// 最終_FB：Galleryは6枚1セットで考え、画像が挿入されて7枚目が入ってきたら、1番目が繰り返される
+.gallery-photo__items {
+  display: grid;
+  gap: rem(8);
+  @include mq(md) {
+    grid-template-columns:492fr 80fr 492fr;
+    grid-template-rows: repeat(4, 369fr);
+    grid-auto-flow: dense;
+  }
+}
+
+.gallery-photo__item:nth-child(6n+1),
+.gallery-photo__item:nth-child(6n+6) {
+  @include mq(md) {
+    grid-row: span 2;
+    grid-column: span 1;
+  }
+}
+
+.gallery-photo__item {
+  @include mq(md) {
+    grid-row: span 1;
+    grid-column: span 2;
+  }
+}
+
+.gallery-photo__img {
+  display: block;
+  aspect-ratio: 345 / 219;
+  overflow: hidden;
+  cursor: pointer;
+  @include mq(md) {
+    aspect-ratio: 580 / 369;
+  }
+}
+
+.gallery-photo__item:nth-child(6n+1) .gallery-photo__img,
+.gallery-photo__item:nth-child(6n+6) .gallery-photo__img {
+  display: block;
+  aspect-ratio: 345 / 523;
+  overflow: hidden;
+  @include mq(md) {
+    aspect-ratio: 492 / 746;
+  }
+}
+
+.gallery-photo__img img {
+  height: 100%;
+  object-fit: cover;
+}

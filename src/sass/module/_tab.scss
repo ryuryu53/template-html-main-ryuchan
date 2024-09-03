@@ -1,0 +1,121 @@
+@use "global" as *;
+
+.tab__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: rem(20);
+  background-color: $white;
+  @include mq(md) {
+    gap: rem(90);
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.tab__item {
+  font-size: rem(14);
+  font-weight: $normal;
+  line-height: 1.44;
+  color: $greenaccent;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: $green2;
+  border: none;
+  padding: rem(10) 0;
+  box-shadow: rem(2) rem(2) rem(4) rgba($color: $black, $alpha: 25%);
+  cursor: pointer;
+  @include mq(md) {
+    position: relative;
+    font-size: rem(24);
+    padding: rem(29) rem(30) rem(26) rem(102);
+  }
+}
+
+.tab__item:nth-child(2) {
+  @include mq(md) {
+    padding-right: rem(18);
+    padding-left: rem(90);
+  }
+}
+
+.tab__item:hover {
+  color: $white;
+  background-color: $greenaccent;
+}
+
+.tab__item::before {
+  @include mq(md) {
+    content: "";
+    position: absolute;
+    top: rem(13);
+    left: rem(30);
+    width: rem(64);
+    height: rem(64);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+.tab__item:first-child::before {
+  @include mq(md) {
+    background-image: url(../images/common/whale-icon.svg);
+  }
+}
+
+.tab__item:nth-child(2)::before {
+  @include mq(md) {
+    left: rem(18);
+    width: rem(63);
+    height: rem(63);
+    background-image: url(../images/common/fish-icon_1.svg);
+  }
+}
+
+.tab__item:nth-child(3)::before {
+  @include mq(md) {
+    background-image: url(../images/common/fish-icon_2.svg);
+  }
+}
+
+.tab__item:first-child:hover::before {
+  @include mq(md) {
+    background-image: url(../images/common/whale-icon-white.svg);
+  }
+}
+
+.tab__item:nth-child(2):hover::before {
+  @include mq(md) {
+    background-image: url(../images/common/fish-icon_1-white.svg);
+  }
+}
+
+.tab__item:nth-child(3):hover::before {
+  @include mq(md) {
+    background-image: url(../images/common/fish-icon_2-white.svg);
+  }
+}
+
+.tab__item.is-active {
+  color: $white;
+  border-color: transparent;
+  background-color: $greenaccent;
+}
+
+.tab__item:first-child.is-active::before {
+  @include mq(md) {
+    background-image: url(../images/common/whale-icon-white.svg);
+  }
+}
+
+.tab__item:nth-child(2).is-active::before {
+  @include mq(md) {
+    background-image: url(../images/common/fish-icon_1-white.svg);
+  }
+}
+
+.tab__item:nth-child(3).is-active::before {
+  @include mq(md) {
+    background-image: url(../images/common/fish-icon_2-white.svg);
+  }
+}

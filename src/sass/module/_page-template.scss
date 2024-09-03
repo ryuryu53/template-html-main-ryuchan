@@ -1,0 +1,93 @@
+@use "global" as *;
+
+.page-template {
+  position: relative;
+}
+
+.page-template::before {
+  content: "";
+  background-image: url(../images/common/goldfish-sp.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: rem(-24);  // -24+17+3
+  left: rem(15);
+  width: rem(120);
+  height: rem(55);
+  @include mq(md) {
+    background-image: url(../images/common/goldfish-pc.svg);
+    top: rem(-70);  // PC版カンプには魚なし：-70+17とすると文字と被る部分が増えるので、そのまま-70にした
+    left: calc(50% - min(48%, rem(620)));
+    width: rem(301);
+    height: rem(138);
+  }
+}
+
+.page-template__inner.inner {
+  max-width: rem(850);
+}
+
+.page-template__title.section-header {
+  position: relative;
+  text-align: left;
+}
+
+.page-template__text-block {
+  font-size: rem(16);
+  font-weight: $normal;
+  line-height: 2;
+  margin-top: rem(39);
+}
+
+.page-template__head-list {
+  margin-top: rem(32);
+  padding-left: rem(6);
+}
+
+.page-template__head-item {
+  text-indent: -1.15em;
+  padding-left: 1.15em;
+}
+
+.page-template__middle-content {
+  margin-top: rem(32);
+}
+
+.page-template__middle-item--terms-page {
+  margin-left: rem(-6);
+}
+
+.page-template__middle-item span {
+  display: block;
+  text-indent: -1.15em;
+  padding-left: calc(1.15em + rem(6));
+}
+
+.page-template__use-text {
+  line-break: anywhere;
+  margin-top: rem(32);
+}
+
+.page-template__use-text--terms-page {
+  line-break: strict;
+  margin-top: 0;
+}
+
+.page-template__provision-text {
+  margin-top: rem(32);
+}
+
+.page-template__last-list {
+  padding-left: rem(6);
+}
+
+.page-template__last-item {
+  text-indent: -1.15em;
+  line-break: strict;
+  padding-left: 1.15em;
+}
+
+.page-template__last-text {
+  margin-top: rem(32);
+}

@@ -1,0 +1,283 @@
+@use "global" as *;
+
+.campaign-card {
+  box-shadow: rem(2) rem(2) rem(10) 0 rgba($color: $black, $alpha: 25%);
+}
+
+.campaign-card__link {
+  // display: block; // FB：追加 → 動画レビュー：コメントアウト
+  display: flex;  // 動画レビュー：追加
+  flex-direction: column; // 動画レビュー：追加
+  height: 100%; // FB：追加
+}
+
+.campaign-card__img {
+  // display: block; コード_FB：クラス名をpictureタグへ移したためblockにしたが、なくても問題ない!? → flexアイテムなのでブロック扱い
+  aspect-ratio: 280 / 188;
+  // width: rem(280);
+  overflow: hidden;
+
+  @include mq(md) {
+    // width: rem(333);
+    aspect-ratio: 333 / 223;
+  }
+}
+
+.campaign-card__img--sub-page {
+  @include mq(md) {
+    aspect-ratio: 520 / 347;
+  }
+}
+
+.campaign-card__img.campaign-card__img--blog-page {
+  aspect-ratio: 294 / 188;
+}
+
+.campaign-card__img img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.campaign-card__body {
+  flex-grow: 1; // 動画レビュー：追加
+  display: flex;  // 動画レビュー：追加
+  flex-direction: column; // 動画レビュー：追加
+  padding: rem(16);
+
+  @include mq(md) {
+    padding: rem(24) rem(16) rem(32);
+  }
+}
+
+.campaign-card__body--sub-page {
+  @include mq(md) {
+    padding: rem(24) rem(24) 0;
+  }
+}
+
+.campaign-card__body.campaign-card__body--blog-page {
+  padding: rem(15) rem(23) rem(16);
+  @include mq(md) {
+    padding-top: rem(16);
+    padding-bottom: rem(18);
+  }
+}
+
+.campaign-card__category {
+  display: inline-block;
+  width: fit-content; // 動画レビュー：追加
+  font-size: rem(12);
+  font-weight: $normal;
+  color: $greenaccent;
+  padding: rem(5) rem(11);
+  border: rem(1) solid currentColor;
+
+  @include mq(md) {
+    padding: rem(7) rem(15);
+  }
+}
+
+.campaign-card__title {
+  flex-grow: 1; // 動画レビュー：追加
+  border-bottom: rem(1) solid $greenaccent;
+  margin-top: rem(4);
+  padding-bottom: rem(8);
+}
+
+.campaign-card__title--sub-page {
+  @include mq(md) {
+    padding-bottom: rem(3);
+  }
+}
+
+.campaign-card__title--blog-page {
+  margin-top: 0;
+  text-align: center;
+}
+
+.campaign-card__text {
+  text-align: center;
+  margin-top: rem(9);
+
+  @include mq(md) {
+    margin-top: rem(15);
+    padding-right: rem(15);
+  }
+}
+
+.campaign-card__text--sub-page {
+  @include mq(md) {
+    margin-top: rem(23);
+  }
+}
+
+.campaign-card__text.campaign-card__text--blog-page {
+  @include mq(md) {
+    font-size: rem(14);
+    margin-top: rem(9);
+    padding-right: 0;
+  }
+}
+
+.campaign-card:nth-child(3) .campaign-card__text--sub-page,
+.campaign-card:nth-child(7) .campaign-card__text--sub-page {
+  @include mq(md) {
+    padding-right: 0;
+  }
+}
+
+.campaign-card__price {
+  font-family: $third-font-family;
+  font-weight: $bold;
+  text-align: center;
+  margin-top: rem(1);
+
+  @include mq(md) {
+    line-height: 1.37;
+    margin-top: rem(1);
+  }
+}
+
+
+.campaign-card:nth-child(3) .campaign-card__price,
+.campaign-card:nth-child(7) .campaign-card__price {
+  @include mq(md) {
+    padding-right: rem(24);
+  }
+}
+
+.campaign-card:nth-child(3) .campaign-card__price--sub-page,
+.campaign-card:nth-child(7) .campaign-card__price--sub-page {
+  @include mq(md) {
+    padding-right: rem(3);
+  }
+}
+
+.campaign-card__price.campaign-card__price--blog-page {
+  @include mq(md) {
+    margin-top: rem(3);
+  }
+}
+
+.campaign-card__price-before {
+  position: relative;
+  font-size: rem(20);
+
+  @include mq(md) {
+    font-size: rem(24);
+  }
+}
+
+.campaign-card:nth-child(3) .campaign-card__price-before,
+.campaign-card:nth-child(7) .campaign-card__price-before {
+  @include mq(md) {
+    padding-right: rem(2);
+  }
+}
+
+.campaign-card:nth-child(3) .campaign-card__price-before--sub-page,
+.campaign-card:nth-child(7) .campaign-card__price-before--sub-page {
+  @include mq(md) {
+    padding-right: 0;
+  }
+}
+
+.campaign-card__price-before.campaign-card__price-before--blog-page {
+  @include mq(md) {
+    font-size: rem(20);
+  }
+}
+
+.campaign-card__price-before::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 0;
+  width: rem(76);
+  height: rem(3);
+  background-color: $red;
+
+  @include mq(md) {
+    top: 48%;
+    width: rem(91);
+  }
+}
+
+.campaign-card__price-before.campaign-card__price-before--blog-page::before {
+  @include mq(md) {
+    top: 45%;
+    width: rem(76);
+  }
+}
+
+.campaign-card__price-after {
+  position: relative;
+  left: rem(1);
+  font-size: rem(32);
+  color: $greenaccent;
+  margin-left: rem(17);
+
+  @include mq(md) {
+    font-size: rem(40);
+    margin-left: rem(24);
+  }
+}
+
+.campaign-card__price-after--sub-page {
+  @include mq(md) {
+    margin-left: rem(41);
+  }
+}
+
+.campaign-card__price-after.campaign-card__price-after--blog-page {
+  @include mq(md) {
+    font-size: rem(32);
+    margin-left: rem(17);
+  }
+}
+
+.campaign-card__information {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: rem(16);
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.campaign-card__information-text {
+  flex-grow: 1;
+  font-size: rem(16);
+  font-weight: $normal;
+  color: $green;
+}
+
+.campaign-card__information-period {
+  font-family: $third-font-family;
+  font-size: rem(16);
+  font-weight: $bold;
+  color: $greenaccent;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-top: rem(29);
+  padding-right: rem(15);
+}
+
+.campaign-card__information-inquiry {
+  font-size: rem(14);
+  font-weight: $normal;
+  color: $greenaccent;
+  text-align: center;
+  margin-top: rem(3);
+}
+
+.campaign-card__btn {
+  text-align: center;
+  padding-bottom: rem(5);
+  margin-top: rem(16);
+}
+
+.campaign-card__btn--sub-page {
+  margin-top: rem(14);
+}

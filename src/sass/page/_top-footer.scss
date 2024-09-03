@@ -1,0 +1,31 @@
+@use "global" as *;
+
+.top-footer {
+  margin-top: rem(104);
+  padding-top: rem(48);
+  padding-bottom: rem(56);
+
+  @include mq(md) {
+    margin-top: rem(160);
+    padding-top: rem(80);
+    padding-bottom: rem(80);
+  }
+}
+
+.top-footer--contact-page {
+  margin-top: rem(148);
+  @include mq(md) {
+    margin-top: rem(177);
+  }
+}
+
+.top-footer--thanks-page {
+  margin-top: rem(143);
+  @include mq(md) {
+    margin-top: rem(120);
+  }
+}
+
+.top-footer.top-footer--404-page {
+  margin-top: 0;
+}

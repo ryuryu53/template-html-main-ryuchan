@@ -1,0 +1,132 @@
+@use "global" as *;
+
+.sp-nav {
+  display: none;
+  position: absolute;
+  top: rem(80); // 動画レビュー：追加
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: $greenaccent;
+  // overflow-y: auto; // FB：追加 ⇒ 動画レビュー：.sp-nav__inner へ移動
+}
+
+.sp-nav__inner {
+  height: calc(100vh - rem(80));
+  overflow-y: auto;
+  padding-bottom: rem(32);
+}
+
+.sp-nav__container {
+  display: flex;
+  // align-items: center; FB：スマホを横にしたときメニューの上部が見切れてしまう
+  width: 100%;
+  max-width: rem(600);
+  // height: calc(100vh - rem(80));  // 動画レビュー：inherit から修正 ⇒ .sp-nav__innerへ移動
+  margin: auto;
+  padding: rem(5) rem(15) 0; // FB：rem(85) 追加 ⇒ 動画レビュー：85 → 5 に修正
+}
+
+.sp-nav__left-content {
+  width: 50.2%;
+  padding-bottom: rem(16);
+}
+
+.sp-nav__right-content {
+  width: 46.7%;
+  padding-bottom: rem(8);
+}
+
+.sp-nav__left-items:first-child {
+  padding-bottom: rem(2);
+}
+
+.sp-nav__right-items:nth-child(2) {
+  margin-top: 8px;
+}
+
+.sp-nav__left-item,
+.sp-nav__right-item {
+  font-size: rem(16);
+  color: $white;
+  padding-bottom: rem(1);
+}
+
+.sp-nav__left-item:nth-child(2) {
+  margin-top: 8px;
+}
+
+.sp-nav__right-item:nth-child(2) {
+  margin-top: 2px;
+}
+
+// 最終_FB：.sp-nav__left-link, .sp-nav__right-link → .sp-nav__linkにまとめた
+.sp-nav__link {
+  position: relative;
+  display: block;
+  font-weight: $bold;
+  // text-indent: rem(-18); コード_FB：マイナス系のものはあまり使わない方がよい ⇒ absoluteで対応
+  padding: rem(16) 0 rem(15) rem(22);
+}
+
+// .sp-nav__left-link-1 { // コード_FB：ほとんど数値変わらないのでpadding統一してOK。連番は使わない
+//   padding: rem(16) 0 rem(15) rem(22);
+// }
+
+.sp-nav__right-items:nth-child(2) .sp-nav__right-item:nth-child(2) .sp-nav__link {
+  line-height: 1.1;
+  padding-top: rem(20);
+}
+
+.sp-nav__right-items:nth-child(2) .sp-nav__right-item:nth-child(3) .sp-nav__link {
+  padding-top: rem(21);
+}
+
+.sp-nav__right-items:nth-child(2) .sp-nav__right-item:nth-child(4) .sp-nav__link {
+  padding-top: rem(18);
+}
+
+.sp-nav__link::before {
+  content: "";
+  position: absolute; // コード_FB：アイコンの位置調整はabsoluteで行う
+  top: rem(19);
+  left: 0;
+  display: inline-block;
+  width: rem(18);
+  height: rem(18);
+  background-image: url(../images/common/starfish.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.sp-nav__right-items:nth-child(2) .sp-nav__right-item:nth-child(3) .sp-nav__link::before {
+  top: rem(24);
+}
+
+.sp-nav__right-items:nth-child(2) .sp-nav__right-item:nth-child(4) .sp-nav__link::before {
+  top: rem(21);
+}
+
+.sp-nav__left-detail-item,
+.sp-nav__right-detail-item {
+  font-weight: $normal;
+}
+
+.sp-nav__left-detail-link,
+.sp-nav__right-detail-link {
+  display: block;
+  padding-bottom: rem(9);
+  padding-left: rem(22);
+}
+
+.sp-nav__left-detail-item:first-child .sp-nav__left-detail-link,
+.sp-nav__right-detail-item:first-child .sp-nav__right-detail-link {
+  padding-top: rem(3);
+}
+
+.sp-nav__left-detail-item:not(:first-child) .sp-nav__left-detail-link,
+.sp-nav__right-detail-item:not(:first-child) .sp-nav__right-detail-link {
+  padding-top: rem(9);
+}

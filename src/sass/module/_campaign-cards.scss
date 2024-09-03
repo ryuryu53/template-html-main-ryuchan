@@ -1,0 +1,36 @@
+@use "global" as *;
+
+.campaign-cards {
+  padding-bottom: rem(10); // シャドウが見えるようにするため
+  padding-left: rem(6); // 同上
+}
+
+.campaign-cards__item {
+  // swiper-slideにwidth100%あり
+  max-width: rem(280);
+  height: auto; // FB：テキストが増えてもカードの高さを揃えるため
+
+  @include mq(md) {
+    max-width: rem(333);
+  }
+}
+
+// .campaign-cards__item--sub-page {
+//   width: 100%;
+//   margin: auto;
+//   @include mq(md) {
+//     max-width: rem(520);
+//     padding-bottom: rem(40);
+//     display: grid;
+//     grid-template-rows: subgrid;
+//   }
+// }
+
+.campaign-cards__item--blog-page {
+  max-width: 100%;
+  width: 100%;
+}
+
+.campaign-cards__item--blog-page + .campaign-cards__item--blog-page {
+  margin-top: rem(40);
+}

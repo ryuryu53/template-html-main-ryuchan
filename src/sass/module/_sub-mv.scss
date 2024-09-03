@@ -1,0 +1,42 @@
+@use "global" as *;
+
+.sub-mv__header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+
+  @include mq(md) {
+    top: 59.2%;
+  }
+}
+
+.sub-mv__title {
+  font-family: $third-font-family;
+  font-size: rem(40);
+  font-weight: $normal;
+  color: $white;
+
+  @include mq(md) {
+    font-size: rem(80);
+  }
+}
+
+.sub-mv__title--space-pc {
+  @include mq(md) {
+    letter-spacing: 0.006em;
+  }
+}
+
+.sub-mv__title--space {
+  letter-spacing: -0.006em;
+}
+
+.sub-mv__title--space2 {
+  letter-spacing: -0.005em;
+}
+
+.sub-mv__title span {
+  text-transform: uppercase;
+}

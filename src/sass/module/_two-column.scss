@@ -1,0 +1,72 @@
+@use "global" as *;
+
+.two-column {
+  position: relative;
+}
+
+.two-column::before {
+  content: "";
+  background-image: url(../images/common/goldfish-sp.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: rem(-24);
+  left: rem(15);
+  width: rem(120);
+  height: rem(55);
+  @include mq(md) {
+    background-image: url(../images/common/goldfish-pc.svg);
+    top: rem(-70);
+    left: calc(50% - min(48%, rem(620)));
+    width: rem(301);
+    height: rem(138);
+  }
+}
+
+  // // 最終_FB：ブログ一覧とブログ詳細のカラムは全く同じものでよい
+.two-column__inner {
+  @include mq(md) {
+    position: relative;
+    display: flex;
+    gap: rem(80);
+  }
+}
+
+// .two-column__inner.inner {
+//   @media (max-width: 767px) {
+//     padding-right: rem(21);
+//     padding-left: rem(21);
+//   }
+// }
+
+// .two-column__inner--single-page.inner {
+//   @media (max-width: 767px) {
+//     padding-right: rem(15);
+//     padding-left: rem(15);
+//   }
+
+//   @include mq(md) {
+//     gap: rem(86);
+//   }
+// }
+
+.two-column__article {
+  @include mq(md) {
+    width: 65.37%;
+  }
+}
+
+// .two-column__article--single-page {
+//   @include mq(md) {
+//     width: 65.1%;
+//   }
+// }
+
+.two-column__aside {
+  margin-top: rem(80);
+  @include mq(md) {
+    width: 27.22%;
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,79 @@
+@use "global" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: rem(80);
+  background-color: rgba($color: $green, $alpha: 68%);
+
+  @include mq(md) {
+    height: rem(90);
+  }
+}
+
+.header.is-active {
+  background-color: $greenaccent; // 動画レビュー：追加
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: inherit;
+  padding: 0 rem(15);
+
+  @include mq(md) {
+    // max-width: rem(1440);  FB：左右にくっつける（max-widthの設定不要）
+    // margin: auto;
+    padding: 0 rem(40);
+  }
+}
+
+.header__logo {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  height: inherit;
+
+  @include mq(md) {
+    left: rem(-4);
+    padding-top: rem(7);  // align-items: center;だけではズレが大きいのでpaddingで調整
+  }
+}
+
+.header__logo-link {
+  display: block;
+  aspect-ratio: 102 / 38;
+  width: rem(102);
+  overflow: hidden;
+
+  @include mq(md) {
+    aspect-ratio: 141 / 58; // 133/50 → 141/58 に修正：カンプは133×50だがその通り指定すると、デベロッパーツールで組み込みサイズ141×58(レンダリングは133×50)と表示され、VSCodeのsvgファイルには「width="141" height="58"」とある
+    width: rem(141);
+  }
+}
+
+.header__logo-link img {  // この指定忘れてた！
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__drawer {
+  @include mq(md) {
+    display: none;
+  }
+}
+
+.header__pc-nav {
+  display: none;
+  height: inherit;
+
+  @include mq(md) {
+    display: block;
+  }
+}
