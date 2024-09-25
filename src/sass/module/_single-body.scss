@@ -32,6 +32,11 @@
   }
 }
 
+.single-body__img img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .single-body__content {
   display: grid;
   gap: rem(24);
@@ -41,53 +46,54 @@
     margin-top: rem(40);
   }
 
-  & > * {
-    margin-top: 0 !important; // gridで管理し、これを使えばpとulを囲っていたdivをなくせる（HIROKIさんに直伝）
+  > * {
+    margin-top: 0 !important; // gridで管理し、これを使えばpとulを囲っていたdivをなくせる
   }
 
   p {
-    margin-top: rem(24);
-    @include mq(md) {
-      margin-top: rem(40);
-    }
-  }
-
-  picture {
-    display: block;
-    aspect-ratio: 345 / 231;
-    overflow: hidden;
-    margin-top: rem(24);
-    @include mq(md) {
-      aspect-ratio: 700 / 468;
-      margin-top: rem(40);
-    }
-    
-    & img {
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  margin-top: rem(24);
-  @include mq(md) {
-    margin-top: rem(40);
-  }
-
-  & p {
     font-size: rem(16);
     font-weight: $normal;
+    color: $black;
+    margin-top: rem(24);
     @include mq(md) {
-      color: $black;
+      color: $green;
+      margin-top: rem(40);
     }
   }
 
-  & ul {
+  img {
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 345 / 231;
+    @include mq(md) {
+      aspect-ratio: 700 / 468;
+    }
+  }
+
+  // WP化したとき管理画面で指定の画像ではpicture要素を使っていない
+  // picture {
+  //   display: block;
+  //   aspect-ratio: 345 / 231;
+  //   overflow: hidden;
+  //   margin-top: rem(24);
+  //   @include mq(md) {
+  //     aspect-ratio: 700 / 468;
+  //     margin-top: rem(40);
+  //   }
+    
+  //   & img {
+  //     height: 100%;
+  //     object-fit: cover;
+  //   }
+  // }
+
+  ul {
     margin-top: rem(24);
     @include mq(md) {
     margin-top: rem(40);
     }
 
-    & li {
+    li {
       position: relative;
       font-size: rem(16);
       font-weight: $normal;
@@ -97,7 +103,7 @@
         color: $green;
       }
 
-      & + li {
+      + li {
         margin-top: rem(4);
       }
 

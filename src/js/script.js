@@ -161,39 +161,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
     }
   }
 
-  // タブによる絞り込み
-  // 変数に要素をセット
-  // var $filter = $('.js-filter-list [data-filter]'),
-  //     $item = $('.js-filter-item [data-item]');
-    
-  // // カテゴリをクリックしたら
-  // $filter.click(function (e) {
-  //   // デフォルトの動作をキャンセル
-  //   e.preventDefault();
-  //   var $this = $(this);
-      
-  //   // クリックしたカテゴリにクラスを付与
-  //   $filter.removeClass('is-active');
-  //   $this.addClass('is-active');
-    
-  //   // クリックした要素のdata属性を取得
-  //   var $filterItem = $this.attr('data-filter');
-    
-  //   // データ属性が all なら全ての要素を表示
-  //   if ($filterItem == 'all') {
-  //     $item.removeClass('is-active').fadeOut().promise().done(function () {
-  //       $item.addClass('is-active').fadeIn();
-  //     });
-  //   // all 以外の場合は、クリックした要素のdata属性の値と同じ値のアイテムを表示
-  //   } else {
-  //     $item.removeClass('is-active').fadeOut().promise().done(function () {
-  //       $item.filter('[data-item = "' + $filterItem + '"]').addClass('is-active').fadeIn();
-  //     });
-  //   }
-
-  //   updateBoxShadow();
-  // });
-
   // 最初に表示されるタブの設定
   $('.information-cards__item:first-child').addClass('is-active');
   $('.tab__item:first-child').addClass('is-active');
@@ -212,15 +179,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
     updateBoxShadow();
   });
 
-  // let browserW = window.outerWidth;
-  // if (browserW >= 768) {
-  //   let nothold = $('.filter-list__item--page-info').not('.is-active');
-
-  //   nothold.css({
-  //     'box-shadow': 'none',
-  //   });
-  // }
-
   // 初期状態のボックスシャドウを更新
   updateBoxShadow();
 
@@ -228,11 +186,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   $(window).resize(function() {
     updateBoxShadow();
   });
-
-  // クリックイベントでis-activeクラスをつけたり外したりする時の処理
-  // $('.filter-list__item--page-info').click(function() {
-  //   updateBoxShadow();
-  // });
 
   // タブを選択する関数を定義
   function selectTab(hash) {
@@ -326,11 +279,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   // トグル
-  $(".js-archive-toggle:first-child .js-archive-toggle-items").css(
-    "display",
-    "block"
-  );
-  $(".js-archive-toggle:first-child > .js-archive-toggle-title").addClass("is-open");
   $(".js-archive-toggle-title").on("click", function () {
     $(this).toggleClass("is-open");
     $(this).next().slideToggle(300);
@@ -341,56 +289,6 @@ $(".js-accordion-title").on("click", function () {
   $(this).toggleClass("is-close");
   $(this).next().slideToggle(300);
 });
-
-// フォームの入力チェック
-// $('#form__contact').on('submit', function (e) {
-//   var user_name = $('#form__name').val(); /* お名前 */
-//   var email = $('#form__email').val(); /* メールアドレス */
-//   var tel = $('#form__tel').val(); /* 電話番号 */
-//   var inquiry_checked = $('input[name="inquiry"]:checked').length > 0; /* inquiryのチェックボックス */
-//   // var campaign_select = $('#form__campaign').val(); /* キャンペーン */
-//   var textarea_value = $('#form__textarea').val(); /* お問合せ内容 */
-//   var agree_checked = $('input[name="agree"]:checked').length > 0; /* agreeのチェックボックス */
-
-//   var error_text = ''; /* エラーの説明が入る変数 */
-
-//   if (user_name.trim() === '') {
-//     error_text = '※必須項目が入力されていません。入力してください。';
-//   } else if (email.trim() === '') {
-//     error_text = '※必須項目が入力されていません。入力してください。';
-//   } else if (tel.trim() === '') {
-//     error_text = '※必須項目が入力されていません。入力してください。';
-//   } else if (!inquiry_checked) {
-//     error_text = '※必須項目がチェックされていません。チェックしてください。';
-//   }/* else if (campaign_select === '') {
-//     error_text = '※必須項目が選択されていません。選択してください。';
-//   } */ else if (textarea_value.trim() === '') {
-//     error_text = '※必須項目が入力されていません。入力してください。';
-//   } else if (!agree_checked) {
-//     error_text = '※必須項目がチェックされていません。チェックしてください。';
-//   }
-
-//     // console.log(inquiry_checked);
-
-//   // エラーがあった場合はページ遷移を止め、エラー内容を表示する
-//   if (error_text !== '') {
-
-//     // ページ遷移を止める
-//     e.preventDefault();
-
-//     // エラー内容を表示する
-//     $('#form__error').text(error_text);
-
-//   // エラーがない場合はエラー内容をクリアする
-//   } else {
-
-//     // 今回はサーバーにデータを送らないのでページ遷移を止める
-//     e.preventDefault();
-
-//     // エラー内容をクリアする
-//     $('#form__error').text('');
-//   }
-// });
 
   // フォームの入力チェック
   if (window.location.pathname.endsWith('page-contact.html')) {
@@ -492,3 +390,51 @@ $(".js-accordion-title").on("click", function () {
     }
   }
 });
+
+// ★ページネーションの設定（SP版とPC版で表示するページ数を変える設定）
+// ウェブページが完全に読み込まれたときにadjustPaginationという関数を実行するようにブラウザに指示
+// （documentオブジェクトにアクセスして、addEventListenerメソッドにより、DOMContentLoadedイベント（ページ全体のHTMLが完全に読み込まれ、DOMツリーが構築された後に発生）が発生するとadjustPagination関数が呼び出される）
+document.addEventListener('DOMContentLoaded', adjustPagination);
+// ブラウザのウィンドウのサイズが変更されたときにadjustPaginationという関数を実行
+// （windowオブジェクトにアクセスして、addEventListenerメソッドにより、resizeイベント（ブラウザのウィンドウのサイズが変更されたときに発生）が発生するとadjustPagination関数が呼び出される）
+window.addEventListener('resize', adjustPagination);
+
+// 関数宣言はホイスティングされる → 関数を定義する前にその関数を呼び出すことが可能
+function adjustPagination() {
+  // ブラウザのウィンドウの幅が768ピクセル未満かどうかをチェックし、その結果をisMobileという変数に保存
+  // 768ピクセル未満ならtrue（モバイル）、それ以上ならfalse（PC）になる
+  var isMobile = window.innerWidth < 768;
+  // モバイルの場合はページあたり4ページ、PCの場合は6ページを表示するように設定
+  var perPage = isMobile ? 4 : 6; // isMobileがtrueなら4、falseなら6になる
+  // ページネーションの中で現在表示されているページの番号を取得して、それを整数（数値）に変換
+  // （document.querySelectorメソッド：指定したセレクタに一致するドキュメント内の最初の要素を返す）
+  // （textContentプロパティ：選択された要素のテキスト内容を取得）
+  // （parseInt関数：文字列を整数に変換する → 第一引数は変換したい文字列、第二引数は数値の基数（この場合は十進数））
+  var currentPage = parseInt(document.querySelector('.wp-pagenavi .current').textContent, 10);
+  // ページネーションに関連するすべてのリンクと現在のページを示す要素を取得
+  // （document.querySelectorAllメソッド：指定したCSSセレクタに一致するドキュメント内のすべての要素をノードリストとして返す）
+  var paginationLinks = document.querySelectorAll('.wp-pagenavi a.page, .wp-pagenavi span.current');
+  // ページネーションにおいて表示するページの範囲を決定する際の「開始ページ」を計算
+  // （Math.max関数：引数として与えられた2つの数値から、より大きい方を返す）
+  // （Math.floor関数：与えられた数値を小数点以下を切り捨てて最大の整数を返す）
+  var startPage = Math.max(currentPage - Math.floor(perPage / 2), 1);
+  // ページネーションにおいて表示するページの範囲を決定する際の「終了ページ」を計算
+  // （Math.min関数：引数として与えられた数値から、より小さい方を返す）
+  var endPage = Math.min(startPage + perPage - 1, currentPage + Math.floor(perPage / 2));
+
+  // 全てのページリンクを一つずつ見ていき、そのページ番号が表示範囲内なら表示し、範囲外なら非表示にする
+  paginationLinks.forEach(function(link) {  // 引数 link は、リストの各要素を指す
+    var pageNumber = parseInt(link.textContent, 10);
+    // ページ番号 (pageNumber) が有効な数値かどうかを確認し、有効な場合にそのリンクの表示・非表示を制御
+    // （isNaN()関数：引数として渡された値が数値でない場合に true を返す）
+    if ( !isNaN(pageNumber) ) {
+      // style.displayプロパティ：指定したHTML要素の表示方法を制御。空文字列 ('') を設定すると、その要素はデフォルトの表示スタイルに従って表示される
+      link.style.display = (pageNumber >= startPage && pageNumber <= endPage) ? '' : 'none';
+    }
+  });
+
+  // 前後のリンクの表示制御を確保（「次へ」と「前へ」のリンクは常に表示されるように設定）
+  document.querySelectorAll('.wp-pagenavi .nextpostslink, .wp-pagenavi .previouspostslink').forEach(function(link) {
+    link.style.display = ''; // 常に表示
+  });
+}

@@ -379,78 +379,43 @@
           </picture>
         </div>
         <div class="price__table price-table">
-          <div class="price-table__content">
-            <h3 class="price-table__title text--bold">ライセンス講習</h3>
-            <dl class="price-table__items text--small-sp">
-              <div class="price-table__item">
-                <dt>オープンウォーターダイバーコース</dt>
-                <dd>&yen;50&#44;000</dd>
+          <?php
+            // 4つの料金表に対応するフィールド名を設定
+            $price_tables = [
+              'table_prices1',
+              'table_prices2',
+              'table_prices3',
+              'table_prices4'
+            ];
+            // 各料金表について処理
+            foreach ( $price_tables as $price_table_key ) :
+              // PriceページのID
+              $page_price_id = 12;
+              // テーブルタイトルと料金表情報を取得
+              $table_title = SCF::get('table_title' . substr($price_table_key, -1), $page_price_id);
+              $table_prices = SCF::get($price_table_key, $page_price_id);
+              // テーブルタイトルと料金表情報が存在するか確認
+            if ( !empty($table_title) && !empty($table_prices) ) :
+          ?>
+              <div class="price-table__content">
+                <h3 class="price-table__title text--bold"><?php echo esc_html($table_title); ?></h3>
+                <dl class="price-table__items text--small-sp">
+                  <?php foreach ( $table_prices as $price ) : ?>
+                    <div class="price-table__item">
+                      <dt>
+                        <?php
+                          $course_name = $price['course_name' . substr($price_table_key, -1)];
+                          $course_name_escaped = esc_html($course_name);
+                          echo $course_name_escaped;  // トップページではSP版でも改行しない、HTMLエスケープのみ
+                        ?>
+                      </dt>
+                      <dd>&yen;<?php echo esc_html(number_format($price['course_price' . substr($price_table_key, -1)])); ?></dd>
+                    </div>
+                  <?php endforeach; ?>
+                </dl>
               </div>
-              <div class="price-table__item">
-                <dt>アドバンスドオープンウォーターコース</dt>
-                <dd>&yen;60&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>レスキュー＋EFRコース</dt>
-                <dd>&yen;70&#44;000</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="price-table__content">
-            <h3 class="price-table__title text--bold">体験ダイビング</h3>
-            <dl class="price-table__items text--small-sp">
-              <div class="price-table__item">
-                <dt>ビーチ体験ダイビング(半日)</dt>
-                <dd>&yen;7&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>ビーチ体験ダイビング(1日)</dt>
-                <dd>&yen;14&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>ボート体験ダイビング(半日)</dt>
-                <dd>&yen;10&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>ボート体験ダイビング(1日)</dt>
-                <dd>&yen;18&#44;000</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="price-table__content">
-            <h3 class="price-table__title text--bold">ファンダイビング</h3>
-            <dl class="price-table__items text--small-sp">
-              <div class="price-table__item">
-                <dt>ビーチダイビング(2ダイブ)</dt>
-                <dd>&yen;14&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>ボートダイビング(2ダイブ)</dt>
-                <dd>&yen;18&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>スペシャルダイビング(2ダイブ)</dt>
-                <dd>&yen;24&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>ナイトダイビング(1ダイブ)</dt>
-                <dd>&yen;10&#44;000</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="price-table__content">
-            <h3 class="price-table__title text--bold">スペシャルダイビング</h3>
-            <dl class="price-table__items text--small-sp">
-              <div class="price-table__item">
-                <dt>貸切ダイビング(2ダイブ)</dt>
-                <dd>&yen;24&#44;000</dd>
-              </div>
-              <div class="price-table__item">
-                <dt>1日ダイビング(3ダイブ)</dt>
-                <dd>&yen;32&#44;000</dd>
-              </div>
-            </dl>
-          </div>
+            <?php endif; ?>
+          <?php endforeach; ?>
         </div>
       </div>
       <div class="price__btn">

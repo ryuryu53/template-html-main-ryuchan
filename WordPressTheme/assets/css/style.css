@@ -457,6 +457,10 @@ a:hover {
 	padding-top: 0.1875rem;
 }
 
+.archive-toggle:first-child .archive-toggle__items {
+	display: block;
+}
+
 .archive-toggle__item + .archive-toggle__item {
 	padding-top: 0.1875rem;
 }
@@ -657,6 +661,8 @@ a:hover {
 
 .breadcrumbs {
 	margin-top: 0.5rem;
+	position: relative;
+	z-index: 10;
 }
 
 .breadcrumbs ul {
@@ -671,6 +677,10 @@ a:hover {
 	font-weight: 400;
 	position: relative;
 	text-transform: uppercase;
+}
+
+.breadcrumbs__inner--white {
+	color: #fff;
 }
 
 .breadcrumbs__inner--white span {
@@ -935,6 +945,7 @@ a:hover {
 }
 
 .campaign-category__link {
+	background-color: #fff;
 	border: 0.0625rem solid currentColor;
 	color: #408F95;
 	cursor: pointer;
@@ -2353,11 +2364,16 @@ a:hover {
 	overflow: hidden;
 }
 
+.single-body__img img {
+	-o-object-fit: cover;
+	height: 100%;
+	object-fit: cover;
+}
+
 .single-body__content {
 	grid-gap: 1.5rem;
 	display: grid;
 	gap: 1.5rem;
-	margin-top: 1.5rem;
 	margin-top: 1.5rem;
 }
 
@@ -2366,25 +2382,17 @@ a:hover {
 }
 
 .single-body__content p {
-	margin-top: 1.5rem;
-}
-
-.single-body__content picture {
-	aspect-ratio: 345/231;
-	display: block;
-	margin-top: 1.5rem;
-	overflow: hidden;
-}
-
-.single-body__content picture img {
-	-o-object-fit: cover;
-	height: 100%;
-	object-fit: cover;
-}
-
-.single-body__content p {
+	color: #000;
 	font-size: 1rem;
 	font-weight: 400;
+	margin-top: 1.5rem;
+}
+
+.single-body__content img {
+	-o-object-fit: cover;
+	aspect-ratio: 345/231;
+	height: 100%;
+	object-fit: cover;
 }
 
 .single-body__content ul {
@@ -3229,13 +3237,17 @@ textarea {
 .wp-pagenavi .previouspostslink {
 	margin-left: 0;
 	margin-right: 2.125rem;
+	overflow: hidden;
 	position: relative;
+	text-indent: -9999px;
 }
 
 .wp-pagenavi .nextpostslink {
 	margin-left: 2.1875rem;
 	margin-right: 0;
+	overflow: hidden;
 	position: relative;
+	text-indent: -9999px;
 }
 
 .wp-pagenavi .previouspostslink::before,
@@ -4427,20 +4439,12 @@ html {
 }
 
 .single-body__content p {
+	color: #0D2936;
 	margin-top: 2.5rem;
 }
 
-.single-body__content picture {
+.single-body__content img {
 	aspect-ratio: 700/468;
-	margin-top: 2.5rem;
-}
-
-.single-body__content {
-	margin-top: 2.5rem;
-}
-
-.single-body__content p {
-	color: #000;
 }
 
 .single-body__content ul {

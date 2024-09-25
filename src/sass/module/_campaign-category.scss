@@ -31,6 +31,7 @@
   border: rem(1) solid currentColor;
   cursor: pointer;
   transition: 0.3s ease;
+  background-color: $white;
 }
 
 .campaign-category__link.is-active {

@@ -26,12 +26,16 @@
   position: relative;
   margin-right: rem(34);
   margin-left: 0;
+  text-indent: -9999px; // プラグインで生成される矢印を画面の外へ出す
+  overflow: hidden; // 同上
 }
 
 .wp-pagenavi .nextpostslink {
   position: relative;
   margin-right: 0;
   margin-left: rem(35);
+  text-indent: -9999px; // プラグインで生成される矢印を画面の外へ出す
+  overflow: hidden; // 同上
 }
 
 .wp-pagenavi .previouspostslink::before,
