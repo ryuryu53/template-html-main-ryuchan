@@ -505,3 +505,40 @@ textarea {
   border-bottom: rem(1) solid currentColor;
   transform: skew(48deg);
 }
+
+// Contact Form 7
+.wpcf7 {
+	position: relative;
+}
+
+.wpcf7-spinner {
+	display: none !important;	// 確実に消したいのでimportantしてもOK（WP講座6.3 9:00）→ Sendボタン矢印、フッターが少し上に上がる
+}
+
+.form__item .wpcf7-list-item {
+	display: block;
+}
+
+.form__item .wpcf7-not-valid {
+	border-color: $red;
+	background-color: rgba($color: $red, $alpha: 20%);
+}
+
+.form__item .wpcf7-not-valid::placeholder {
+	color: $white;
+}
+
+.form__agree .wpcf7-list-item {
+	margin: 0;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output {
+	position: absolute;
+	font-size: rem(14);
+	color: $red;
+	border: none;
+	top: rem(-60);
+	left: rem(180);
+	margin: 0;
+	padding: 0;
+}

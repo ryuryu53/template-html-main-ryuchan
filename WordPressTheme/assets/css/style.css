@@ -3211,6 +3211,46 @@ textarea {
 	width: 2.5rem;
 }
 
+.wpcf7 {
+	position: relative;
+}
+
+.wpcf7-spinner {
+	display: none !important;
+}
+
+.form__item .wpcf7-list-item {
+	display: block;
+}
+
+.form__item .wpcf7-not-valid {
+	background-color: rgba(201, 72, 0, 0.2);
+	border-color: #C94800;
+}
+
+.form__item .wpcf7-not-valid::-moz-placeholder {
+	color: #fff;
+}
+
+.form__item .wpcf7-not-valid::placeholder {
+	color: #fff;
+}
+
+.form__agree .wpcf7-list-item {
+	margin: 0;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output {
+	border: none;
+	color: #C94800;
+	font-size: 0.875rem;
+	left: 11.25rem;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: -3.75rem;
+}
+
 .wp-pagenavi {
 	display: flex;
 	justify-content: center;

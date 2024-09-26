@@ -247,3 +247,28 @@ add_filter('get_the_archive_title', function ($title) {
   }
   return $title;
 });
+
+// Contact Form 7で自動挿入されるPタグ、brタグを削除
+add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+function wpcf7_autop_return_false() {
+  return false;
+}
+
+// フォームが送信されたときに、サンクスページに自動的に移動させるための処理
+function custom_wpcf7_scripts() {
+  // もし今表示されているページが固定ページであれば、その後の処理を実行する
+  if ( is_page() ) { // 特定のページの場合にのみスクリプトを追加する
+    ?>
+    <script>
+    // フォームが送信された後に何かを行う「イベントリスナー」を追加
+    // 'wpcf7mailsent'：Contact Form 7 でフォームが正常に送信されたことを示すイベント
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
+      // location.href は「ブラウザのURLを変更する」ためのもの → http:～ というURLにリダイレクト（ページ移動）する
+      location.href = 'http://codeupsforwordpress3.local/thanks/';
+    }, false ); // false はイベントがバブリング（親要素に伝わる）しないようにする設定
+    </script>
+    <?php
+  }
+}
+// 作成した関数「custom_wpcf7_scripts」を</body> タグの直前に追加する、という指示
+add_action( 'wp_footer', 'custom_wpcf7_scripts' );

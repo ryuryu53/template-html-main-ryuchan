@@ -291,150 +291,150 @@ $(".js-accordion-title").on("click", function () {
 });
 
   // フォームの入力チェック
-  if (window.location.pathname.endsWith('page-contact.html')) {
-    $('#form__contact').on('submit', function(e) {
-      var user_name = $('#form__name').val(); /* お名前 */
-      var email = $('#form__email').val(); /* メールアドレス */
-      var tel = $('#form__tel').val(); /* 電話番号 */
-      var inquiry_checked = $('input[name="inquiry"]:checked').length > 0; /* inquiryのチェックボックス */
-      var textarea_value = $('#form__textarea').val(); /* お問合せ内容 */
-      var agree_checked = $('input[name="agree"]:checked').length > 0; /* agreeのチェックボックス */
+  // if (window.location.pathname.endsWith('page-contact.html')) {
+  //   $('#form__contact').on('submit', function(e) {
+  //     var user_name = $('#form__name').val(); /* お名前 */
+  //     var email = $('#form__email').val(); /* メールアドレス */
+  //     var tel = $('#form__tel').val(); /* 電話番号 */
+  //     var inquiry_checked = $('input[name="inquiry"]:checked').length > 0; /* inquiryのチェックボックス */
+  //     var textarea_value = $('#form__textarea').val(); /* お問合せ内容 */
+  //     var agree_checked = $('input[name="agree"]:checked').length > 0; /* agreeのチェックボックス */
 
-      var error_text = ''; /* エラーの説明が入る変数 */
+  //     var error_text = ''; /* エラーの説明が入る変数 */
 
-      // すべてのエラースタイルをリセット
-      $('#form__name, #form__email, #form__tel, #form__textarea, #form__checkbox').removeClass('form__error-style');
+  //     // すべてのエラースタイルをリセット
+  //     $('#form__name, #form__email, #form__tel, #form__textarea, #form__checkbox').removeClass('form__error-style');
 
-      if (user_name.trim() === '') {
-        error_text = '※必須項目が入力されていません。入力してください。';
-        $('#form__name').addClass('form__error-style');
-      } else if (email.trim() === '') {
-        error_text = '※必須項目が入力されていません。入力してください。';
-        $('#form__email').addClass('form__error-style');
-      } else if (tel.trim() === '') {
-        error_text = '※必須項目が入力されていません。入力してください。';
-        $('#form__tel').addClass('form__error-style');
-      } else if (!inquiry_checked) {
-        error_text = '※必須項目がチェックされていません。チェックしてください。';
-      } else if (textarea_value.trim() === '') {
-        error_text = '※必須項目が入力されていません。入力してください。';
-        $('#form__textarea').addClass('form__error-style');
-      } else if (!agree_checked) {
-        error_text = '※必須項目がチェックされていません。チェックしてください。';
-        $('#form__checkbox').addClass('form__error-style');
-      }
+  //     if (user_name.trim() === '') {
+  //       error_text = '※必須項目が入力されていません。入力してください。';
+  //       $('#form__name').addClass('form__error-style');
+  //     } else if (email.trim() === '') {
+  //       error_text = '※必須項目が入力されていません。入力してください。';
+  //       $('#form__email').addClass('form__error-style');
+  //     } else if (tel.trim() === '') {
+  //       error_text = '※必須項目が入力されていません。入力してください。';
+  //       $('#form__tel').addClass('form__error-style');
+  //     } else if (!inquiry_checked) {
+  //       error_text = '※必須項目がチェックされていません。チェックしてください。';
+  //     } else if (textarea_value.trim() === '') {
+  //       error_text = '※必須項目が入力されていません。入力してください。';
+  //       $('#form__textarea').addClass('form__error-style');
+  //     } else if (!agree_checked) {
+  //       error_text = '※必須項目がチェックされていません。チェックしてください。';
+  //       $('#form__checkbox').addClass('form__error-style');
+  //     }
 
-      if (error_text !== '') {
-        e.preventDefault(); // フォームの送信を止める
-        localStorage.setItem('error_text', error_text);
-        localStorage.setItem('form_data', JSON.stringify({
-          user_name: user_name,
-          email: email,
-          tel: tel,
-          inquiry_checked: $('input[name="inquiry"]:checked').map(function() { return this.value; }).get(),
-          textarea_value: textarea_value,
-          agree_checked: agree_checked
-        }));
-        window.location.href = 'error.html';
-      } else {
+  //     if (error_text !== '') {
+  //       e.preventDefault(); // フォームの送信を止める
+  //       localStorage.setItem('error_text', error_text);
+  //       localStorage.setItem('form_data', JSON.stringify({
+  //         user_name: user_name,
+  //         email: email,
+  //         tel: tel,
+  //         inquiry_checked: $('input[name="inquiry"]:checked').map(function() { return this.value; }).get(),
+  //         textarea_value: textarea_value,
+  //         agree_checked: agree_checked
+  //       }));
+  //       window.location.href = 'error.html';
+  //     } else {
 
-        // 今回はサーバーにデータを送らないのでページ遷移を止める
-        e.preventDefault();
-        window.location.href = 'thanks.html';
+  //       // 今回はサーバーにデータを送らないのでページ遷移を止める
+  //       e.preventDefault();
+  //       window.location.href = 'thanks.html';
     
-        // エラー内容をクリアする
-        // $('#form__error').text('');
+  //       // エラー内容をクリアする
+  //       // $('#form__error').text('');
+  //     }
+  //   });
+  // }
+
+  // // エラーページの処理
+  // if (window.location.pathname.endsWith('error.html')) {
+  //   var error_text = localStorage.getItem('error_text');
+  //   if (error_text) {
+  //     $('#form__error').text(error_text); // エラー内容を表示する
+  //     localStorage.removeItem('error_text'); // 表示後にクリア
+  //   }
+
+  //   var form_data = JSON.parse(localStorage.getItem('form_data'));
+  //   if (form_data) {
+  //     $('#form__name').val(form_data.user_name);
+  //     $('#form__email').val(form_data.email);
+  //     $('#form__tel').val(form_data.tel);
+
+  //     form_data.inquiry_checked.forEach(function(value) {
+  //       $('input[name="inquiry"][value="' + value + '"]').prop('checked', true);
+  //     });
+
+  //     $('input[name="agree"]').prop('checked', form_data.agree_checked);
+  //     $('#form__textarea').val(form_data.textarea_value);
+
+  //     // すべてのエラースタイルをリセット
+  //     $('#form__name, #form__email, #form__tel, #form__textarea, #form__checkbox').removeClass('form__error-style');
+
+  //     if (form_data.user_name.trim() === '') {
+  //       $('#form__name').addClass('form__error-style');
+  //     } else if (form_data.email.trim() === '') {
+  //       $('#form__email').addClass('form__error-style');
+  //     } else if (form_data.tel.trim() === '') {
+  //       $('#form__tel').addClass('form__error-style');
+  //     } else if (form_data.inquiry_checked.length === 0) {
+  //       // 必要に応じて処理を追加
+  //     } else if (form_data.textarea_value.trim() === '') {
+  //       $('#form__textarea').addClass('form__error-style');
+  //     } else if (!form_data.agree_checked) {
+  //       $('#form__checkbox').addClass('form__error-style');
+  //     }
+
+  //     localStorage.removeItem('form_data'); // 表示後にクリア
+  //   }
+  // }
+
+  // ★ページネーションの設定（SP版とPC版で表示するページ数を変える設定）
+  // ウェブページが完全に読み込まれたときにadjustPaginationという関数を実行するようにブラウザに指示
+  // （documentオブジェクトにアクセスして、addEventListenerメソッドにより、DOMContentLoadedイベント（ページ全体のHTMLが完全に読み込まれ、DOMツリーが構築された後に発生）が発生するとadjustPagination関数が呼び出される）
+  document.addEventListener('DOMContentLoaded', adjustPagination);
+  // ブラウザのウィンドウのサイズが変更されたときにadjustPaginationという関数を実行
+  // （windowオブジェクトにアクセスして、addEventListenerメソッドにより、resizeイベント（ブラウザのウィンドウのサイズが変更されたときに発生）が発生するとadjustPagination関数が呼び出される）
+  window.addEventListener('resize', adjustPagination);
+
+  // 関数宣言はホイスティングされる → 関数を定義する前にその関数を呼び出すことが可能
+  function adjustPagination() {
+    // ブラウザのウィンドウの幅が768ピクセル未満かどうかをチェックし、その結果をisMobileという変数に保存
+    // 768ピクセル未満ならtrue（モバイル）、それ以上ならfalse（PC）になる
+    var isMobile = window.innerWidth < 768;
+    // モバイルの場合はページあたり4ページ、PCの場合は6ページを表示するように設定
+    var perPage = isMobile ? 4 : 6; // isMobileがtrueなら4、falseなら6になる
+    // ページネーションの中で現在表示されているページの番号を取得して、それを整数（数値）に変換
+    // （document.querySelectorメソッド：指定したセレクタに一致するドキュメント内の最初の要素を返す）
+    // （textContentプロパティ：選択された要素のテキスト内容を取得）
+    // （parseInt関数：文字列を整数に変換する → 第一引数は変換したい文字列、第二引数は数値の基数（この場合は十進数））
+    var currentPage = parseInt(document.querySelector('.wp-pagenavi .current').textContent, 10);
+    // ページネーションに関連するすべてのリンクと現在のページを示す要素を取得
+    // （document.querySelectorAllメソッド：指定したCSSセレクタに一致するドキュメント内のすべての要素をノードリストとして返す）
+    var paginationLinks = document.querySelectorAll('.wp-pagenavi a.page, .wp-pagenavi span.current');
+    // ページネーションにおいて表示するページの範囲を決定する際の「開始ページ」を計算
+    // （Math.max関数：引数として与えられた2つの数値から、より大きい方を返す）
+    // （Math.floor関数：与えられた数値を小数点以下を切り捨てて最大の整数を返す）
+    var startPage = Math.max(currentPage - Math.floor(perPage / 2), 1);
+    // ページネーションにおいて表示するページの範囲を決定する際の「終了ページ」を計算
+    // （Math.min関数：引数として与えられた数値から、より小さい方を返す）
+    var endPage = Math.min(startPage + perPage - 1, currentPage + Math.floor(perPage / 2));
+
+    // 全てのページリンクを一つずつ見ていき、そのページ番号が表示範囲内なら表示し、範囲外なら非表示にする
+    paginationLinks.forEach(function(link) {  // 引数 link は、リストの各要素を指す
+      var pageNumber = parseInt(link.textContent, 10);
+      // ページ番号 (pageNumber) が有効な数値かどうかを確認し、有効な場合にそのリンクの表示・非表示を制御
+      // （isNaN()関数：引数として渡された値が数値でない場合に true を返す）
+      if ( !isNaN(pageNumber) ) {
+        // style.displayプロパティ：指定したHTML要素の表示方法を制御。空文字列 ('') を設定すると、その要素はデフォルトの表示スタイルに従って表示される
+        link.style.display = (pageNumber >= startPage && pageNumber <= endPage) ? '' : 'none';
       }
     });
-  }
 
-  // エラーページの処理
-  if (window.location.pathname.endsWith('error.html')) {
-    var error_text = localStorage.getItem('error_text');
-    if (error_text) {
-      $('#form__error').text(error_text); // エラー内容を表示する
-      localStorage.removeItem('error_text'); // 表示後にクリア
-    }
-
-    var form_data = JSON.parse(localStorage.getItem('form_data'));
-    if (form_data) {
-      $('#form__name').val(form_data.user_name);
-      $('#form__email').val(form_data.email);
-      $('#form__tel').val(form_data.tel);
-
-      form_data.inquiry_checked.forEach(function(value) {
-        $('input[name="inquiry"][value="' + value + '"]').prop('checked', true);
-      });
-
-      $('input[name="agree"]').prop('checked', form_data.agree_checked);
-      $('#form__textarea').val(form_data.textarea_value);
-
-      // すべてのエラースタイルをリセット
-      $('#form__name, #form__email, #form__tel, #form__textarea, #form__checkbox').removeClass('form__error-style');
-
-      if (form_data.user_name.trim() === '') {
-        $('#form__name').addClass('form__error-style');
-      } else if (form_data.email.trim() === '') {
-        $('#form__email').addClass('form__error-style');
-      } else if (form_data.tel.trim() === '') {
-        $('#form__tel').addClass('form__error-style');
-      } else if (form_data.inquiry_checked.length === 0) {
-        // 必要に応じて処理を追加
-      } else if (form_data.textarea_value.trim() === '') {
-        $('#form__textarea').addClass('form__error-style');
-      } else if (!form_data.agree_checked) {
-        $('#form__checkbox').addClass('form__error-style');
-      }
-
-      localStorage.removeItem('form_data'); // 表示後にクリア
-    }
+    // 前後のリンクの表示制御を確保（「次へ」と「前へ」のリンクは常に表示されるように設定）
+    document.querySelectorAll('.wp-pagenavi .nextpostslink, .wp-pagenavi .previouspostslink').forEach(function(link) {
+      link.style.display = ''; // 常に表示
+    });
   }
 });
-
-// ★ページネーションの設定（SP版とPC版で表示するページ数を変える設定）
-// ウェブページが完全に読み込まれたときにadjustPaginationという関数を実行するようにブラウザに指示
-// （documentオブジェクトにアクセスして、addEventListenerメソッドにより、DOMContentLoadedイベント（ページ全体のHTMLが完全に読み込まれ、DOMツリーが構築された後に発生）が発生するとadjustPagination関数が呼び出される）
-document.addEventListener('DOMContentLoaded', adjustPagination);
-// ブラウザのウィンドウのサイズが変更されたときにadjustPaginationという関数を実行
-// （windowオブジェクトにアクセスして、addEventListenerメソッドにより、resizeイベント（ブラウザのウィンドウのサイズが変更されたときに発生）が発生するとadjustPagination関数が呼び出される）
-window.addEventListener('resize', adjustPagination);
-
-// 関数宣言はホイスティングされる → 関数を定義する前にその関数を呼び出すことが可能
-function adjustPagination() {
-  // ブラウザのウィンドウの幅が768ピクセル未満かどうかをチェックし、その結果をisMobileという変数に保存
-  // 768ピクセル未満ならtrue（モバイル）、それ以上ならfalse（PC）になる
-  var isMobile = window.innerWidth < 768;
-  // モバイルの場合はページあたり4ページ、PCの場合は6ページを表示するように設定
-  var perPage = isMobile ? 4 : 6; // isMobileがtrueなら4、falseなら6になる
-  // ページネーションの中で現在表示されているページの番号を取得して、それを整数（数値）に変換
-  // （document.querySelectorメソッド：指定したセレクタに一致するドキュメント内の最初の要素を返す）
-  // （textContentプロパティ：選択された要素のテキスト内容を取得）
-  // （parseInt関数：文字列を整数に変換する → 第一引数は変換したい文字列、第二引数は数値の基数（この場合は十進数））
-  var currentPage = parseInt(document.querySelector('.wp-pagenavi .current').textContent, 10);
-  // ページネーションに関連するすべてのリンクと現在のページを示す要素を取得
-  // （document.querySelectorAllメソッド：指定したCSSセレクタに一致するドキュメント内のすべての要素をノードリストとして返す）
-  var paginationLinks = document.querySelectorAll('.wp-pagenavi a.page, .wp-pagenavi span.current');
-  // ページネーションにおいて表示するページの範囲を決定する際の「開始ページ」を計算
-  // （Math.max関数：引数として与えられた2つの数値から、より大きい方を返す）
-  // （Math.floor関数：与えられた数値を小数点以下を切り捨てて最大の整数を返す）
-  var startPage = Math.max(currentPage - Math.floor(perPage / 2), 1);
-  // ページネーションにおいて表示するページの範囲を決定する際の「終了ページ」を計算
-  // （Math.min関数：引数として与えられた数値から、より小さい方を返す）
-  var endPage = Math.min(startPage + perPage - 1, currentPage + Math.floor(perPage / 2));
-
-  // 全てのページリンクを一つずつ見ていき、そのページ番号が表示範囲内なら表示し、範囲外なら非表示にする
-  paginationLinks.forEach(function(link) {  // 引数 link は、リストの各要素を指す
-    var pageNumber = parseInt(link.textContent, 10);
-    // ページ番号 (pageNumber) が有効な数値かどうかを確認し、有効な場合にそのリンクの表示・非表示を制御
-    // （isNaN()関数：引数として渡された値が数値でない場合に true を返す）
-    if ( !isNaN(pageNumber) ) {
-      // style.displayプロパティ：指定したHTML要素の表示方法を制御。空文字列 ('') を設定すると、その要素はデフォルトの表示スタイルに従って表示される
-      link.style.display = (pageNumber >= startPage && pageNumber <= endPage) ? '' : 'none';
-    }
-  });
-
-  // 前後のリンクの表示制御を確保（「次へ」と「前へ」のリンクは常に表示されるように設定）
-  document.querySelectorAll('.wp-pagenavi .nextpostslink, .wp-pagenavi .previouspostslink').forEach(function(link) {
-    link.style.display = ''; // 常に表示
-  });
-}
