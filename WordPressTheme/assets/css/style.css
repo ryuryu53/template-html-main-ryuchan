@@ -2108,6 +2108,82 @@ a:hover {
 	margin-top: 2rem;
 }
 
+.page-template__text-block ol:first-of-type {
+	counter-reset: num; /* カウンターを初期化 */
+	margin-top: 2rem;
+	padding-left: 0.375rem;
+}
+
+.page-template__text-block ol:first-of-type li {
+	counter-increment: num; /* 各.list_itemの出現で番号を増加 */
+	padding-left: 1.15em;
+	text-indent: -1.15em;
+}
+
+.page-template__text-block ol:first-of-type li::before {
+	content: counter(num) "."; /* 番号と接尾語を表示 */
+}
+
+.page-template__text-block p:nth-of-type(2) {
+	margin-top: 2rem;
+}
+
+.page-template__text-block ol:nth-of-type(2),
+.page-template__text-block ol:nth-of-type(3) {
+	counter-reset: num;
+}
+
+.page-template__text-block ol:nth-of-type(2) li,
+.page-template__text-block ol:nth-of-type(3) li {
+	counter-increment: num;
+	display: block;
+	padding-left: calc(1.15em + 0.375rem);
+	text-indent: -1.15em;
+}
+
+.page-template__text-block ol:nth-of-type(2) li::before,
+.page-template__text-block ol:nth-of-type(3) li::before {
+	content: counter(num) ".";
+}
+
+.page-template__text-block p:nth-of-type(3) {
+	line-break: anywhere;
+	margin-top: 2rem;
+}
+
+.page-template__text-block p:nth-of-type(4),
+.page-template__text-block p:nth-of-type(5) {
+	margin-top: 2rem;
+}
+
+.page-template__text-block ol:nth-of-type(4) {
+	counter-reset: num;
+	padding-left: 0.375rem;
+}
+
+.page-template__text-block ol:nth-of-type(4) li {
+	counter-increment: num;
+	line-break: strict;
+	padding-left: 1.15em;
+	text-indent: -1.15em;
+}
+
+.page-template__text-block ol:nth-of-type(4) li::before {
+	content: counter(num) ".";
+}
+
+.page-template__text-block .page-template__use-text--terms-page:nth-of-type(2) {
+	margin-top: 0;
+}
+
+.page-template__terms-list {
+	margin-top: 2rem;
+}
+
+.page-template__terms-list li {
+	line-break: strict;
+}
+
 .pc-nav__items {
 	align-items: center;
 	display: flex;
