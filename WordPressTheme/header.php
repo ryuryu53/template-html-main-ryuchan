@@ -20,7 +20,7 @@
   $information = esc_url( home_url('/information/') );
   $blog = esc_url( home_url('/blog/') );
   $voice = esc_url( home_url('/voice/') );
-  $price = esc_url( home_url('/price/') );
+  $amount = esc_url( home_url('/price/') );
   $faq = esc_url( home_url('/faq/') );
   $contact = esc_url( home_url('/contact/') );
   $sitemap = esc_url( home_url('/sitemap/') );
@@ -78,7 +78,7 @@
               </a>
             </li>
             <li class="pc-nav__item">
-              <a href="<?php echo $price; ?>" class="pc-nav__link">
+              <a href="<?php echo $amount; ?>" class="pc-nav__link">
                 <span class="pc-nav__engtext">Price</span>
                 <span class="pc-nav__jatext">料金一覧</span>
               </a>
@@ -149,7 +149,7 @@
                     <a href="<?php echo $voice; ?>" class="sp-nav__link">お客様の声</a>
                   </li>
                   <li class="sp-nav__right-item">
-                    <a href="<?php echo $price; ?>" class="sp-nav__link">料金一覧</a>
+                    <a href="<?php echo $amount; ?>" class="sp-nav__link">料金一覧</a>
                     <ul class="sp-nav__right-detail-items">
                       <li class="sp-nav__right-detail-item">
                         <a href="#" class="sp-nav__right-detail-link">ライセンス講習</a>

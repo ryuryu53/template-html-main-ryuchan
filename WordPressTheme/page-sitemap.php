@@ -7,7 +7,7 @@
   $information = esc_url( home_url('/information/') );
   $blog = esc_url( home_url('/blog/') );
   $voice = esc_url( home_url('/voice/') );
-  $price = esc_url( home_url('/price/') );
+  $amount = esc_url( home_url('/price/') );
   $faq = esc_url( home_url('/faq/') );
   $contact = esc_url( home_url('/contact/') );
   $sitemap = esc_url( home_url('/sitemap/') );
@@ -78,7 +78,7 @@
               <a href="<?php echo $voice; ?>" class="footer-nav__right-link footer-nav__right-link--icon-green">お客様の声</a>
             </li>
             <li class="footer-nav__right-item footer-nav__right-item--green">
-              <a href="<?php echo $price; ?>" class="footer-nav__right-link footer-nav__right-link--icon-green">料金一覧</a>
+              <a href="<?php echo $amount; ?>" class="footer-nav__right-link footer-nav__right-link--icon-green">料金一覧</a>
               <ul class="footer-nav__right-detail-items">
                 <li class="footer-nav__right-detail-item">
                   <a href="#" class="footer-nav__right-detail-link">ライセンス講習</a>

@@ -7,7 +7,7 @@
   $information = esc_url( home_url('/information/') );
   $blog = esc_url( home_url('/blog/') );
   $voice = esc_url( home_url('/voice/') );
-  $price = esc_url( home_url('/price/') );
+  $amount = esc_url( home_url('/price/') );
   $faq = esc_url( home_url('/faq/') );
   $contact = esc_url( home_url('/contact/') );
   $sitemap = esc_url( home_url('/sitemap/') );
@@ -71,134 +71,51 @@
       <div class="campaign__swiper">
         <div class="swiper js-campaign-swiper">
           <ul class="swiper-wrapper campaign__items campaign-cards">
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_1.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_1.jpg" alt="いろいろな色の魚が海で泳いでいる様子">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">ライセンス講習</p>
-                  <h3 class="campaign-card__title text--medium">ライセンス取得</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;56&#44;000</span><span class="campaign-card__price-after">&yen;46&#44;000</span>
+            <?php
+            // 最新のカスタム投稿（campaign）の8件を取得するクエリ
+            $latest_campaign_args = array(  // $latest_campaign_args：WP_Queryに渡すための条件を設定
+              'post_type' => 'campaign', // カスタム投稿タイプ「campaign」の指定
+              'posts_per_page' => 8, // 最新の8件を表示
+              'orderby' => 'date', // 日付順にソート
+              'order' => 'DESC' // 新しいものを先頭に･･･降順（DESC）
+            );
+            // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースからキャンペーン投稿を取得
+            $latest_campaign_query = new WP_Query($latest_campaign_args);
+
+            // サブループ開始   while文：投稿がある限り、このループで8件のキャンペーン情報を1件ずつ表示
+            if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post(); ?>
+              <li class="swiper-slide campaign-cards__item campaign-card">
+                <a href="<?php the_permalink(); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし -->
+                  <picture class="campaign-card__img">
+                    <?php if ( get_the_post_thumbnail() ) : ?>
+                    <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
+                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                    <?php else : ?>
+                      <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                    <?php endif; ?>
+                  </picture>
+                  <div class="campaign-card__body">
+                    <?php
+                    // カスタムタクソノミー「campaign_category」の取得
+                    $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                    if ( $terms && !is_wp_error($terms) ) :
+                    ?>
+                      <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
+                    <?php endif; ?>
+                    <h3 class="campaign-card__title text--medium"><?php the_title(); ?></h3>
+                    <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
+                    <div class="campaign-card__price">
+                      <?php if ( get_field('campaign_1') ) : ?>
+                        <span class="campaign-card__price-before">&yen;<?php echo esc_html(number_format(intval(get_field('campaign_1')))); ?></span>
+                      <?php endif; ?>
+                      <?php if ( get_field('campaign_2') ) : ?>
+                        <span class="campaign-card__price-after">&yen;<?php echo esc_html(number_format(intval(get_field('campaign_2')))); ?></span>
+                      <?php endif; ?>
+                    </div>
                   </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_2.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_2.jpg" alt="2隻の白いボートが浮かぶエメラルドグリーン浜辺">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">体験ダイビング</p>
-                  <h3 class="campaign-card__title text--medium">貸切体験ダイビング</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;24&#44;000</span><span class="campaign-card__price-after">&yen;18&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_3.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_3.jpg" alt="海の中を漂う光るクラゲ">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">体験ダイビング</p>
-                  <h3 class="campaign-card__title text--medium">ナイトダイビング</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;10&#44;000</span><span class="campaign-card__price-after">&yen;8&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_4.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_4.jpg" alt="ダイビングを楽しむ4人の人たちが水面で合図を交わしている様子">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">ファンダイビング</p>
-                  <h3 class="campaign-card__title text--medium">貸切ファンダイビング</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;20&#44;000</span><span class="campaign-card__price-after">&yen;16&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_1.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_1.jpg" alt="いろいろな色の魚が海で泳いでいる様子">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">ライセンス講習</p>
-                  <h3 class="campaign-card__title text--medium">ライセンス取得</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;56&#44;000</span><span class="campaign-card__price-after">&yen;46&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_2.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_2.jpg" alt="2隻の白いボートが浮かぶエメラルドグリーン浜辺">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">体験ダイビング</p>
-                  <h3 class="campaign-card__title text--medium">貸切体験ダイビング</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;24&#44;000</span><span class="campaign-card__price-after">&yen;18&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_3.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_3.jpg" alt="海の中を漂う光るクラゲ">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">体験ダイビング</p>
-                  <h3 class="campaign-card__title text--medium">ナイトダイビング</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;10&#44;000</span><span class="campaign-card__price-after">&yen;8&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="swiper-slide campaign-cards__item campaign-card">
-              <a href="#" class="campaign-card__link">
-                <picture class="campaign-card__img">
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_4.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/campaign_4.jpg" alt="ダイビングを楽しむ4人の人たちが水面で合図を交わしている様子">
-                </picture>
-                <div class="campaign-card__body">
-                  <p class="campaign-card__category">ファンダイビング</p>
-                  <h3 class="campaign-card__title text--medium">貸切ファンダイビング</h3>
-                  <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                  <div class="campaign-card__price">
-                    <span class="campaign-card__price-before">&yen;20&#44;000</span><span class="campaign-card__price-after">&yen;16&#44;000</span>
-                  </div>
-                </div>
-              </a>
-            </li>
+                </a>
+              </li>
+            <?php endwhile; endif; wp_reset_postdata(); ?>
           </ul>
         </div>
       </div>
@@ -434,7 +351,7 @@
         </div>
       </div>
       <div class="price__btn">
-        <a href="<?php echo $price; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="<?php echo $amount; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
