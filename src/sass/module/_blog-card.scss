@@ -82,6 +82,11 @@
 
 .blog-card__text {
   margin-top: rem(15);
+  // 5行より多くなったら「･･･」となるようにする（WP化で追加）
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
 }
 
 .blog-card__text.blog-card__text--single-page {

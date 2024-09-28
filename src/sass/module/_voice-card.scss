@@ -102,8 +102,15 @@
 
 .voice-card__text {
   margin-top: rem(15);
+  // 10行より多くなったら「･･･」となるようにする（WP化で追加）
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 10;
 
   @include mq(md) {
     margin-top: rem(40);
+    // 7行より多くなったら「･･･」となるようにする（WP化で追加）
+    -webkit-line-clamp: 7;
   }
 }

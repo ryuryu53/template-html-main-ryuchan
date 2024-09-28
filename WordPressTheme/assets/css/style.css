@@ -587,7 +587,11 @@ a:hover {
 }
 
 .blog-card__text {
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	display: -webkit-box;
 	margin-top: 0.9375rem;
+	overflow: hidden;
 }
 
 .blog-card__text.blog-card__text--single-page {
@@ -2841,7 +2845,11 @@ a:hover {
 }
 
 .voice-card__text {
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 10;
+	display: -webkit-box;
 	margin-top: 0.9375rem;
+	overflow: hidden;
 }
 
 .voice-cards {
@@ -4759,6 +4767,7 @@ html {
 }
 
 .voice-card__text {
+	-webkit-line-clamp: 7;
 	margin-top: 2.5rem;
 }
 

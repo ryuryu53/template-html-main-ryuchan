@@ -72,18 +72,19 @@
         <div class="swiper js-campaign-swiper">
           <ul class="swiper-wrapper campaign__items campaign-cards">
             <?php
-            // 最新のカスタム投稿（campaign）の8件を取得するクエリ
-            $latest_campaign_args = array(  // $latest_campaign_args：WP_Queryに渡すための条件を設定
-              'post_type' => 'campaign', // カスタム投稿タイプ「campaign」の指定
-              'posts_per_page' => 8, // 最新の8件を表示
-              'orderby' => 'date', // 日付順にソート
-              'order' => 'DESC' // 新しいものを先頭に･･･降順（DESC）
-            );
-            // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースからキャンペーン投稿を取得
-            $latest_campaign_query = new WP_Query($latest_campaign_args);
+              // 最新のカスタム投稿（campaign）の8件を取得するクエリ
+              $latest_campaign_args = array(  // $latest_campaign_args：WP_Queryに渡すための条件を設定
+                'post_type' => 'campaign', // カスタム投稿タイプ「campaign」の指定
+                'posts_per_page' => 8, // 最新の8件を表示
+                'orderby' => 'date', // 日付順にソート
+                'order' => 'DESC' // 新しいものを先頭に･･･降順（DESC）
+              );
+              // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースからキャンペーン投稿を取得
+              $latest_campaign_query = new WP_Query($latest_campaign_args);
 
-            // サブループ開始   while文：投稿がある限り、このループで8件のキャンペーン情報を1件ずつ表示
-            if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post(); ?>
+              // サブループ開始   while文：投稿がある限り、このループで8件のキャンペーン情報を1件ずつ表示
+              if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post();
+            ?>
               <li class="swiper-slide campaign-cards__item campaign-card">
                 <a href="<?php the_permalink(); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし -->
                   <picture class="campaign-card__img">
@@ -193,45 +194,32 @@
         <h2 class="section-header__jatitle section-header__jatitle--white-pc">ブログ</h2>
       </div>
       <div class="blog__items blog-cards">
-        <article class="blog-cards__item blog-card">
-          <a href="#" class="blog-card__link">
-            <picture class="blog-card__img">
-              <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/blog_1.webp" type="image/webp">
-              <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/blog_1.jpg" alt="白いポツポツに覆われた赤いサンゴ">
-            </picture>
-            <div class="blog-card__body">
-              <time datetime="2023-11-17" class="blog-card__date">2023.11.17</time>
-              <h3 class="blog-card__title text--medium">ライセンス取得</h3>
-              <p class="blog-card__text text--black-pc">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-            </div>
-          </a>
-        </article>
-        <article class="blog-cards__item blog-card">
-          <a href="#" class="blog-card__link">
-            <picture class="blog-card__img">
-              <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/blog_2.webp" type="image/webp">
-              <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/blog_2.jpg" alt="ウミガメが海で泳いでいる様子">
-            </picture>
-            <div class="blog-card__body">
-              <time datetime="2023-11-17" class="blog-card__date">2023.11.17</time>
-              <h3 class="blog-card__title text--medium">ウミガメと泳ぐ</h3>
-              <p class="blog-card__text text--black-pc">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-            </div>
-          </a>
-        </article>
-        <article class="blog-cards__item blog-card">
-          <a href="#" class="blog-card__link">
-            <picture class="blog-card__img">
-              <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/blog_3.webp" type="image/webp">
-              <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/blog_3.jpg" alt="イソギンチャクの中から顔を出すカクレクマノミ">
-            </picture>
-            <div class="blog-card__body">
-              <time datetime="2023-11-17" class="blog-card__date">2023.11.17</time>
-              <h3 class="blog-card__title text--medium">カクレクマノミ</h3>
-              <p class="blog-card__text text--black-pc">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-            </div>
-          </a>
-        </article>
+        <?php
+          $posts_args = array(
+          'post_type' => 'post',
+          'posts_per_page' => 3
+          );
+          $posts_query = new WP_Query($posts_args);
+          if ( $posts_query->have_posts() ) : while ( $posts_query->have_posts() ) : $posts_query->the_post();
+        ?>
+          <article class="blog-cards__item blog-card">
+            <a href="#" class="blog-card__link">
+              <picture class="blog-card__img">
+                <?php if ( get_the_post_thumbnail() ) : ?>
+                  <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
+                  <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                <?php else : ?>
+                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                <?php endif; ?>
+              </picture>
+              <div class="blog-card__body">
+                <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m.d'); ?></time>
+                <h3 class="blog-card__title text--medium"><?php the_title(); ?></h3>
+                <p class="blog-card__text text--black-pc">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
+              </div>
+            </a>
+          </article>
+        <?php endwhile; endif; wp_reset_postdata(); ?>
       </div>
       <div class="blog__btn">
         <a href="<?php echo $blog; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
@@ -247,46 +235,51 @@
         <h2 class="section-header__jatitle voice__title-jp">お客様の声</h2>
       </div>
       <div class="voice__items voice-cards">
-        <article class="voice-cards__item voice-card">
-          <a href="#" class="voice-card__link">
-            <div class="voice-card__head">
-              <div class="voice-card__meta">
-                <div class="voice-card__label">
-                  <span class="voice-card__age">20代(女性)</span>
-                  <p class="voice-card__category">ライセンス講習</p>
+        <?php
+          // 最新のカスタム投稿（voice）の2件を取得するクエリ
+          $latest_voice_args = array( // $latest_voice_args：WP_Queryに渡すための条件を設定
+            'post_type' => 'voice', // カスタム投稿タイプ「voice」の指定
+            'posts_per_page' => 2, // 最新の2件だけ表示
+            'orderby' => 'date', // 日付順にソート
+            'order' => 'DESC' // 新しいものを先頭に
+          );
+          // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースから「口コミ」の投稿を取得
+          $latest_voice_query = new WP_Query($latest_voice_args);
+
+          // サブループ開始   while文：投稿がある限り、このループで1件ずつ口コミの情報を表示。今回は最新の2件なので2回だけ実行される
+          if ( $latest_voice_query->have_posts() ) : while ( $latest_voice_query->have_posts() ) : $latest_voice_query->the_post();
+        ?>
+          <article class="voice-cards__item voice-card">
+            <a href="<?php the_permalink(); ?>" class="voice-card__link">  <!-- 詳細投稿ページはなし -->
+              <div class="voice-card__head">
+                <div class="voice-card__meta">
+                  <div class="voice-card__label">
+                    <span class="voice-card__age"><?php echo esc_html(get_post_meta(get_the_ID(), 'voice_1', true)); ?>(<?php echo esc_html(get_post_meta(get_the_ID(), 'voice_2', true)); ?>)</span>
+                    <?php
+                      // カスタムタクソノミー「voice_category」の取得
+                      $terms = get_the_terms(get_the_ID(), 'voice_category');
+                      if ( $terms && !is_wp_error($terms) ) :
+                    ?>
+                      <p class="voice-card__category"><?php echo esc_html($terms[0]->name); ?></p>
+                    <?php endif; ?>
+                  </div>
+                  <h3 class="voice-card__title"><?php the_title(); ?></h3>
                 </div>
-                <h3 class="voice-card__title">ここにタイトルが入ります。ここにタイトル</h3>
-              </div>
-              <div class="voice-card__img colorbox js-colorbox">
-                <picture>
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/voice_1.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/voice_1.jpg" alt="麦わら帽子をかぶった笑顔の女性">
-                </picture>
-              </div>
-            </div>
-            <p class="voice-card__text text--black-sp">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。</p>
-          </a>
-        </article>
-        <article class="voice-cards__item voice-card">
-          <a href="#" class="voice-card__link">
-            <div class="voice-card__head">
-              <div class="voice-card__meta">
-                <div class="voice-card__label">
-                  <span class="voice-card__age">20代(男性)</span>
-                  <p class="voice-card__category">ファンダイビング</p>
+                <div class="voice-card__img colorbox js-colorbox">
+                  <picture>
+                    <?php if ( get_the_post_thumbnail() ) : ?>
+                      <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
+                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                    <?php else : ?>
+                      <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                    <?php endif; ?>
+                  </picture>
                 </div>
-                <h3 class="voice-card__title">ここにタイトルが入ります。ここにタイトル</h3>
               </div>
-              <div class="voice-card__img colorbox js-colorbox">
-                <picture>
-                  <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/voice_2.webp" type="image/webp">
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/voice_2.jpg" alt="青い服を着たグッドポーズの男性">
-                </picture>
-              </div>
-            </div>
-            <p class="voice-card__text text--black-sp">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。</p>
-          </a>
-        </article>
+              <p class="voice-card__text text--black-sp">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。</p>
+            </a>
+          </article>
+        <?php endwhile; endif; wp_reset_postdata(); ?>
       </div>
       <div class="voice__btn">
         <a href="<?php echo $voice; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
