@@ -1,3 +1,18 @@
+      <?php
+        $home = esc_url( home_url('/') );
+        $campaign = esc_url( home_url('/campaign/') );
+        $about = esc_url( home_url('/about-us/') );
+        $information = esc_url( home_url('/information/') );
+        $blog = esc_url( home_url('/blog/') );
+        $voice = esc_url( home_url('/voice/') );
+        $amount = esc_url( home_url('/price/') );
+        $faq = esc_url( home_url('/faq/') );
+        $contact = esc_url( home_url('/contact/') );
+        $sitemap = esc_url( home_url('/sitemap/') );
+        $privacy = esc_url( home_url('/privacy-policy/') );
+        $terms = esc_url( home_url('/terms-of-service/') );
+      ?>
+
       <!-- Contact -->
       <?php if ( !is_page(array('contact', 'thanks')) && !is_404() ) : ?>
         <section class="top-contact contact">
@@ -29,7 +44,7 @@
                 </div>
                 <p class="contact__text">ご予約・お問い合わせはコチラ</p>
                 <div class="contact__btn">
-                  <a href="./page-contact.html" class="button"><span class="button__text">Contact&nbsp;us</span></a>
+                  <a href="<?php echo $contact; ?>" class="button"><span class="button__text">Contact&nbsp;us</span></a>
                 </div>
               </div>
             </div>
@@ -44,21 +59,6 @@
         </div>
       <?php endif; ?>
     </main>
-
-    <?php
-    $home = esc_url( home_url('/') );
-    $campaign = esc_url( home_url('/campaign/') );
-    $about = esc_url( home_url('/about-us/') );
-    $information = esc_url( home_url('/information/') );
-    $blog = esc_url( home_url('/blog/') );
-    $voice = esc_url( home_url('/voice/') );
-    $amount = esc_url( home_url('/price/') );
-    $faq = esc_url( home_url('/faq/') );
-    $contact = esc_url( home_url('/contact/') );
-    $sitemap = esc_url( home_url('/sitemap/') );
-    $privacy = esc_url( home_url('/privacy-policy/') );
-    $terms = esc_url( home_url('/terms-of-service/') );
-    ?>
 
     <!-- フッター -->
     <footer class="top-footer <?php if ( is_404() ) { echo 'top-footer--404-page'; } ?> footer js-footer">
