@@ -45,12 +45,27 @@
       <?php endif; ?>
     </main>
 
+    <?php
+    $home = esc_url( home_url('/') );
+    $campaign = esc_url( home_url('/campaign/') );
+    $about = esc_url( home_url('/about-us/') );
+    $information = esc_url( home_url('/information/') );
+    $blog = esc_url( home_url('/blog/') );
+    $voice = esc_url( home_url('/voice/') );
+    $price = esc_url( home_url('/price/') );
+    $faq = esc_url( home_url('/faq/') );
+    $contact = esc_url( home_url('/contact/') );
+    $sitemap = esc_url( home_url('/sitemap/') );
+    $privacy = esc_url( home_url('/privacy-policy/') );
+    $terms = esc_url( home_url('/terms-of-service/') );
+    ?>
+
     <!-- フッター -->
     <footer class="top-footer <?php if ( is_404() ) { echo 'top-footer--404-page'; } ?> footer js-footer">
       <div class="footer__inner inner">
         <div class="footer__img">
           <div class="footer__logo">
-            <a href="#top" class="footer__logo-link">
+            <a href="<?php echo $home; ?>" class="footer__logo-link">
               <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/footer-logo.svg" alt="CodeUps">
             </a>
           </div>
@@ -67,7 +82,7 @@
           <div class="footer-nav__left-content">
             <ul class="footer-nav__left-items">
               <li class="footer-nav__left-item">
-                <a href="./page-campaign.html" class="footer-nav__left-link">キャンペーン</a>
+                <a href="<?php echo $campaign; ?>" class="footer-nav__left-link">キャンペーン</a>
                 <ul class="footer-nav__left-detail-items">
                   <li class="footer-nav__left-detail-item">
                     <a href="#" class="footer-nav__left-detail-link">ライセンス取得</a>
@@ -78,15 +93,18 @@
                   <li class="footer-nav__left-detail-item">
                     <a href="#" class="footer-nav__left-detail-link">ナイトダイビング</a>
                   </li>
+                  <li class="footer-nav__left-detail-item">
+                    <a href="#" class="footer-nav__left-detail-link">貸切ファンダイビング</a>
+                  </li>
                 </ul>
               </li>
               <li class="footer-nav__left-item">
-                <a href="./page-about.html" class="footer-nav__left-link">私たちについて</a>
+                <a href="<?php echo $about; ?>" class="footer-nav__left-link">私たちについて</a>
               </li>
             </ul>
             <ul class="footer-nav__left-items">
               <li class="footer-nav__left-item">
-                <a href="./page-information.html" class="footer-nav__left-link">ダイビング情報</a>
+                <a href="<?php echo $information; ?>" class="footer-nav__left-link">ダイビング情報</a>
                 <ul class="footer-nav__left-detail-items">
                   <li class="footer-nav__left-detail-item">
                     <a href="./page-information.html#tab1" class="footer-nav__left-detail-link">ライセンス講習</a>
@@ -100,17 +118,17 @@
                 </ul>
               </li>
               <li class="footer-nav__left-item">
-                <a href="./home.html" class="footer-nav__left-link">ブログ</a>
+                <a href="<?php echo $blog; ?>" class="footer-nav__left-link">ブログ</a>
               </li>
             </ul>
           </div>
           <div class="footer-nav__right-content">
             <ul class="footer-nav__right-items">
               <li class="footer-nav__right-item">
-                <a href="./page-voice.html" class="footer-nav__right-link">お客様の声</a>
+                <a href="<?php echo $voice; ?>" class="footer-nav__right-link">お客様の声</a>
               </li>
               <li class="footer-nav__right-item">
-                <a href="./page-price.html" class="footer-nav__right-link">料金一覧</a>
+                <a href="<?php echo $price; ?>" class="footer-nav__right-link">料金一覧</a>
                 <ul class="footer-nav__right-detail-items">
                   <li class="footer-nav__right-detail-item">
                     <a href="#" class="footer-nav__right-detail-link">ライセンス講習</a>
@@ -121,21 +139,27 @@
                   <li class="footer-nav__right-detail-item">
                     <a href="#" class="footer-nav__right-detail-link">ファンダイビング</a>
                   </li>
+                  <li class="footer-nav__right-detail-item">
+                    <a href="#" class="footer-nav__right-detail-link">スペシャルダイビング</a>
+                  </li>
                 </ul>
               </li>
             </ul>
             <ul class="footer-nav__right-items">
               <li class="footer-nav__right-item">
-                <a href="./page-faq.html" class="footer-nav__right-link">よくある質問</a>
+                <a href="<?php echo $faq; ?>" class="footer-nav__right-link">よくある質問</a>
               </li>
               <li class="footer-nav__right-item">
-                <a href="./page-privacy.html" class="footer-nav__right-link">プライバシー<br class="u-mobile">ポリシー</a>
+                <a href="<?php echo $privacy; ?>" class="footer-nav__right-link">プライバシー<br class="u-mobile">ポリシー</a>
               </li>
               <li class="footer-nav__right-item">
-                <a href="./page-terms.html" class="footer-nav__right-link">利用規約</a>
+                <a href="<?php echo $terms; ?>" class="footer-nav__right-link">利用規約</a>
               </li>
               <li class="footer-nav__right-item">
-                <a href="./page-contact.html" class="footer-nav__right-link">お問い合わせ</a>
+                <a href="<?php echo $contact; ?>" class="footer-nav__right-link">お問い合わせ</a>
+              </li>
+              <li class="footer-nav__right-item">
+                <a href="<?php echo $sitemap; ?>" class="footer-nav__right-link">サイトマップ</a>
               </li>
             </ul>
           </div>
