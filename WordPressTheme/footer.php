@@ -70,10 +70,10 @@
             </a>
           </div>
           <div class="footer__sns">
-            <a href="#" class="footer__sns-link">
+            <a href="https://www.facebook.com/" class="footer__sns-link" target="_blank" rel="noopener noreferrer">
               <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/facebook-logo.svg" alt="Facebook">
             </a>
-            <a href="#" class="footer__sns-link">
+            <a href="https://www.instagram.com/" class="footer__sns-link" target="_blank" rel="noopener noreferrer">
               <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/instagram-logo.svg" alt="Instagram">
             </a>
           </div>
@@ -85,16 +85,16 @@
                 <a href="<?php echo $campaign; ?>" class="footer-nav__left-link">キャンペーン</a>
                 <ul class="footer-nav__left-detail-items">
                   <li class="footer-nav__left-detail-item">
-                    <a href="#" class="footer-nav__left-detail-link">ライセンス取得</a>
+                    <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">ライセンス取得</a>
                   </li>
                   <li class="footer-nav__left-detail-item">
-                    <a href="#" class="footer-nav__left-detail-link">貸切体験ダイビング</a>
+                    <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">貸切体験ダイビング</a>
                   </li>
                   <li class="footer-nav__left-detail-item">
-                    <a href="#" class="footer-nav__left-detail-link">ナイトダイビング</a>
+                    <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">ナイトダイビング</a>
                   </li>
                   <li class="footer-nav__left-detail-item">
-                    <a href="#" class="footer-nav__left-detail-link">貸切ファンダイビング</a>
+                    <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">貸切ファンダイビング</a>
                   </li>
                 </ul>
               </li>
@@ -107,13 +107,13 @@
                 <a href="<?php echo $information; ?>" class="footer-nav__left-link">ダイビング情報</a>
                 <ul class="footer-nav__left-detail-items">
                   <li class="footer-nav__left-detail-item">
-                    <a href="./page-information.html#tab1" class="footer-nav__left-detail-link">ライセンス講習</a>
+                    <a href="<?php echo $information; ?>#tab1" class="footer-nav__left-detail-link">ライセンス講習</a>
                   </li>
                   <li class="footer-nav__left-detail-item">
-                    <a href="./page-information.html#tab3" class="footer-nav__left-detail-link">体験ダイビング</a>
+                    <a href="<?php echo $information; ?>#tab3" class="footer-nav__left-detail-link">体験ダイビング</a>
                   </li>
                   <li class="footer-nav__left-detail-item">
-                    <a href="./page-information.html#tab2" class="footer-nav__left-detail-link">ファンダイビング</a>
+                    <a href="<?php echo $information; ?>#tab2" class="footer-nav__left-detail-link">ファンダイビング</a>
                   </li>
                 </ul>
               </li>
@@ -131,16 +131,16 @@
                 <a href="<?php echo $amount; ?>" class="footer-nav__right-link">料金一覧</a>
                 <ul class="footer-nav__right-detail-items">
                   <li class="footer-nav__right-detail-item">
-                    <a href="#" class="footer-nav__right-detail-link">ライセンス講習</a>
+                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">ライセンス講習</a>
                   </li>
                   <li class="footer-nav__right-detail-item">
-                    <a href="#" class="footer-nav__right-detail-link">体験ダイビング</a>
+                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">体験ダイビング</a>
                   </li>
                   <li class="footer-nav__right-detail-item">
-                    <a href="#" class="footer-nav__right-detail-link">ファンダイビング</a>
+                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">ファンダイビング</a>
                   </li>
                   <li class="footer-nav__right-detail-item">
-                    <a href="#" class="footer-nav__right-detail-link">スペシャルダイビング</a>
+                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">スペシャルダイビング</a>
                   </li>
                 </ul>
               </li>

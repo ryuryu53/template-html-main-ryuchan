@@ -50,9 +50,12 @@
                       <div class="voice-card__label">
                         <span class="voice-card__age">
                           <?php if ( get_field('voice_1') ) : ?><?php the_field('voice_1'); ?><?php endif; ?><?php if ( get_field('voice_2') ) : ?>(<?php the_field('voice_2'); ?>)<?php endif; ?>
-                          </span>
-                        <?php $terms = get_the_terms(get_the_ID(), 'voice_category'); ?>
-                        <?php if ( $terms && !is_wp_error($terms) ) : ?>
+                        </span>
+                        <?php
+                          // カスタムタクソノミー「voice_category」の取得
+                          $terms = get_the_terms(get_the_ID(), 'voice_category');
+                          if ( $terms && !is_wp_error($terms) ) :
+                        ?>
                           <p class="voice-card__category"><?php echo esc_html($terms[0]->name); ?></p>
                         <?php endif; ?>
                       </div>

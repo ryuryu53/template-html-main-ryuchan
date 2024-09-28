@@ -203,7 +203,7 @@
           if ( $posts_query->have_posts() ) : while ( $posts_query->have_posts() ) : $posts_query->the_post();
         ?>
           <article class="blog-cards__item blog-card">
-            <a href="#" class="blog-card__link">
+            <a href="<?php the_permalink(); ?>" class="blog-card__link">
               <picture class="blog-card__img">
                 <?php if ( get_the_post_thumbnail() ) : ?>
                   <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">

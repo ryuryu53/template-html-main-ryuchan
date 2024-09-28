@@ -220,8 +220,8 @@ jQuery(function ($) {
     updateBoxShadow();
   }
 
-  // フッターのリンクがクリックされたときの処理
-  $('.footer-nav__left-detail-link').on('click', function (e) {
+  // フッターまたはドロワーメニューのリンクがクリックされたときの処理
+  $('.footer-nav__left-detail-link, .sp-nav__left-detail-link').on('click', function (e) {
     // デフォルトのリンク動作をキャンセル
     // e.preventDefault();
 

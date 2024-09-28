@@ -128,13 +128,13 @@
                     <a href="<?php echo $information; ?>" class="sp-nav__link">ダイビング情報</a>
                     <ul class="sp-nav__left-detail-items">
                       <li class="sp-nav__left-detail-item">
-                        <a href="./page-information.html#tab1" class="sp-nav__left-detail-link">ライセンス講習</a>
+                        <a href="<?php echo $information; ?>#tab1" class="sp-nav__left-detail-link">ライセンス講習</a>
                       </li>
                       <li class="sp-nav__left-detail-item">
-                        <a href="./page-information.html#tab3" class="sp-nav__left-detail-link">体験ダイビング</a>
+                        <a href="<?php echo $information; ?>#tab3" class="sp-nav__left-detail-link">体験ダイビング</a>
                       </li>
                       <li class="sp-nav__left-detail-item">
-                        <a href="./page-information.html#tab2" class="sp-nav__left-detail-link">ファンダイビング</a>
+                        <a href="<?php echo $information; ?>#tab2" class="sp-nav__left-detail-link">ファンダイビング</a>
                       </li>
                     </ul>
                   </li>
@@ -152,16 +152,16 @@
                     <a href="<?php echo $amount; ?>" class="sp-nav__link">料金一覧</a>
                     <ul class="sp-nav__right-detail-items">
                       <li class="sp-nav__right-detail-item">
-                        <a href="#" class="sp-nav__right-detail-link">ライセンス講習</a>
+                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">ライセンス講習</a>
                       </li>
                       <li class="sp-nav__right-detail-item">
-                        <a href="#" class="sp-nav__right-detail-link">体験ダイビング</a>
+                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">体験ダイビング</a>
                       </li>
                       <li class="sp-nav__right-detail-item">
-                        <a href="#" class="sp-nav__right-detail-link">ファンダイビング</a>
+                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">ファンダイビング</a>
                       </li>
                       <li class="sp-nav__right-detail-item">
-                        <a href="#" class="sp-nav__right-detail-link">スペシャルダイビング</a>
+                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">スペシャルダイビング</a>
                       </li>
                     </ul>
                   </li>

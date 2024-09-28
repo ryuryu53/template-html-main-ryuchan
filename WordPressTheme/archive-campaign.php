@@ -62,8 +62,11 @@
               </picture>
               <div class="campaign-card__body campaign-card__body--sub-page">
                 <!-- get_the_terms()：投稿に関連するタクソノミー（分類）を取得するための関数、get_the_ID()：現在表示されている投稿のID（個別の識別番号）を取得 -->
-                <?php $terms = get_the_terms(get_the_ID(), 'campaign_category'); ?>
-                <?php if ( $terms && !is_wp_error($terms) ) : ?>
+                <?php
+                  // カスタムタクソノミー「campaign_category」の取得
+                  $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                  if ( $terms && !is_wp_error($terms) ) :
+                ?>
                   <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
                 <?php endif; ?>
                   <h3 class="campaign-card__title campaign-card__title--sub-page text--medium-large"><?php the_title(); ?></h3>
