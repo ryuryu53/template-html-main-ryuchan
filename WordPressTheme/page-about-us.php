@@ -49,18 +49,18 @@
           $gallery_images = SCF::get('gallery', get_the_ID());
 
           // 画像が登録されている場合にループで表示
-          if ( $gallery_images ) :
-            foreach ( $gallery_images as $image ) :
+        if ( $gallery_images ) :
+          foreach ( $gallery_images as $image ) :
 
-              // 画像URLとalt属性を取得
-              // wp_get_attachment_image_src()：画像に関する情報を配列で返す
-              // false (デフォルト)は「アイコンを使わない」という意味、[0]：url（画像のurl）
-              $image_url_webp = wp_get_attachment_image_src($image['image_webp'], 'full', false)[0];
-              $image_url_jpg = wp_get_attachment_image_src($image['image'], 'full')[0];
-              // get_post_meta()：特定の投稿（ポスト）やメディアに付属する追加情報（メタデータ）を取得する関数
-              // $image['image']は画像のIDを返す  _wp_attachment_image_alt：画像のaltテキストを表す特別なキー(メタデータキー)
-              // true：一つの値だけが返される（falseだと複数の値が配列として返される）
-              $image_alt = get_post_meta($image['image'], '_wp_attachment_image_alt', true); // 画像のalt属性
+            // 画像URLとalt属性を取得
+            // wp_get_attachment_image_src()：画像に関する情報を配列で返す
+            // false (デフォルト)は「アイコンを使わない」という意味、[0]：url（画像のurl）
+            $image_url_webp = wp_get_attachment_image_src($image['image_webp'], 'full', false)[0];
+            $image_url_jpg = wp_get_attachment_image_src($image['image'], 'full')[0];
+            // get_post_meta()：特定の投稿（ポスト）やメディアに付属する追加情報（メタデータ）を取得する関数
+            // $image['image']は画像のIDを返す  _wp_attachment_image_alt：画像のaltテキストを表す特別なキー(メタデータキー)
+            // true：一つの値だけが返される（falseだと複数の値が配列として返される）
+            $image_alt = get_post_meta($image['image'], '_wp_attachment_image_alt', true); // 画像のalt属性
           ?>
           <div class="gallery-photo__item">
             <picture class="gallery-photo__img js-modal-open">
