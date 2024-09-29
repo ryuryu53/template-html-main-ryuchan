@@ -314,7 +314,7 @@
             // 各料金表について処理
             foreach ( $price_tables as $price_table_key ) :
               // PriceページのID
-              $page_price_id = 13;
+              $page_price_id = 12;
               // テーブルタイトルと料金表情報を取得
               $table_title = SCF::get('table_title' . substr($price_table_key, -1), $page_price_id);
               $table_prices = SCF::get($price_table_key, $page_price_id);
