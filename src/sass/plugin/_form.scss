@@ -319,10 +319,15 @@ textarea {
 }
 
 .form__item:nth-child(6) {
-	padding-bottom: rem(19);	// textareaの下に謎の余白5pxが入る
+	padding-bottom: rem(23);
 	@include mq(md) {
-		padding-bottom: rem(35);
+		padding-bottom: rem(41);
 	}
+}
+
+// textareaの下に謎の余白5pxが入る → textareaがdisplay: inline-block;になっているから。blockにするかvertical-alignで解決
+textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
+	vertical-align: bottom;
 }
 
 .form__item dt {
@@ -366,7 +371,6 @@ textarea {
 	margin-top: rem(15);
 	@include mq(md) {
 		margin-top: 0;
-		padding-top: rem(2);
 	}
 }
 
@@ -517,6 +521,8 @@ textarea {
 
 .form__item .wpcf7-list-item {
 	display: block;
+	margin-left: 0;
+	line-height: 1.65;
 }
 
 .form__item .wpcf7-not-valid {
@@ -537,8 +543,8 @@ textarea {
 	font-size: rem(14);
 	color: $red;
 	border: none;
-	top: rem(-60);
-	left: rem(180);
+	top: rem(-48);
+	left: rem(64);
 	margin: 0;
 	padding: 0;
 }

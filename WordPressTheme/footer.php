@@ -61,7 +61,7 @@
     </main>
 
     <!-- フッター -->
-    <footer class="top-footer <?php if ( is_404() ) { echo 'top-footer--404-page'; } ?> footer js-footer">
+    <footer class="top-footer <?php if ( is_404() ) { echo 'top-footer--404-page'; } elseif ( is_page('contact') ) { echo 'top-footer--contact-page'; } elseif ( is_page('thanks') ) { echo 'top-footer--thanks-page'; } ?> footer js-footer">
       <div class="footer__inner inner">
         <div class="footer__img">
           <div class="footer__logo">

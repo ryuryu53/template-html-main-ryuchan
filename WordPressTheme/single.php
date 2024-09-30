@@ -17,7 +17,7 @@
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
           <article class="single-article__item single-body">
             <div class="single-body__meta">
-              <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m.d'); ?></time>
+              <time datetime="<?php the_time('c'); ?>" class="single-body__date"><?php the_time('Y.m.d'); ?></time>
               <h1 class="single-body__title"><?php the_title(); ?></h1>
             </div>
             <picture class="single-body__img">

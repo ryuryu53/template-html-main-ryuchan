@@ -167,7 +167,7 @@ a:hover {
 }
 
 .top-contact {
-	margin-top: 5rem;
+	margin-top: 6.625rem;
 }
 
 .top-footer {
@@ -664,23 +664,19 @@ a:hover {
 }
 
 .breadcrumbs {
-	margin-top: 0.5rem;
-	position: relative;
-	z-index: 10;
-}
-
-.breadcrumbs ul {
-	align-items: center;
-	display: flex;
-	gap: 1.3125rem;
-}
-
-.breadcrumbs li {
 	color: #0D2936;
 	font-size: 0.875rem;
 	font-weight: 400;
+	margin-top: 0.5rem;
 	position: relative;
 	text-transform: uppercase;
+	z-index: 10;
+}
+
+.breadcrumbs__inner {
+	align-items: center;
+	display: flex;
+	gap: 0.4375rem;
 }
 
 .breadcrumbs__inner--white {
@@ -2074,10 +2070,6 @@ a:hover {
 	margin-top: 2rem;
 }
 
-.page-template__middle-item--terms-page {
-	margin-left: -0.375rem;
-}
-
 .page-template__middle-item span {
 	display: block;
 	padding-left: calc(1.15em + 0.375rem);
@@ -2337,6 +2329,7 @@ a:hover {
 
 .review-card__img {
 	aspect-ratio: 294/218;
+	display: block;
 	overflow: hidden;
 }
 
@@ -3146,7 +3139,11 @@ textarea {
 }
 
 .form__item:nth-child(6) {
-	padding-bottom: 1.1875rem;
+	padding-bottom: 1.4375rem;
+}
+
+textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
+	vertical-align: bottom;
 }
 
 .form__item dt {
@@ -3305,6 +3302,8 @@ textarea {
 
 .form__item .wpcf7-list-item {
 	display: block;
+	line-height: 1.65;
+	margin-left: 0;
 }
 
 .form__item .wpcf7-not-valid {
@@ -3328,11 +3327,11 @@ textarea {
 	border: none;
 	color: #C94800;
 	font-size: 0.875rem;
-	left: 11.25rem;
+	left: 4rem;
 	margin: 0;
 	padding: 0;
 	position: absolute;
-	top: -3.75rem;
+	top: -3rem;
 }
 
 .wp-pagenavi {
@@ -4837,7 +4836,7 @@ html {
 }
 
 .form__item:nth-child(6) {
-	padding-bottom: 2.1875rem;
+	padding-bottom: 2.5625rem;
 }
 
 .form__item dt {
@@ -4856,7 +4855,6 @@ html {
 
 .form__item:nth-child(4) dd {
 	margin-top: 0;
-	padding-top: 0.125rem;
 }
 
 .form__campaign {

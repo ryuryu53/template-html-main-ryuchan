@@ -3,6 +3,7 @@
 .review-card__img {
   aspect-ratio: 294 / 218;
   overflow: hidden;
+  display: block; // 忘れてた?
 }
 
 .review-card__img img {

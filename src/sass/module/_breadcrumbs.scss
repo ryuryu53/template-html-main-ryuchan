@@ -4,21 +4,33 @@
   margin-top: rem(8);
   position: relative; // パンくずを画像の前に持ってくる 24.09.25
   z-index: 10;
-}
-
-.breadcrumbs ul {
-  display: flex;
-  align-items: center;
-  gap: rem(21);
-}
-
-.breadcrumbs li {
-  position: relative;
+  // liから移動
   font-size: rem(14);
   font-weight: $normal;
   color: $green;
   text-transform: uppercase;
 }
+
+.breadcrumbs__inner {
+  display: flex;
+  align-items: center;
+  gap: rem(7);
+}
+
+// プラグインにはulなし
+// .breadcrumbs ul {
+//   display: flex;
+//   align-items: center;
+//   gap: rem(21);
+// }
+
+// .breadcrumbs li {
+//   position: relative;
+//   font-size: rem(14);
+//   font-weight: $normal;
+//   color: $green;
+//   text-transform: uppercase;
+// }
 
 // これがないとWP化したとき「＞」が白くならない 24.09.25
 .breadcrumbs__inner--white {

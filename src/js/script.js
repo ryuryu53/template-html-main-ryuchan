@@ -437,4 +437,20 @@ $(".js-accordion-title").on("click", function () {
       link.style.display = ''; // 常に表示
     });
   }
+
+  $('.wpcf7').on('submit', function(event) {
+    // 画面幅が767px以下の場合に改行を挿入
+    if ( window.innerWidth <= 767 ) {
+      // 送信後、エラーメッセージが出力されるのを監視
+      setTimeout(function() {
+        // エラーメッセージのテキストを探す
+        var responseOutput = $('.wpcf7-response-output');
+        if ( responseOutput.length ) {
+          var text = responseOutput.html();
+          // 「入力されていません。」の後に改行を追加
+          responseOutput.html(text.replace('入力されていません。', '入力されていません。<br>&nbsp;&nbsp;&nbsp;&nbsp;'));
+        }
+      }, 500); // 少し遅延させることで、エラーメッセージの生成を待つ
+    }
+  });
 });
