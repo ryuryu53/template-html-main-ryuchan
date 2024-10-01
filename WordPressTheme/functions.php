@@ -272,20 +272,3 @@ function custom_wpcf7_scripts() {
 }
 // 作成した関数「custom_wpcf7_scripts」を</body> タグの直前に追加する、という指示
 add_action( 'wp_footer', 'custom_wpcf7_scripts' );
-
-// function enqueue_custom_js() {
-//   // テーマディレクトリ内のjsフォルダにあるcustom.jsを読み込む
-//   wp_enqueue_script('custom-js', get_template_directory_uri() . '/js/custom.js', array(), false, true);
-// }
-// add_action('wp_enqueue_scripts', 'enqueue_custom_js');
-
-// add_action('wp_footer', function() {
-//   echo get_template_directory_uri();
-// });
-
-// add_filter('wpcf7_validation_error', 'custom_wpcf7_error_message', 10, 2);
-// function custom_wpcf7_error_message($error, $name) {
-//     // エラーメッセージに改行を追加
-//     $error = str_replace('入力されていません。', '入力されていません。<br>', $error);
-//     return $error;
-// }
