@@ -20,7 +20,7 @@
             <div class="contact__wrapper">
               <div class="contact__info">
                 <div class="contact__logo">
-                  <a href="#top" class="contact__logo-link"><img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/contact-logo.svg" alt="CodeUps">
+                  <a href="<?php echo $home; ?>" class="contact__logo-link"><img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/contact-logo.svg" alt="CodeUps">
                   </a>
                 </div>
                 <div class="contact__access">
