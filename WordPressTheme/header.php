@@ -33,14 +33,18 @@
     <!-- ヘッダー -->
     <header class="header js-header">
       <div class="header__inner">
-        <h1 class="header__logo">
+        <?php
+        // トップページかどうかを判定し、タグを決定
+        $tag = ( is_front_page() ) ? 'h1' : 'div';
+        ?>
+        <<?php echo $tag; ?> class="header__logo">
           <a href="<?php echo $home; ?>" class="header__logo-link">
             <picture>
               <source media="(max-width: 767px)" srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/header-logo.svg">
               <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/header-logo-pc.svg" alt="CodeUps">
             </picture>
           </a>
-        </h1>
+        </<?php echo $tag; ?>>
         <div class="header__drawer hamburger js-hamburger">
           <span></span>
           <span></span>
