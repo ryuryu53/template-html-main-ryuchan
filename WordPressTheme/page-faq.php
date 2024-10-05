@@ -21,20 +21,22 @@
             foreach ( $q_and_a as $fields ) :
           ?>
             <div class="accordion__item">
-              <div class="accordion__title js-accordion-title">
-                <p class="accordion__title-text">
-                  <?php
-                  echo nl2br(esc_html($fields['question']));
-                  ?>
-                </p>
-              </div>
-              <div class="accordion__content js-accordion-content">
-                <p class="accordion__text">
-                  <?php
-                  echo nl2br(esc_html($fields['answer']));
-                  ?>
-                </p>
-              </div>
+              <?php if ( !empty($fields['question']) && !empty($fields['answer']) ) : ?>
+                <div class="accordion__title js-accordion-title">
+                  <p class="accordion__title-text">
+                    <?php
+                    echo nl2br(esc_html($fields['question']));
+                    ?>
+                  </p>
+                </div>
+                <div class="accordion__content js-accordion-content">
+                  <p class="accordion__text">
+                    <?php
+                    echo nl2br(esc_html($fields['answer']));
+                    ?>
+                  </p>
+                </div>
+              <?php endif; ?>
             </div>
           <?php endforeach; endif; ?>
         </div>

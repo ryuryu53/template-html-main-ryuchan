@@ -1415,6 +1415,10 @@ a:hover {
 	object-fit: cover;
 }
 
+.gallery {
+	position: relative;
+}
+
 .gallery__items-wrap {
 	margin-top: 2.5rem;
 }
@@ -4090,6 +4094,19 @@ html {
 	aspect-ratio: 492/746;
 }
 
+.gallery::before {
+	background-image: url(../images/common/contact-goldfish-pc.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: "";
+	height: 9.125rem;
+	position: absolute;
+	right: calc(50% - min(48%, 40.25rem));
+	top: -5rem;
+	width: 19.3125rem;
+}
+
 .gallery__items-wrap {
 	margin-top: 5rem;
 }
@@ -4236,19 +4253,6 @@ html {
 	top: -4.375rem;
 	width: 18.8125rem;
 	z-index: 0;
-}
-
-.page-about::after {
-	background-image: url(../images/common/contact-goldfish-pc.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-	bottom: -11.625rem;
-	content: "";
-	height: 9.125rem;
-	position: absolute;
-	right: calc(50% - min(48%, 40.25rem));
-	width: 19.3125rem;
 }
 
 .page-about__img-box {

@@ -16,9 +16,11 @@
       <div class="page-template__title section-header">
         <h2 class="section-header__title"><?php the_title(); ?></h2>
       </div>
-      <div class="page-template__text-block">
-        <?php the_content(); ?>
-      </div>
+      <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+        <div class="page-template__text-block">
+          <?php the_content(); ?>
+        </div>
+      <?php endwhile; endif; ?>
     </div>
   </section>
 

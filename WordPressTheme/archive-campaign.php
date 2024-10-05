@@ -19,34 +19,35 @@
         <!-- if ( !is_tax() ) echo 'is-active' → 今表示されているページが特定のカテゴリ（タクソノミー）に属していない場合、is-activeというクラスを付与 -->
         <a href="<?php echo esc_url(get_post_type_archive_link('campaign')); ?>" class="campaign-category__link <?php if ( !is_tax() ) echo 'is-active'; ?>">All</a>
         <?php
-        // 表示したい順番のスラッグを指定
-        $custom_order = array('license', 'fun-diving', 'experience-diving');
+        // 表示したい順番のスラッグを指定（FB：並び替え不要）
+        // $custom_order = array('license', 'fun-diving', 'experience-diving');
 
         $terms = get_terms(array( // get_terms：特定のタクソノミー（campaign_category）のカテゴリ情報を取得する関数
           'taxonomy' => 'campaign_category',
           'hide_empty' => true, // 投稿が1つもないカテゴリを表示しないようにする
         ));
 
-        // スラッグ順にタームを並び替える
-        if ( !empty($terms) ) {
-          usort($terms, function($a, $b) use ($custom_order) {  // usort：配列を特定のルールで並び替える関数
-            // array_search：配列の中から、指定した値が何番目にあるかを調べる関数
-            $pos_a = array_search($a->slug, $custom_order); // $aのスラッグが$custom_orderの配列内で何番目にあるかを調べ、その位置（インデックス番号）を返す
-            // 例えば、$aのスラッグが「license」であれば、$custom_order配列の最初にあるため、0が返される
-            $pos_b = array_search($b->slug, $custom_order);
-            return $pos_a - $pos_b; // $aと$bの順番を決定する
-            // 引き算の結果が0より小さければ$aが先、0より大きければ$bが先に並ぶ
-            // つまり、$pos_aの値が小さい方（つまり、$custom_order配列で前の方にあるもの）が先に来るように並び替えられる
-          });
+        // スラッグ順にタームを並び替える（FB：並び替え不要）
+        if ( !empty($terms) ) :
+          // usort($terms, function($a, $b) use ($custom_order) {  // usort：配列を特定のルールで並び替える関数
+          //   // array_search：配列の中から、指定した値が何番目にあるかを調べる関数
+          //   $pos_a = array_search($a->slug, $custom_order); // $aのスラッグが$custom_orderの配列内で何番目にあるかを調べ、その位置（インデックス番号）を返す
+          //   // 例えば、$aのスラッグが「license」であれば、$custom_order配列の最初にあるため、0が返される
+          //   $pos_b = array_search($b->slug, $custom_order);
+          //   return $pos_a - $pos_b; // $aと$bの順番を決定する
+          //   // 引き算の結果が0より小さければ$aが先、0より大きければ$bが先に並ぶ
+          //   // つまり、$pos_aの値が小さい方（つまり、$custom_order配列で前の方にあるもの）が先に来るように並び替えられる
+          // });
 
-          // 並び替え後にリンクを生成
-          foreach ($terms as $term) {
+          // 並び替え後にリンクを生成（FB：並び替え不要）
+          foreach ($terms as $term) :
             $term_link = get_term_link($term);  // 各カテゴリ（タクソノミー）のリンク先URLを取得
             // is_tax('campaign_category', $term->slug)：「今表示しているページが、このループで処理しているカテゴリ（$term->slug）かどうか？」を判定
-            echo '<a href="' . esc_url($term_link) . '" class="campaign-category__link ' . (is_tax('campaign_category', $term->slug) ? 'is-active' : '') . '">' . esc_html($term->name) . '</a>';
-          }
-        }
         ?>
+        <a href="<?php echo esc_url($term_link); ?>" class="campaign-category__link <?php echo (is_tax('campaign_category', $term->slug) ? 'is-active' : ''); ?>">
+          <?php echo esc_html($term->name); ?>
+        </a>
+        <?php endforeach; endif; ?>
       </div>
       <ul class="page-campaign__items campaign-list">
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
