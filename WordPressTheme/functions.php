@@ -272,3 +272,46 @@ function custom_wpcf7_scripts() {
 }
 // 作成した関数「custom_wpcf7_scripts」を</body> タグの直前に追加する、という指示
 add_action( 'wp_footer', 'custom_wpcf7_scripts' );
+
+// WordPressの特定の投稿タイプに対してWYSIWYGエディターを無効化する
+function remove_wysiwyg_for_post_type($post_type) {
+    remove_post_type_support($post_type, 'editor');
+    // 必要に応じて他の機能を削除
+    // remove_post_type_support($post_type, 'thumbnail');
+}
+
+add_action('init', function() {
+    // campaign投稿タイプからエディターを削除
+    remove_wysiwyg_for_post_type('campaign');
+    // 他の投稿タイプにも適用できる
+    // remove_wysiwyg_for_post_type('another_post_type');
+});
+
+// 管理画面にカスタムCSSを追加する（Campaignページ、説明文の文字を赤くする）
+function my_acf_admin_styles() {
+  echo '
+  <style>
+    /* 「手順」欄に入力した文字を赤くする */
+    .acf-field .acf-label p.description {
+      color: red;
+    }
+  </style>
+  ';
+}
+add_action('admin_head', 'my_acf_admin_styles');
+
+// 管理画面にカスタムCSSを追加する（Campaignページ、サンプル画像を挿入）
+function my_custom_admin_styles() {
+  echo '
+    <style>
+      /* ACFグループの右側に背景画像を挿入 */
+      #acf-group_66f03c54687bd .acf-fields.-top {
+        background-image: url(' . get_template_directory_uri() . '/assets/images/common/campaign-sample.webp);
+        background-position: top right 8px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    </style>
+  ';
+}
+add_action('admin_head', 'my_custom_admin_styles');

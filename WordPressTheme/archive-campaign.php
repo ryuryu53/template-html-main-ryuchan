@@ -70,24 +70,58 @@
                 ?>
                   <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
                 <?php endif; ?>
-                  <h3 class="campaign-card__title campaign-card__title--sub-page text--medium-large"><?php the_title(); ?></h3>
-                  <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
+                <h3 class="campaign-card__title campaign-card__title--sub-page text--medium-large"><?php the_title(); ?></h3>
+                <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
+                <!-- キャンペーン価格 -->
                 <div class="campaign-card__price campaign-card__price--sub-page">
-                  <?php if ( get_field('campaign_1') ) : ?>
+                <?php
+                  $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
+                  $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                  $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                ?>
+                  <?php if ( $price_before ) : ?>
                     <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
-                    <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html(number_format(intval(get_field('campaign_1')))); ?></span>
+                    <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>
                   <?php endif; ?>
-                  <?php if ( get_field('campaign_2') ) : ?>
-                    <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html(number_format(intval(get_field('campaign_2')))); ?></span>
+                  <?php if ( $price_after ) : ?>
+                    <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html(number_format(intval($price_after))); ?></span>
                   <?php endif; ?>
                 </div>
                 <div class="campaign-card__information">
                   <?php if ( get_field('campaign_3') ) : ?>
                     <p class="campaign-card__information-text"><?php the_field('campaign_3'); ?></p>
                   <?php endif; ?>
-                  <?php if ( get_field('campaign_4') ) : ?>
-                    <p class="campaign-card__information-period"><?php the_field('campaign_4'); ?></p>
-                  <?php endif; ?>
+                  <!-- キャンペーン期間 -->
+                  <div class="campaign-card__information-period">
+                  <?php
+                    $campaign_period = get_field('campaign_period');  // グループフィールドからデータを取得
+                    $start_date = $campaign_period['campaign_4']; // 開始日(フォーマット済み: Y/n/j)を取得
+                    $end_date = $campaign_period['campaign_5']; // 終了日(フォーマット済み: Y/n/j)を取得
+                    // 開始日と終了日の年を抽出
+                    $start_year = substr($start_date, 0, 4); // 先頭4文字を取得して年を抽出
+                    $end_year = substr($end_date, 0, 4);     // 同じく終了日の年を抽出
+                  ?>
+                    <?php if ( $start_date ) : ?>
+                      <time datetime="<?php echo esc_attr($start_date); ?>">
+                        <?php echo esc_html($start_date); ?>
+                      </time>
+                    <?php endif; ?>
+                    <?php if ( $end_date ) : ?>
+                      <?php if ( $start_date ) : ?>
+                      -
+                      <?php endif; ?>
+                      <time datetime="<?php echo esc_attr($end_date); ?>">
+                        <?php
+                          // 開始日と終了日の年が同じ場合は終了日の年を省略
+                          if ( $start_year === $end_year ) {
+                            echo esc_html(substr($end_date, 5)); // 「Y/n/j」の先頭5文字を飛ばして「n/j」を表示
+                          } else {
+                            echo esc_html($end_date); // 年が異なる場合はフルの日付「Y/n/j」を表示
+                          }
+                        ?>
+                      </time>
+                    <?php endif; ?>
+                  </div>
                   <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
                   <div class="campaign-card__btn campaign-card__btn--sub-page u-desktop">
                     <a href="<?php echo esc_url(home_url('/contact')); ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
