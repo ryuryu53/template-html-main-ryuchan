@@ -49,8 +49,19 @@
               <div class="voice-card__head">
                 <div class="voice-card__meta">
                   <div class="voice-card__label">
+                    <!-- 年代（性別） -->
                     <span class="voice-card__age">
-                      <?php if ( get_field('voice_1') ) : ?><?php the_field('voice_1'); ?><?php endif; ?><?php if ( get_field('voice_2') ) : ?>(<?php the_field('voice_2'); ?>)<?php endif; ?>
+                    <?php
+                      $voice_age_and_gender = get_field('voice_age_and_gender');  // グループフィールドからデータを取得
+                      $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
+                      $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
+                    ?>
+                      <?php if ( $voice_age ) : ?>
+                        <?php echo esc_html($voice_age); ?>
+                      <?php endif; ?>
+                      <?php if ( $voice_gender ) : ?>
+                        (<?php echo esc_html($voice_gender); ?>)
+                      <?php endif; ?>
                     </span>
                     <?php
                       // カスタムタクソノミー「voice_category」の取得

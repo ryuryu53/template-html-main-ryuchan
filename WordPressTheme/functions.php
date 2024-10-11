@@ -283,8 +283,8 @@ function remove_wysiwyg_for_post_type($post_type) {
 add_action('init', function() {
     // campaign投稿タイプからエディターを削除
     remove_wysiwyg_for_post_type('campaign');
-    // 他の投稿タイプにも適用できる
-    // remove_wysiwyg_for_post_type('another_post_type');
+    // voice投稿タイプからエディターを削除
+    remove_wysiwyg_for_post_type('voice');
 });
 
 // 管理画面にカスタムCSSを追加する（Campaignページ、説明文の文字を赤くする）
@@ -300,18 +300,54 @@ function my_acf_admin_styles() {
 }
 add_action('admin_head', 'my_acf_admin_styles');
 
-// 管理画面にカスタムCSSを追加する（Campaignページ、サンプル画像を挿入）
+// 管理画面にカスタムCSSを追加する（Campaign、Voiceページ、サンプル画像を挿入）
 function my_custom_admin_styles() {
   echo '
     <style>
-      /* ACFグループの右側に背景画像を挿入 */
+      /* ACFグループの右側にサンプル画像を挿入 */
+      /* Campaignページ */
       #acf-group_66f03c54687bd .acf-fields.-top {
         background-image: url(' . get_template_directory_uri() . '/assets/images/common/campaign-sample.webp);
         background-position: top right 8px;
         background-size: contain;
         background-repeat: no-repeat;
       }
+
+      /* Voiceページ */
+      #acf-group_66f123ca28191 .acf-fields.-top {
+        background-image: url(' . get_template_directory_uri() . '/assets/images/common/voice-sample.webp);
+        background-position: top 24px right 8px;
+        background-size: 320px;
+        background-repeat: no-repeat;
+      }
     </style>
   ';
 }
 add_action('admin_head', 'my_custom_admin_styles');
+
+// Priceページのエディターのメインコンテンツエリアについて「height: 80%;」を適用
+function custom_editor_styles_for_specific_page() {
+  // 現在の画面情報を取得
+  $screen = get_current_screen();
+  
+  // エディタ画面かつ特定の固定ページIDが12の場合にスタイルを適用
+  if ( 'post' === $screen->base && get_the_ID() === 12 ) {
+      echo '<style>
+          .editor-visual-editor {
+              height: 80%;
+          }
+      </style>';
+  }
+}
+add_action('admin_head', 'custom_editor_styles_for_specific_page');
+
+// Priceページのエディターで「価格」欄の説明文の文字を赤くする
+function my_scf_admin_styles() {
+  echo '<style>
+    /* SCFの「手順」欄に入力した文字を赤くする */
+    .smart-cf-meta-box-table td .instruction {
+      color: red;
+    }
+  </style>';
+}
+add_action('admin_head', 'my_scf_admin_styles');

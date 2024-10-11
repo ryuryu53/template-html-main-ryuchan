@@ -16,12 +16,13 @@
       <div class="page-price__table page-price-table">
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
           <?php
-            // 4つの料金表に対応するフィールド名を設定
+            // 5つの料金表に対応するフィールド名を設定
             $price_tables = [
               'table_prices1',
               'table_prices2',
               'table_prices3',
-              'table_prices4'
+              'table_prices4',
+              'table_prices5'
             ];
 
             // 各料金表について処理
