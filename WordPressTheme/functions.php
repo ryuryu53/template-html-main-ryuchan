@@ -275,16 +275,19 @@ add_action( 'wp_footer', 'custom_wpcf7_scripts' );
 
 // WordPressの特定の投稿タイプに対してWYSIWYGエディターを無効化する
 function remove_wysiwyg_for_post_type($post_type) {
-    remove_post_type_support($post_type, 'editor');
-    // 必要に応じて他の機能を削除
-    // remove_post_type_support($post_type, 'thumbnail');
+  remove_post_type_support($post_type, 'editor');
+  // 必要に応じて他の機能を削除
+  // remove_post_type_support($post_type, 'thumbnail');
 }
 
 add_action('init', function() {
-    // campaign投稿タイプからエディターを削除
-    remove_wysiwyg_for_post_type('campaign');
-    // voice投稿タイプからエディターを削除
-    remove_wysiwyg_for_post_type('voice');
+  // エディターを無効にする投稿タイプのリスト
+  $post_types = ['campaign', 'voice'];
+
+  // 各投稿タイプに対してエディターを削除
+  foreach ($post_types as $post_type) {
+    remove_wysiwyg_for_post_type($post_type);
+  }
 });
 
 // 管理画面にカスタムCSSを追加する（Campaignページ、説明文の文字を赤くする）
@@ -325,18 +328,39 @@ function my_custom_admin_styles() {
 }
 add_action('admin_head', 'my_custom_admin_styles');
 
-// Priceページのエディターのメインコンテンツエリアについて「height: 80%;」を適用
+// エディターのメインコンテンツエリアについて高さを調整
 function custom_editor_styles_for_specific_page() {
   // 現在の画面情報を取得
   $screen = get_current_screen();
   
-  // エディタ画面かつ特定の固定ページIDが12の場合にスタイルを適用
+  // エディタ画面かつ特定の固定ページIDが12（料金一覧）の場合にスタイルを適用
   if ( 'post' === $screen->base && get_the_ID() === 12 ) {
-      echo '<style>
-          .editor-visual-editor {
-              height: 80%;
-          }
-      </style>';
+    echo '<style>
+      .editor-visual-editor {
+        height: 80%;
+      }
+    </style>';
+    // エディタ画面かつ特定の固定ページIDが8（私たちについて）の場合にスタイルを適用
+  } elseif ( 'post' === $screen->base && get_the_ID() === 8 ) {
+    echo '<style>
+      .editor-visual-editor {
+        height: 30%;
+      }
+    </style>';
+    // エディタ画面かつ特定の固定ページIDが16（よくある質問）の場合にスタイルを適用
+  } elseif ( 'post' === $screen->base && get_the_ID() === 16 ) {
+    echo '<style>
+      .editor-visual-editor {
+        height: 30%;
+      }
+    </style>';
+    // エディタ画面かつ特定の固定ページIDが25（トップページ）の場合にスタイルを適用
+  } elseif ( 'post' === $screen->base && get_the_ID() === 25 ) {
+    echo '<style>
+      .editor-visual-editor {
+        height: 30%;
+      }
+    </style>';
   }
 }
 add_action('admin_head', 'custom_editor_styles_for_specific_page');

@@ -1,5 +1,6 @@
 "use strict";
 
+var mv_swiper;
 jQuery(function ($) {
   // この中であればWordpressでも「$」が使用可能になる
   //ドロワーメニュー
@@ -30,17 +31,16 @@ jQuery(function ($) {
     }
   });
 
-  // mvスワイパー
-  var mv_swiper = new Swiper('.js-mv-swiper', {
+  // スワイパーの自動再生を一時停止
+  mv_swiper = new Swiper('.js-mv-swiper', {
+    // ここで「var」を削除して、グローバルに宣言したmv_swiperを使用
     loop: true,
     effect: 'fade',
     speed: 3000,
     // スライド（フェイド）が変わるスピード
     allowTouchMove: false,
     // 3秒(delay: 3000)たつ前にマウスでカチャカチャなぞることによって次のスライドへ移るのをさせないようにする（これがないとクリックで自分でスライドできてしまう）
-    autoplay: {
-      delay: 3000 // 3秒後にスライドが変わっていく
-    }
+    autoplay: false // 最初は自動再生をしない
   });
 
   // campaignスワイパー
@@ -458,5 +458,41 @@ jQuery(function ($) {
         }
       }, 500); // 少し遅延させることで、エラーメッセージの生成を待つ
     }
+  });
+});
+
+// ローディングアニメーション
+jQuery(window).on("load", function () {
+  jQuery(".js-load").fadeOut(1000, function () {
+    // fadeOutを使用してフェード後に非表示に
+    jQuery(this).addClass('loaded'); // フェードアウト後に非表示
+    // フェードアウト完了後の処理
+    // 左右の画像が下からスライド
+    jQuery('.mv__img-left').addClass('loaded'); // 左の画像をスライドイン
+
+    jQuery('.mv__img-right').addClass('loaded'); // 右の画像をスライドイン（80px差で配置済み）
+
+    setTimeout(function () {
+      // スライドアニメーションが終わったらフェードアウト
+      jQuery('.mv__img-left').addClass('hidden'); // フェードアウト用のクラスを追加
+      jQuery('.mv__img-right').addClass('hidden');
+      setTimeout(function () {
+        // 完全に非表示にする（optional：フェードアウト後にdisplay: none; を追加したい場合）
+        jQuery('.mv__images').css('display', 'none');
+      }, 500); // opacity 0.5sのフェードアウト時間
+    }, 2000); // 2秒後にフェードアウト開始
+
+    setTimeout(function () {
+      // タイトルを表示
+      jQuery('.mv__header').css('opacity', '1');
+
+      // 2秒後にスワイパーの自動再生を開始
+      // autoplayオプションを追加・設定して開始
+      // mv_swiper.params.autoplay = {  // この書き方だとスワイパーが止まってしまう！よって、以下の通り1行に書いた
+      //   delay: 3000,
+      // };
+      mv_swiper.params.autoplay.delay = 3000; // 3秒ごとにスライド(3秒後にスライドが変わっていく)
+      mv_swiper.autoplay.start(); // 自動再生を開始
+    }, 2000);
   });
 });
