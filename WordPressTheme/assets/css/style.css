@@ -1764,7 +1764,7 @@ a:hover {
 	height: 100%;
 	opacity: 1; /* 初期状態は表示されている */
 	position: absolute;
-	transition: transform 2s ease, opacity 0.5s ease;
+	transition: transform 2s ease;
 	width: 50%;
 }
 
@@ -1785,12 +1785,6 @@ a:hover {
 .mv__img-left.loaded,
 .mv__img-right.loaded {
 	transform: translateY(0);
-}
-
-.mv__img-left.hidden,
-.mv__img-right.hidden {
-	opacity: 0; /* フェードアウト */
-	pointer-events: none; /* ユーザー操作を無効化 */
 }
 
 .page-404__wrapper {

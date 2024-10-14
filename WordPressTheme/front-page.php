@@ -33,6 +33,7 @@
             $mv_images = SCF::get('mainview', get_the_ID());
             // 画像が登録されている場合にループで表示
           if ( $mv_images ) :
+            $counter = 0; // カウンターを初期化
             foreach ( $mv_images as $image ) :
               // 画像URLとalt属性を取得
               // wp_get_attachment_image_src()：画像に関する情報を配列で返す
@@ -46,10 +47,13 @@
           ?>
             <div class="swiper-slide">
               <!-- ローディングアニメーション用 -->
-              <div class="mv__images">
-                <div class="mv__img-left"></div>
-                <div class="mv__img-right"></div>
-              </div>
+              <!-- 1つ目のスライドにのみmv__imagesを表示 -->
+              <?php if ( $counter === 0 ) : ?>
+                <div class="mv__images">
+                  <div class="mv__img-left"></div>
+                  <div class="mv__img-right"></div>
+                </div>
+              <?php endif; ?>
               <picture class="mv__img">
                 <!-- spの画像 -->
                 <source media="(max-width: 767px)" srcset="<?php echo esc_url($image_url_sp); ?>" width="375" height="667">
@@ -57,7 +61,11 @@
                 <img src="<?php echo esc_url($image_url_pc); ?>" alt="<?php echo esc_attr($image_alt); ?>" width="1440" height="768">
               </picture>
             </div>
-          <?php endforeach; endif; ?>
+          <?php
+            $counter++; // カウンターをインクリメント
+            endforeach;
+          endif;
+          ?>
         </div>
       </div>
       <div class="mv__header">

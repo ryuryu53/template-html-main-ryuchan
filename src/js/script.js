@@ -468,17 +468,6 @@ jQuery(window).on("load", function () {
     jQuery('.mv__img-right').addClass('loaded'); // 右の画像をスライドイン（80px差で配置済み）
 
     setTimeout(function () {
-      // スライドアニメーションが終わったらフェードアウト
-      jQuery('.mv__img-left').addClass('hidden'); // フェードアウト用のクラスを追加
-      jQuery('.mv__img-right').addClass('hidden');
-
-      setTimeout(function () {
-        // 完全に非表示にする（optional：フェードアウト後にdisplay: none; を追加したい場合）
-        jQuery('.mv__images').css('display', 'none');
-      }, 500); // opacity 0.5sのフェードアウト時間
-    }, 2000); // 2秒後にフェードアウト開始
-
-    setTimeout(function () {
       // タイトルを表示
       jQuery('.mv__header').css('opacity', '1');
 

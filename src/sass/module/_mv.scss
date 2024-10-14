@@ -82,7 +82,7 @@
   background-repeat: no-repeat;
   background-size: 200% 100%; /* 横幅を2倍にして、左右で分割 */
   background-position: center;
-  transition: transform 2s ease, opacity 0.5s ease; // 2秒かけてtransformをアニメーション
+  transition: transform 2s ease; // 2秒かけてtransformをアニメーション
   opacity: 1; /* 初期状態は表示されている */
   @include mq(md) {
   background-image: url('../images/common/mv-pc_1.jpg');
@@ -105,9 +105,4 @@
 
 .mv__img-left.loaded, .mv__img-right.loaded {
   transform: translateY(0); // アニメーションで上にスライドする
-}
-
-.mv__img-left.hidden, .mv__img-right.hidden {
-  opacity: 0; /* フェードアウト */
-  pointer-events: none; /* ユーザー操作を無効化 */
 }
