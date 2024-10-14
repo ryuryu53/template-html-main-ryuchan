@@ -1,9 +1,10 @@
 @use "global" as *;
 
+// ローディング最初の画面が出ないようにするため、余白をmargin-top → padding-topへ変更
 .top-campaign {
-  margin-top: rem(44);
+  padding-top: rem(44);
 
   @include mq(md) {
-    margin-top: rem(120);
+    padding-top: rem(120);
   }
 }

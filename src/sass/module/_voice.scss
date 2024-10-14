@@ -2,6 +2,7 @@
 
 .voice {
   position: relative;
+  background-color: white;  // ローディング最初の画面が出ないようにするため
 }
 
 .voice::before {
@@ -12,7 +13,7 @@
     background-position: center;
     background-size: contain;
     position: absolute;
-    top: rem(-120);
+    top: rem(24);
     left: calc(50% - min(48%, rem(620)));
     width: rem(301);
     height: rem(138);
@@ -28,7 +29,7 @@
     background-size: contain;
     position: absolute;
     right: calc(50% - min(48%, rem(540)));
-    bottom: rem(-71);
+    bottom: rem(73);
     width: rem(71);
     height: rem(162);
   }

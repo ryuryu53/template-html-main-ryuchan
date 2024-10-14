@@ -1,9 +1,12 @@
 @use "global" as *;
 
+// ローディング最初の画面が出ないようにするため、余白をmargin-top → padding-topへ変更
 .top-contact {
-  margin-top: rem(106);
+  padding-top: rem(80);
+  padding-bottom: rem(104);
 
   @include mq(md) {
-    margin-top: rem(140);
+    padding-top: rem(140);
+    padding-bottom: rem(160);
   }
 }

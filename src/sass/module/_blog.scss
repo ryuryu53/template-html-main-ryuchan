@@ -2,6 +2,7 @@
 
 .blog {
   position: relative;
+  background-color: white;  // ローディング最初の画面が出ないようにするため
 }
 
 .blog::before {
@@ -14,6 +15,7 @@
     position: absolute;
     top: rem(24);
     left: calc(50% - min(48%, rem(620)));
+    z-index: 20;
     width: rem(437);
     height: rem(201);
   }
@@ -27,7 +29,6 @@
     left: 0;
     width: 100%;
     height: 60.5%;
-    z-index: -10;
     background-image: url(../images/common/blog-bg.webp);
     background-repeat: no-repeat;
     background-position: center;

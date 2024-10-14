@@ -1,6 +1,8 @@
 @use "global" as *;
 
 .section-header {
+  position: relative;  // ローディング最初の画面が出ないようにするため
+  z-index: 20;
   text-align: center;
 }
 

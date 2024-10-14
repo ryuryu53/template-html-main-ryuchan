@@ -100,7 +100,14 @@
               if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post();
             ?>
               <li class="swiper-slide campaign-cards__item campaign-card">
-                <a href="<?php the_permalink(); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし -->
+                <?php
+                  $terms = get_the_terms(get_the_ID(), 'campaign_category'); // 現在の投稿に紐付いた'term'を取得
+                  if ( $terms && !is_wp_error($terms) ) : // タームが存在し、エラーがない場合のみ処理を実行
+                    foreach ($terms as $term) : // 各タームについて繰り返し処理
+                      $term_link = get_term_link($term); // タームのリンクを取得
+                ?>
+                  <a href="<?php echo esc_url($term_link); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
+                <?php endforeach; endif; ?>
                   <picture class="campaign-card__img">
                     <?php if ( get_the_post_thumbnail() ) : ?>
                     <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
@@ -111,9 +118,9 @@
                   </picture>
                   <div class="campaign-card__body">
                     <?php
-                    // カスタムタクソノミー「campaign_category」の取得
-                    $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                    if ( $terms && !is_wp_error($terms) ) :
+                      // カスタムタクソノミー「campaign_category」の取得
+                      $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                      if ( $terms && !is_wp_error($terms) ) :
                     ?>
                       <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
                     <?php endif; ?>
@@ -264,7 +271,14 @@
           if ( $latest_voice_query->have_posts() ) : while ( $latest_voice_query->have_posts() ) : $latest_voice_query->the_post();
         ?>
           <article class="voice-cards__item voice-card">
-            <a href="<?php the_permalink(); ?>" class="voice-card__link">  <!-- 詳細投稿ページはなし -->
+            <?php
+              $terms = get_the_terms(get_the_ID(), 'voice_category'); // 現在の投稿に紐付いた'term'を取得
+              if ( $terms && !is_wp_error($terms) ) : // タームが存在し、エラーがない場合のみ処理を実行
+                foreach ($terms as $term) : // 各タームについて繰り返し処理
+                  $term_link = get_term_link($term); // タームのリンクを取得
+            ?>
+              <a href="<?php echo esc_url($term_link); ?>" class="voice-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
+            <?php endforeach; endif; ?>
               <div class="voice-card__head">
                 <div class="voice-card__meta">
                   <div class="voice-card__label">

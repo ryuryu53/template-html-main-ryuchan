@@ -155,7 +155,7 @@ a:hover {
 }
 
 .top-about {
-	margin-top: 5.1875rem;
+	padding-top: 5.1875rem;
 }
 
 .top-blog {
@@ -163,15 +163,15 @@ a:hover {
 }
 
 .top-campaign {
-	margin-top: 2.75rem;
+	padding-top: 2.75rem;
 }
 
 .top-contact {
-	margin-top: 6.625rem;
+	padding-bottom: 6.5rem;
+	padding-top: 5rem;
 }
 
 .top-footer {
-	margin-top: 6.5rem;
 	padding-bottom: 3.5rem;
 	padding-top: 3rem;
 }
@@ -251,7 +251,6 @@ a:hover {
 }
 
 .top-price {
-	margin-top: 5.25rem;
 	padding-bottom: 5.25rem;
 	padding-top: 5.25rem;
 }
@@ -261,7 +260,8 @@ a:hover {
 }
 
 .top-voice {
-	margin-top: 5.5rem;
+	padding-bottom: 5.25rem;
+	padding-top: 5.5rem;
 }
 
 .about-mv {
@@ -274,6 +274,7 @@ a:hover {
 }
 
 .about {
+	background-color: white;
 	position: relative;
 }
 
@@ -635,6 +636,8 @@ a:hover {
 	grid-gap: 2.5rem;
 	display: grid;
 	gap: 2.5rem;
+	position: relative;
+	z-index: 20;
 }
 
 .blog-mv {
@@ -647,6 +650,7 @@ a:hover {
 }
 
 .blog {
+	background-color: white;
 	position: relative;
 }
 
@@ -990,7 +994,9 @@ a:hover {
 }
 
 .campaign {
+	background-color: white;
 	overflow: hidden;
+	position: relative;
 }
 
 .campaign__inner {
@@ -1142,6 +1148,7 @@ a:hover {
 }
 
 .contact {
+	background-color: white;
 	filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 	position: relative;
 }
@@ -1155,7 +1162,7 @@ a:hover {
 	height: 3.125rem;
 	position: absolute;
 	right: 0.9375rem;
-	top: -1.625rem;
+	top: 3.375rem;
 	width: 6.8125rem;
 }
 
@@ -1351,6 +1358,7 @@ a:hover {
 
 .footer {
 	background-color: #408F95;
+	position: relative;
 }
 
 .footer__logo {
@@ -1575,6 +1583,7 @@ a:hover {
 
 .information {
 	background-color: #DDF0F1;
+	position: relative;
 }
 
 .information__content {
@@ -2442,7 +2451,9 @@ a:hover {
 }
 
 .section-header {
+	position: relative;
 	text-align: center;
+	z-index: 20;
 }
 
 .section-header__engtitle {
@@ -2947,6 +2958,7 @@ a:hover {
 }
 
 .voice {
+	background-color: white;
 	position: relative;
 }
 
@@ -3520,7 +3532,7 @@ html {
 }
 
 .top-about {
-	margin-top: 8.6875rem;
+	padding-top: 8.6875rem;
 }
 
 .top-blog {
@@ -3528,15 +3540,15 @@ html {
 }
 
 .top-campaign {
-	margin-top: 7.5rem;
+	padding-top: 7.5rem;
 }
 
 .top-contact {
-	margin-top: 8.75rem;
+	padding-bottom: 10rem;
+	padding-top: 8.75rem;
 }
 
 .top-footer {
-	margin-top: 10rem;
 	padding-bottom: 5rem;
 	padding-top: 5rem;
 }
@@ -3617,7 +3629,6 @@ html {
 }
 
 .top-price {
-	margin-top: 9rem;
 	padding-bottom: 6.5rem;
 	padding-top: 6.25rem;
 }
@@ -3627,7 +3638,8 @@ html {
 }
 
 .top-voice {
-	margin-top: 9rem;
+	padding-bottom: 9rem;
+	padding-top: 9rem;
 }
 
 .about-mv {
@@ -3801,6 +3813,7 @@ html {
 	position: absolute;
 	top: 1.5rem;
 	width: 27.3125rem;
+	z-index: 20;
 }
 
 .blog::after {
@@ -3814,7 +3827,6 @@ html {
 	position: absolute;
 	top: 0;
 	width: 100%;
-	z-index: -10;
 }
 
 .blog__title {
@@ -3994,7 +4006,7 @@ html {
 	background-image: url(../images/common/contact-goldfish-pc.svg);
 	height: 9.125rem;
 	right: calc(50% - min(48%, 42.125rem));
-	top: -2.5rem;
+	top: 6.25rem;
 	width: 19.3125rem;
 }
 
@@ -4893,7 +4905,7 @@ html {
 	height: 8.625rem;
 	left: calc(50% - min(48%, 38.75rem));
 	position: absolute;
-	top: -7.5rem;
+	top: 1.5rem;
 	width: 18.8125rem;
 }
 
@@ -4902,7 +4914,7 @@ html {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	bottom: -4.4375rem;
+	bottom: 4.5625rem;
 	content: "";
 	height: 10.125rem;
 	position: absolute;

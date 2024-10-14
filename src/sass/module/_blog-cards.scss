@@ -1,6 +1,8 @@
 @use "global" as *;
 
 .blog-cards {
+  position: relative;  // ローディング最初の画面が出ないようにするため
+  z-index: 20;
   display: grid;
   gap: rem(40); // rem(40) rem(30) → rem(40)
 
