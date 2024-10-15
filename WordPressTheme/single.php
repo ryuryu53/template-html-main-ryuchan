@@ -58,7 +58,10 @@
         </div>
       </div>
 
-      <?php get_sidebar(); ?>
+      <!-- サイドバー -->
+      <aside class="two-column__aside">
+        <?php get_sidebar(); ?>
+      </aside>
     </div>
   </div>
 
