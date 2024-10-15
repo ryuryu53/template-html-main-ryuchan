@@ -3,6 +3,9 @@
   <?php
   $home = esc_url( home_url('/') );
   $campaign = esc_url( home_url('/campaign/') );
+  $campaign_fun_diving = esc_url( home_url('/campaign_category/fun-diving/') );
+  $campaign_license = esc_url( home_url('/campaign_category/license/') );
+  $campaign_experience_diving = esc_url( home_url('/campaign_category/experience-diving/') );
   $about = esc_url( home_url('/about-us/') );
   $information = esc_url( home_url('/information/') );
   $blog = esc_url( home_url('/blog/') );
@@ -35,16 +38,16 @@
               <a href="<?php echo $campaign; ?>" class="footer-nav__left-link footer-nav__left-link--icon-green">キャンペーン</a>
               <ul class="footer-nav__left-detail-items">
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">ライセンス取得</a>
+                  <a href="<?php echo $campaign_license; ?>" class="footer-nav__left-detail-link">ライセンス取得</a>
                 </li>
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">貸切体験ダイビング</a>
+                  <a href="<?php echo $campaign_experience_diving; ?>" class="footer-nav__left-detail-link">貸切体験ダイビング</a>
                 </li>
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">ナイトダイビング</a>
+                  <a href="<?php echo $campaign_experience_diving; ?>" class="footer-nav__left-detail-link">ナイトダイビング</a>
                 </li>
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $campaign; ?>" class="footer-nav__left-detail-link">貸切ファンダイビング</a>
+                  <a href="<?php echo $campaign_fun_diving; ?>" class="footer-nav__left-detail-link">貸切ファンダイビング</a>
                 </li>
               </ul>
             </li>
