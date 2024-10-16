@@ -155,6 +155,7 @@ a:hover {
 }
 
 .top-about {
+	padding-bottom: 4.625rem;
 	padding-top: 5.1875rem;
 }
 
@@ -193,7 +194,6 @@ a:hover {
 }
 
 .top-information {
-	margin-top: 4.625rem;
 	padding-bottom: 5.25rem;
 	padding-top: 5.25rem;
 }
@@ -2451,9 +2451,7 @@ a:hover {
 }
 
 .section-header {
-	position: relative;
 	text-align: center;
-	z-index: 20;
 }
 
 .section-header__engtitle {
@@ -3532,6 +3530,7 @@ html {
 }
 
 .top-about {
+	padding-bottom: 10.25rem;
 	padding-top: 8.6875rem;
 }
 
@@ -3566,7 +3565,6 @@ html {
 }
 
 .top-information {
-	margin-top: 10.25rem;
 	padding-bottom: 4.75rem;
 	padding-top: 6.25rem;
 }
@@ -3652,7 +3650,7 @@ html {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	bottom: -5.625rem;
+	bottom: 4.625rem;
 	content: "";
 	height: 11.3125rem;
 	position: absolute;

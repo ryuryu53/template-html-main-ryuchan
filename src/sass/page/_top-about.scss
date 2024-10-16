@@ -3,8 +3,10 @@
 // ローディング最初の画面が出ないようにするため、余白をmargin-top → padding-topへ変更
 .top-about {
   padding-top: rem(83);
+  padding-bottom: rem(74);
 
   @include mq(md) {
     padding-top: rem(139);
+    padding-bottom: rem(164);
   }
 }
