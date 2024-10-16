@@ -375,3 +375,47 @@ function my_scf_admin_styles() {
   </style>';
 }
 add_action('admin_head', 'my_scf_admin_styles');
+
+// ウィジェットの内容を定義する関数（アイコン付きリンクを追加）
+function my_custom_dashboard_widget() {
+  // ウィジェット内に表示する内容をリスト化（CSSクラスを使う）
+  echo '<ul class="custom-dashboard-links">'; // クラスを割り当て
+  echo '<li><span class="dashicons dashicons-admin-home custom-icon"></span><a href="' . get_edit_post_link(25) . '">トップページ</a></li>';
+  echo '<li><span class="dashicons dashicons-format-gallery custom-icon"></span><a href="' . get_edit_post_link(8) . '">ギャラリー</a></li>';
+  echo '<li><span class="dashicons dashicons-money-alt custom-icon"></span><a href="' . get_edit_post_link(12) . '">料金一覧</a></li>';
+  echo '<li><span class="dashicons dashicons-editor-help custom-icon"></span><a href="' . get_edit_post_link(16) . '">よくある質問</a></li>';
+  echo '</ul>';
+}
+
+// ウィジェットをダッシュボードに追加する関数
+function add_my_custom_dashboard_widget() {
+  wp_add_dashboard_widget(
+      'custom_dashboard_widget',   // ウィジェットのID
+      '固定ページへのリンク',     // ウィジェットのタイトル
+      'my_custom_dashboard_widget' // ウィジェット内に表示する内容を作る関数
+  );
+}
+
+// カスタムCSSを追加する関数
+function my_custom_dashboard_styles() {
+  echo '
+  <style>
+      .custom-dashboard-links {
+          list-style: none;
+          padding-left: 0;
+      }
+      .custom-dashboard-links li {
+          font-size: 18px;
+          margin-bottom: 10px;
+      }
+      .custom-dashboard-links .custom-icon {
+          margin-right: 5px;
+      }
+  </style>';
+}
+
+// ダッシュボード用のCSSを読み込む
+add_action('admin_head', 'my_custom_dashboard_styles');
+
+// フックを使ってダッシュボードにウィジェットを追加
+add_action('wp_dashboard_setup', 'add_my_custom_dashboard_widget');
