@@ -3829,6 +3829,8 @@ html {
 
 .blog__title {
 	padding-right: 0.0625rem;
+	position: relative;
+	z-index: 20;
 }
 
 .blog__items {

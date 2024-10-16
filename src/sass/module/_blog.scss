@@ -47,6 +47,8 @@
   padding-right: rem(2);
 
   @include mq(md) {
+    position: relative;
+    z-index: 20;
     padding-right: rem(1);
   }
 }
