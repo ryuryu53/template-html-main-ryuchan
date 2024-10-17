@@ -341,26 +341,26 @@ function custom_editor_styles_for_specific_page() {
       }
     </style>';
     // エディタ画面かつ特定の固定ページIDが8（私たちについて）の場合にスタイルを適用
-  } elseif ( 'post' === $screen->base && get_the_ID() === 8 ) {
-    echo '<style>
-      .editor-visual-editor {
-        height: 30%;
-      }
-    </style>';
-    // エディタ画面かつ特定の固定ページIDが16（よくある質問）の場合にスタイルを適用
-  } elseif ( 'post' === $screen->base && get_the_ID() === 16 ) {
-    echo '<style>
-      .editor-visual-editor {
-        height: 30%;
-      }
-    </style>';
-    // エディタ画面かつ特定の固定ページIDが25（トップページ）の場合にスタイルを適用
-  } elseif ( 'post' === $screen->base && get_the_ID() === 25 ) {
-    echo '<style>
-      .editor-visual-editor {
-        height: 30%;
-      }
-    </style>';
+  // } elseif ( 'post' === $screen->base && get_the_ID() === 8 ) {
+  //   echo '<style>
+  //     .editor-visual-editor {
+  //       height: 30%;
+  //     }
+  //   </style>';
+  //   // エディタ画面かつ特定の固定ページIDが16（よくある質問）の場合にスタイルを適用
+  // } elseif ( 'post' === $screen->base && get_the_ID() === 16 ) {
+  //   echo '<style>
+  //     .editor-visual-editor {
+  //       height: 30%;
+  //     }
+  //   </style>';
+  //   // エディタ画面かつ特定の固定ページIDが25（トップページ）の場合にスタイルを適用
+  // } elseif ( 'post' === $screen->base && get_the_ID() === 25 ) {
+  //   echo '<style>
+  //     .editor-visual-editor {
+  //       height: 30%;
+  //     }
+  //   </style>';
   }
 }
 add_action('admin_head', 'custom_editor_styles_for_specific_page');
@@ -419,3 +419,60 @@ add_action('admin_head', 'my_custom_dashboard_styles');
 
 // フックを使ってダッシュボードにウィジェットを追加
 add_action('wp_dashboard_setup', 'add_my_custom_dashboard_widget');
+
+// すべての固定ページのエディターを削除
+// function my_remove_post_editor_support() {
+// remove_post_type_support( 'page', 'editor' );//本文
+// }
+// add_action( 'init' , 'my_remove_post_editor_support' );
+
+// これでもOK！
+// 「料金一覧」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（1）
+// 固定ページに対してブロックエディタを使用するかどうかを制御するフィルターフック
+// $use_block_editor（エディタを使うかどうかのブール値）と$post（現在の投稿情報）を引数として受け取る
+// add_filter('use_block_editor_for_post', function($use_block_editor, $post) {
+//   // 投稿のタイプが「固定ページ」であるかどうかをチェックする
+//   if ( $post->post_type === 'page' ) {
+//     // 表示するページスラッグのリスト
+//     $allowed_pages = ['price', 'privacy-policy', 'terms-of-service'];
+
+//     // スラッグがリストに含まれていなければエディタを非表示にする
+//     // in_array()関数：指定した値が配列に含まれているかどうかを確認
+//     // ページスラッグが許可されたリストに含まれていない場合にtrueを返す
+//     if ( !in_array($post->post_name, $allowed_pages) ) {  // post_nameはページのスラッグを指す
+//       // 特定の投稿タイプからエディタのサポートを削除する
+//       remove_post_type_support('page', 'editor'); // エディタを非表示
+//       return false; // ブロックエディタを無効化
+//     }
+//   }
+//   // 条件に該当しない場合は、もともとのブロックエディタの設定を保持するために、この値をそのまま返す
+//   return $use_block_editor; // それ以外の場合はエディタを使用
+// }, 10, 2);
+
+// 「料金一覧」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（2）
+function my_remove_post_editor_support() {
+  // 現在の画面が管理画面であり、編集しているのが固定ページの場合のみ処理を続ける
+  // 今表示している画面の情報を$screenという変数に保存
+  $screen = get_current_screen();
+  // その画面で編集している投稿タイプ（$screen->post_type）が固定ページ（page）、かつ現在の管理画面の「画面タイプ」（$screen->base）が編集画面（post）ならば
+  if ( $screen->post_type === 'page' && $screen->base === 'post' ) {
+    // 編集しているページのIDを取得（現在のページIDを取得（$_GET['post']）し、存在していればそれを整数値に変換して$post_idに保存し、IDがない場合は0を代入）
+    $post_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
+
+    // IDに基づいてページのスラッグを取得し、特定のページならエディタ削除をしない
+    $exclude_slugs = array('price', 'privacy-policy', 'terms-of-service');
+    // get_current_screen()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
+    $post_slug = get_post_field( 'post_name', $post_id );
+
+    // 除外リストにある場合はエディタ削除を行わない
+    if ( in_array( $post_slug, $exclude_slugs ) ) {
+      return;
+    }
+
+    // 条件に合わない場合はエディタを削除
+    // 固定ページからエディター（editor）機能を削除
+    remove_post_type_support( 'page', 'editor' );
+  }
+}
+// current_screen：現在の管理画面の画面情報が利用可能になるタイミングでフックされるアクションフック
+add_action( 'current_screen', 'my_remove_post_editor_support' );
