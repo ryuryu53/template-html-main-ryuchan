@@ -333,8 +333,8 @@ function custom_editor_styles_for_specific_page() {
   // 現在の画面情報を取得
   $screen = get_current_screen();
   
-  // エディタ画面かつ特定の固定ページIDが12（料金一覧）の場合にスタイルを適用
-  if ( 'post' === $screen->base && get_the_ID() === 12 ) {
+  // エディタ画面かつ特定の固定ページIDが12（料金一覧）または16（よくある質問）の場合にスタイルを適用
+  if ( 'post' === $screen->base && get_the_ID() === 12 || get_the_ID() === 16 ) {
     echo '<style>
       .editor-visual-editor {
         height: 80%;
@@ -342,13 +342,6 @@ function custom_editor_styles_for_specific_page() {
     </style>';
     // エディタ画面かつ特定の固定ページIDが8（私たちについて）の場合にスタイルを適用
   // } elseif ( 'post' === $screen->base && get_the_ID() === 8 ) {
-  //   echo '<style>
-  //     .editor-visual-editor {
-  //       height: 30%;
-  //     }
-  //   </style>';
-  //   // エディタ画面かつ特定の固定ページIDが16（よくある質問）の場合にスタイルを適用
-  // } elseif ( 'post' === $screen->base && get_the_ID() === 16 ) {
   //   echo '<style>
   //     .editor-visual-editor {
   //       height: 30%;
@@ -434,7 +427,7 @@ add_action('wp_dashboard_setup', 'add_my_custom_dashboard_widget');
 //   // 投稿のタイプが「固定ページ」であるかどうかをチェックする
 //   if ( $post->post_type === 'page' ) {
 //     // 表示するページスラッグのリスト
-//     $allowed_pages = ['price', 'privacy-policy', 'terms-of-service'];
+//     $allowed_pages = ['price', 'faq', 'privacy-policy', 'terms-of-service'];
 
 //     // スラッグがリストに含まれていなければエディタを非表示にする
 //     // in_array()関数：指定した値が配列に含まれているかどうかを確認
@@ -460,7 +453,7 @@ function my_remove_post_editor_support() {
     $post_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
 
     // IDに基づいてページのスラッグを取得し、特定のページならエディタ削除をしない
-    $exclude_slugs = array('price', 'privacy-policy', 'terms-of-service');
+    $exclude_slugs = array('price', 'faq', 'privacy-policy', 'terms-of-service');
     // get_current_screen()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
     $post_slug = get_post_field( 'post_name', $post_id );
 
