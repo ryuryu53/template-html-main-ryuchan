@@ -144,16 +144,16 @@
                 <a href="<?php echo $amount; ?>" class="footer-nav__right-link">料金一覧</a>
                 <ul class="footer-nav__right-detail-items">
                   <li class="footer-nav__right-detail-item">
-                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">ライセンス講習</a>
+                    <a href="<?php echo $amount; ?>#title1" class="footer-nav__right-detail-link">ライセンス講習</a>
                   </li>
                   <li class="footer-nav__right-detail-item">
-                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">体験ダイビング</a>
+                    <a href="<?php echo $amount; ?>#title2" class="footer-nav__right-detail-link">体験ダイビング</a>
                   </li>
                   <li class="footer-nav__right-detail-item">
-                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">ファンダイビング</a>
+                    <a href="<?php echo $amount; ?>#title3" class="footer-nav__right-detail-link">ファンダイビング</a>
                   </li>
                   <li class="footer-nav__right-detail-item">
-                    <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">スペシャルダイビング</a>
+                    <a href="<?php echo $amount; ?>#title4" class="footer-nav__right-detail-link">スペシャルダイビング</a>
                   </li>
                 </ul>
               </li>

@@ -25,6 +25,9 @@
               'table_prices5'
             ];
 
+            // カウンター変数を追加
+            $counter = 1;
+
             // 各料金表について処理
             foreach ( $price_tables as $price_table_key ) :
               // テーブルタイトルと料金表情報を取得  substr($price_table_key, -1) はこの文字列の最後の1文字を取り出す
@@ -35,7 +38,8 @@
             if ( !empty($table_title) && !empty($table_prices) ) :
           ?>
               <div class="page-price-table__content">
-                <h2 class="page-price-table__title"><?php echo esc_html($table_title); ?></h2>
+                <!-- h2 タグに id を追加し、連番を付ける -->
+                <h2 id="title<?php echo $counter; ?>" class="page-price-table__title"><?php echo esc_html($table_title); ?></h2>
                 <dl class="page-price-table__items">
                   <?php foreach ( $table_prices as $price ) : ?>
                     <div class="page-price-table__item">
@@ -53,8 +57,12 @@
                   <?php endforeach; ?>
                 </dl>
               </div>
-            <?php endif; ?>
-          <?php endforeach; ?>
+          <?php
+              // カウンターをインクリメントして連番を進める
+              $counter++;
+              endif;
+            endforeach;
+          ?>
         <?php endwhile; endif; ?>
       </div>
     </div>

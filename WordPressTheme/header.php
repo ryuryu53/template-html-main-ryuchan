@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php if ( is_page('information') ) : ?>
+<?php if ( is_page( array('information', 'price') ) ) : ?>
   <html class="html1" lang="ja">
 <?php else : ?>
   <html lang="ja">
@@ -160,16 +160,16 @@
                     <a href="<?php echo $amount; ?>" class="sp-nav__link">料金一覧</a>
                     <ul class="sp-nav__right-detail-items">
                       <li class="sp-nav__right-detail-item">
-                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">ライセンス講習</a>
+                        <a href="<?php echo $amount; ?>#title1" class="sp-nav__right-detail-link">ライセンス講習</a>
                       </li>
                       <li class="sp-nav__right-detail-item">
-                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">体験ダイビング</a>
+                        <a href="<?php echo $amount; ?>#title2" class="sp-nav__right-detail-link">体験ダイビング</a>
                       </li>
                       <li class="sp-nav__right-detail-item">
-                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">ファンダイビング</a>
+                        <a href="<?php echo $amount; ?>#title3" class="sp-nav__right-detail-link">ファンダイビング</a>
                       </li>
                       <li class="sp-nav__right-detail-item">
-                        <a href="<?php echo $amount; ?>" class="sp-nav__right-detail-link">スペシャルダイビング</a>
+                        <a href="<?php echo $amount; ?>#title4" class="sp-nav__right-detail-link">スペシャルダイビング</a>
                       </li>
                     </ul>
                   </li>
