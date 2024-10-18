@@ -215,21 +215,21 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
   // フッターまたはドロワーメニューのリンクがクリックされたときの処理
   $('.footer-nav__left-detail-link, .sp-nav__left-detail-link').on('click', function (e) {
-      // デフォルトのリンク動作をキャンセル
-      // e.preventDefault();
+    // デフォルトのリンク動作をキャンセル
+    // e.preventDefault();
 
-      // クリックされたリンクのハッシュを取得
-      var targetHash = this.hash;
+    // クリックされたリンクのハッシュを取得
+    var targetHash = this.hash;
 
-      // 該当するタブを選択
-      selectTab(targetHash);
+    // 該当するタブを選択
+    selectTab(targetHash);
 
-      updateBoxShadow();
+    updateBoxShadow();
 
-      // 該当タブまでスクロール
-      // $('html, body').animate({
-      //     scrollTop: $(targetHash).offset().top
-      // }, 500);
+    // 該当タブまでスクロール
+    // $('html, body').animate({
+    //     scrollTop: $(targetHash).offset().top
+    // }, 500);
   });
 
   // モーダル
