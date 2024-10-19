@@ -17,7 +17,7 @@
 .footer-nav__left-content--width {
   width: 54.2%;
   @include mq(md) {
-    width: 55.9%;
+    width: 54.9%;
   }
 }
 
@@ -34,7 +34,7 @@
 .footer-nav__right-content--width {
   width: 43.5%;
   @include mq(md) {
-    width: 44.1%;
+    width: 45%;
   }
 }
 
@@ -64,9 +64,15 @@
   }
 }
 
-.footer-nav__right-items--width {
+.footer-nav__right-items--width:first-child {
   @include mq(md) {
-    width: 38.2%;
+    width: 60.4%;
+  }
+}
+
+.footer-nav__right-items--width:nth-child(2) {
+  @include mq(md) {
+    width: 41.2%;
   }
 }
 

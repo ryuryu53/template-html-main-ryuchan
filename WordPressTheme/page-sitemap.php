@@ -76,7 +76,7 @@
           </ul>
         </div>
         <div class="footer-nav__right-content footer-nav__right-content--width">
-          <ul class="footer-nav__right-items">
+          <ul class="footer-nav__right-items footer-nav__right-items--width">
             <li class="footer-nav__right-item footer-nav__right-item--green">
               <a href="<?php echo $voice; ?>" class="footer-nav__right-link footer-nav__right-link--icon-green">お客様の声</a>
             </li>

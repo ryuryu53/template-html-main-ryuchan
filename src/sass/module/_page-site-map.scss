@@ -23,3 +23,9 @@
     height: rem(138);
   }
 }
+
+.page-site-map__inner.inner {
+  @include mq(md) {
+    padding-right: 7px;
+  }
+}
