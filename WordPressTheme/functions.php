@@ -469,3 +469,37 @@ function my_remove_post_editor_support() {
 }
 // current_screen：現在の管理画面の画面情報が利用可能になるタイミングでフックされるアクションフック
 add_action( 'current_screen', 'my_remove_post_editor_support' );
+
+
+function add_custom_button_labels() {
+  echo '
+  <style>
+  /* 「+」ボタンに「追加」ラベルを追加 */
+  .dashicons-plus-alt::after {
+    content: "追加";
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: 5px;
+    padding-right: 10px;
+  }
+
+  .btn-add-repeat-group.dashicons.dashicons-plus-alt.smart-cf-repeat-btn {
+    color: green;
+  }
+
+  /* 「×」ボタンに「削除」ラベルを追加 */
+  .dashicons-dismiss::after {
+    content: "削除";
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: 5px;
+    padding-right: 10px;
+  }
+
+  .btn-remove-repeat-group.dashicons.dashicons-dismiss.smart-cf-repeat-btn {
+    color: blue;
+  }
+  </style>
+  ';
+}
+add_action('admin_head', 'add_custom_button_labels');
