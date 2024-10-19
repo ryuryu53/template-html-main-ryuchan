@@ -470,7 +470,7 @@ function my_remove_post_editor_support() {
 // current_screen：現在の管理画面の画面情報が利用可能になるタイミングでフックされるアクションフック
 add_action( 'current_screen', 'my_remove_post_editor_support' );
 
-
+// 繰り返しフィールドの「＋」「×」ボタンにラベル追加
 function add_custom_button_labels() {
   echo '
   <style>
