@@ -100,10 +100,11 @@ textarea {
   resize: vertical;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
-  display: none;
-}
+// チェックボックスやラジオボタンで「display: none;」は使わない！
+// input[type="checkbox"],
+// input[type="radio"] {
+//   display: none;
+// }
 
 input[type="submit"],
 input[type="button"],

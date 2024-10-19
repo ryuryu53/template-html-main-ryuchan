@@ -109,7 +109,7 @@ button,
 }
 
 [type="radio"] {
-	display: none;
+	// display: none;
 
 	+ span {
 		display: inline-block;
@@ -158,7 +158,7 @@ button,
 }
 
 [type="checkbox"] {
-	display: none;
+	// display: none;
 
 	+ span {
 		display: inline-block;
@@ -318,10 +318,17 @@ textarea {
 	}
 }
 
-.form__item:nth-child(6) {
-	padding-bottom: rem(23);
+.form__item:nth-child(5) {
+	padding-bottom: rem(21);
 	@include mq(md) {
-		padding-bottom: rem(41);
+		padding-bottom: rem(38);
+	}
+}
+
+.form__item:nth-child(6) {
+	@include mq(md) {
+		margin-top: rem(38);
+		padding-bottom: rem(40);
 	}
 }
 
@@ -360,14 +367,14 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	}
 }
 
-.form__item:nth-child(3) dd {
+.form__item:nth-child(4) dd {
 	margin-top: rem(17);
 	@include mq(md) {
 		margin-top: 0;
 	}
 }
 
-.form__item:nth-child(4) dd {
+.form__item:nth-child(5) dd {
 	margin-top: rem(15);
 	@include mq(md) {
 		margin-top: 0;
@@ -386,7 +393,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 		background-position: right 0.4375rem top 55%;
 		margin-top: rem(-3);
 		padding-top: rem(6);
-		padding-bottom: rem(3);
+		padding-bottom: rem(4);
 	}
 }
 
@@ -394,10 +401,10 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	max-width: rem(284);
 	width: 100%;
 	margin: auto;
-	margin-top: rem(39);
+	margin-top: rem(15);
 	@include mq(md) {
 		max-width: rem(374);
-		margin-top: rem(78);
+		margin-top: rem(54);
 	}
 }
 
@@ -521,7 +528,8 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .form__item .wpcf7-list-item {
 	display: block;
-	margin-left: 0;
+	margin-top: rem(1);
+	margin-left: rem(-7);
 	line-height: 1.65;
 }
 
