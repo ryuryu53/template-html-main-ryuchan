@@ -34,7 +34,7 @@
 }
 
 .sp-nav__right-content {
-  width: 46.7%;
+  width: 49.8%; // 46.7 → 49.8 left-contentと合わせて100にした
   padding-bottom: rem(8);
 }
 
@@ -112,6 +112,11 @@
 .sp-nav__left-detail-item,
 .sp-nav__right-detail-item {
   font-weight: $normal;
+}
+
+.sp-nav__left-detail-item:nth-child(4),
+.sp-nav__right-detail-item:nth-child(4) {
+  font-size: 0.94rem;
 }
 
 .sp-nav__left-detail-link,

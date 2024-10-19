@@ -93,7 +93,7 @@
                   <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">ファンダイビング</a>
                 </li>
                 <li class="footer-nav__right-detail-item">
-                  <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">スペシャルダイビング</a>
+                  <a href="<?php echo $amount; ?>" class="footer-nav__right-detail-link">スペシャル<br class="u-mobile">ダイビング</a>
                 </li>
               </ul>
             </li>

@@ -6,23 +6,23 @@
 }
 
 .footer-nav__left-content {
-  width: 50%;
+  width: 53.4%;
 
   @include mq(md) {
-    width: 50%;
+    width: 51.5%;
     display: flex;
-    justify-content: space-between;
   }
 }
 
 .footer-nav__left-content--width {
+  width: 54.2%;
   @include mq(md) {
-    width: 54.2%;
+    width: 55.9%;
   }
 }
 
 .footer-nav__right-content {
-  width: 46.7%;
+  width: 46.6%;
 
   @include mq(md) {
     display: flex;
@@ -40,7 +40,7 @@
 
 .footer-nav__left-items:first-child {
   @include mq(md) {
-    width: 50%;
+    width: 51.4%;
   }
 }
 
