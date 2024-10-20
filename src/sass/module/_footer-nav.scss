@@ -91,6 +91,7 @@
   color: $green;
 }
 
+// コード_FB：ほとんど数値変わらないのでpadding統一してOK。連番は使わない
 .footer-nav__left-link,
 .footer-nav__right-link {
   position: relative;
@@ -102,71 +103,6 @@
     padding-top: rem(17);
   }
 }
-
-// .footer-nav__left-link-1 { // コード_FB：ほとんど数値変わらないのでpadding統一してOK。連番は使わない
-//   padding: rem(16) 0 rem(15) rem(22);
-
-//   @include mq(md) {
-//     padding-top: rem(17);
-//   }
-// }
-
-// .footer-nav__left-link-2 {
-//   padding: rem(17) 0 rem(17) rem(22);
-
-//   @include mq(md) {
-//     padding-top: rem(17);
-//   }
-// }
-
-// .footer-nav__left-link-3 {
-//   padding: rem(17) 0 rem(15) rem(22);
-// }
-
-// .footer-nav__left-link-4 {
-//   padding: rem(17) 0 rem(15) rem(22);
-
-//   @include mq(md) {
-//     padding-top: rem(17);
-//   }
-// }
-
-// .footer-nav__right-link-1 {
-//   padding: rem(16) 0 rem(17) rem(22);
-
-//   @include mq(md) {
-//     padding-top: rem(17);
-//   }
-// }
-
-// .footer-nav__right-link-2 {
-//   padding: rem(17) 0 rem(15) rem(22);
-// }
-
-// .footer-nav__right-link-3 {
-//   padding: rem(17) 0 rem(17) rem(22);
-
-//   @include mq(md) {
-//     padding-top: rem(17);
-//   }
-// }
-
-// .footer-nav__right-link-4 {
-//   line-height: 1.1;
-//   padding: rem(18) 0 rem(18) rem(22);
-// }
-
-// .footer-nav__right-link-5 {
-//   padding: rem(18) 0 rem(17) rem(22);
-
-//   @include mq(md) {
-//     padding-top: rem(19);
-//   }
-// }
-
-// .footer-nav__right-link-6 {
-//   padding: rem(17) 0 rem(15) rem(22);
-// }
 
 .footer-nav__right-items:nth-child(2) .footer-nav__right-item:nth-child(2) .footer-nav__right-link {
   line-height: 1.1;
