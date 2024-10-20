@@ -226,6 +226,13 @@
   font-weight: $normal;
 }
 
+.footer-nav__left-detail-item:nth-child(4),
+.footer-nav__right-detail-item:nth-child(3) {
+  @media (max-width: 767px) {
+    font-size: 0.94rem;
+  }
+}
+
 .footer-nav__left-detail-link,
 .footer-nav__right-detail-link {
   display: block;

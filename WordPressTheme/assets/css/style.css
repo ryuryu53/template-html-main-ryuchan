@@ -1383,7 +1383,7 @@ a:hover {
 }
 
 .footer__copyright {
-	margin: 0.9375rem -0.5rem 0;
+	margin: 0.9375rem -0.9375rem 0;
 	position: relative;
 	right: 0.0625rem;
 	text-align: center;
@@ -5038,6 +5038,11 @@ html {
 .column-aside__container {
 	padding-left: 1.5625rem;
 	padding-right: 1.5625rem;
+}
+
+.footer-nav__left-detail-item:nth-child(4),
+.footer-nav__right-detail-item:nth-child(3) {
+	font-size: 0.94rem;
 }
 
 .wp-pagenavi .page.larger.u-desktop {

@@ -57,7 +57,7 @@
   position: relative;
   right: rem(1);
   text-align: center;
-  margin: rem(15) rem(-8) 0;
+  margin: rem(15) rem(-15) 0;
 
   @include mq(md) {
     right: 0;
