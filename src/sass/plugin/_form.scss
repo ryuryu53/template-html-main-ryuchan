@@ -210,6 +210,10 @@ button,
 	}
 }
 
+[type="checkbox"]:focus + span::before {
+  outline: 1px solid #391E88;
+}
+
 select {
 	/*↓リセットCSS */
 	border-radius: 0;

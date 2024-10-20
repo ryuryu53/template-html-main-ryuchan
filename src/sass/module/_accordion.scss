@@ -10,6 +10,7 @@
   padding: rem(16) rem(44) rem(15) rem(16);
   cursor: pointer;
   background-color: $greenaccent;
+  width: 100%;
   @include mq(md) {
     padding: rem(26) rem(72) rem(24) rem(40);
   }
@@ -43,6 +44,10 @@
 
 .accordion__title.is-close::after {
   opacity: 1;
+}
+
+.accordion__title:focus {
+  outline: rem(2) solid #391E88;
 }
 
 .accordion__title-text {
