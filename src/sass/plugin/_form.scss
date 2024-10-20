@@ -87,7 +87,6 @@ button,
 [type="submit"] {
 	/*↓リセットCSS */
 	margin: 0;
-	width: rem(202);
 	display: inline-block;
 	text-decoration: none;
 	border: rem(1) solid $greenaccent;
@@ -504,6 +503,10 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .form__btn-submit:hover::after {
 	transform: scale(1, 1);
+}
+
+.form__btn-submit input {
+	width: rem(202);
 }
 
 .form__btn-arrow {

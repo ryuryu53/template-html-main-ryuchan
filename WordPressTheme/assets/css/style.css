@@ -3045,7 +3045,6 @@ button,
 	position: relative;
 	text-align: center;
 	text-decoration: none;
-	width: 12.625rem;
 	z-index: 10;
 }
 
@@ -3371,6 +3370,10 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .form__btn-submit:hover::after {
 	transform: scale(1, 1);
+}
+
+.form__btn-submit input {
+	width: 12.625rem;
 }
 
 .form__btn-arrow {
