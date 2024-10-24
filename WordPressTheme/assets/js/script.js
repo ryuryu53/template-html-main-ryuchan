@@ -1,5 +1,6 @@
 "use strict";
 
+// 宣言を jQuery(function ($) {}); の外側でする
 var mv_swiper;
 jQuery(function ($) {
   // この中であればWordpressでも「$」が使用可能になる
