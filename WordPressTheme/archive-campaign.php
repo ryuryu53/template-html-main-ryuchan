@@ -124,7 +124,7 @@
                   </div>
                   <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
                   <div class="campaign-card__btn campaign-card__btn--sub-page u-desktop">
-                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="button"><span class="button__text">Contact&nbsp;us</span></a>
                   </div>
                 </div>
               </div>
