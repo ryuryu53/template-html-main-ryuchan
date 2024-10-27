@@ -29,7 +29,30 @@
                 <div class="blog-card__body">
                   <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m.d'); ?></time>
                   <h3 class="blog-card__title text--medium"><?php the_title(); ?></h3>
-                  <p class="blog-card__text text--black-pc">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
+                  <p class="blog-card__text text--black-pc">
+                    <?php
+                      // 投稿本文を取得
+                      // $postオブジェクトには、その投稿に関連するさまざまな情報が格納されている
+                      // post_contentは、投稿オブジェクト（$post）のプロパティの一つで、その投稿の本文（記事の内容）が保存されている
+                      $content = $post->post_content;
+
+                      // 文字数を制限（ここでは110文字 → これでカンプの文字数と一致する）
+                      // mb_strlen: 文字数を数える関数。UTF-8を指定することで日本語を正しく数えられる
+                      if (mb_strlen($content, 'UTF-8') > 110) {
+                        // mb_substr: 文字列の一部を取り出す関数（110文字取り出す）
+                        $content = mb_substr($content, 0, 110, 'UTF-8');
+                      }
+
+                      // コメントや不要なタグを削除（HTMLタグは維持してもOKなら、2番目のパラメータに指定 → <p>タグOKだと.blog-card__textの外に<p>タグができてそこにテキストが入ってしまう！）
+                        $content = strip_tags($content, '<p>');
+
+                      // 改行を<br>タグに変換 → <br>タグがテキストの上にできてしまう！
+                      // $content_with_breaks = nl2br($content);
+
+                      // 整形したコンテンツを出力
+                      echo $content;
+                    ?>
+                  </p>
                 </div>
               </a>
             </article>
