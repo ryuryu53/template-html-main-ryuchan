@@ -90,7 +90,14 @@
             // サブループ開始   while文：投稿がある限り、このループで2件のキャンペーン情報を1件ずつ表示
             if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post(); ?>
             <li class="campaign-cards__item campaign-card campaign-cards__item--blog-page">
-              <a href="<?php the_permalink(); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし -->
+              <?php
+                $terms = get_the_terms(get_the_ID(), 'campaign_category'); // 現在の投稿に紐付いた'term'を取得
+                if ( $terms && !is_wp_error($terms) ) : // タームが存在し、エラーがない場合のみ処理を実行
+                  foreach ($terms as $term) : // 各タームについて繰り返し処理
+                    $term_link = get_term_link($term); // タームのリンクを取得
+              ?>
+                <a href="<?php echo esc_url($term_link); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
+              <?php endforeach; endif; ?>
                 <picture class="campaign-card__img campaign-card__img--blog-page">
                   <?php if ( get_the_post_thumbnail() ) : ?>
                     <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
