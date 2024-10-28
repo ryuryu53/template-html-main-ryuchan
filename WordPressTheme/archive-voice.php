@@ -51,11 +51,11 @@
                   <div class="voice-card__label">
                     <!-- 年代（性別） -->
                     <span class="voice-card__age">
-                    <?php
-                      $voice_age_and_gender = get_field('voice_age_and_gender');  // グループフィールドからデータを取得
-                      $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
-                      $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
-                    ?>
+                      <?php
+                        $voice_age_and_gender = get_field('voice_age_and_gender');  // グループフィールドからデータを取得
+                        $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
+                        $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
+                      ?>
                       <?php if ( $voice_age ) : ?>
                         <?php echo esc_html($voice_age); ?>
                       <?php endif; ?>

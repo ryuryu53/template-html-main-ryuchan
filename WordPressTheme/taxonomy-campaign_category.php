@@ -73,11 +73,11 @@
                 <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
                 <!-- キャンペーン価格 -->
                 <div class="campaign-card__price campaign-card__price--sub-page">
-                <?php
-                  $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
-                  $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
-                  $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
-                ?>
+                  <?php
+                    $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
+                    $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                    $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                  ?>
                   <?php if ( $price_before ) : ?>
                     <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
                     <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>
@@ -92,14 +92,14 @@
                   <?php endif; ?>
                   <!-- キャンペーン期間 -->
                   <div class="campaign-card__information-period">
-                  <?php
-                    $campaign_period = get_field('campaign_period');  // グループフィールドからデータを取得
-                    $start_date = $campaign_period['campaign_4']; // 開始日(フォーマット済み: Y/n/j)を取得
-                    $end_date = $campaign_period['campaign_5']; // 終了日(フォーマット済み: Y/n/j)を取得
-                    // 開始日と終了日の年を抽出
-                    $start_year = substr($start_date, 0, 4); // 先頭4文字を取得して年を抽出
-                    $end_year = substr($end_date, 0, 4);     // 同じく終了日の年を抽出
-                  ?>
+                    <?php
+                      $campaign_period = get_field('campaign_period');  // グループフィールドからデータを取得
+                      $start_date = $campaign_period['campaign_4']; // 開始日(フォーマット済み: Y/n/j)を取得
+                      $end_date = $campaign_period['campaign_5']; // 終了日(フォーマット済み: Y/n/j)を取得
+                      // 開始日と終了日の年を抽出
+                      $start_year = substr($start_date, 0, 4); // 先頭4文字を取得して年を抽出
+                      $end_year = substr($end_date, 0, 4);     // 同じく終了日の年を抽出
+                    ?>
                     <?php if ( $start_date ) : ?>
                       <time datetime="<?php echo esc_attr($start_date); ?>">
                         <?php echo esc_html($start_date); ?>

@@ -74,11 +74,11 @@
                 <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
                 <!-- キャンペーン価格 -->
                 <div class="campaign-card__price campaign-card__price--sub-page">
-                <?php
-                  $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
-                  $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
-                  $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
-                ?>
+                  <?php
+                    $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
+                    $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                    $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                  ?>
                   <?php if ( $price_before ) : ?>
                     <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
                     <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>

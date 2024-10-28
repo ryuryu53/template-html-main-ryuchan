@@ -112,8 +112,8 @@
                 <?php endforeach; endif; ?>
                   <picture class="campaign-card__img">
                     <?php if ( get_the_post_thumbnail() ) : ?>
-                    <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
-                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                      <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
+                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                     <?php else : ?>
                       <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
                     <?php endif; ?>
@@ -129,11 +129,16 @@
                     <h3 class="campaign-card__title text--medium"><?php the_title(); ?></h3>
                     <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
                     <div class="campaign-card__price">
-                      <?php if ( get_field('campaign_1') ) : ?>
-                        <span class="campaign-card__price-before">&yen;<?php echo esc_html(number_format(intval(get_field('campaign_1')))); ?></span>
+                      <?php
+                        $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
+                        $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                        $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                      ?>
+                      <?php if ( $price_before ) : ?>
+                        <span class="campaign-card__price-before">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>
                       <?php endif; ?>
-                      <?php if ( get_field('campaign_2') ) : ?>
-                        <span class="campaign-card__price-after">&yen;<?php echo esc_html(number_format(intval(get_field('campaign_2')))); ?></span>
+                      <?php if ( $price_after ) : ?>
+                        <span class="campaign-card__price-after">&yen;<?php echo esc_html(number_format(intval($price_after))); ?></span>
                       <?php endif; ?>
                     </div>
                   </div>
@@ -301,7 +306,20 @@
               <div class="voice-card__head">
                 <div class="voice-card__meta">
                   <div class="voice-card__label">
-                    <span class="voice-card__age"><?php echo esc_html(get_post_meta(get_the_ID(), 'voice_1', true)); ?>(<?php echo esc_html(get_post_meta(get_the_ID(), 'voice_2', true)); ?>)</span>
+                    <!-- 年代（性別） -->
+                    <span class="voice-card__age">
+                      <?php
+                        $voice_age_and_gender = get_field('voice_age_and_gender');  // グループフィールドからデータを取得
+                        $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
+                        $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
+                      ?>
+                      <?php if ( $voice_age ) : ?>
+                        <?php echo esc_html($voice_age); ?>
+                      <?php endif; ?>
+                      <?php if ( $voice_gender ) : ?>
+                        (<?php echo esc_html($voice_gender); ?>)
+                      <?php endif; ?>
+                    </span>
                     <?php
                       // カスタムタクソノミー「voice_category」の取得
                       $terms = get_the_terms(get_the_ID(), 'voice_category');
@@ -323,7 +341,9 @@
                   </picture>
                 </div>
               </div>
-              <p class="voice-card__text text--black-sp">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。</p>
+              <?php if ( get_field('voice_3') ) : ?>
+                <p class="voice-card__text text--black-sp"><?php the_field('voice_3'); ?></p>
+              <?php endif; ?>
             </a>
           </article>
         <?php endwhile; endif; wp_reset_postdata(); ?>
