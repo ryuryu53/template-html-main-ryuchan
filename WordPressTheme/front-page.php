@@ -372,40 +372,64 @@
         </div>
         <div class="price__table price-table">
           <?php
-            // 4つの料金表に対応するフィールド名を設定
+            // 料金表のフィールド名をリスト化
             $price_tables = [
               'table_prices1',
               'table_prices2',
               'table_prices3',
-              'table_prices4'
+              'table_prices4',
+              'table_prices5'
             ];
+
+            // コースデータの有効性をチェックする関数
+            function is_valid_course($price, $key_suffix) {
+              return !empty($price["course_name{$key_suffix}"]) && !empty($price["course_price{$key_suffix}"]);
+          }
+
             // 各料金表について処理
             foreach ( $price_tables as $price_table_key ) :
               // PriceページのID
               $page_price_id = 12;
               // テーブルタイトルと料金表情報を取得
-              $table_title = SCF::get('table_title' . substr($price_table_key, -1), $page_price_id);
+              $key_suffix = substr($price_table_key, -1); // キーの末尾番号を取得
+              $table_title = SCF::get("table_title{$key_suffix}", $page_price_id);  // ここではSCF::getメソッドに$page_price_id引数が必要
               $table_prices = SCF::get($price_table_key, $page_price_id);
+
               // テーブルタイトルと料金表情報が存在するか確認
-            if ( !empty($table_title) && !empty($table_prices) ) :
+              if ( !empty($table_title) && !empty($table_prices) && is_array($table_prices) ) :
+                // 各項目が空でないことを確認
+                $has_valid_price = false;
+                foreach ( $table_prices as $price ) {
+                  if ( is_valid_course($price, $key_suffix) ) {
+                    $has_valid_price = true;
+                    break;
+                  }
+                }
+              // 有効な料金情報が存在する場合のみ表示
+              if ( $has_valid_price ) :
           ?>
               <div class="price-table__content">
                 <h3 class="price-table__title text--bold"><?php echo esc_html($table_title); ?></h3>
                 <dl class="price-table__items text--small-sp">
                   <?php foreach ( $table_prices as $price ) : ?>
+                    <?php
+                      // コース名と価格が空でないことを確認
+                      if ( is_valid_course($price, $key_suffix) ) :
+                    ?>
                     <div class="price-table__item">
                       <dt>
                         <?php
-                          $course_name = $price['course_name' . substr($price_table_key, -1)];
-                          $course_name_escaped = esc_html($course_name);
-                          echo $course_name_escaped;  // トップページではSP版でも改行しない、HTMLエスケープのみ
+                          $course_name = esc_html($price["course_name{$key_suffix}"]);
+                          echo $course_name;  // トップページではSP版でも改行しない、HTMLエスケープのみ
                         ?>
                       </dt>
-                      <dd>&yen;<?php echo esc_html(number_format($price['course_price' . substr($price_table_key, -1)])); ?></dd>
+                      <dd>&yen;<?php echo esc_html(number_format(intval($price["course_price{$key_suffix}"]))); ?></dd>
                     </div>
+                    <?php endif; ?>
                   <?php endforeach; ?>
                 </dl>
               </div>
+              <?php endif; ?>
             <?php endif; ?>
           <?php endforeach; ?>
         </div>

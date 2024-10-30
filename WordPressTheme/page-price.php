@@ -41,7 +41,6 @@
 
               // テーブルタイトルと料金表情報が存在するか確認
               if ( !empty($table_title) && !empty($table_prices) && is_array($table_prices) ) :
-
                 // 各項目が空でないことを確認
                 $has_valid_price = false;
                 foreach ( $table_prices as $price ) {
