@@ -179,7 +179,7 @@
                     <a href="<?php echo $faq; ?>" class="sp-nav__link">よくある質問</a>
                   </li>
                   <li class="sp-nav__right-item">
-                    <a href="<?php echo $privacy; ?>" class="sp-nav__link">プライバシー<br class="u-mobile">ポリシー</a>
+                    <a href="<?php echo $privacy; ?>" class="sp-nav__link">プライバシー<br>ポリシー</a>
                   </li>
                   <li class="sp-nav__right-item">
                     <a href="<?php echo $terms; ?>" class="sp-nav__link">利用規約</a>
