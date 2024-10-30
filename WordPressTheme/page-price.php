@@ -78,8 +78,8 @@
           <?php
                   endif;
                 endif;
-              endforeach;
-            $counter++; // カウンターをインクリメントして連番を進める
+              $counter++; // カウンターをインクリメントして連番を進める
+            endforeach;
           ?>
         <?php endwhile; endif; ?>
       </div>
