@@ -252,7 +252,7 @@
                     // 文字数を制限
                     if (mb_strlen($content, 'UTF-8') > 110) {
                       // 110文字で切り取る
-                      $content = mb_substr($content, 0, 110, 'UTF-8');
+                      $content = mb_substr($content, 0, 110, 'UTF-8') . '...';
                     }
 
                     // コメントや不要なタグを削除
