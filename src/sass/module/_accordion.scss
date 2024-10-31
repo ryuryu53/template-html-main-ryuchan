@@ -11,6 +11,7 @@
   cursor: pointer;
   background-color: $greenaccent;
   width: 100%;
+  text-align: left;
   @include mq(md) {
     padding: rem(26) rem(72) rem(24) rem(40);
   }

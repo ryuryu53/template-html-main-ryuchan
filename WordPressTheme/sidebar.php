@@ -62,7 +62,20 @@
               <?php endif; ?>
             </picture>
             <div class="review-card__body">
-              <span class="review-card__age"><?php echo esc_html(get_post_meta(get_the_ID(), 'voice_1', true)); ?>(<?php echo esc_html(get_post_meta(get_the_ID(), 'voice_2', true)); ?>)</span>
+              <!-- 年代（性別） -->
+              <span class="review-card__age">
+                <?php
+                  $voice_age_and_gender = get_field('voice_age_and_gender');  // グループフィールドからデータを取得
+                  $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
+                  $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
+                ?>
+                <?php if ( $voice_age ) : ?>
+                  <?php echo esc_html($voice_age); ?>
+                <?php endif; ?>
+                <?php if ( $voice_gender ) : ?>
+                  (<?php echo esc_html($voice_gender); ?>)
+                <?php endif; ?>
+              </span>
               <h3 class="review-card__title"><?php the_title(); ?></h3>
             </div>
           <?php endwhile; endif; wp_reset_postdata(); ?>
@@ -109,8 +122,19 @@
                 <div class="campaign-card__body campaign-card__body--blog-page">
                   <h3 class="campaign-card__title campaign-card__title--blog-page text--medium"><?php the_title(); ?></h3>
                   <p class="campaign-card__text campaign-card__text--blog-page text--small-sp">全部コミコミ(お一人様)</p>
+                  <!-- キャンペーン価格 -->
                   <div class="campaign-card__price campaign-card__price--blog-page">
-                    <span class="campaign-card__price-before campaign-card__price-before--blog-page">&yen;<?php echo get_post_meta(get_the_ID(), 'campaign_1', true); ?></span><span class="campaign-card__price-after campaign-card__price-after--blog-page">&yen;<?php echo get_post_meta(get_the_ID(), 'campaign_2', true); ?></span>
+                    <?php
+                      $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
+                      $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                      $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                    ?>
+                    <?php if ( $price_before ) : ?>
+                      <span class="campaign-card__price-before campaign-card__price-before--blog-page">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>
+                    <?php endif; ?>
+                    <?php if ( $price_after ) : ?>
+                      <span class="campaign-card__price-after campaign-card__price-after--blog-page">&yen;<?php echo esc_html(number_format(intval($price_after))); ?></span>
+                    <?php endif; ?>
                   </div>
                 </div>
               </a>

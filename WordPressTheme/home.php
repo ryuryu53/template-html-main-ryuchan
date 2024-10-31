@@ -40,11 +40,11 @@
                       // mb_strlen: 文字数を数える関数。UTF-8を指定することで日本語を正しく数えられる
                       if (mb_strlen($content, 'UTF-8') > 110) {
                         // mb_substr: 文字列の一部を取り出す関数（110文字取り出す）
-                        $content = mb_substr($content, 0, 110, 'UTF-8');
+                        $content = mb_substr($content, 0, 110, 'UTF-8') . '...';
                       }
 
                       // コメントや不要なタグを削除（HTMLタグは維持してもOKなら、2番目のパラメータに指定 → <p>タグOKだと.blog-card__textの外に<p>タグができてそこにテキストが入ってしまう！）
-                        $content = strip_tags($content, '<p>');
+                        $content = strip_tags($content);
 
                       // 改行を<br>タグに変換 → <br>タグがテキストの上にできてしまう！
                       // $content_with_breaks = nl2br($content);

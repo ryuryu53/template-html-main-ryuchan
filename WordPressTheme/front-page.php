@@ -128,6 +128,7 @@
                     <?php endif; ?>
                     <h3 class="campaign-card__title text--medium"><?php the_title(); ?></h3>
                     <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
+                    <!-- キャンペーン価格 -->
                     <div class="campaign-card__price">
                       <?php
                         $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
