@@ -420,7 +420,7 @@ add_action('wp_dashboard_setup', 'add_my_custom_dashboard_widget');
 // add_action( 'init' , 'my_remove_post_editor_support' );
 
 // これでもOK！
-// 「料金一覧」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（1）
+// 「料金一覧」「よくある質問」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（1）
 // 固定ページに対してブロックエディタを使用するかどうかを制御するフィルターフック
 // $use_block_editor（エディタを使うかどうかのブール値）と$post（現在の投稿情報）を引数として受け取る
 // add_filter('use_block_editor_for_post', function($use_block_editor, $post) {
@@ -442,7 +442,7 @@ add_action('wp_dashboard_setup', 'add_my_custom_dashboard_widget');
 //   return $use_block_editor; // それ以外の場合はエディタを使用
 // }, 10, 2);
 
-// 「料金一覧」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（2）
+// 「料金一覧」「よくある質問」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（2）
 function my_remove_post_editor_support() {
   // 現在の画面が管理画面であり、編集しているのが固定ページの場合のみ処理を続ける
   // 今表示している画面の情報を$screenという変数に保存
@@ -454,7 +454,7 @@ function my_remove_post_editor_support() {
 
     // IDに基づいてページのスラッグを取得し、特定のページならエディタ削除をしない
     $exclude_slugs = array('price', 'faq', 'privacy-policy', 'terms-of-service');
-    // get_current_screen()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
+    // get_post_field()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
     $post_slug = get_post_field( 'post_name', $post_id );
 
     // 除外リストにある場合はエディタ削除を行わない
