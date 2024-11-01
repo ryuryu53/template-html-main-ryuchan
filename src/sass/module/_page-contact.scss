@@ -43,6 +43,9 @@
   font-weight: $normal;
   line-height: 1.45;
   text-align: center;
+  @media (max-width: 767px) {
+    font-size: 0.98rem;
+  }
 }
 
 .page-contact__thanks-text:nth-child(2) {

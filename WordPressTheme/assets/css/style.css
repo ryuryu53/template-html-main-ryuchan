@@ -5055,6 +5055,10 @@ html {
 	font-size: 0.94rem;
 }
 
+.page-contact__thanks-text {
+	font-size: 0.98rem;
+}
+
 .wp-pagenavi .page.larger.u-desktop {
 	display: none;
 }
