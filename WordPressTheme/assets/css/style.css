@@ -4740,13 +4740,12 @@ html {
 
 .tab__item {
 	font-size: 1.5rem;
-	padding: 1.8125rem 1.875rem 1.625rem 6.375rem;
+	padding: 1.8125rem 0 1.625rem 6.375rem;
 	position: relative;
 }
 
 .tab__item:nth-child(2) {
 	padding-left: 5.625rem;
-	padding-right: 1.125rem;
 }
 
 .tab__item::before {
