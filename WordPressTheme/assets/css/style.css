@@ -1372,6 +1372,12 @@ a:hover {
 	width: 7.5rem;
 }
 
+.footer__logo-link img {
+	-o-object-fit: cover;
+	height: 100%;
+	object-fit: cover;
+}
+
 .footer__sns {
 	display: flex;
 	gap: 1rem;
@@ -1382,6 +1388,12 @@ a:hover {
 	aspect-ratio: 24/24;
 	overflow: hidden;
 	width: 1.5rem;
+}
+
+.footer__sns-link img {
+	-o-object-fit: cover;
+	height: 100%;
+	object-fit: cover;
 }
 
 .footer__nav {
