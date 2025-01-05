@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
   <!-- 下層ページのメインビュー -->
-  <section class="contact-mv sub-mv">
+  <section class="contact-mv sub-mv js-mv-height">
     <div class="sub-mv__header">
       <h1 class="sub-mv__title">Contact</h1>
     </div>

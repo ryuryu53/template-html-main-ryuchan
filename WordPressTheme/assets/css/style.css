@@ -1508,6 +1508,10 @@ a:hover {
 	z-index: 1000;
 }
 
+.header.is-color {
+	background-color: #9a9a9a;
+}
+
 .header.is-active {
 	background-color: #408F95;
 }

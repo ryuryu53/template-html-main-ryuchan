@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
   <!-- 下層ページのメインビュー -->
-  <section class="faq-mv sub-mv">
+  <section class="faq-mv sub-mv js-mv-height">
     <div class="sub-mv__header">
       <h1 class="sub-mv__title">FAQ</h1>
     </div>
