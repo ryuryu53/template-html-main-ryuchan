@@ -2486,6 +2486,10 @@ a:hover {
 	color: #408F95;
 }
 
+.section-header__engtitle--voice-ls {
+	letter-spacing: 0.01em;
+}
+
 .section-header__engtitle--large {
 	font-size: 5rem;
 	letter-spacing: 0.003em;
@@ -2984,14 +2988,6 @@ a:hover {
 .voice {
 	background-color: white;
 	position: relative;
-}
-
-.voice__title-en {
-	letter-spacing: 0.01em;
-}
-
-.voice__title-jp {
-	padding-right: 0.0625rem;
 }
 
 .voice__items {
