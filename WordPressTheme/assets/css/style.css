@@ -1502,8 +1502,10 @@ a:hover {
 	background-color: rgba(13, 41, 54, 0.68);
 	height: 5rem;
 	left: 0;
+	opacity: 0; /* 初期状態では非表示 */
 	position: fixed;
 	top: 0;
+	transition: opacity 2s ease;
 	width: 100%;
 	z-index: 1000;
 }

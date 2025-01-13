@@ -50,8 +50,8 @@
               <!-- 1つ目のスライドにのみmv__imagesを表示 -->
               <?php if ( $counter === 0 ) : ?>
                 <div class="mv__images">
-                  <div class="mv__img-left"></div>
-                  <div class="mv__img-right"></div>
+                  <div class="mv__img-left js-mv-img-left"></div>
+                  <div class="mv__img-right js-mv-img-right"></div>
                 </div>
               <?php endif; ?>
               <picture class="mv__img">
@@ -70,7 +70,7 @@
           ?>
         </div>
       </div>
-      <div class="mv__header">
+      <div class="mv__header js-mv-header">
         <h2 class="mv__title">diving</h2>
         <p class="mv__subtitle">into&nbsp;the&nbsp;ocean</p>
       </div>
