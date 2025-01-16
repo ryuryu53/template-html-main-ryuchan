@@ -167,6 +167,14 @@ a:hover {
 	padding-top: 5rem;
 }
 
+.top-contact--sub-page {
+	margin-top: 6.625rem;
+}
+
+.top-contact--site-map-page {
+	margin-top: 5.5rem;
+}
+
 .top-footer {
 	padding-bottom: 3.5rem;
 	padding-top: 3rem;
@@ -206,14 +214,6 @@ a:hover {
 }
 
 .top-page-contact {
-	margin-top: 6.625rem;
-}
-
-.top-page-contact--site-map-page {
-	margin-top: 5.5rem;
-}
-
-.top-page-contact2 {
 	margin-top: 3.125rem;
 }
 
@@ -3571,6 +3571,19 @@ html {
 	padding-top: 8.75rem;
 }
 
+.top-contact--sub-page {
+	margin-top: 8.75rem;
+}
+
+.top-contact--site-map-page {
+	margin-top: 7.5rem;
+}
+
+.top-contact--privacy-page,
+.top-contact--terms-page {
+	margin-top: 8.6875rem;
+}
+
 .top-footer {
 	padding-bottom: 5rem;
 	padding-top: 5rem;
@@ -3606,19 +3619,6 @@ html {
 }
 
 .top-page-contact {
-	margin-top: 8.75rem;
-}
-
-.top-page-contact--site-map-page {
-	margin-top: 7.5rem;
-}
-
-.top-page-contact--privacy-page,
-.top-page-contact--terms-page {
-	margin-top: 8.6875rem;
-}
-
-.top-page-contact2 {
 	margin-top: 8.5rem;
 }
 

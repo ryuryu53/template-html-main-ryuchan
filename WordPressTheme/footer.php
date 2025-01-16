@@ -18,7 +18,16 @@
 
       <!-- Contact -->
       <?php if ( !is_page(array('contact', 'thanks')) && !is_404() ) : ?>
-        <section class="top-contact contact">
+        <section class="top-contact<?php
+          if ( !is_front_page() && !is_page(array('sitemap', 'privacy-policy', 'terms-of-service')) ) {
+            echo ' top-contact--sub-page';
+          } elseif ( is_page('sitemap')) {
+            echo ' top-contact--site-map-page';
+          } elseif ( is_page('privacy-policy')) {
+            echo ' top-contact--privacy-page';
+          } elseif ( is_page('terms-of-service')) {
+            echo ' top-contact--terms-page';
+          } ?> contact">
           <div class="contact__inner inner">
             <div class="contact__wrapper">
               <div class="contact__info">
@@ -65,14 +74,13 @@
 
     <!-- フッター -->
     <footer class="top-footer<?php
-        if ( is_404() ) {
-          echo ' top-footer--404-page';
-        } elseif ( is_page('contact') ) {
-          echo ' top-footer--contact-page';
-        } elseif ( is_page('thanks') ) {
-          echo ' top-footer--thanks-page';
-        }
-      ?> footer js-footer">
+      if ( is_404() ) {
+        echo ' top-footer--404-page';
+      } elseif ( is_page('contact') ) {
+        echo ' top-footer--contact-page';
+      } elseif ( is_page('thanks') ) {
+        echo ' top-footer--thanks-page';
+      } ?> footer js-footer">
       <div class="footer__inner inner">
         <div class="footer__img">
           <div class="footer__logo">

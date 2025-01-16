@@ -11,7 +11,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- 送信完了 -->
-  <div class="top-page-contact2 page-contact">
+  <div class="top-page-contact page-contact">
     <div class="page-contact__inner inner">
       <div class="page-contact__content">
         <p class="page-contact__thanks-title">お問い合わせ内容を送信完了しました。</p>
