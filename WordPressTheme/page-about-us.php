@@ -63,8 +63,8 @@
           <p class="section-header__engtitle"> Gallery</p>
           <h2 class="section-header__jatitle">フォト</h2>
         </div>
-        <div class="gallery__items-wrap gallery-photo">
-          <div class="gallery-photo__items">
+        <div class="gallery__items-wrap">
+          <div class="gallery__items gallery-photo">
           <?php
             // 画像が登録されている場合にループで表示
             foreach ( $gallery_images as $image ) :

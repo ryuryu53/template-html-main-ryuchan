@@ -1414,7 +1414,7 @@ a:hover {
 	font-weight: 400;
 }
 
-.gallery-photo__items {
+.gallery-photo {
 	grid-gap: 0.5rem;
 	display: grid;
 	gap: 0.5rem;
@@ -4189,21 +4189,21 @@ html {
 	font-size: 0.875rem;
 }
 
-.gallery-photo__items {
+.gallery-photo {
 	grid-auto-flow: dense;
 	grid-template-columns: 492fr 80fr 492fr;
 	grid-template-rows: repeat(4, 369fr);
+}
+
+.gallery-photo__item {
+	grid-column: span 2;
+	grid-row: span 1;
 }
 
 .gallery-photo__item:nth-child(6n+1),
 .gallery-photo__item:nth-child(6n+6) {
 	grid-column: span 1;
 	grid-row: span 2;
-}
-
-.gallery-photo__item {
-	grid-column: span 2;
-	grid-row: span 1;
 }
 
 .gallery-photo__img {
