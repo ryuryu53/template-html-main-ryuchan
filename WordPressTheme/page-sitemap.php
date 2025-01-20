@@ -55,7 +55,7 @@
               <a href="<?php echo $about; ?>" class="footer-nav__left-link footer-nav__left-link--icon-green">私たちについて</a>
             </li>
           </ul>
-          <ul class="footer-nav__left-items footer-nav__left-items--width">
+          <ul class="footer-nav__left-items">
             <li class="footer-nav__left-item footer-nav__left-item--green">
               <a href="<?php echo $information; ?>" class="footer-nav__left-link footer-nav__left-link--icon-green">ダイビング情報</a>
               <ul class="footer-nav__left-detail-items">
