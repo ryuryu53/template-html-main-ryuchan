@@ -493,13 +493,10 @@ a:hover {
 	-o-object-fit: cover;
 	height: 100%;
 	object-fit: cover;
-}
-
-.article-card__image {
 	transition: transform 0.3s;
 }
 
-.article-card:hover .article-card__image {
+.article-card:hover .article-card__img img {
 	transform: scale(1.36);
 }
 
@@ -554,13 +551,10 @@ a:hover {
 	-o-object-fit: cover;
 	height: 100%;
 	object-fit: cover;
-}
-
-.blog-card__image {
 	transition: transform 0.3s;
 }
 
-.blog-card:hover .blog-card__image {
+.blog-card:hover .blog-card__img img {
 	transform: scale(1.36);
 }
 
