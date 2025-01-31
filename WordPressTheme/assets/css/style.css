@@ -1902,10 +1902,6 @@ a:hover {
 	object-fit: cover;
 }
 
-.page-about__text-body {
-	display: contents;
-}
-
 .page-about__subtitle {
 	color: #fff;
 	font-family: "Gotu", sans-serif;
