@@ -1428,8 +1428,6 @@ a:hover {
 .gallery-photo__item:nth-child(6n+1) .gallery-photo__img,
 .gallery-photo__item:nth-child(6n+6) .gallery-photo__img {
 	aspect-ratio: 345/523;
-	display: block;
-	overflow: hidden;
 }
 
 .gallery-photo__img img {
