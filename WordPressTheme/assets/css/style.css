@@ -977,6 +977,12 @@ a:hover {
 	opacity: 1;
 }
 
+.campaign-list {
+	grid-gap: 2.5rem;
+	display: grid;
+	gap: 2.5rem;
+}
+
 .campaign-list__item {
 	height: auto;
 	margin: auto;
@@ -1938,9 +1944,6 @@ a:hover {
 }
 
 .page-campaign__items {
-	grid-gap: 2.5rem;
-	display: grid;
-	gap: 2.5rem;
 	margin-top: 2.5rem;
 }
 
@@ -3975,6 +3978,11 @@ html {
 	width: 100%;
 }
 
+.campaign-list {
+	gap: 5rem 2.5rem;
+	grid-template-columns: repeat(2, 1fr);
+}
+
 .campaign-list__item {
 	display: grid;
 	grid-template-rows: subgrid;
@@ -4433,11 +4441,6 @@ html {
 	left: calc(50% - min(48%, 38.75rem));
 	top: -4.375rem;
 	width: 18.8125rem;
-}
-
-.page-campaign__items {
-	gap: 5rem 2.5rem;
-	grid-template-columns: repeat(2, 1fr);
 }
 
 .page-contact::before {
