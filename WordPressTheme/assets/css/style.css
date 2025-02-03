@@ -1506,17 +1506,13 @@ a:hover {
 	left: 0;
 	position: fixed;
 	top: 0;
-	transition: opacity 2s ease;
+	transition: opacity 2s, background-color 0.3s;
 	width: 100%;
 	z-index: 1000;
 }
 
 .header.is-color {
 	background-color: #9a9a9a;
-}
-
-.header.is-active {
-	background-color: #408F95;
 }
 
 .header__inner {
@@ -2631,9 +2627,10 @@ a:hover {
 	display: none;
 	height: 100vh;
 	left: 0;
+	padding-top: 5rem;
 	position: absolute;
 	right: 0;
-	top: 5rem;
+	top: 0;
 	width: 100%;
 }
 
