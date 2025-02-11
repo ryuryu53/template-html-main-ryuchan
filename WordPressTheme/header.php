@@ -103,7 +103,7 @@
             <li class="pc-nav__item">
               <a href="<?php echo $contact; ?>" class="pc-nav__link">
                 <span class="pc-nav__engtext">Contact</span>
-                <span class="pc-nav__jatext">お問合せ</span>
+                <span class="pc-nav__jatext">お問い合わせ</span>
               </a>
             </li>
           </ul>
