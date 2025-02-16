@@ -11,24 +11,30 @@
   }
 }
 
-.top-contact--sub-page {
-  margin-top: rem(106);
+.top-contact.top-contact--sub-page {
+  filter: none;
+  margin-top: rem(26);
 
   @include mq(md) {
-    margin-top: rem(140);
+    margin-top: 0;
   }
 }
 
-.top-contact--site-map-page {
-  margin-top: rem(88);
+.top-contact.top-contact--site-map-page {
+  filter: none;
+  margin-top: rem(8);
   @include mq(md) {
-    margin-top: rem(120);
+    margin-top: 0;
+    padding-top: rem(120);
   }
 }
 
-.top-contact--privacy-page,
-.top-contact--terms-page {
+.top-contact.top-contact--privacy-page,
+.top-contact.top-contact--terms-page {
+  filter: none;
+  margin-top: rem(26);
   @include mq(md) {
-    margin-top: rem(139);
+    margin-top: 0;
+    padding-top: rem(139);
   }
 }

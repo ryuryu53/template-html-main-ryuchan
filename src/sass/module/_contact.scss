@@ -4,7 +4,7 @@
   position: relative;
   // セクション全体にシャドウがついている。このクラスでbox-shadowを指定しても効果なし
   filter: drop-shadow(0 rem(4) rem(4) rgba(0, 0, 0, 0.25));
-  background-color: white;  // ローディング最初の画面が出ないようにするため
+  background-color: white;  // ローディング最初の画面が出ないようにするため。ただし、drop-shadowは効かなくなる！ところが、上端境界ではbgc:whiteにすることにより、drop-shadowが効いてくる！？
 
   @include mq(md) {
     filter: none;

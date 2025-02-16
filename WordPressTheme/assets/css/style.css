@@ -167,12 +167,20 @@ a:hover {
 	padding-top: 5rem;
 }
 
-.top-contact--sub-page {
-	margin-top: 6.625rem;
+.top-contact.top-contact--sub-page {
+	filter: none;
+	margin-top: 1.625rem;
 }
 
-.top-contact--site-map-page {
-	margin-top: 5.5rem;
+.top-contact.top-contact--site-map-page {
+	filter: none;
+	margin-top: 0.5rem;
+}
+
+.top-contact.top-contact--privacy-page,
+.top-contact.top-contact--terms-page {
+	filter: none;
+	margin-top: 1.625rem;
 }
 
 .top-footer {
@@ -3563,17 +3571,19 @@ html {
 	padding-top: 8.75rem;
 }
 
-.top-contact--sub-page {
-	margin-top: 8.75rem;
+.top-contact.top-contact--sub-page {
+	margin-top: 0;
 }
 
-.top-contact--site-map-page {
-	margin-top: 7.5rem;
+.top-contact.top-contact--site-map-page {
+	margin-top: 0;
+	padding-top: 7.5rem;
 }
 
-.top-contact--privacy-page,
-.top-contact--terms-page {
-	margin-top: 8.6875rem;
+.top-contact.top-contact--privacy-page,
+.top-contact.top-contact--terms-page {
+	margin-top: 0;
+	padding-top: 8.6875rem;
 }
 
 .top-footer {
