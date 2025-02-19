@@ -103,8 +103,11 @@ button,
 	z-index: 10;
 }
 
-.form__btn-submit:hover [type="submit"] {	// 送信ボタン
-	color: $greenaccent;
+// タッチデバイスのときはホバーエフェクトを無効にする
+@media (any-hover: hover) {
+	.form__btn-submit:hover [type="submit"] {	// 送信ボタン
+		color: $greenaccent;
+	}
 }
 
 [type="radio"] {
@@ -475,10 +478,6 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	color: $white;
 }
 
-.form__btn-submit:hover {
-	color: $greenaccent;
-}
-
 .form__btn-submit::before {
 	content: "";
   position: absolute;
@@ -505,8 +504,15 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
   transition: .2s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-.form__btn-submit:hover::after {
-	transform: scale(1, 1);
+// タッチデバイスのときはホバーエフェクトを無効にする
+@media (any-hover: hover) {
+	.form__btn-submit:hover {
+		color: $greenaccent;
+	}
+
+	.form__btn-submit:hover::after {
+		transform: scale(1, 1);
+	}
 }
 
 .form__btn-submit input {

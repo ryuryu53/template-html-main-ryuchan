@@ -145,10 +145,6 @@ a {
 	transition: opacity 0.3s;
 }
 
-a:hover {
-	opacity: 0.7;
-}
-
 .top-about {
 	padding-bottom: 4.625rem;
 	padding-top: 5.1875rem;
@@ -504,10 +500,6 @@ a:hover {
 	transition: transform 0.3s;
 }
 
-.article-card:hover .article-card__img img {
-	transform: scale(1.36);
-}
-
 .article-card__body {
 	display: flex;
 	flex-direction: column;
@@ -560,10 +552,6 @@ a:hover {
 	height: 100%;
 	object-fit: cover;
 	transition: transform 0.3s;
-}
-
-.blog-card:hover .blog-card__img img {
-	transform: scale(1.36);
 }
 
 .blog-card__body {
@@ -752,19 +740,6 @@ a:hover {
 
 .button--reverse::after {
 	background-color: #408F95;
-}
-
-.button:hover {
-	color: #408F95;
-	opacity: 1;
-}
-
-.button--reverse:hover {
-	color: #fff;
-}
-
-.button:hover::after {
-	transform: scale(1, 1);
 }
 
 .button__text {
@@ -3068,10 +3043,6 @@ button,
 	z-index: 10;
 }
 
-.form__btn-submit:hover [type=submit] {
-	color: #408F95;
-}
-
 [type=radio] + span {
 	cursor: pointer;
 	display: inline-block;
@@ -3362,10 +3333,6 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	z-index: 1;
 }
 
-.form__btn-submit:hover {
-	color: #408F95;
-}
-
 .form__btn-submit::before {
 	background-color: transparent;
 	border: 0.0625rem solid #408F95;
@@ -3390,10 +3357,6 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1);
 	width: calc(100% - 0.125rem);
 	z-index: -1;
-}
-
-.form__btn-submit:hover::after {
-	transform: scale(1, 1);
 }
 
 .form__btn-submit input {
@@ -3537,6 +3500,47 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	background-color: #408F95;
 	border-color: transparent;
 	color: #fff;
+}
+
+@media (any-hover: hover) {
+
+a:hover {
+	opacity: 0.7;
+}
+
+.article-card:hover .article-card__img img {
+	transform: scale(1.36);
+}
+
+.blog-card:hover .blog-card__img img {
+	transform: scale(1.36);
+}
+
+.button:hover {
+	color: #408F95;
+	opacity: 1;
+}
+
+.button--reverse:hover {
+	color: #fff;
+}
+
+.button:hover::after {
+	transform: scale(1, 1);
+}
+
+.form__btn-submit:hover [type=submit] {
+	color: #408F95;
+}
+
+.form__btn-submit:hover {
+	color: #408F95;
+}
+
+.form__btn-submit:hover::after {
+	transform: scale(1, 1);
+}
+
 }
 
 @media screen and (min-width: 768px) {

@@ -126,6 +126,8 @@ a {
   transition: opacity 0.3s;
 }
 
-a:hover {
-  opacity: 0.7; // 追加
+@media (any-hover: hover) {// タッチデバイスのときはホバーエフェクトを無効にする
+  a:hover {
+    opacity: 0.7; // 追加
+  }
 }

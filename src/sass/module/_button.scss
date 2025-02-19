@@ -56,18 +56,22 @@
   background-color: $greenaccent;
 }
 
-.button:hover {
-  color: $greenaccent;
-  opacity: 1;
+// タッチデバイスのときはホバーエフェクトを無効にする
+@media (any-hover: hover) {
+  .button:hover {
+    color: $greenaccent;
+    opacity: 1;
+  }
+
+  .button--reverse:hover {
+    color: $white;
+  }
+
+  .button:hover::after {
+    transform: scale(1, 1);
+  }
 }
 
-.button--reverse:hover {
-  color: $white;
-}
-
-.button:hover::after {
-  transform: scale(1, 1);
-}
 
 .button__text {
   position: relative;

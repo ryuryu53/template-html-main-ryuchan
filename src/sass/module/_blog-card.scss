@@ -40,8 +40,11 @@
   transition: transform 0.3s;
 }
 
-.blog-card:hover .blog-card__img img {
-  transform: scale(1.36);
+// タッチデバイスのときはホバーエフェクトを無効にする
+@media (any-hover: hover) {
+  .blog-card:hover .blog-card__img img {
+    transform: scale(1.36);
+  }
 }
 
 .blog-card__body {

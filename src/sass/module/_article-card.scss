@@ -20,8 +20,11 @@
   transition: transform 0.3s;
 }
 
-.article-card:hover .article-card__img img {
-  transform: scale(1.36);
+// タッチデバイスのときはホバーエフェクトを無効にする
+@media (any-hover: hover) {
+  .article-card:hover .article-card__img img {
+    transform: scale(1.36);
+  }
 }
 
 .article-card__body {
