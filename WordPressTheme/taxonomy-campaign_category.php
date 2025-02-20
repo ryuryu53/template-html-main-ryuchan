@@ -123,7 +123,15 @@
                   </div>
                   <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
                   <div class="campaign-card__btn campaign-card__btn--sub-page u-desktop">
-                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+                    <?php
+                      // カスタムタクソノミー「campaign_category」の取得
+                      $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                      $campaign_category = !empty($terms) ? $terms[0]->name : ''; // 最初のカテゴリ名を取得
+                      $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）
+                    ?>
+                    <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button">
+                      <span class="button__text">Contact&nbsp;us</span>
+                    </a>
                   </div>
                 </div>
               </div>

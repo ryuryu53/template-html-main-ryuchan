@@ -503,3 +503,25 @@ function add_custom_button_labels() {
   ';
 }
 add_action('admin_head', 'add_custom_button_labels');
+
+// GETパラメータを受け取って、フォームのセレクトボックスのデフォルト値として設定
+function custom_wpcf7_select_filter($tag) {
+  if (!is_array($tag)) return $tag;
+
+  $form_field_name = 'menu-464'; // CF7のセレクトボックス名（ショートコード内のname）
+  
+  if (isset($_GET['select_plan'])) {
+      $selected_value = urldecode($_GET['select_plan']); // GETパラメータをデコード
+      
+      if ($tag['name'] === $form_field_name) {
+          foreach ($tag['values'] as $key => $value) {
+              if ($value === $selected_value) {
+                  $tag['options'][$key] = 'default:' . $value; // デフォルト値を設定
+              }
+          }
+      }
+  }
+
+  return $tag;
+}
+add_filter('wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2);
