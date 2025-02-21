@@ -506,22 +506,32 @@ add_action('admin_head', 'add_custom_button_labels');
 
 // GETパラメータを受け取って、フォームのセレクトボックスのデフォルト値として設定
 function custom_wpcf7_select_filter($tag) {
+  // $tagが配列かどうかを確認。配列でないなら、そのまま返して関数の処理を終了
   if (!is_array($tag)) return $tag;
 
   $form_field_name = 'menu-464'; // CF7のセレクトボックス名（ショートコード内のname）
-  
-  if (isset($_GET['select_plan'])) {
-      $selected_value = urldecode($_GET['select_plan']); // GETパラメータをデコード
-      
-      if ($tag['name'] === $form_field_name) {
-          foreach ($tag['values'] as $key => $value) {
-              if ($value === $selected_value) {
-                  $tag['options'][$key] = 'default:' . $value; // デフォルト値を設定
-              }
+  // URLにselect_planというパラメータがあるかどうかを確認（$_GET：URLのクエリパラメータ（GETパラメータ → ?の後ろの部分）を取得するための配列。例：https://example.com/?key=value だとkeyを指定してvalueを取得）
+  if (isset($_GET['select_plan']) && isset($tag['values'])) { // isset() は「変数が存在するか」を調べる関数
+    // urldecode()を使ってURLエンコードされている文字（例: %20 → スペース）を元の形に戻す
+    $selected_value = urldecode($_GET['select_plan']); // GETパラメータをデコード
+    // $tag['name']（現在のフォームのフィールド名）が $form_field_name（指定したセレクトボックス）と同じかを確認
+    if ($tag['name'] === $form_field_name) {
+      // $tag['values'] には、セレクトボックスの選択肢（プルダウンの中身）が入っている
+      foreach ($tag['values'] as $key => $value) {  // $keyは選択肢の番号（0から始まる）、$valueは選択肢の文字（ライセンス講習など）
+        // もしGETパラメータの値と、今見ている選択肢のvalueが同じなら…
+        if ($value === $selected_value) {
+          // $tag['options']はデフォルトでは空の配列である可能性が高いが、初めから存在しない（未定義）可能性もあるので、安全にコードを動作させるためには以下のチェックをした方がよい
+          if (!isset($tag['options'])) {
+            $tag['options'] = []; // `options`が未定義なら空の配列をセット
           }
+          // default: をつけて、CF7のデフォルト値として設定。CF7の仕様では1から始まるため+1（[] を使うことで、配列の最後に値を追加できる）
+          $tag['options'][] = 'default:' . ($key + 1); // 例えば、$key = 0 なら、'default:1' となり、1番目の選択肢がデフォルトになる
+        }
       }
+    }
   }
-
+  // 変更を加えた$tagを返す → フォームのセレクトボックスのデフォルト値が変更される
   return $tag;
 }
+// add_filter()を使って、CF7のフォームタグをカスタマイズする処理を追加（'wpcf7_form_tag'はCF7 のフォームタグを変更するためのフィルターフック）
 add_filter('wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2);

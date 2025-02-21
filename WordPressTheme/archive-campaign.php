@@ -128,7 +128,8 @@
                       // カスタムタクソノミー「campaign_category」の取得
                       $terms = get_the_terms(get_the_ID(), 'campaign_category');
                       $campaign_category = !empty($terms) ? $terms[0]->name : ''; // 最初のカテゴリ名を取得
-                      $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）
+                      $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）→ 今回は未使用
+                      // ↓ urlencode($campaign_category)で日本語をURLで使える形に変換（エンコード）してselect_plan という GETパラメータにセット
                     ?>
                     <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button">
                       <span class="button__text">Contact&nbsp;us</span>
