@@ -200,10 +200,6 @@ a {
 	margin-top: 2.5rem;
 }
 
-.top-header {
-	opacity: 0;
-}
-
 .top-information {
 	padding-bottom: 5.25rem;
 	padding-top: 5.25rem;
@@ -1637,25 +1633,28 @@ a {
 	width: 100%;
 }
 
-.loading {
+.loading__white {
 	background-color: #fff;
 	height: 100vh;
 	left: 0;
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 9999;
 }
 
-.loading.loaded {
+.loading__white.fadeout {
 	display: none;
 }
 
 .loading__header {
+	display: none;
 	left: 50%;
 	position: absolute;
 	text-align: center;
 	top: 50%;
 	transform: translate(-50%, -52%);
+	z-index: 10;
 }
 
 .loading__title {
@@ -1676,6 +1675,57 @@ a {
 	font-weight: 400;
 	position: relative;
 	right: 0.0625rem;
+}
+
+/* 画面遷移アニメーション */
+
+.loading__images {
+	background-color: transparent;
+	display: none;
+	height: 100vh;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99999;
+}
+
+/* .loading__imagesにappearクラスがついたら出現 */
+
+.loading__images.appear {
+	display: block;
+}
+
+.loading__img-left,
+.loading__img-right {
+	background-image: url("../images/common/mv_1.webp");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 200% 100%; /* 横幅を2倍にして、左右で分割 */
+	height: 100%;
+	position: absolute;
+	transition: transform 1.5s ease;
+	width: 50%;
+}
+
+.loading__img-left {
+	background-position: left center; /* 画像の左半分を表示 */
+	left: 0;
+	top: 0;
+	transform: translateY(100%); /* 初期位置を画面外下部に */
+}
+
+.loading__img-right {
+	background-position: right center; /* 画像の右半分を表示 */
+	right: 0;
+	top: 0;
+	transform: translateY(calc(100% + 80px));
+}
+
+.loading__img-left.loaded,
+.loading__img-right.loaded {
+	transform: translateY(0);
 }
 
 .modal {
@@ -1732,12 +1782,10 @@ a {
 
 .mv__header {
 	left: 50%;
-	opacity: 0; /* 初期状態では非表示 */
 	position: absolute;
 	text-align: center;
 	top: 50%;
 	transform: translate(-50%, -52%);
-	transition: opacity 2s ease;
 	z-index: 10;
 }
 
@@ -1759,45 +1807,6 @@ a {
 	font-weight: 400;
 	position: relative;
 	right: 0.0625rem;
-}
-
-.mv__images {
-	height: 100vh;
-	overflow: hidden;
-	position: relative;
-	width: 100%;
-}
-
-.mv__img-left,
-.mv__img-right {
-	background-image: url("../images/common/mv_1.jpg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 200% 100%; /* 横幅を2倍にして、左右で分割 */
-	height: 100%;
-	opacity: 1; /* 初期状態は表示されている */
-	position: absolute;
-	transition: transform 2s ease;
-	width: 50%;
-}
-
-.mv__img-left {
-	background-position: left center; /* 画像の左半分を表示 */
-	left: 0;
-	top: 0;
-	transform: translateY(100%); /* 初期位置を画面外下部に */
-}
-
-.mv__img-right {
-	background-position: right center; /* 画像の右半分を表示 */
-	right: 0;
-	top: 0;
-	transform: translateY(calc(100% + 80px));
-}
-
-.mv__img-left.loaded,
-.mv__img-right.loaded {
-	transform: translateY(0);
 }
 
 .page-404__wrapper {
@@ -4341,6 +4350,11 @@ html {
 	right: 0.125rem;
 }
 
+.loading__img-left,
+.loading__img-right {
+	background-image: url("../images/common/mv-pc_1.webp");
+}
+
 .modal__img {
 	height: 80%;
 	max-width: 60.625rem;
@@ -4365,11 +4379,6 @@ html {
 
 .mv__subtitle {
 	right: 0.125rem;
-}
-
-.mv__img-left,
-.mv__img-right {
-	background-image: url("../images/common/mv-pc_1.jpg");
 }
 
 .page-404__wrapper {

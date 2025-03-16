@@ -15,11 +15,19 @@
     $terms = esc_url( home_url('/terms-of-service/') );
   ?>
 
-  <!-- ローディング最初の画面 -->
-  <div class="loading js-load">
-    <div class="loading__header">
-      <div class="loading__title">diving</div>
-      <div class="loading__subtitle">into&nbsp;the&nbsp;ocean</div>
+  <!-- ローディングアニメーション -->
+  <div class="loading">
+    <!-- 最初の白い画面 -->
+    <div class="loading__white js-loading-white">
+      <div class="loading__header js-loading-title">
+        <div class="loading__title">diving</div>
+        <div class="loading__subtitle">into&nbsp;the&nbsp;ocean</div>
+      </div>
+    </div>
+    <!-- 2つに分かれた画像 -->
+    <div class="loading__images js-loading-images">
+      <div class="loading__img-left js-loading-img-left"></div>
+      <div class="loading__img-right js-loading-img-right"></div>
     </div>
   </div>
 
@@ -33,7 +41,7 @@
             $mv_images = SCF::get('mainview', get_the_ID());
             // 画像が登録されている場合にループで表示
           if ( $mv_images ) :
-            $counter = 0; // カウンターを初期化
+            // $counter = 0; // カウンターを初期化
             foreach ( $mv_images as $image ) :
               // 画像URLとalt属性を取得
               // wp_get_attachment_image_src()：画像に関する情報を配列で返す
@@ -48,12 +56,12 @@
             <div class="swiper-slide">
               <!-- ローディングアニメーション用 -->
               <!-- 1つ目のスライドにのみmv__imagesを表示 -->
-              <?php if ( $counter === 0 ) : ?>
-                <div class="mv__images">
+              <?php // if ( $counter === 0 ) : ?>
+                <!-- <div class="mv__images">
                   <div class="mv__img-left js-mv-img-left"></div>
                   <div class="mv__img-right js-mv-img-right"></div>
-                </div>
-              <?php endif; ?>
+                </div> -->
+              <?php // endif; ?>
               <picture class="mv__img">
                 <?php if ( !empty($image['image_sp']) && !empty($image['image_pc']) ) : ?>
                   <!-- spの画像 -->
@@ -64,7 +72,7 @@
               </picture>
             </div>
           <?php
-            $counter++; // カウンターをインクリメント
+            // $counter++; // カウンターをインクリメント
             endforeach;
           endif;
           ?>
