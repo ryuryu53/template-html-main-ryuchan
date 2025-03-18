@@ -5,7 +5,7 @@ function enqueue_custom_scripts() {
   wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', array(), null);
 
   // SwiperのCSS読み込み
-  wp_enqueue_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), null);
+  wp_enqueue_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css', array(), null);
 
   // テーマのメインCSS読み込み
   wp_enqueue_style('main-style', get_theme_file_uri('/assets/css/style.css'), array(), null);
@@ -17,7 +17,7 @@ function enqueue_custom_scripts() {
   wp_enqueue_script('jquery-inview', get_theme_file_uri('/assets/js/jquery.inview.min.js'), array('jquery-cdn'), 'null', true);
 
   // SwiperのJavaScript読み込み（defer属性付き）
-  wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0.0', true);
+  wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', array(), '8.0.0', true);
 
   // テーマのメインJavaScriptファイル読み込み（defer属性付き）
   wp_enqueue_script('main-script', get_theme_file_uri('/assets/js/script.js'), array('jquery-cdn'), null, true);
