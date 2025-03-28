@@ -192,7 +192,7 @@
         <div class="swiper-button-prev campaign__btn-prev u-desktop"></div>
       </div>
       <div class="campaign__btn">
-        <a href="./page-campaign.html" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="./page-campaign.html" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
@@ -221,7 +221,7 @@
             ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト<!-- PC版だとこの後さらに「が入ります。」が続く -->
           </p>
           <div class="about__btn">
-            <a href="./page-about.html" class="button"><span class="button__text">View&nbsp;more</span></a>
+            <a href="./page-about.html" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
           </div>
         </div>
       </div>
@@ -246,7 +246,7 @@
           <h3 class="information__subtitle">ライセンス講習</h3>
           <p class="information__text text--black-pc">当店はダイビングライセンス（Cカード）世界最大の教育機関PADIの「正規店」として店舗登録されています。<br>正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。</p>
           <div class="information__btn">
-            <a href="./page-information.html" class="button"><span class="button__text">View&nbsp;more</span></a>
+            <a href="./page-information.html" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
           </div>
         </div>
       </div>
@@ -302,7 +302,7 @@
         </article>
       </div>
       <div class="blog__btn">
-        <a href="./home.html" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="./home.html" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
@@ -357,7 +357,7 @@
         </article>
       </div>
       <div class="voice__btn">
-        <a href="./page-voice.html" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="./page-voice.html" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
@@ -454,7 +454,7 @@
         </div>
       </div>
       <div class="price__btn">
-        <a href="./page-price.html" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="./page-price.html" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
