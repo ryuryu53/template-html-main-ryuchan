@@ -67,7 +67,7 @@
       <!-- ページトップへ戻るボタン -->
       <?php if ( !is_404() ) : ?>
         <div class="to-top js-to-top">
-          <a href="#top" class="to-top__link"></a>
+          <a href="#top" class="to-top__link" aria-label="ページトップへ戻る"></a>
         </div>
       <?php endif; ?>
     </main>
