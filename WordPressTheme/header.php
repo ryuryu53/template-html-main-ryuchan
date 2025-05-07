@@ -51,11 +51,11 @@
             </picture>
           </a>
         </<?php echo $tag; ?>>
-        <div class="header__drawer hamburger js-hamburger">
+        <button class="header__drawer hamburger js-hamburger" aria-label="メニューを開く">
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </button>
         <nav class="header__pc-nav pc-nav" aria-label="ヘッダーナビゲーション">
           <ul class="pc-nav__items">
             <li class="pc-nav__item">

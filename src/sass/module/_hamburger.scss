@@ -7,11 +7,14 @@
   z-index: 100;
   width: rem(33);
   height: rem(32);
+  padding: 0;
+  border: none;
   cursor: pointer;
 }
 
 .hamburger span {
   position: absolute;
+  right: 0;
   width: inherit;
   height: rem(1);
   background-color: $white;
