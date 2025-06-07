@@ -590,39 +590,6 @@ a {
 	margin-top: 1.5rem;
 }
 
-.blog-card__text-block {
-	margin-top: 1.5rem;
-}
-
-.blog-card__list {
-	margin-top: 1.5rem;
-}
-
-.blog-card__item {
-	color: #000;
-	font-size: 1rem;
-	font-weight: 400;
-	padding-left: 1.6875rem;
-	position: relative;
-}
-
-.blog-card__item + .blog-card__item {
-	margin-top: 0.25rem;
-}
-
-.blog-card__item::before {
-	background-image: url(../images/common/starfish-green.svg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-	content: "";
-	height: 1.125rem;
-	left: 0;
-	position: absolute;
-	top: 0.1875rem;
-	width: 1.125rem;
-}
-
 .blog-cards {
 	grid-gap: 2.5rem;
 	display: grid;
@@ -3809,18 +3776,6 @@ html {
 
 .blog-card__text.blog-card__text--single-page {
 	margin-top: 2.5rem;
-}
-
-.blog-card__text-block {
-	margin-top: 2.5rem;
-}
-
-.blog-card__list {
-	margin-top: 2.5rem;
-}
-
-.blog-card__item {
-	color: #0D2936;
 }
 
 .blog-cards {
