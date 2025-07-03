@@ -4,13 +4,16 @@
 // var mv_swiper;
 jQuery(function ($) {
   // この中であればWordpressでも「$」が使用可能になる
-  // ヘッダークラス名付与
+  /* --------------------------------------------
+   *   スクロールしてmvを過ぎたらヘッダーの背景色を変える
+   * -------------------------------------------- */
   var header = $('.js-header');
   var headerheight = $('.js-header').height();
   var height = $('.js-mv-height').height();
   console.log('ヘッダーの高さ：' + headerheight);
   console.log('メインビューの高さ：' + height);
   console.log(height - headerheight);
+  // ヘッダークラス名付与
   $(window).scroll(function () {
     if ($(this).scrollTop() > height - headerheight) {
       header.addClass('is-color');
@@ -19,7 +22,9 @@ jQuery(function ($) {
     }
   });
 
-  //ドロワーメニュー
+  /* --------------------------------------------
+   *   ドロワーメニュー
+   * -------------------------------------------- */
   $(".js-hamburger, .js-sp-nav").click(function () {
     if ($(".js-hamburger").hasClass('is-active')) {
       $(".js-hamburger").removeClass("is-active");
@@ -47,6 +52,9 @@ jQuery(function ($) {
     }
   });
 
+  /* --------------------------------------------
+   *   mvスワイパー
+   * -------------------------------------------- */
   // スワイパーの自動再生を一時停止 → ローディングアニメーションを「jQuery(function ($) {}」の中に書くやり方へ変更したので、通常通りスワイパーを自動再生 25.3.16
   var mv_swiper = new Swiper('.js-mv-swiper', {
     // ここで「var」を削除して、グローバルに宣言したmv_swiperを使用 → 使用せず
@@ -62,7 +70,9 @@ jQuery(function ($) {
     // autoplay: false // 最初は自動再生をしない
   });
 
-  // campaignスワイパー
+  /* --------------------------------------------
+   *   campaignスワイパー
+   * -------------------------------------------- */
   var campaign_swiper = new Swiper('.js-campaign-swiper', {
     slidesPerView: 'auto',
     loop: true,
@@ -84,7 +94,9 @@ jQuery(function ($) {
     }
   });
 
-  // 背景色の後に画像が表示されるエフェクト
+  /* --------------------------------------------
+   *   背景色の後に画像が表示されるエフェクト
+   * -------------------------------------------- */
   //要素の取得とスピードの設定
   var box = $('.js-colorbox'),
     speed = 700;
@@ -117,7 +129,9 @@ jQuery(function ($) {
     });
   });
 
-  // スクロールしながらページトップへ戻るボタン
+  /* --------------------------------------------
+   *   スクロールしながらページトップへ戻るボタン
+   * -------------------------------------------- */
   var topBtn = $('.js-to-top');
   topBtn.hide();
 
@@ -176,7 +190,9 @@ jQuery(function ($) {
     }
   });
 
-  // ボックスシャドウを更新する関数
+  /* --------------------------------------------
+   *   ボックスシャドウを更新する関数
+   * -------------------------------------------- */
   function updateBoxShadow() {
     var browserW = window.innerWidth;
     if (browserW >= 768) {
@@ -190,6 +206,9 @@ jQuery(function ($) {
     }
   }
 
+  /* --------------------------------------------
+   *   タブの設定
+   * -------------------------------------------- */
   // 最初に表示されるタブの設定
   $('.information-cards__item:first-child').addClass('is-active');
   $('.tab__item:first-child').addClass('is-active');
@@ -257,7 +276,9 @@ jQuery(function ($) {
     // }, 500);
   });
 
-  // モーダル
+  /* --------------------------------------------
+   *   モーダル
+   * -------------------------------------------- */
   var open = $('.js-modal-open'),
     modal = $('.js-modal');
   var scrollTop;
@@ -302,19 +323,25 @@ jQuery(function ($) {
     $(window).scrollTop(scrollTop);
   });
 
-  // トグル
+  /* --------------------------------------------
+   *   トグル
+   * -------------------------------------------- */
   $(".js-archive-toggle-title").on("click", function () {
     $(this).toggleClass("is-open");
     $(this).next().slideToggle(300);
   });
 
-  // アコーディーン
+  /* --------------------------------------------
+   *   アコーディーン
+   * -------------------------------------------- */
   $(".js-accordion-title").on("click", function () {
     $(this).toggleClass("is-close");
     $(this).next().slideToggle(300);
   });
 
-  // ★ページネーションの設定（SP版とPC版で表示するページ数を変える設定）
+  /* --------------------------------------------
+   *   ★ページネーションの設定（SP版とPC版で表示するページ数を変える設定）
+   * -------------------------------------------- */
   // `.wp-pagenavi .current` が存在する場合のみイベントリスナーを登録
   if (document.querySelector('.wp-pagenavi .current')) {
     // ウェブページが完全に読み込まれたときにadjustPaginationという関数を実行するようにブラウザに指示
@@ -370,6 +397,9 @@ jQuery(function ($) {
     });
   }
 
+  /* --------------------------------------------
+   *   お問い合わせフォーム：エラーメッセージの改行処理
+   * -------------------------------------------- */
   $('.wpcf7').on('submit', function (event) {
     // 画面幅が767px以下の場合に改行を挿入
     if (window.innerWidth <= 767) {
@@ -386,7 +416,9 @@ jQuery(function ($) {
     }
   });
 
-  // ローディングアニメーション
+  /* --------------------------------------------
+   *   ローディングアニメーション
+   * -------------------------------------------- */
   function runLoadingAnimation() {
     var $loading = $(".js-loading-white");
     var $images = $(".js-loading-images");
