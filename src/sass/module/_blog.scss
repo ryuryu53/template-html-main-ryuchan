@@ -2,7 +2,11 @@
 
 .blog {
   position: relative;
-  background-color: white;  // ローディング最初の画面が出ないようにするため
+  padding-top: rem(84);
+
+  @include mq(md) {
+    padding-top: rem(100);
+  }
 }
 
 .blog::before {

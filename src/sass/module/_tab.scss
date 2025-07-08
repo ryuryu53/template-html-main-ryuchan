@@ -27,12 +27,13 @@
   @include mq(md) {
     position: relative;
     font-size: rem(24);
-    padding: rem(29) 0 rem(26) rem(102);
+    padding: rem(29) rem(30) rem(26) rem(102);
   }
 }
 
 .tab__item:nth-child(2) {
   @include mq(md) {
+    padding-right: rem(18);
     padding-left: rem(90);
   }
 }

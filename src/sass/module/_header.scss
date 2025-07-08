@@ -1,19 +1,10 @@
 @use "global" as *;
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100%;
-  height: rem(80);
   background-color: rgba($color: $green, $alpha: 68%);
   // ↓ スクロールしてメインビューを過ぎたとき、ヘッダーの色が一瞬で変わらないようにbackground-colorについても指定（25.2.4）
-  transition: opacity 2s, background-color 0.3s;
-
-  @include mq(md) {
-    height: rem(90);
-  }
+  // 「opacity 2s ease」は不要のため削除（25.7.8)
+  transition: background-color 0.3s;
 }
 
 .header.is-color {

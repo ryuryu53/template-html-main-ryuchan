@@ -1,14 +1,9 @@
 @use "global" as *;
 
 .top-price {
-  // ローディング最初の画面が出ないようにするため、余白を.top-voiceのpadding-bottomで指定
-  // margin-top: rem(84);
-  padding-top: rem(84);
-  padding-bottom: rem(84);
+  margin-top: rem(84);
 
   @include mq(md) {
-    // margin-top: rem(144);
-    padding-top: rem(100);
-    padding-bottom: rem(104);
+    margin-top: rem(144);
   }
 }

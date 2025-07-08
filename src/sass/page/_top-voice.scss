@@ -1,12 +1,9 @@
 @use "global" as *;
 
-// ローディング最初の画面が出ないようにするため、余白をmargin-top → padding-topへ変更
 .top-voice {
-  padding-top: rem(88);
-  padding-bottom: rem(84);
+  margin-top: rem(88);
 
   @include mq(md) {
-    padding-top: rem(144);
-    padding-bottom: rem(144);
+    margin-top: rem(144);
   }
 }

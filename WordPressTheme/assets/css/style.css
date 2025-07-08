@@ -146,49 +146,42 @@ a {
 }
 
 .top-about {
-	padding-bottom: 4.625rem;
-	padding-top: 5.1875rem;
-}
-
-.top-blog {
-	padding-top: 5.25rem;
+	margin-top: 5.1875rem;
 }
 
 .top-campaign {
-	padding-top: 2.75rem;
+	margin-top: 2.75rem;
 }
 
 .top-contact {
-	padding-bottom: 6.5rem;
-	padding-top: 5rem;
+	margin-top: 5rem;
 }
 
 .top-contact.top-contact--sub-page {
 	filter: none;
-	margin-top: 1.625rem;
+	margin-top: 6.625rem;
 }
 
 .top-contact.top-contact--site-map-page {
 	filter: none;
-	margin-top: 0.5rem;
+	margin-top: 5.5rem;
 }
 
 .top-contact.top-contact--privacy-page,
 .top-contact.top-contact--terms-page {
 	filter: none;
-	margin-top: 1.625rem;
+	margin-top: 6.625rem;
 }
 
 .top-footer {
-	padding-bottom: 3.5rem;
-	padding-top: 3rem;
+	margin-top: 6.5rem;
 }
 
-.top-footer--contact-page {
+.top-footer.top-footer--contact-page {
 	margin-top: 9.25rem;
 }
 
-.top-footer--thanks-page {
+.top-footer.top-footer--thanks-page {
 	margin-top: 8.9375rem;
 }
 
@@ -200,9 +193,17 @@ a {
 	margin-top: 2.5rem;
 }
 
+.top-header {
+	height: 5rem;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
 .top-information {
-	padding-bottom: 5.25rem;
-	padding-top: 5.25rem;
+	margin-top: 4.625rem;
 }
 
 .top-page-404 {
@@ -250,8 +251,7 @@ a {
 }
 
 .top-price {
-	padding-bottom: 5.25rem;
-	padding-top: 5.25rem;
+	margin-top: 5.25rem;
 }
 
 .top-two-column {
@@ -259,8 +259,7 @@ a {
 }
 
 .top-voice {
-	padding-bottom: 5.25rem;
-	padding-top: 5.5rem;
+	margin-top: 5.5rem;
 }
 
 .about-mv {
@@ -273,7 +272,6 @@ a {
 }
 
 .about {
-	background-color: white;
 	position: relative;
 }
 
@@ -604,7 +602,7 @@ a {
 }
 
 .blog {
-	background-color: white;
+	padding-top: 5.25rem;
 	position: relative;
 }
 
@@ -941,9 +939,7 @@ a {
 }
 
 .campaign {
-	background-color: white;
 	overflow: hidden;
-	position: relative;
 }
 
 .campaign__inner {
@@ -1095,7 +1091,6 @@ a {
 }
 
 .contact {
-	background-color: white;
 	filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
 	position: relative;
 }
@@ -1109,7 +1104,7 @@ a {
 	height: 3.125rem;
 	position: absolute;
 	right: 0.9375rem;
-	top: 3.375rem;
+	top: -1.625rem;
 	width: 6.8125rem;
 }
 
@@ -1309,7 +1304,8 @@ a {
 
 .footer {
 	background-color: #408F95;
-	position: relative;
+	padding-bottom: 3.5rem;
+	padding-top: 3rem;
 }
 
 .footer__logo-link {
@@ -1448,13 +1444,7 @@ a {
 
 .header {
 	background-color: rgba(13, 41, 54, 0.68);
-	height: 5rem;
-	left: 0;
-	position: fixed;
-	top: 0;
-	transition: opacity 2s, background-color 0.3s;
-	width: 100%;
-	z-index: 1000;
+	transition: background-color 0.3s;
 }
 
 .header.is-color {
@@ -1549,7 +1539,8 @@ a {
 
 .information {
 	background-color: #DDF0F1;
-	position: relative;
+	padding-bottom: 5.25rem;
+	padding-top: 5.25rem;
 }
 
 .information__content {
@@ -2366,6 +2357,8 @@ a {
 
 .price {
 	background-color: #DDF0F1;
+	padding-bottom: 5.25rem;
+	padding-top: 5.25rem;
 	position: relative;
 }
 
@@ -2938,7 +2931,6 @@ a {
 }
 
 .voice {
-	background-color: white;
 	position: relative;
 }
 
@@ -3533,48 +3525,39 @@ html {
 }
 
 .top-about {
-	padding-bottom: 10.25rem;
-	padding-top: 8.6875rem;
-}
-
-.top-blog {
-	padding-top: 6.25rem;
+	margin-top: 8.6875rem;
 }
 
 .top-campaign {
-	padding-top: 7.5rem;
+	margin-top: 7.5rem;
 }
 
 .top-contact {
-	padding-bottom: 10rem;
-	padding-top: 8.75rem;
+	margin-top: 8.75rem;
 }
 
 .top-contact.top-contact--sub-page {
-	margin-top: 0;
+	margin-top: 8.75rem;
 }
 
 .top-contact.top-contact--site-map-page {
-	margin-top: 0;
-	padding-top: 7.5rem;
+	margin-top: 7.5rem;
 }
 
 .top-contact.top-contact--privacy-page,
 .top-contact.top-contact--terms-page {
-	margin-top: 0;
-	padding-top: 8.6875rem;
+	margin-top: 8.6875rem;
 }
 
 .top-footer {
-	padding-bottom: 5rem;
-	padding-top: 5rem;
+	margin-top: 10rem;
 }
 
-.top-footer--contact-page {
-	margin-top: 11.0625rem;
+.top-footer.top-footer--contact-page {
+	margin-top: 10.25rem;
 }
 
-.top-footer--thanks-page {
+.top-footer.top-footer--thanks-page {
 	margin-top: 7.5rem;
 }
 
@@ -3582,9 +3565,12 @@ html {
 	margin-top: 7.5rem;
 }
 
+.top-header {
+	height: 5.625rem;
+}
+
 .top-information {
-	padding-bottom: 4.75rem;
-	padding-top: 6.25rem;
+	margin-top: 10.25rem;
 }
 
 .top-page-404 {
@@ -3600,7 +3586,7 @@ html {
 }
 
 .top-page-contact {
-	margin-top: 8.5rem;
+	margin-top: 9.3125rem;
 }
 
 .top-page-faq {
@@ -3632,8 +3618,7 @@ html {
 }
 
 .top-price {
-	padding-bottom: 6.5rem;
-	padding-top: 6.25rem;
+	margin-top: 9rem;
 }
 
 .top-two-column {
@@ -3641,8 +3626,7 @@ html {
 }
 
 .top-voice {
-	padding-bottom: 9rem;
-	padding-top: 9rem;
+	margin-top: 9rem;
 }
 
 .about-mv {
@@ -3791,6 +3775,10 @@ html {
 
 .blog-mv--single-page {
 	background-image: url(../images/common/blog-detail-mv-pc.webp);
+}
+
+.blog {
+	padding-top: 6.25rem;
 }
 
 .blog::before {
@@ -4004,7 +3992,7 @@ html {
 	background-image: url(../images/common/contact-goldfish-pc.svg);
 	height: 9.125rem;
 	right: calc(50% - min(48%, 42.125rem));
-	top: 6.25rem;
+	top: -2.5rem;
 	width: 19.3125rem;
 }
 
@@ -4126,6 +4114,11 @@ html {
 	position: relative;
 }
 
+.footer {
+	padding-bottom: 5rem;
+	padding-top: 5rem;
+}
+
 .footer__img {
 	display: flex;
 	gap: 2.5rem;
@@ -4202,10 +4195,6 @@ html {
 	margin-top: 5rem;
 }
 
-.header {
-	height: 5.625rem;
-}
-
 .header__inner {
 	padding: 0 2.5rem;
 }
@@ -4253,6 +4242,11 @@ html {
 .information-mv {
 	background-image: url(../images/common/info-mv-pc.webp);
 	height: 34.25rem;
+}
+
+.information {
+	padding-bottom: 4.75rem;
+	padding-top: 6.25rem;
 }
 
 .information__title {
@@ -4422,7 +4416,7 @@ html {
 	background-image: url(../images/common/goldfish-pc.svg);
 	height: 8.625rem;
 	left: calc(50% - min(48%, 38.75rem));
-	top: -3.5625rem;
+	top: -4.375rem;
 	width: 18.8125rem;
 }
 
@@ -4566,6 +4560,11 @@ html {
 .price-table__item dd {
 	left: 0.0625rem;
 	position: relative;
+}
+
+.price {
+	padding-bottom: 6.5rem;
+	padding-top: 6.25rem;
 }
 
 .price::before {
@@ -4719,12 +4718,13 @@ html {
 
 .tab__item {
 	font-size: 1.5rem;
-	padding: 1.8125rem 0 1.625rem 6.375rem;
+	padding: 1.8125rem 1.875rem 1.625rem 6.375rem;
 	position: relative;
 }
 
 .tab__item:nth-child(2) {
 	padding-left: 5.625rem;
+	padding-right: 1.125rem;
 }
 
 .tab__item::before {
