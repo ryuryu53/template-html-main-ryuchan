@@ -20,6 +20,7 @@
 .top-contact.top-contact--site-map-page {
   filter: none;
   margin-top: rem(88);
+
   @include mq(md) {
     margin-top: rem(120);
   }
@@ -29,6 +30,7 @@
 .top-contact.top-contact--terms-page {
   filter: none;
   margin-top: rem(106);
+
   @include mq(md) {
     margin-top: rem(139);
   }

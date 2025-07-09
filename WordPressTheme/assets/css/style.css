@@ -206,6 +206,11 @@ a {
 	margin-top: 4.625rem;
 }
 
+.top-mv {
+	height: 100svh;
+	width: 100%;
+}
+
 .top-page-404 {
 	margin-top: 3.6875rem;
 }
@@ -1715,11 +1720,6 @@ a {
 	width: 100%;
 }
 
-.mv {
-	height: 100vh;
-	width: 100%;
-}
-
 .mv__inner {
 	height: inherit;
 	position: relative;
@@ -2577,7 +2577,7 @@ a {
 .sp-nav {
 	background-color: #408F95;
 	display: none;
-	height: 100vh;
+	height: 100dvh;
 	left: 0;
 	padding-top: 5rem;
 	position: absolute;
@@ -2587,7 +2587,7 @@ a {
 }
 
 .sp-nav__inner {
-	height: calc(100vh - 5rem);
+	height: calc(100dvh - 5rem);
 	overflow-y: auto;
 	padding-bottom: 2rem;
 }
