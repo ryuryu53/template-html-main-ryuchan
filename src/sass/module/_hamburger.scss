@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.hamburger:focus {
+  outline: rem(2) solid #391E88;
+}
+
 .hamburger span {
   position: absolute;
   right: 0;

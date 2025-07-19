@@ -1406,6 +1406,10 @@ a {
 	z-index: 100;
 }
 
+.hamburger:focus {
+	outline: 0.125rem solid #391E88;
+}
+
 .hamburger span {
 	background-color: #fff;
 	height: 0.0625rem;
