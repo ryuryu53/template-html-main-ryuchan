@@ -3462,9 +3462,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .wp-pagenavi .nextpostslink:hover::before {
 	background-image: url(../images/common/prev-vector-white.svg);
-	left: 38%;
-	top: 27.5%;
-	transform: scale(-1, 1);
+	transform: translate(-50%, -50%) scale(-1, 1);
 }
 
 .wp-pagenavi span.current {
