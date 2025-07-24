@@ -1974,10 +1974,6 @@ a {
 	width: 7.5rem;
 }
 
-.page-information__items {
-	margin-top: 1rem;
-}
-
 .page-price-table {
 	width: 100%;
 }
@@ -2764,6 +2760,10 @@ a {
 	background-color: #408F95;
 	border-color: transparent;
 	color: #fff;
+}
+
+.tab__cards {
+	margin-top: 1rem;
 }
 
 .text,
@@ -4442,10 +4442,6 @@ html {
 	width: 18.8125rem;
 }
 
-.page-information__items {
-	margin-top: 1.5rem;
-}
-
 .page-price-table__content {
 	display: flex;
 }
@@ -4778,6 +4774,10 @@ html {
 
 .tab__item:nth-child(3).is-active::before {
 	background-image: url(../images/common/fish-icon_2-white.svg);
+}
+
+.tab__cards {
+	margin-top: 1.5rem;
 }
 
 .text--white-pc {
