@@ -34,7 +34,7 @@
 
   <body>
     <!-- ヘッダー -->
-    <header class="top-header header js-header">
+    <header class="layout-header header js-header">
       <div class="header__inner">
         <?php
         // トップページかどうかを判定し、タグを決定

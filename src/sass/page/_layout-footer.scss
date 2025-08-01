@@ -1,6 +1,6 @@
 @use "global" as *;
 
-.top-footer {
+.layout-footer {
   margin-top: rem(104);
 
   @include mq(md) {
@@ -8,20 +8,20 @@
   }
 }
 
-.top-footer.top-footer--contact-page {
+.layout-footer.layout-footer--contact-page {
   margin-top: rem(148);
   @include mq(md) {
     margin-top: rem(164);
   }
 }
 
-.top-footer.top-footer--thanks-page {
+.layout-footer.layout-footer--thanks-page {
   margin-top: rem(143);
   @include mq(md) {
     margin-top: rem(120);
   }
 }
 
-.top-footer.top-footer--404-page {
+.layout-footer.layout-footer--404-page {
   margin-top: 0;
 }

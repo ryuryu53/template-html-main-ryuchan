@@ -11,7 +11,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- 私たちについて -->
-  <section class="top-page-about page-about">
+  <section class="layout-page-about page-about">
     <div class="page-about__inner inner">
       <div class="page-about__img-box">
         <picture class="page-about__img-left u-desktop">
@@ -57,7 +57,7 @@
     // 画像がある場合のみセクションを表示
     if ( $has_image ) :
   ?>
-    <section class="top-gallery gallery">
+    <section class="layout-gallery gallery">
       <div class="gallery__inner inner">
         <div class="gallery__title section-header">
           <p class="section-header__engtitle"> Gallery</p>

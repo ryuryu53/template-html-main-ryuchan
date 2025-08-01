@@ -11,7 +11,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- プライバシーポリシー -->
-  <section class="top-page-template page-template">
+  <section class="layout-page-template page-template">
     <div class="page-template__inner inner">
       <div class="page-template__title section-header">
         <h2 class="section-header__title"><?php the_title(); ?></h2>

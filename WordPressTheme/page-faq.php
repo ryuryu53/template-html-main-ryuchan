@@ -11,7 +11,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- よくある質問 -->
-  <div class="top-page-faq page-faq">
+  <div class="layout-page-faq page-faq">
     <div class="page-faq__inner inner">
       <div class="page-faq__accordion accordion">
         <div class="accordion__container">

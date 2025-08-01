@@ -1,6 +1,6 @@
 @use "global" as *;
 
-.top-page-site-map {
+.layout-page-site-map {
   margin-top: rem(31);  // 51-17-3
 
   @include mq(md) {

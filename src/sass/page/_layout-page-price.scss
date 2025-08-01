@@ -1,6 +1,6 @@
 @use "global" as *;
 
-.top-page-price {
+.layout-page-price {
   margin-top: rem(51);
 
   @include mq(md) {

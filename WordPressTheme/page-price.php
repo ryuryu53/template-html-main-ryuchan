@@ -11,7 +11,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- 料金一覧 -->
-  <section class="top-page-price page-price">
+  <section class="layout-page-price page-price">
     <div class="page-price__inner inner">
       <div class="page-price__table page-price-table">
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>

@@ -12,7 +12,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- ブログ一覧 -->
-  <div class="top-two-column two-column">
+  <div class="layout-two-column two-column">
     <div class="two-column__inner inner">
       <div class="two-column__article column-article">
         <div class="column-article__items blog-cards blog-cards--2col">

@@ -47,7 +47,7 @@
   </section>
 
   <!-- Campaign -->
-  <section class="top-campaign campaign">
+  <section class="layout-campaign campaign">
     <div class="campaign__inner inner">
       <div class="campaign__title section-header">
         <p class="section-header__engtitle">Campaign</p>
@@ -198,7 +198,7 @@
   </section>
 
   <!-- About -->
-  <section class="top-about about">
+  <section class="layout-about about">
     <div class="about__inner inner">
       <div class="about__title section-header">
         <p class="section-header__engtitle">About&nbsp;us</p>
@@ -229,7 +229,7 @@
   </section>
 
   <!-- Information -->
-  <section class="top-information information">
+  <section class="layout-information information">
     <div class="information__inner inner">
       <div class="information__title section-header">
         <p class="section-header__engtitle">Information</p>
@@ -254,7 +254,7 @@
   </section>
 
   <!-- Blog -->
-  <section class="top-blog blog">
+  <section class="layout-blog blog">
     <div class="blog__inner inner">
       <div class="blog__title section-header">
         <p class="section-header__engtitle section-header__engtitle--white-pc">Blog</p>
@@ -308,7 +308,7 @@
   </section>
 
   <!-- Voice -->
-  <section class="top-voice voice">
+  <section class="layout-voice voice">
     <div class="voice__inner inner">
       <div class="voice__title section-header">
         <p class="section-header__engtitle voice__title-en">Voice</p>
@@ -363,7 +363,7 @@
   </section>
 
   <!-- Price -->
-  <section class="top-price price">
+  <section class="layout-price price">
     <div class="price__inner inner">
       <div class="price__title section-header">
         <p class="section-header__engtitle">Price</p>

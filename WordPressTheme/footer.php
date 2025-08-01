@@ -18,15 +18,15 @@
 
       <!-- Contact -->
       <?php if ( !is_page(array('contact', 'thanks')) && !is_404() ) : ?>
-        <section class="top-contact<?php
+        <section class="layout-contact<?php
           if ( !is_front_page() && !is_page(array('sitemap', 'privacy-policy', 'terms-of-service')) ) {
-            echo ' top-contact--sub-page';
+            echo ' layout-contact--sub-page';
           } elseif ( is_page('sitemap')) {
-            echo ' top-contact--site-map-page';
+            echo ' layout-contact--site-map-page';
           } elseif ( is_page('privacy-policy')) {
-            echo ' top-contact--privacy-page';
+            echo ' layout-contact--privacy-page';
           } elseif ( is_page('terms-of-service')) {
-            echo ' top-contact--terms-page';
+            echo ' layout-contact--terms-page';
           } ?> contact">
           <div class="contact__inner inner">
             <div class="contact__wrapper">
@@ -73,13 +73,13 @@
     </main>
 
     <!-- フッター -->
-    <footer class="top-footer<?php
+    <footer class="layout-footer<?php
       if ( is_404() ) {
-        echo ' top-footer--404-page';
+        echo ' layout-footer--404-page';
       } elseif ( is_page('contact') ) {
-        echo ' top-footer--contact-page';
+        echo ' layout-footer--contact-page';
       } elseif ( is_page('thanks') ) {
-        echo ' top-footer--thanks-page';
+        echo ' layout-footer--thanks-page';
       } ?> footer js-footer">
       <div class="footer__inner inner">
         <div class="footer__img">

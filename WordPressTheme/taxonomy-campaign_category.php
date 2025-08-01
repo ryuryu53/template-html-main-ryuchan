@@ -11,7 +11,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- キャンペーン -->
-  <section class="top-page-campaign page-campaign">
+  <section class="layout-page-campaign page-campaign">
     <div class="page-campaign__inner inner">
       <div class="page-campaign__category campaign-category">
         <!-- タクソノミーのタブを生成 -->
@@ -142,7 +142,7 @@
     </div>
   </section>
 
-  <div class="top-pagenavi">
+  <div class="layout-pagenavi">
     <?php wp_pagenavi(); ?>
   </div>
 

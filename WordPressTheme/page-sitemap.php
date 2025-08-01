@@ -29,7 +29,7 @@
   <?php get_template_part('parts/breadcrumbs'); ?>
 
   <!-- サイトマップ -->
-  <div class="top-page-site-map page-site-map">
+  <div class="layout-page-site-map page-site-map">
     <div class="page-site-map__inner inner">
       <nav class="page-site-map__nav footer-nav">
         <div class="footer-nav__left-content footer-nav__left-content--width">

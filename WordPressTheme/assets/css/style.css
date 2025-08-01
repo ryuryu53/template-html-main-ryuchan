@@ -145,55 +145,55 @@ a {
 	transition: opacity 0.3s;
 }
 
-.top-about {
+.layout-about {
 	margin-top: 5.1875rem;
 }
 
-.top-campaign {
+.layout-campaign {
 	margin-top: 2.75rem;
 }
 
-.top-contact {
+.layout-contact {
 	margin-top: 5rem;
 }
 
-.top-contact.top-contact--sub-page {
+.layout-contact.layout-contact--sub-page {
 	filter: none;
 	margin-top: 6.625rem;
 }
 
-.top-contact.top-contact--site-map-page {
+.layout-contact.layout-contact--site-map-page {
 	filter: none;
 	margin-top: 5.5rem;
 }
 
-.top-contact.top-contact--privacy-page,
-.top-contact.top-contact--terms-page {
+.layout-contact.layout-contact--privacy-page,
+.layout-contact.layout-contact--terms-page {
 	filter: none;
 	margin-top: 6.625rem;
 }
 
-.top-footer {
+.layout-footer {
 	margin-top: 6.5rem;
 }
 
-.top-footer.top-footer--contact-page {
+.layout-footer.layout-footer--contact-page {
 	margin-top: 9.25rem;
 }
 
-.top-footer.top-footer--thanks-page {
+.layout-footer.layout-footer--thanks-page {
 	margin-top: 8.9375rem;
 }
 
-.top-footer.top-footer--404-page {
+.layout-footer.layout-footer--404-page {
 	margin-top: 0;
 }
 
-.top-gallery {
+.layout-gallery {
 	margin-top: 2.5rem;
 }
 
-.top-header {
+.layout-header {
 	height: 5rem;
 	left: 0;
 	position: fixed;
@@ -202,68 +202,68 @@ a {
 	z-index: 1000;
 }
 
-.top-information {
+.layout-information {
 	margin-top: 4.625rem;
 }
 
-.top-mv {
+.layout-mv {
 	height: 100svh;
 	width: 100%;
 }
 
-.top-page-404 {
+.layout-page-404 {
 	margin-top: 3.6875rem;
 }
 
-.top-page-about {
+.layout-page-about {
 	margin-top: 3.25rem;
 }
 
-.top-page-campaign {
+.layout-page-campaign {
 	margin-top: 3.1875rem;
 }
 
-.top-page-contact {
+.layout-page-contact {
 	margin-top: 3.125rem;
 }
 
-.top-page-faq {
+.layout-page-faq {
 	margin-top: 3.1875rem;
 }
 
-.top-page-information {
+.layout-page-information {
 	margin-top: 7.5rem;
 }
 
-.top-page-price {
+.layout-page-price {
 	margin-top: 3.1875rem;
 }
 
-.top-page-site-map {
+.layout-page-site-map {
 	margin-top: 1.9375rem;
 }
 
-.top-page-template {
+.layout-page-template {
 	margin-top: 3.1875rem;
 }
 
-.top-pagenavi {
+.layout-pagenavi {
 	margin-top: 4.875rem;
 }
 
-.top-pagenavi.top-pagenavi--voice-page {
+.layout-pagenavi.layout-pagenavi--voice-page {
 	margin-top: 4.9375rem;
 }
 
-.top-price {
+.layout-price {
 	margin-top: 5.25rem;
 }
 
-.top-two-column {
+.layout-two-column {
 	margin-top: 3.1875rem;
 }
 
-.top-voice {
+.layout-voice {
 	margin-top: 5.5rem;
 }
 
@@ -2729,7 +2729,6 @@ a {
 
 .tab__list {
 	grid-gap: 1.25rem;
-	background-color: #fff;
 	display: grid;
 	gap: 1.25rem;
 	grid-template-columns: repeat(3, 1fr);
@@ -3523,108 +3522,108 @@ html {
 	font-size: 1.4814814815vw;
 }
 
-.top-about {
+.layout-about {
 	margin-top: 8.6875rem;
 }
 
-.top-campaign {
+.layout-campaign {
 	margin-top: 7.5rem;
 }
 
-.top-contact {
+.layout-contact {
 	margin-top: 8.75rem;
 }
 
-.top-contact.top-contact--sub-page {
+.layout-contact.layout-contact--sub-page {
 	margin-top: 8.75rem;
 }
 
-.top-contact.top-contact--site-map-page {
+.layout-contact.layout-contact--site-map-page {
 	margin-top: 7.5rem;
 }
 
-.top-contact.top-contact--privacy-page,
-.top-contact.top-contact--terms-page {
+.layout-contact.layout-contact--privacy-page,
+.layout-contact.layout-contact--terms-page {
 	margin-top: 8.6875rem;
 }
 
-.top-footer {
+.layout-footer {
 	margin-top: 10rem;
 }
 
-.top-footer.top-footer--contact-page {
+.layout-footer.layout-footer--contact-page {
 	margin-top: 10.25rem;
 }
 
-.top-footer.top-footer--thanks-page {
+.layout-footer.layout-footer--thanks-page {
 	margin-top: 7.5rem;
 }
 
-.top-gallery {
+.layout-gallery {
 	margin-top: 7.5rem;
 }
 
-.top-header {
+.layout-header {
 	height: 5.625rem;
 }
 
-.top-information {
+.layout-information {
 	margin-top: 10.25rem;
 }
 
-.top-page-404 {
+.layout-page-404 {
 	margin-top: 8.375rem;
 }
 
-.top-page-about {
+.layout-page-about {
 	margin-top: 9.3125rem;
 }
 
-.top-page-campaign {
+.layout-page-campaign {
 	margin-top: 9.3125rem;
 }
 
-.top-page-contact {
+.layout-page-contact {
 	margin-top: 9.3125rem;
 }
 
-.top-page-faq {
+.layout-page-faq {
 	margin-top: 9.3125rem;
 }
 
-.top-page-information {
+.layout-page-information {
 	margin-top: 9.3125rem;
 }
 
-.top-page-price {
+.layout-page-price {
 	margin-top: 9.3125rem;
 }
 
-.top-page-site-map {
+.layout-page-site-map {
 	margin-top: 8.0625rem;
 }
 
-.top-page-template {
+.layout-page-template {
 	margin-top: 9.3125rem;
 }
 
-.top-pagenavi {
+.layout-pagenavi {
 	margin-top: 5rem;
 }
 
-.top-pagenavi.top-pagenavi--voice-page {
+.layout-pagenavi.layout-pagenavi--voice-page {
 	margin-top: 4.5rem;
 }
 
-.top-price {
+.layout-price {
 	margin-top: 9rem;
 }
 
-.top-two-column {
+.layout-two-column {
 	margin-top: 9.3125rem;
 }
 
-.top-voice {
+.layout-voice {
 	margin-top: 9rem;
 }
 

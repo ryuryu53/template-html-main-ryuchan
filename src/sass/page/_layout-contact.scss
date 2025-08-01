@@ -1,6 +1,6 @@
 @use "global" as *;
 
-.top-contact {
+.layout-contact {
   margin-top: rem(80);
 
   @include mq(md) {
@@ -8,7 +8,7 @@
   }
 }
 
-.top-contact.top-contact--sub-page {
+.layout-contact.layout-contact--sub-page {
   filter: none;
   margin-top: rem(106);
 
@@ -17,7 +17,7 @@
   }
 }
 
-.top-contact.top-contact--site-map-page {
+.layout-contact.layout-contact--site-map-page {
   filter: none;
   margin-top: rem(88);
 
@@ -26,8 +26,8 @@
   }
 }
 
-.top-contact.top-contact--privacy-page,
-.top-contact.top-contact--terms-page {
+.layout-contact.layout-contact--privacy-page,
+.layout-contact.layout-contact--terms-page {
   filter: none;
   margin-top: rem(106);
 

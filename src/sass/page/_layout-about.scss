@@ -1,6 +1,6 @@
 @use "global" as *;
 
-.top-about {
+.layout-about {
   margin-top: rem(83);
 
   @include mq(md) {
