@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
   <!-- 下層ページのメインビュー -->
-  <section class="site-map-mv site-map-mv--shadow-pc sub-mv js-mv-height">
+  <section class="layout-sub-mv sub-mv sub-mv--site-map js-mv-height">
     <div class="sub-mv__header">
       <h1 class="sub-mv__title">Privacy&nbsp;Policy</h1>
     </div>
