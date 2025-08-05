@@ -12,6 +12,8 @@ html {
 	font-size: 16px;
 }
 
+/* pcの電話番号発信対応（追加 25.8.5） */
+
 *,
 *::before,
 *::after {
@@ -3515,6 +3517,11 @@ a:hover {
 
 html {
 	font-size: 1.4814814815vw;
+}
+
+a[href^="tel:"] {
+	cursor: default;
+	pointer-events: none;
 }
 
 .layout-about {

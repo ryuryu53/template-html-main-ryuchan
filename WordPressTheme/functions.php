@@ -328,35 +328,66 @@ function my_custom_admin_styles() {
 }
 add_action('admin_head', 'my_custom_admin_styles');
 
-// エディターのメインコンテンツエリアについて高さを調整
-function custom_editor_styles_for_specific_page() {
-  // 現在の画面情報を取得
+// // エディターのメインコンテンツエリアについて高さを調整
+// function custom_editor_styles_for_specific_page() {
+//   // 現在の画面情報を取得
+//   $screen = get_current_screen();
+
+  // // 管理画面でのみ実行し、投稿タイプと投稿IDを正しく取得（min-height だと縦スクロールバーが2本出る）
+  // if (is_admin() && $screen) {
+  //   $post_id = 0;
+
+  //   // 編集画面の場合、URLパラメータから投稿IDを取得
+  //   if (isset($_GET['post'])) {
+  //     $post_id = intval($_GET['post']);
+  //   }
+
+  //   // 投稿タイプを取得
+  //   $post_type = '';
+  //   if ($post_id > 0) {
+  //     $post_type = get_post_type($post_id);
+  //   }
+
+  //   // 固定ページ（page）かつ特定のIDが12（料金一覧）または16（よくある質問）の場合にのみスタイルを適用
+  //   if ($post_type === 'page' && ($post_id === 12 || $post_id === 16)) {
+  //     echo '<style>
+  //       /* エディタエリアの初期高さを設定（リサイズ機能は保持） */
+  //       .editor-visual-editor {
+  //         min-height: 80vh;
+  //       }
+  //     </style>';
+  //   }
+  // }
+  // // エディタ画面かつ特定の固定ページIDが12（料金一覧）または16（よくある質問）の場合にスタイルを適用
+  // if ( 'post' === $screen->base && get_the_ID() === 12 || get_the_ID() === 16 ) {
+  //   echo '<style>
+  //     .editor-visual-editor {
+  //       height: 80%;
+  //     }
+  //   </style>';
+  // }
+// }
+// add_action('admin_head', 'custom_editor_styles_for_specific_page');
+
+// 料金一覧（ID: 12）とよくある質問（ID: 16）のエディター初期高さを80vhに設定（これでもうまくいかない。
+// 「WordPressのブロックエディターの初期高さを設定するのは、実際には非常に困難な問題」との事。「リサイズハンドルを使って手動調整」で妥協する）
+function set_editor_initial_height() {
   $screen = get_current_screen();
-  
-  // エディタ画面かつ特定の固定ページIDが12（料金一覧）または16（よくある質問）の場合にスタイルを適用
-  if ( 'post' === $screen->base && get_the_ID() === 12 || get_the_ID() === 16 ) {
-    echo '<style>
-      .editor-visual-editor {
-        height: 80%;
-      }
-    </style>';
-    // エディタ画面かつ特定の固定ページIDが8（私たちについて）の場合にスタイルを適用
-  // } elseif ( 'post' === $screen->base && get_the_ID() === 8 ) {
-  //   echo '<style>
-  //     .editor-visual-editor {
-  //       height: 30%;
-  //     }
-  //   </style>';
-  //   // エディタ画面かつ特定の固定ページIDが25（トップページ）の場合にスタイルを適用
-  // } elseif ( 'post' === $screen->base && get_the_ID() === 25 ) {
-  //   echo '<style>
-  //     .editor-visual-editor {
-  //       height: 30%;
-  //     }
-  //   </style>';
+
+  if ( 'post' === $screen->base && isset($_GET['post']) ) {
+    $post_id = intval($_GET['post']);
+    if ( $post_id === 12 || $post_id === 16 ) {
+      ?>
+      <style>
+        .editor-styles-wrapper {
+          height: 80vh !important;
+        }
+      </style>
+      <?php
+    }
   }
 }
-add_action('admin_head', 'custom_editor_styles_for_specific_page');
+add_action('admin_head', 'set_editor_initial_height');
 
 // Priceページのエディターで「価格」欄の説明文の文字を赤くする
 function my_scf_admin_styles() {
