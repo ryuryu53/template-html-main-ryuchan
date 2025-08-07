@@ -347,9 +347,11 @@ a {
 
 .access-details__item {
 	margin-top: 0.25rem;
+	white-space: nowrap;
 }
 
 .access-details__item:first-child {
+	margin-top: 0;
 	padding-right: 0.4375rem;
 }
 
@@ -3705,7 +3707,6 @@ a[href^="tel:"] {
 }
 
 .access-details__item:first-child {
-	margin-top: 0;
 	padding-right: 0;
 }
 
