@@ -15,6 +15,7 @@
   left: rem(15);
   width: rem(120);
   height: rem(55);
+
   @include mq(md) {
     background-image: url(../images/common/goldfish-pc.svg);
     top: rem(-70);  // PC版カンプには魚なし：-70+17とすると文字と被る部分が増えるので、そのまま-70にした
@@ -97,7 +98,7 @@
     li {
       text-indent: -1.15em;
       padding-left: 1.15em;
-      counter-increment: num; /* 各.list_itemの出現で番号を増加 */
+      counter-increment: num; /* 各li要素の出現で番号を増加 */
       &::before {
         content: counter(num) "."; /* 番号と接尾語を表示 */
       }
@@ -108,11 +109,11 @@
   }
   ol:nth-of-type(2),
   ol:nth-of-type(3) {
+    padding-left: rem(6);
     counter-reset: num;
-    & li {
-      display: block;
+    li {
       text-indent: -1.15em;
-      padding-left: calc(1.15em + rem(6));
+      padding-left: 1.15em;
       counter-increment: num;
       &::before {
         content: counter(num) ".";
@@ -125,8 +126,8 @@
   }
   p:nth-of-type(4),
   p:nth-of-type(5) {
-      margin-top: rem(32);
-    }
+    margin-top: rem(32);
+  }
   ol:nth-of-type(4) {
     padding-left: rem(6);
     counter-reset: num;

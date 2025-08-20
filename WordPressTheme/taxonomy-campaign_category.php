@@ -86,7 +86,7 @@
                     <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html(number_format(intval($price_after))); ?></span>
                   <?php endif; ?>
                 </div>
-                <div class="campaign-card__information">
+                <div class="campaign-card__information u-desktop">
                   <?php if ( get_field('campaign_3') ) : ?>
                     <p class="campaign-card__information-text"><?php the_field('campaign_3'); ?></p>
                   <?php endif; ?>
@@ -122,7 +122,7 @@
                     <?php endif; ?>
                   </div>
                   <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
-                  <div class="campaign-card__btn campaign-card__btn--sub-page u-desktop">
+                  <div class="campaign-card__btn">
                     <?php
                       // カスタムタクソノミー「campaign_category」の取得
                       $terms = get_the_terms(get_the_ID(), 'campaign_category');
