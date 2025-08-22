@@ -1794,6 +1794,10 @@ a {
 	object-fit: cover;
 }
 
+.page-about__text-body {
+	margin-top: 2.5rem;
+}
+
 .page-about__subtitle {
 	color: #fff;
 	font-family: "Gotu", sans-serif;
@@ -1803,10 +1807,6 @@ a {
 	line-height: 1;
 	position: absolute;
 	top: 1.5rem;
-}
-
-.page-about__text-block {
-	margin-top: 2.5rem;
 }
 
 .page-about__text {
@@ -4321,6 +4321,7 @@ a[href^="tel:"] {
 
 .page-about__text-body {
 	display: flex;
+	margin-top: 0;
 	max-width: 52.5rem;
 	position: absolute;
 	right: 5.84%;
@@ -4337,7 +4338,6 @@ a[href^="tel:"] {
 }
 
 .page-about__text-block {
-	margin-top: 0;
 	padding-top: 1.625rem;
 	width: 47.62%;
 }
