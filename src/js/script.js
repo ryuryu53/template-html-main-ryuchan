@@ -325,16 +325,16 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   /* --------------------------------------------
    *   トグル
    * -------------------------------------------- */
-  $(".js-archive-toggle-title").on("click", function () {
-    $(this).toggleClass("is-open");
+  $('.js-archive-toggle-title').on('click', function () {
+    $(this).toggleClass('is-open');
     $(this).next().slideToggle(300);
   });
 
   /* --------------------------------------------
    *   アコーディーン
    * -------------------------------------------- */
-  $(".js-accordion-title").on("click", function () {
-    $(this).toggleClass("is-close");
+  $('.js-accordion-title').on('click', function () {
+    $(this).toggleClass('is-close');
     $(this).next().slideToggle(300);
   });
 
