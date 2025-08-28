@@ -532,15 +532,6 @@ a {
 	overflow: hidden;
 }
 
-.blog-card__img.blog-card__img--single-page {
-	aspect-ratio: 345/231;
-	margin-top: 1.4375rem;
-}
-
-.blog-card__img.blog-card__img--single-page:nth-of-type(2) {
-	margin-top: 1.5rem;
-}
-
 .blog-card__img img {
 	-o-object-fit: cover;
 	height: 100%;
@@ -559,21 +550,10 @@ a {
 	font-weight: 400;
 }
 
-.blog-card__date--single-page {
-	font-size: 0.875rem;
-	position: relative;
-	top: -0.375rem;
-}
-
 .blog-card__title {
 	border-bottom: 0.0625rem solid #408F95;
 	color: #0D2936;
 	padding-bottom: 0.25rem;
-}
-
-.blog-card__title.blog-card__title--single-page {
-	font-size: 1.5rem;
-	padding-bottom: 0.1875rem;
 }
 
 .blog-card__text {
@@ -582,10 +562,6 @@ a {
 	display: -webkit-box;
 	margin-top: 0.9375rem;
 	overflow: hidden;
-}
-
-.blog-card__text.blog-card__text--single-page {
-	margin-top: 1.5rem;
 }
 
 .blog-cards {
@@ -2480,7 +2456,7 @@ a {
 	color: #000;
 	font-size: 1rem;
 	font-weight: 400;
-	padding-left: 1.6875rem;
+	padding-left: 1.6875em;
 	position: relative;
 }
 
@@ -2494,11 +2470,12 @@ a {
 	background-repeat: no-repeat;
 	background-size: contain;
 	content: "";
-	height: 1.125rem;
+	height: 1.125em;
 	left: 0;
 	position: absolute;
-	top: 0.1875rem;
-	width: 1.125rem;
+	top: 0.5lh;
+	transform: translateY(-50%);
+	width: 1.125em;
 }
 
 .sp-nav {
@@ -3463,6 +3440,10 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	color: #fff;
 }
 
+.wp-pagenavi .page.larger.u-desktop {
+	display: none;
+}
+
 @media (any-hover: hover) {
 
 a:hover {
@@ -3734,25 +3715,6 @@ a[href^="tel:"] {
 
 .accordion__item:nth-child(4) .accordion__content {
 	padding-bottom: 2.375rem;
-}
-
-.blog-card__img.blog-card__img--single-page {
-	aspect-ratio: 700/468;
-	margin-top: 2.4375rem;
-}
-
-.blog-card__img.blog-card__img--single-page:nth-of-type(2) {
-	margin-top: 2.5rem;
-}
-
-.blog-card__title.blog-card__title--single-page {
-	font-size: 2rem;
-	line-height: 1.44;
-	padding-bottom: 0;
-}
-
-.blog-card__text.blog-card__text--single-page {
-	margin-top: 2.5rem;
 }
 
 .blog-cards {
@@ -4828,6 +4790,7 @@ a[href^="tel:"] {
 	display: flex;
 	gap: 5rem;
 	position: relative;
+	z-index: 5;
 }
 
 .two-column__article {
@@ -4997,6 +4960,10 @@ a[href^="tel:"] {
 	margin-top: 2.4375rem;
 }
 
+.wp-pagenavi .page.larger.u-desktop {
+	display: inline-flex;
+}
+
 }
 
 @media (min-width: 1080px) {
@@ -5016,10 +4983,6 @@ html {
 
 .page-contact__thanks-text {
 	font-size: 0.98rem;
-}
-
-.wp-pagenavi .page.larger.u-desktop {
-	display: none;
 }
 
 }
