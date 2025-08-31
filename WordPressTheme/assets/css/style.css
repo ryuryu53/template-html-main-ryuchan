@@ -1822,6 +1822,10 @@ a {
 	padding: 0 2rem 0 2.0625rem;
 }
 
+.page-campaign__items.page-campaign__items--voice-page {
+	padding: 0;
+}
+
 .page-contact {
 	position: relative;
 }
