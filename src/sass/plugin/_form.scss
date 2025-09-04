@@ -87,27 +87,21 @@ button,
 [type="submit"] {
 	/*↓リセットCSS */
 	margin: 0;
+	background-image: none;
+	width: auto;
 	display: inline-block;
 	text-decoration: none;
-	border: rem(1) solid $greenaccent;
+	border: none;
 	border-radius: 0;
 	/*↓カスタム */
-	padding: rem(15) rem(57) rem(15) 0;
+	padding: $padding-und-btn $padding-lnr-btn;
+	// background: $back-cr-btn;
 	color: $font-cr-btn;
 	font-size: $fz-btn;
-	font-weight: $normal;
 	cursor: pointer;
-  line-height: calc(22 / 14);
-	text-align: center;
-	position: relative;
-	z-index: 10;
-}
-
-// タッチデバイスのときはホバーエフェクトを無効にする
-@media (any-hover: hover) {
-	.form__btn-submit:hover [type="submit"] {	// 送信ボタン
-		color: $greenaccent;
-	}
+  // transition: 0.3s ease;
+	// border-radius: $border-r-btn;
+  line-height: 1;
 }
 
 [type="radio"] {
@@ -282,6 +276,7 @@ textarea {
 .form__error-wrap {
 	padding-top: rem(1);
 	padding-left: rem(11);
+
 	@include mq(md) {
 		padding-top: rem(13);
     padding-bottom: rem(1);
@@ -298,6 +293,7 @@ textarea {
 	text-indent: -1em;
 	margin:0 auto rem(38);
 	padding-left: rem(8);
+
 	@include mq(md) {
 		max-width: 100%;
 		padding-left: 0;
@@ -311,6 +307,7 @@ textarea {
 	font-weight: $bold;
 	border-bottom: rem(1) dashed $greenaccent;
 	padding-bottom: rem(24);
+
 	@include mq(md) {
 		display: flex;
 		padding-bottom: rem(40);
@@ -319,6 +316,7 @@ textarea {
 
 .form__item + .form__item {
 	margin-top: rem(22);
+
 	@include mq(md) {
 		margin-top: rem(39);
 	}
@@ -326,12 +324,14 @@ textarea {
 
 .form__item:nth-child(5) {
 	padding-bottom: rem(21);
+
 	@include mq(md) {
 		padding-bottom: rem(38);
 	}
 }
 
 .form__item:nth-child(6) {
+
 	@include mq(md) {
 		margin-top: rem(38);
 		padding-bottom: rem(40);
@@ -346,6 +346,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 .form__item dt {
 	display: flex;
 	align-items: center;
+
 	@include mq(md) {
 		align-items: flex-start;
 		width: calc(100% - 68.57142857142857%);
@@ -367,6 +368,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .form__item dd {
 	margin-top: rem(16);
+
 	@include mq(md) {
 		width: 68.57142857142857%;
 		margin-top: 0;
@@ -375,6 +377,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .form__item:nth-child(4) dd {
 	margin-top: rem(17);
+
 	@include mq(md) {
 		margin-top: 0;
 	}
@@ -382,6 +385,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 
 .form__item:nth-child(5) dd {
 	margin-top: rem(15);
+
 	@include mq(md) {
 		margin-top: 0;
 	}
@@ -395,6 +399,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	font-size: rem(12);
 	font-weight: $normal;
 	color: $black;
+
 	@include mq(md) {
 		background-position: right 0.4375rem top 55%;
 		margin-top: rem(-3);
@@ -408,6 +413,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	width: 100%;
 	margin: auto;
 	margin-top: rem(15);
+
 	@include mq(md) {
 		max-width: rem(374);
 		margin-top: rem(54);
@@ -421,6 +427,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	color: $black;
 	margin-right: 0;
 	padding-left: calc(rem(26) + $check-space);	// $check-space:5
+
 	@include mq(md) {
 		padding-left: rem(38);
 		color: $green;
@@ -431,6 +438,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	top: 25%;
 	width: rem(22);
 	height: rem(22);
+
 	@include mq(md) {
 		top: 45%;
 	}
@@ -442,6 +450,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	width: calc(rem(22) * 0.7);	// 0.9 → 0.7
 	height: calc(rem(22) * 0.35);	// 0.5 → 0.35
 	margin-left: 0.25em;	// 0.1em → 0.25em
+
 	@include mq(md) {
 		top: 50%;
 	}
@@ -465,6 +474,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 .form__btn {
 	text-align: center;
 	margin-top: rem(24);
+
 	@include mq(md) {
 		margin-top: rem(39);
 	}
@@ -513,10 +523,20 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	.form__btn-submit:hover::after {
 		transform: scale(1, 1);
 	}
+
+	.form__btn-submit:hover [type="submit"] {	// 送信ボタン
+		color: $greenaccent;
+	}
 }
 
-.form__btn-submit input {
+.form__btn-submit [type="submit"] {
+	position: relative;
+	z-index: 10;
 	width: rem(202);
+	padding: rem(15) rem(57) rem(15) 0;
+	font-weight: $normal;
+	line-height: calc(22 / 14);
+	border: rem(1) solid $greenaccent;
 }
 
 .form__btn-arrow {

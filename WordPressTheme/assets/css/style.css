@@ -362,6 +362,7 @@ a {
 .accordion__title {
 	background-color: #408F95;
 	cursor: pointer;
+	line-height: 1.5;
 	padding: 1rem 2.75rem 0.9375rem 1rem;
 	position: relative;
 	text-align: left;
@@ -1328,8 +1329,6 @@ a {
 }
 
 .hamburger {
-	border: none;
-	cursor: pointer;
 	height: 2rem;
 	padding: 0;
 	position: absolute;
@@ -2968,20 +2967,18 @@ button,
 [type=button],
 [type=submit] {
 	-webkit-text-decoration: none;
-	border: 0.0625rem solid #408F95;
+	background-image: none;
+	border: none;
 	border-radius: 0;
 	color: white;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 0.875rem;
-	font-weight: 400;
-	line-height: 1.5714285714; /*↓リセットCSS */
+	line-height: 1; /*↓リセットCSS */
 	margin: 0; /*↓カスタム */
-	padding: 0.9375rem 3.5625rem 0.9375rem 0;
-	position: relative;
-	text-align: center;
+	padding: 1.25rem 4.5rem;
 	text-decoration: none;
-	z-index: 10;
+	width: auto;
 }
 
 [type=radio] + span {
@@ -3300,8 +3297,14 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	z-index: -1;
 }
 
-.form__btn-submit input {
+.form__btn-submit [type=submit] {
+	border: 0.0625rem solid #408F95;
+	font-weight: 400;
+	line-height: 1.5714285714;
+	padding: 0.9375rem 3.5625rem 0.9375rem 0;
+	position: relative;
 	width: 12.625rem;
+	z-index: 10;
 }
 
 .form__btn-arrow {
@@ -3472,16 +3475,16 @@ a:hover {
 	transform: scale(1, 1);
 }
 
-.form__btn-submit:hover [type=submit] {
-	color: #408F95;
-}
-
 .form__btn-submit:hover {
 	color: #408F95;
 }
 
 .form__btn-submit:hover::after {
 	transform: scale(1, 1);
+}
+
+.form__btn-submit:hover [type=submit] {
+	color: #408F95;
 }
 
 }
