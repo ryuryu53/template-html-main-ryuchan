@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-  <div class="page-404__wrapper">
+  <div class="page-404-area">
     <!-- パンくず -->
     <?php get_template_part('parts/breadcrumbs'); ?>
 
