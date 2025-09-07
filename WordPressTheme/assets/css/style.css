@@ -1396,7 +1396,6 @@ a {
 	align-items: center;
 	display: flex;
 	height: inherit;
-	justify-content: space-between;
 	padding: 0 0.9375rem;
 	width: 100%;
 }
@@ -4148,6 +4147,7 @@ a[href^="tel:"] {
 
 .header__pc-nav {
 	display: block;
+	margin-left: auto;
 }
 
 .information-card {

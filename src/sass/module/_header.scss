@@ -19,7 +19,6 @@
 .header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: inherit;
   padding: 0 rem(15);
@@ -73,5 +72,6 @@
 
   @include mq(md) {
     display: block;
+    margin-left: auto;
   }
 }
