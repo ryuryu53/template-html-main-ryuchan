@@ -195,7 +195,7 @@ jQuery(function ($) {
    * -------------------------------------------- */
   function updateBoxShadow() {
     var browserW = window.innerWidth;
-    $('.tab__item').each(function () {
+    $('.js-tab-item').each(function () {
       if (browserW >= 768) {
         if (!$(this).hasClass('is-active')) {
           $(this).css('box-shadow', 'none');
@@ -210,21 +210,29 @@ jQuery(function ($) {
   }
 
   /* --------------------------------------------
-   *   タブの設定
+   *   ダイビング情報のタブ切り替え
    * -------------------------------------------- */
   // 最初に表示されるタブの設定
   $('.js-tab-item:first-child').addClass('is-active');
   $('.js-tab-content:first-child').addClass('is-active');
 
   // タブによる切り替え
-  var tabButton = $(".js-tab-item"),
-    tabContent = $(".js-tab-content");
-  tabButton.on("click", function () {
-    var index = tabButton.index(this);
-    tabButton.removeClass("is-active");
-    $(this).addClass("is-active");
-    tabContent.removeClass("is-active");
-    tabContent.eq(index).addClass("is-active");
+  $('.js-tab-item').click(function () {
+    // タブのアクティブクラスを切り替え
+    $('.js-tab-item').removeClass('is-active');
+    $(this).addClass('is-active');
+
+    // 画像の切り替え
+    $('.js-tab-content').removeClass('is-active');
+    // $(this).data('target')で取得される値は "tab1" のような文字列
+    // その文字列をjQueryセレクタとして使用するために、$()で囲む必要がある
+    // $('#' + $(this).data('target'))とすることで、正しくDOM要素を選択してaddClass()メソッドが実行できるようになる
+    $('#' + $(this).data('target')).addClass('is-active');
+    // $()で囲まないと文字列に対して直接addClass()メソッドを実行することになり、コンテンツが正しく表示されない
+    // ※ 始めから"#tab1"と#をつけると「タブ切り替え」だけを考えれば $( $(this).data('target') )とシンプルにできていいが、
+    // 「特定のタブへダイレクトリンク」まで考えると、そのタブが選択された状態でページ遷移できない！
+    // 同一ページ内でdata-target属性の値が#tab1、id="tab1"でうまくいかなくなるのでは･･･
+
     updateBoxShadow();
   });
 
@@ -236,48 +244,43 @@ jQuery(function ($) {
     updateBoxShadow();
   });
 
-  // タブを選択する関数を定義
-  function selectTab(hash) {
-    // すべてのタブコンテンツを非表示に("is-active"クラスを削除)する
+  /* --------------------------------------------
+   *   特定のタブへダイレクトリンクできるようにする
+   * -------------------------------------------- */
+  // URLのクエリパラメータ（の値）を取得する関数
+  function getQueryParam(name) {
+    // window.location.search は URL の「?」以降の部分（クエリパラメータ）を取得
+    // new URLSearchParams(...) でクエリパラメータを簡単に操作できるオブジェクトに変換
+    var params = new URLSearchParams(window.location.search);
+    // params.get(name) で、name に対応するパラメータの値を取得
+    // 例えば getQueryParam('tab') を呼び出すと、"tab1" などの値が返ってくる
+    return params.get(name);
+  }
+
+  // タブを選択する関数
+  function selectTab(target) {
+    // target（どのタブを選択するかの情報）を受け取る
+    // すべてのタブとタブコンテンツの "is-active" クラスを削除
+    $('.js-tab-item').removeClass('is-active');
     $('.js-tab-content').removeClass('is-active');
 
-    // すべてのタブアイテムから"is-active"クラスを削除する
-    $('.js-tab-item').removeClass('is-active');
+    // data-target属性が target の値と一致するタブを取得し、そのタブに "is-active" クラスを追加
+    $(".js-tab-item[data-target=\"".concat(target, "\"]")).addClass('is-active');
 
-    // ハッシュに対応するタブアイテムに"is-active"クラスを追加する
-    $(hash).addClass('is-active');
-
-    // ハッシュに対応するタブコンテンツを表示("is-active"クラスを追加)する
-    var contentId = hash + '-content';
-    $(contentId).addClass('is-active');
+    // targetのIDを持つタブのコンテンツを取得し、そのコンテンツに "is-active" クラスを追加
+    $("#".concat(target)).addClass('is-active');
   }
 
-  // ページがロードされたときにURLのハッシュを取得
-  var hash = window.location.hash;
+  // クエリパラメータ "tab" を取得
+  var tabParam = getQueryParam('tab'); // getQueryParam('tab') を呼び出して、URLの ?tab=... の値を取得
+  // tabParamには、tab1、tab2、tab3のどれかが入る
 
-  // ハッシュが存在する場合は、そのタブを選択
-  if (hash) {
-    selectTab(hash);
+  // クエリパラメータが存在すればタブを選択
+  if (tabParam) {
+    // tabParamに値が入っている場合（クエリパラメータがある場合）、selectTab(tabParam); を実行
+    selectTab(tabParam);
     updateBoxShadow();
   }
-
-  // フッターまたはドロワーメニューのリンクがクリックされたときの処理
-  $('.footer-nav__left-detail-link, .sp-nav__left-detail-link').on('click', function (e) {
-    // デフォルトのリンク動作をキャンセル
-    // e.preventDefault();
-
-    // クリックされたリンクのハッシュを取得
-    var targetHash = this.hash;
-
-    // 該当するタブを選択
-    selectTab(targetHash);
-    updateBoxShadow();
-
-    // 該当タブまでスクロール
-    // $('html, body').animate({
-    //     scrollTop: $(targetHash).offset().top
-    // }, 500);
-  });
 
   /* --------------------------------------------
    *   モーダル

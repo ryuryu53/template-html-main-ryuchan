@@ -15,12 +15,12 @@
     <div class="page-information__inner inner">
       <div class="page-information__container tab">
         <ul class="tab__list">
-          <li id="tab1" class="tab__item js-tab-item"><span>ライセンス<br class="u-mobile">講習</span></li>
-          <li id="tab2" class="tab__item js-tab-item"><span>ファン<br class="u-mobile">ダイビング</span></li>
-          <li id="tab3" class="tab__item js-tab-item"><span>体験<br class="u-mobile">ダイビング</span></li>
+          <li data-target="tab1" class="tab__item js-tab-item"><span>ライセンス<br class="u-mobile">講習</span></li>
+          <li data-target="tab2" class="tab__item js-tab-item"><span>ファン<br class="u-mobile">ダイビング</span></li>
+          <li data-target="tab3" class="tab__item js-tab-item"><span>体験<br class="u-mobile">ダイビング</span></li>
         </ul>
         <ul class="tab__cards information-cards">
-          <li id="tab1-content" class="information-cards__item information-card js-tab-content">
+          <li id="tab1" class="information-cards__item information-card js-tab-content">
             <div class="information-card__content">
               <div class="information-card__body">
                 <h2 class="information-card__title">ライセンス講習</h2>
@@ -32,7 +32,7 @@
               </picture>
             </div>
           </li>
-          <li id="tab2-content" class="information-cards__item information-card js-tab-content">
+          <li id="tab2" class="information-cards__item information-card js-tab-content">
             <div class="information-card__content">
               <div class="information-card__body">
                 <h2 class="information-card__title">ファンダイビング</h2>
@@ -44,7 +44,7 @@
               </picture>
             </div>
           </li>
-          <li id="tab3-content" class="information-cards__item information-card js-tab-content">
+          <li id="tab3" class="information-cards__item information-card js-tab-content">
             <div class="information-card__content">
               <div class="information-card__body">
                 <h2 class="information-card__title">体験ダイビング</h2>

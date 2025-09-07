@@ -136,13 +136,13 @@
                     <a href="<?php echo $information; ?>" class="sp-nav__link">ダイビング情報</a>
                     <ul class="sp-nav__left-detail-items">
                       <li class="sp-nav__left-detail-item">
-                        <a href="<?php echo $information; ?>#tab1" class="sp-nav__left-detail-link">ライセンス講習</a>
+                        <a href="<?php echo $information; ?>?tab=tab1" class="sp-nav__left-detail-link">ライセンス講習</a>
                       </li>
                       <li class="sp-nav__left-detail-item">
-                        <a href="<?php echo $information; ?>#tab3" class="sp-nav__left-detail-link">体験ダイビング</a>
+                        <a href="<?php echo $information; ?>?tab=tab3" class="sp-nav__left-detail-link">体験ダイビング</a>
                       </li>
                       <li class="sp-nav__left-detail-item">
-                        <a href="<?php echo $information; ?>#tab2" class="sp-nav__left-detail-link">ファンダイビング</a>
+                        <a href="<?php echo $information; ?>?tab=tab2" class="sp-nav__left-detail-link">ファンダイビング</a>
                       </li>
                     </ul>
                   </li>
