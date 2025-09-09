@@ -143,7 +143,7 @@
         </ul>
         <div class="column-aside__btn-2">
           <!-- get_post_type_archive_link()：キャンペーンのカスタム投稿タイプ（campaign）のアーカイブページ（一覧ページ）へのリンクを生成 -->
-          <a href="<?php echo esc_url(get_post_type_archive_link('campaign')); ?>" class="button" role="button"><span class="button__text">View&nbsp;more</span></a>
+          <a href="<?php echo esc_url(get_post_type_archive_link('campaign')); ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
         </div>
       </div>
       <div class="column-aside__archive">

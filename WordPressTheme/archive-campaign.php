@@ -131,7 +131,7 @@
                       $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）→ 今回は未使用
                       // ↓ urlencode($campaign_category)で日本語をURLで使える形に変換（エンコード）してselect_plan という GETパラメータにセット
                     ?>
-                    <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button" role="button">
+                    <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button">
                       <span class="button__text">Contact&nbsp;us</span>
                     </a>
                   </div>

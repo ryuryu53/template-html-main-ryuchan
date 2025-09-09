@@ -56,7 +56,7 @@
                 </div>
                 <p class="contact__text">ご予約・お問い合わせはコチラ</p>
                 <div class="contact__btn">
-                  <a href="<?php echo $contact; ?>" class="button" role="button"><span class="button__text">Contact&nbsp;us</span></a>
+                  <a href="<?php echo $contact; ?>" class="button"><span class="button__text">Contact&nbsp;us</span></a>
                 </div>
               </div>
             </div>
