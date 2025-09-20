@@ -76,7 +76,7 @@
                 <div class="voice-card__img colorbox js-colorbox">
                   <picture>
                     <?php if ( get_the_post_thumbnail() ) : ?>
-                      <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
+                      <source srcset="<?php the_post_thumbnail_url('full'); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
                       <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                     <?php else : ?>
                       <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">

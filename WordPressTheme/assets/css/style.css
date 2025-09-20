@@ -1901,6 +1901,77 @@ a {
 	width: 7.5rem;
 }
 
+.page-link__flex {
+	display: flex;
+	justify-content: center;
+}
+
+.page-link__prev,
+.page-link__next {
+	align-items: center;
+	background-color: #fff;
+	border: solid 0.0625rem currentColor;
+	color: #408F95;
+	display: inline-flex;
+	font-size: 1rem;
+	font-weight: 700;
+	height: 2.375rem;
+	justify-content: center;
+	min-width: 2.375rem;
+	padding: 0 0.25rem;
+	position: relative;
+	transition: 0.3s ease;
+}
+
+.page-link__prev {
+	margin-left: 0;
+	margin-right: 2.5625rem;
+}
+
+.page-link__next {
+	margin-left: 2.5625rem;
+	margin-right: 0;
+}
+
+.page-link__prev::before,
+.page-link__next::before {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: "";
+	height: 1rem;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 0.5rem;
+}
+
+.page-link__prev::before {
+	background-image: url(../images/common/prev-vector.svg);
+}
+
+.page-link__next::before {
+	background-image: url(../images/common/next-vector.svg);
+}
+
+.page-link__prev:hover,
+.page-link__next:hover {
+	background-color: #408F95;
+	border-color: transparent;
+	color: #fff;
+	opacity: 1;
+}
+
+.page-link__prev:hover::before {
+	background-image: url(../images/common/prev-vector-white.svg);
+}
+
+.page-link__next:hover::before {
+	background-image: url(../images/common/prev-vector-white.svg);
+	transform: translate(-50%, -50%) scale(-1, 1);
+}
+
 .page-price-table {
 	width: 100%;
 }
@@ -2381,16 +2452,8 @@ a {
 	text-indent: 0.47em;
 }
 
-.single-article__wp-pagenavi {
+.single-article__page-link {
 	margin-top: 2.5rem;
-}
-
-.single-article__wp-pagenavi .wp-pagenavi .previouspostslink {
-	margin-right: 2.5625rem;
-}
-
-.single-article__wp-pagenavi .wp-pagenavi .nextpostslink {
-	margin-left: 2.5625rem;
 }
 
 .single-body__date {
@@ -4372,6 +4435,10 @@ a[href^="tel:"] {
 	width: 18.8125rem;
 }
 
+.page-link {
+	padding-right: 2.0625rem;
+}
+
 .page-price-table__content {
 	display: flex;
 }
@@ -4571,12 +4638,8 @@ a[href^="tel:"] {
 	text-indent: 0.49em;
 }
 
-.single-article__wp-pagenavi {
+.single-article__page-link {
 	margin-top: 5rem;
-}
-
-.single-article__wp-pagenavi .wp-pagenavi {
-	padding-right: 2.0625rem;
 }
 
 .single-body__title {

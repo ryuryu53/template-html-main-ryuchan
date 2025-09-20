@@ -1,0 +1,78 @@
+@use "global" as *;
+
+.page-link {
+  @include mq(md) {
+    padding-right: rem(33);
+  }
+}
+
+.page-link__flex {
+  display: flex;
+  justify-content: center;
+}
+
+.page-link__prev,
+.page-link__next {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: rem(38); // 最終_FB：width → min-width
+  height: rem(38);
+  padding: 0 rem(4);  // 最終_FB：追加
+  font-size: rem(16);
+  font-weight: $bold;
+	color: $greenaccent;
+	background-color: $white;
+	border: solid rem(1) currentColor;
+  transition: 0.3s ease;
+}
+
+.page-link__prev {
+  margin-right: rem(41);
+  margin-left: 0;
+}
+
+.page-link__next {
+  margin-right: 0;
+  margin-left: rem(41);
+}
+
+.page-link__prev::before,
+.page-link__next::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: rem(8);
+  height: rem(16);
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+}
+
+.page-link__prev::before {
+  background-image: url(../images/common/prev-vector.svg);
+}
+
+.page-link__next::before {
+  background-image: url(../images/common/next-vector.svg);
+}
+
+.page-link__prev:hover,
+.page-link__next:hover {
+  color: $white;
+  background-color: $greenaccent;
+  border-color: transparent;
+  opacity: 1;
+}
+
+.page-link__prev:hover::before {
+  background-image: url(../images/common/prev-vector-white.svg);
+}
+
+.page-link__next:hover::before {
+  background-image: url(../images/common/prev-vector-white.svg);
+  transform: translate(-50%, -50%) scale(-1, 1);
+}
