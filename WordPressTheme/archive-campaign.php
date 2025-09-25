@@ -54,11 +54,11 @@
           <li class="campaign-list__item campaign-card">
             <div class="campaign-card__link">
               <picture class="campaign-card__img campaign-card__img--sub-page">
-                <?php if ( (get_the_post_thumbnail()) ) : ?>
-                  <source srcset="<?php the_post_thumbnail_url('full'); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
-                  <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                <?php if ( get_the_post_thumbnail() ) : ?>
+                  <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
+                  <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                 <?php else : ?>
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                  <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
                 <?php endif; ?>
               </picture>
               <div class="campaign-card__body campaign-card__body--sub-page">
@@ -75,48 +75,56 @@
                 <!-- キャンペーン価格 -->
                 <div class="campaign-card__price campaign-card__price--sub-page">
                   <?php
-                    $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
-                    $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
-                    $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                    $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
+                    $price_before = $campaign_price[ 'campaign_1' ];  // サブフィールドから通常価格を取得
+                    $price_after = $campaign_price[ 'campaign_2' ]; // サブフィールドから割引価格を取得
                   ?>
                   <?php if ( $price_before ) : ?>
-                    <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
-                    <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>
+                    <!-- number_format（数値を「3桁ごとにカンマ区切り」にして文字列として返す関数）だけだと非推奨の警告、intval（文字列や小数を整数に変換する関数）で数値として扱う -->
+                    <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html( number_format( intval( $price_before ) ) ); ?></span>
                   <?php endif; ?>
                   <?php if ( $price_after ) : ?>
-                    <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html(number_format(intval($price_after))); ?></span>
+                    <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html( number_format( intval( $price_after ) ) ); ?></span>
                   <?php endif; ?>
                 </div>
                 <div class="campaign-card__information u-desktop">
-                  <?php if ( get_field('campaign_3') ) : ?>
-                    <p class="campaign-card__information-text"><?php the_field('campaign_3'); ?></p>
+                  <?php if ( get_field( 'campaign_3' ) ) : ?>
+                    <p class="campaign-card__information-text"><?php the_field( 'campaign_3' ); ?></p>
                   <?php endif; ?>
                   <!-- キャンペーン期間 -->
                   <div class="campaign-card__information-period">
-                  <?php
-                    $campaign_period = get_field('campaign_period');  // グループフィールドからデータを取得
-                    $start_date = $campaign_period['campaign_4']; // 開始日(フォーマット済み: Y/n/j)を取得
-                    $end_date = $campaign_period['campaign_5']; // 終了日(フォーマット済み: Y/n/j)を取得
-                    // 開始日と終了日の年を抽出
-                    $start_year = substr($start_date, 0, 4); // 先頭4文字を取得して年を抽出
-                    $end_year = substr($end_date, 0, 4);     // 同じく終了日の年を抽出
-                  ?>
-                    <?php if ( $start_date ) : ?>
-                      <time datetime="<?php echo esc_attr($start_date); ?>">
-                        <?php echo esc_html($start_date); ?>
+                    <?php
+                      $campaign_period = get_field( 'campaign_period' );  // グループフィールドからデータを取得
+                      $start_date = $campaign_period[ 'campaign_4' ] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
+                      $end_date = $campaign_period[ 'campaign_5' ] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
+                      // ACF戻り値の形式に合わせてDateTimeオブジェクトに変換（DateTime「日付や時間を便利に扱うためのクラス」、createFromFormat「DateTimeクラスが持っている「静的メソッド」、特定のフォーマットで書かれた文字列を、DateTimeに変換するための関数。DateTime::createFromFormat()と書く必要あり」、スコープ定義演算子（::）「クラスに属するメソッドや定数を呼び出す」ときに使う）
+                      $start_dt = $start_date ? DateTime::createFromFormat( 'Y/n/j', $start_date ) : false;
+                      $end_dt = $end_date ? DateTime::createFromFormat( 'Y/n/j', $end_date ) : false;
+                      // datetime属性用（ISO 8601形式）
+                      $start_datetime_attr = $start_dt ? $start_dt->format( 'Y-m-d' ) : '';
+                      $end_datetime_attr = $end_dt ? $end_dt->format( 'Y-m-d' ) : '';
+                      // 年だけ取得
+                      $start_year = $start_dt ? $start_dt->format( 'Y' ) : '';
+                      $end_year = $end_dt ? $end_dt->format( 'Y' ) : '';
+                      // 終了日の年を省略したものを取得
+                      $end_day = $end_dt ? $end_dt->format( 'n/j' ) : '';
+                    ?>
+                    <?php if ( $start_dt ) : ?>
+                      <time datetime="<?php echo esc_attr( $start_datetime_attr ); ?>">
+                        <?php echo esc_html( $start_date ); ?>
                       </time>
                     <?php endif; ?>
-                    <?php if ( $end_date ) : ?>
-                      <?php if ( $start_date ) : ?>
+                    <?php if ( $end_dt ) : ?>
+                      <?php if ( $start_dt ) : ?>
                       -
                       <?php endif; ?>
-                      <time datetime="<?php echo esc_attr($end_date); ?>">
+                      <time datetime="<?php echo esc_attr( $end_datetime_attr ); ?>">
                         <?php
                           // 開始日と終了日の年が同じ場合は終了日の年を省略
-                          if ( $start_year === $end_year ) {
-                            echo esc_html(substr($end_date, 5)); // 「Y/n/j」の先頭5文字を飛ばして「n/j」を表示
+                          if ( $start_year && $end_year && $start_year === $end_year ) {
+                            echo esc_html( $end_day ); //「n/j」だけ表示
                           } else {
-                            echo esc_html($end_date); // 年が異なる場合はフルの日付「Y/n/j」を表示
+                            echo esc_html( $end_date ); // 年が異なる場合はフルの日付「Y/n/j」を表示
                           }
                         ?>
                       </time>

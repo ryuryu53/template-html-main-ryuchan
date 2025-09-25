@@ -2,27 +2,27 @@
 
 function enqueue_custom_scripts() {
   // Google Fontsの読み込み
-  wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', array(), null);
+  wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', array(), null );
 
   // SwiperのCSS読み込み
-  wp_enqueue_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css', array(), null);
+  wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css', array(), null );
 
   // テーマのメインCSS読み込み
-  wp_enqueue_style('main-style', get_theme_file_uri('/assets/css/style.css'), array(), null);
+  wp_enqueue_style( 'main-style', get_theme_file_uri( '/assets/css/style.css' ), array(), null );
 
   // jQueryの読み込み（defer属性付き）
-  wp_enqueue_script('jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', array(), '3.7.1', true);
+  wp_enqueue_script( 'jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', array(), '3.7.1', true );
 
   // jQuery.inviewプラグインの読み込み（defer属性付き）
-  wp_enqueue_script('jquery-inview', get_theme_file_uri('/assets/js/jquery.inview.min.js'), array('jquery-cdn'), 'null', true);
+  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), array( 'jquery-cdn' ), 'null', true );
 
   // SwiperのJavaScript読み込み（defer属性付き）
-  wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', array(), '8.0.0', true);
+  wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', array(), '8.0.0', true );
 
   // テーマのメインJavaScriptファイル読み込み（defer属性付き）
-  wp_enqueue_script('main-script', get_theme_file_uri('/assets/js/script.js'), array('jquery-cdn'), null, true);
+  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), array( 'jquery-cdn' ), null, true );
 }
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+add_action( 'wp_enqueue_scripts', 'enqueue_custom_scripts' );
 
 // crossorigin属性を持つタグに対する対応
 function add_rel_preconnect( $html, $handle, $href, $media ) {
@@ -100,17 +100,17 @@ function my_setup() {
 add_action( 'after_setup_theme', 'my_setup' );
 
 //アーカイブの表示件数変更  $query ↓ 現在のページでどの投稿が表示されるかを決定するための情報が入っている
-function change_posts_per_page($query) {
+function change_posts_per_page( $query ) {
   // 管理画面やメインクエリでない場合は処理しない
   if ( is_admin() || ! $query->is_main_query() )
       return;
 
   // カスタム投稿タイプ「campaign」のアーカイブページの場合、4件に設定(カスタムタクソノミーのアーカイブページも同様)
-  if ( $query->is_post_type_archive('campaign') || is_tax('campaign_category') ) { //カスタム投稿タイプまたはカスタムタクソノミーを指定
+  if ( $query->is_post_type_archive( 'campaign' ) || is_tax( 'campaign_category' ) ) { //カスタム投稿タイプまたはカスタムタクソノミーを指定
       $query->set( 'posts_per_page', '4' ); //表示件数を指定
   }
   // カスタム投稿タイプ「voice」のアーカイブページの場合、6件に設定(カスタムタクソノミーのアーカイブページも同様)
-  if ( $query->is_post_type_archive('voice') || is_tax('voice_category') ) {
+  if ( $query->is_post_type_archive( 'voice' ) || is_tax( 'voice_category' ) ) {
     $query->set( 'posts_per_page', '6' );
   }
 }
