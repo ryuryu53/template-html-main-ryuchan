@@ -128,6 +128,8 @@
                           }
                         ?>
                       </time>
+                    <?php else : ?>
+                      <span style="font-family: 'Noto Sans JP', sans-serif;">- 未定</span>
                     <?php endif; ?>
                   </div>
                   <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
