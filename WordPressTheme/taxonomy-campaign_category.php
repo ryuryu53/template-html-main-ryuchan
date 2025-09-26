@@ -48,107 +48,112 @@
         </a>
         <?php endforeach; endif; ?>
       </div>
-      <ul class="page-campaign__items campaign-list">
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-          <li class="campaign-list__item campaign-card">
-            <div class="campaign-card__link">
-              <picture class="campaign-card__img campaign-card__img--sub-page">
-                <?php if ( (get_the_post_thumbnail()) ) : ?>
-                  <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
-                  <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
-                <?php else : ?>
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
-                <?php endif; ?>
-              </picture>
-              <div class="campaign-card__body campaign-card__body--sub-page">
-                <!-- get_the_terms()：投稿に関連するタクソノミー（分類）を取得するための関数、get_the_ID()：現在表示されている投稿のID（個別の識別番号）を取得 -->
-                <?php
-                  // カスタムタクソノミー「campaign_category」の取得
-                  $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                  if ( $terms && !is_wp_error($terms) ) :
-                ?>
-                  <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
-                <?php endif; ?>
-                <h3 class="campaign-card__title campaign-card__title--sub-page text--medium-large"><?php the_title(); ?></h3>
-                <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
-                <!-- キャンペーン価格 -->
-                <div class="campaign-card__price campaign-card__price--sub-page">
+      <?php if ( have_posts() ) : ?>
+        <ul class="page-campaign__items campaign-list">
+          <?php while ( have_posts() ) : the_post(); ?>
+            <li class="campaign-list__item campaign-card">
+              <div class="campaign-card__link">
+                <picture class="campaign-card__img campaign-card__img--sub-page">
+                  <?php if ( (get_the_post_thumbnail()) ) : ?>
+                    <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
+                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                  <?php else : ?>
+                    <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                  <?php endif; ?>
+                </picture>
+                <div class="campaign-card__body campaign-card__body--sub-page">
+                  <!-- get_the_terms()：投稿に関連するタクソノミー（分類）を取得するための関数、get_the_ID()：現在表示されている投稿のID（個別の識別番号）を取得 -->
                   <?php
-                    $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
-                    $price_before = $campaign_price[ 'campaign_1' ];  // サブフィールドから通常価格を取得
-                    $price_after = $campaign_price[ 'campaign_2' ]; // サブフィールドから割引価格を取得
+                    // カスタムタクソノミー「campaign_category」の取得
+                    $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                    if ( $terms && !is_wp_error($terms) ) :
                   ?>
-                  <?php if ( $price_before ) : ?>
-                    <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
-                    <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html( number_format( intval( $price_before ) ) ); ?></span>
+                    <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
                   <?php endif; ?>
-                  <?php if ( $price_after ) : ?>
-                    <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html( number_format( intval( $price_after ) ) ); ?></span>
-                  <?php endif; ?>
-                </div>
-                <div class="campaign-card__information u-desktop">
-                  <?php if ( get_field( 'campaign_3' ) ) : ?>
-                    <p class="campaign-card__information-text"><?php the_field( 'campaign_3' ); ?></p>
-                  <?php endif; ?>
-                  <!-- キャンペーン期間 -->
-                  <div class="campaign-card__information-period">
+                  <h3 class="campaign-card__title campaign-card__title--sub-page text--medium-large"><?php the_title(); ?></h3>
+                  <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
+                  <!-- キャンペーン価格 -->
+                  <div class="campaign-card__price campaign-card__price--sub-page">
                     <?php
-                      $campaign_period = get_field( 'campaign_period' );  // グループフィールドからデータを取得
-                      $start_date = $campaign_period[ 'campaign_4' ] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
-                      $end_date = $campaign_period[ 'campaign_5' ] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
-                      // ACF戻り値の形式に合わせてDateTimeオブジェクトに変換（DateTime「日付や時間を便利に扱うためのクラス」、createFromFormat「DateTimeクラスが持っている「静的メソッド」、特定のフォーマットで書かれた文字列を、DateTimeに変換するための関数。DateTime::createFromFormat()と書く必要あり」、スコープ定義演算子（::）「クラスに属するメソッドや定数を呼び出す」ときに使う）
-                      $start_dt = $start_date ? DateTime::createFromFormat( 'Y/n/j', $start_date ) : false;
-                      $end_dt = $end_date ? DateTime::createFromFormat( 'Y/n/j', $end_date ) : false;
-                      // datetime属性用（ISO 8601形式）
-                      $start_datetime_attr = $start_dt ? $start_dt->format( 'Y-m-d' ) : '';
-                      $end_datetime_attr = $end_dt ? $end_dt->format( 'Y-m-d' ) : '';
-                      // 年だけ取得
-                      $start_year = $start_dt ? $start_dt->format( 'Y' ) : '';
-                      $end_year = $end_dt ? $end_dt->format( 'Y' ) : '';
-                      // 終了日の年を省略したものを取得
-                      $end_day = $end_dt ? $end_dt->format( 'n/j' ) : '';
+                      $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
+                      $price_before = $campaign_price[ 'campaign_1' ];  // サブフィールドから通常価格を取得
+                      $price_after = $campaign_price[ 'campaign_2' ]; // サブフィールドから割引価格を取得
                     ?>
-                    <?php if ( $start_dt ) : ?>
-                      <time datetime="<?php echo esc_attr( $start_datetime_attr ); ?>">
-                        <?php echo esc_html( $start_date ); ?>
-                      </time>
+                    <?php if ( $price_before ) : ?>
+                      <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
+                      <span class="campaign-card__price-before campaign-card__price-before--sub-page">&yen;<?php echo esc_html( number_format( intval( $price_before ) ) ); ?></span>
                     <?php endif; ?>
-                    <?php if ( $start_dt ) : ?>
-                    -
-                    <?php endif; ?>
-                    <?php if ( $end_dt ) : ?>
-                      <time datetime="<?php echo esc_attr( $end_datetime_attr ); ?>">
-                        <?php
-                          // 開始日と終了日の年が同じ場合は終了日の年を省略
-                          if ( $start_year && $end_year && $start_year === $end_year ) {
-                            echo esc_html( $end_day ); //「n/j」だけ表示
-                          } else {
-                            echo esc_html( $end_date ); // 年が異なる場合はフルの日付「Y/n/j」を表示
-                          }
-                        ?>
-                      </time>
-                    <?php else : ?>
-                      <span style="font-family: 'Noto Sans JP', sans-serif;">未定</span>
+                    <?php if ( $price_after ) : ?>
+                      <span class="campaign-card__price-after campaign-card__price-after--sub-page">&yen;<?php echo esc_html( number_format( intval( $price_after ) ) ); ?></span>
                     <?php endif; ?>
                   </div>
-                  <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
-                  <div class="campaign-card__btn">
-                    <?php
-                      // カスタムタクソノミー「campaign_category」の取得
-                      $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                      $campaign_category = !empty($terms) ? $terms[0]->name : ''; // 最初のカテゴリ名を取得
-                      $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）
-                    ?>
-                    <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button">
-                      <span class="button__text">Contact&nbsp;us</span>
-                    </a>
+                  <div class="campaign-card__information u-desktop">
+                    <!-- キャンペーン情報 -->
+                    <?php if ( get_field( 'campaign_3' ) ) : ?>
+                      <p class="campaign-card__information-text"><?php the_field( 'campaign_3' ); ?></p>
+                    <?php endif; ?>
+                    <!-- キャンペーン期間 -->
+                    <div class="campaign-card__information-period">
+                      <?php
+                        $campaign_period = get_field( 'campaign_period' );  // グループフィールドからデータを取得
+                        $start_date = $campaign_period[ 'campaign_4' ] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
+                        $end_date = $campaign_period[ 'campaign_5' ] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
+                        // ACF戻り値の形式に合わせてDateTimeオブジェクトに変換（DateTime「日付や時間を便利に扱うためのクラス」、createFromFormat「DateTimeクラスが持っている「静的メソッド」、特定のフォーマットで書かれた文字列を、DateTimeに変換するための関数。DateTime::createFromFormat()と書く必要あり」、スコープ定義演算子（::）「クラスに属するメソッドや定数を呼び出す」ときに使う）
+                        $start_dt = $start_date ? DateTime::createFromFormat( 'Y/n/j', $start_date ) : false;
+                        $end_dt = $end_date ? DateTime::createFromFormat( 'Y/n/j', $end_date ) : false;
+                        // datetime属性用（ISO 8601形式）
+                        $start_datetime_attr = $start_dt ? $start_dt->format( 'Y-m-d' ) : '';
+                        $end_datetime_attr = $end_dt ? $end_dt->format( 'Y-m-d' ) : '';
+                        // 年だけ取得
+                        $start_year = $start_dt ? $start_dt->format( 'Y' ) : '';
+                        $end_year = $end_dt ? $end_dt->format( 'Y' ) : '';
+                        // 終了日の年を省略したものを取得
+                        $end_day = $end_dt ? $end_dt->format( 'n/j' ) : '';
+                      ?>
+                      <?php if ( $start_dt ) : ?>
+                        <time datetime="<?php echo esc_attr( $start_datetime_attr ); ?>">
+                          <?php echo esc_html( $start_date ); ?>
+                        </time>
+                      <?php endif; ?>
+                      <?php if ( $start_dt ) : ?>
+                      -
+                      <?php endif; ?>
+                      <?php if ( $end_dt ) : ?>
+                        <time datetime="<?php echo esc_attr( $end_datetime_attr ); ?>">
+                          <?php
+                            // 開始日と終了日の年が同じ場合は終了日の年を省略
+                            if ( $start_year && $end_year && $start_year === $end_year ) {
+                              echo esc_html( $end_day ); //「n/j」だけ表示
+                            } else {
+                              echo esc_html( $end_date ); // 年が異なる場合はフルの日付「Y/n/j」を表示
+                            }
+                          ?>
+                        </time>
+                      <?php else : ?>
+                        <span style="font-family: 'Noto Sans JP', sans-serif;">未定</span>
+                      <?php endif; ?>
+                    </div>
+                    <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
+                    <div class="campaign-card__btn">
+                      <?php
+                        // カスタムタクソノミー「campaign_category」の取得
+                        $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                        $campaign_category = !empty($terms) ? $terms[0]->name : ''; // 最初のカテゴリ名を取得
+                        $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）
+                      ?>
+                      <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button">
+                        <span class="button__text">Contact&nbsp;us</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </li>
-        <?php endwhile; endif; ?>
-      </ul>
+            </li>
+          <?php endwhile; ?>
+        </ul>
+      <?php else : ?>
+        <p>現在、投稿はありません。</p>
+      <?php endif; ?>
     </div>
   </section>
 
