@@ -117,10 +117,10 @@ function change_posts_per_page( $query ) {
 add_action( 'pre_get_posts', 'change_posts_per_page' );
 
 // カスタム投稿タイプ「campaign」のリライトルールを空にして、詳細ページを生成しない
-add_filter('campaign_rewrite_rules', '__return_empty_array');
+add_filter( 'campaign_rewrite_rules', '__return_empty_array' );
 
 // カスタム投稿タイプ「voice」のリライトルールを空にして、詳細ページを生成しない
-add_filter('voice_rewrite_rules', '__return_empty_array');
+add_filter( 'voice_rewrite_rules', '__return_empty_array' );
 
 // 投稿の閲覧数をカウントする関数を作成
 function set_post_views($postID) {
@@ -181,7 +181,7 @@ function customize_views_column($columns) {
   if ( $screen->post_type === 'post' ) { // 'post'のみで閲覧数を表示する
     // 新しいカラムを追加し、順序を調整
     $reordered_columns = array(); // 新しいカラムの順序を保持するための配列を準備
-    
+
     // 元々のカラム（$columns）を一つ一つ処理する。$keyにはカラムの名前、$valueにはカラムの表示名が入る
     foreach ($columns as $key => $value) {
       // もしカラムが「日付（date）」だったら･･･
@@ -249,7 +249,7 @@ add_filter('get_the_archive_title', function ($title) {
 });
 
 // Contact Form 7で自動挿入されるPタグ、brタグを削除
-add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+add_filter( 'wpcf7_autop_or_not', 'wpcf7_autop_return_false' );
 function wpcf7_autop_return_false() {
   return false;
 }

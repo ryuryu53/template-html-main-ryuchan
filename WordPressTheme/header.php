@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php if ( is_page( array('information', 'price') ) ) : ?>
+<?php if ( is_page( array( 'information', 'price' ) ) ) : ?>
   <html class="html1" lang="ja">
 <?php else : ?>
   <html lang="ja">
@@ -15,21 +15,21 @@
   </head>
 
   <?php
-    $home = esc_url( home_url('/') );
-    $campaign = esc_url( home_url('/campaign/') );
-    $campaign_fun_diving = esc_url( home_url('/campaign_category/fun-diving/') );
-    $campaign_license = esc_url( home_url('/campaign_category/license/') );
-    $campaign_experience_diving = esc_url( home_url('/campaign_category/experience-diving/') );
-    $about = esc_url( home_url('/about-us/') );
-    $information = esc_url( home_url('/information/') );
-    $blog = esc_url( home_url('/blog/') );
-    $voice = esc_url( home_url('/voice/') );
-    $amount = esc_url( home_url('/price/') );
-    $faq = esc_url( home_url('/faq/') );
-    $contact = esc_url( home_url('/contact/') );
-    $sitemap = esc_url( home_url('/sitemap/') );
-    $privacy = esc_url( home_url('/privacy-policy/') );
-    $terms = esc_url( home_url('/terms-of-service/') );
+    $home = esc_url( home_url( '/' ) );
+    $campaign = esc_url( home_url( '/campaign/' ) );
+    $campaign_fun_diving = esc_url( home_url( '/campaign_category/fun-diving/' ) );
+    $campaign_license = esc_url( home_url( '/campaign_category/license/' ) );
+    $campaign_experience_diving = esc_url( home_url( '/campaign_category/experience-diving/' ) );
+    $about = esc_url( home_url( '/about-us/' ) );
+    $information = esc_url( home_url( '/information/' ) );
+    $blog = esc_url( home_url( '/blog/' ) );
+    $voice = esc_url( home_url( '/voice/' ) );
+    $amount = esc_url( home_url( '/price/' ) );
+    $faq = esc_url( home_url( '/faq/' ) );
+    $contact = esc_url( home_url( '/contact/' ) );
+    $sitemap = esc_url( home_url( '/sitemap/' ) );
+    $privacy = esc_url( home_url( '/privacy-policy/' ) );
+    $terms = esc_url( home_url( '/terms-of-service/' ) );
   ?>
 
   <body>
@@ -43,8 +43,8 @@
         <<?php echo $tag; ?> class="header__logo">
           <a href="<?php echo $home; ?>" class="header__logo-link">
             <picture>
-              <source media="(max-width: 767px)" srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/header-logo.svg">
-              <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/header-logo-pc.svg" alt="CodeUps">
+              <source media="(max-width: 767px)" srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/header-logo.svg">
+              <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/header-logo-pc.svg" alt="CodeUps">
             </picture>
           </a>
         </<?php echo $tag; ?>>
