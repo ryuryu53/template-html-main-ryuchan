@@ -8,7 +8,7 @@
   </section>
 
   <!-- パンくず -->
-  <?php get_template_part('parts/breadcrumbs'); ?>
+  <?php get_template_part( 'parts/breadcrumbs' ); ?>
 
   <!-- キャンペーン -->
   <section class="layout-page-campaign page-campaign">
@@ -16,18 +16,18 @@
       <div class="page-campaign__category campaign-category">
         <!-- タクソノミーのタブを生成 -->
         <!-- get_post_type_archive_link('campaign') →「キャンペーン」というカスタム投稿タイプのアーカイブページ（一覧ページ）のリンクを取得 -->
-        <a href="<?php echo esc_url(get_post_type_archive_link('campaign')); ?>" class="campaign-category__link">All</a>
+        <a href="<?php echo esc_url( get_post_type_archive_link( 'campaign' ) ); ?>" class="campaign-category__link">All</a>
         <?php
         // 表示したい順番のスラッグを指定（FB：並び替え不要）
         // $custom_order = array('license', 'fun-diving', 'experience-diving');
 
-        $terms = get_terms(array( // get_terms：特定のタクソノミー（campaign_category）のカテゴリ情報を取得する関数
+        $terms = get_terms( array( // get_terms：特定のタクソノミー（campaign_category）のカテゴリ情報を取得する関数
           'taxonomy' => 'campaign_category',
           'hide_empty' => true, // 投稿が1つもないカテゴリを表示しないようにする
-        ));
+        ) );
 
         // スラッグ順にタームを並び替える（FB：並び替え不要）
-        if ( !empty($terms) ) :
+        if ( ! empty( $terms ) ) :
           // usort($terms, function($a, $b) use ($custom_order) {  // usort：配列を特定のルールで並び替える関数
           //   // array_search：配列の中から、指定した値が何番目にあるかを調べる関数
           //   $pos_a = array_search($a->slug, $custom_order); // $aのスラッグが$custom_orderの配列内で何番目にあるかを調べ、その位置（インデックス番号）を返す
@@ -39,12 +39,12 @@
           // });
 
           // 並び替え後にリンクを生成（FB：並び替え不要）
-          foreach ($terms as $term) :
-            $term_link = get_term_link($term);  // 各カテゴリ（タクソノミー）のリンク先URLを取得
+          foreach ( $terms as $term ) :
+            $term_link = get_term_link( $term );  // 各カテゴリ（タクソノミー）のリンク先URLを取得
             // is_tax('campaign_category', $term->slug)：「今表示しているページが、このループで処理しているカテゴリ（$term->slug）かどうか？」を判定
         ?>
-        <a href="<?php echo esc_url($term_link); ?>" class="campaign-category__link <?php echo (is_tax('campaign_category', $term->slug) ? 'is-active' : ''); ?>">
-          <?php echo esc_html($term->name); ?>
+        <a href="<?php echo esc_url( $term_link ); ?>" class="campaign-category__link <?php echo ( is_tax( 'campaign_category', $term->slug ) ? 'is-active' : '' ); ?>">
+          <?php echo esc_html( $term->name ); ?>
         </a>
         <?php endforeach; endif; ?>
       </div>
@@ -54,21 +54,21 @@
             <li class="campaign-list__item campaign-card">
               <div class="campaign-card__link">
                 <picture class="campaign-card__img campaign-card__img--sub-page">
-                  <?php if ( (get_the_post_thumbnail()) ) : ?>
-                    <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
-                    <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                  <?php if ( get_the_post_thumbnail() ) : ?>
+                    <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>" type="image/webp">
+                    <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                   <?php else : ?>
-                    <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                    <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
                   <?php endif; ?>
                 </picture>
                 <div class="campaign-card__body campaign-card__body--sub-page">
                   <!-- get_the_terms()：投稿に関連するタクソノミー（分類）を取得するための関数、get_the_ID()：現在表示されている投稿のID（個別の識別番号）を取得 -->
                   <?php
                     // カスタムタクソノミー「campaign_category」の取得
-                    $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                    if ( $terms && !is_wp_error($terms) ) :
+                    $terms = get_the_terms( get_the_ID(), 'campaign_category' );
+                    if ( $terms && ! is_wp_error( $terms ) ) :
                   ?>
-                    <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
+                    <p class="campaign-card__category"><?php echo esc_html( $terms[0]->name ); ?></p>
                   <?php endif; ?>
                   <h3 class="campaign-card__title campaign-card__title--sub-page text--medium-large"><?php the_title(); ?></h3>
                   <p class="campaign-card__text campaign-card__text--sub-page text--small-sp">全部コミコミ(お一人様)</p>
@@ -76,8 +76,8 @@
                   <div class="campaign-card__price campaign-card__price--sub-page">
                     <?php
                       $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
-                      $price_before = $campaign_price[ 'campaign_1' ];  // サブフィールドから通常価格を取得
-                      $price_after = $campaign_price[ 'campaign_2' ]; // サブフィールドから割引価格を取得
+                      $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                      $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
                     ?>
                     <?php if ( $price_before ) : ?>
                       <!-- number_formatだけだと非推奨の警告、intvalで数値として扱う -->
@@ -96,8 +96,8 @@
                     <div class="campaign-card__information-period">
                       <?php
                         $campaign_period = get_field( 'campaign_period' );  // グループフィールドからデータを取得
-                        $start_date = $campaign_period[ 'campaign_4' ] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
-                        $end_date = $campaign_period[ 'campaign_5' ] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
+                        $start_date = $campaign_period['campaign_4'] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
+                        $end_date = $campaign_period['campaign_5'] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
                         // ACF戻り値の形式に合わせてDateTimeオブジェクトに変換（DateTime「日付や時間を便利に扱うためのクラス」、createFromFormat「DateTimeクラスが持っている「静的メソッド」、特定のフォーマットで書かれた文字列を、DateTimeに変換するための関数。DateTime::createFromFormat()と書く必要あり」、スコープ定義演算子（::）「クラスに属するメソッドや定数を呼び出す」ときに使う）
                         $start_dt = $start_date ? DateTime::createFromFormat( 'Y/n/j', $start_date ) : false;
                         $end_dt = $end_date ? DateTime::createFromFormat( 'Y/n/j', $end_date ) : false;
@@ -136,12 +136,11 @@
                     <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign-card__btn">
                       <?php
-                        // カスタムタクソノミー「campaign_category」の取得
-                        $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                        $campaign_category = !empty($terms) ? $terms[0]->name : ''; // 最初のカテゴリ名を取得
-                        $campaign_category_slug = !empty($terms) ? $terms[0]->slug : ''; // スラッグ（URLエンコード用）
+                        // 投稿タイトルを取得
+                        $campaign_title = get_the_title();
+                        // urlencode() で日本語タイトルをURLで使えるようにエンコード
                       ?>
-                      <a href="<?php echo esc_url(home_url('/contact?select_plan=' . urlencode($campaign_category))); ?>" class="button">
+                      <a href="<?php echo esc_url( home_url( '/contact?select_plan=' . urlencode( $campaign_title ) ) ); ?>" class="button">
                         <span class="button__text">Contact&nbsp;us</span>
                       </a>
                     </div>

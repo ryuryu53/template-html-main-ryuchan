@@ -1,5 +1,4 @@
 <?php
-
 function enqueue_custom_scripts() {
   // Google Fontsの読み込み
   wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', array(), null );
@@ -48,13 +47,13 @@ function Change_menulabel() {
   global $menu;
   global $submenu;
   $name = 'ブログ'; // $nameという変数に、「ブログ」という新しい名前を設定
-  $menu[5][0] = $name;  // menu[5]は、「投稿」メニューを指している。これを「ブログ」に変更
-  // submenu['edit.php']は、「投稿」のサブメニューを指す。[5][0]は「投稿一覧」を示し、これを「ブログ一覧」に変更
-  $submenu['edit.php'][5][0] = $name.'一覧';
-  // submenu['edit.php'][10][0]は「新規追加」を指し、「新しいブログ」に変更
-  $submenu['edit.php'][10][0] = '新しい'.$name;
+  $menu[5][0] = $name;  // $menu[5]は、「投稿」メニュー全体を指している。その表示ラベルを指す$menu[5][0]を「ブログ」に変更
+  // $submenu['edit.php']は、「投稿」のサブメニューを指す。[5][0]は「投稿一覧」を示し、これを「ブログ一覧」に変更
+  $submenu['edit.php'][5][0] = $name . '一覧';
+  // $submenu['edit.php'][10][0]は「新規追加（投稿を追加）」を指し、「新しいブログ」に変更
+  $submenu['edit.php'][10][0] = '新しい' . $name;
 }
-  // 投稿オブジェクトのラベルを「ブログ」に変更する関数を定義
+// 投稿オブジェクトのラベルを「ブログ」に変更する関数を定義
 function Change_objectlabel() {
   // グローバル変数を使ってWordPressの投稿タイプ（ここでは「投稿」）にアクセス
   global $wp_post_types;
@@ -63,22 +62,23 @@ function Change_objectlabel() {
   $labels = &$wp_post_types['post']->labels;
   $labels->name = $name;  // 投稿全体の名前を「ブログ」に、単数形の名前も「ブログ」に変更
   $labels->singular_name = $name;
-  // 「追加」ボタンのテキストを変更（_xは翻訳関数で、「追加」というテキストを「ブログ」に関連付ける）
-  $labels->add_new = _x('追加', $name);
-  $labels->add_new_item = $name.'の新規追加'; // 「新規追加」のラベルを「ブログの新規追加」に変更
-  $labels->edit_item = $name.'の編集';  // 「編集」のラベルを「ブログの編集」に変更
-  $labels->new_item = '新規'.$name; // 「新規」のラベルを「新規ブログ」に変更
-  $labels->view_item = $name.'を表示'; // 「表示」のラベルを「ブログを表示」に変更
-  $labels->search_items = $name.'を検索'; // 「検索」のラベルを「ブログを検索」に変更
-  // 「見つからなかった」メッセージを「ブログが見つかりませんでした」に変更
-  $labels->not_found = $name.'が見つかりませんでした';
+  //「追加」ボタンのテキストを変更（_xは翻訳関数で、「追加」というテキストを「ブログ」に関連付ける）
+  $labels->add_new = _x( '追加', $name );
+  $labels->add_new_item = $name . 'の新規追加'; //「新規追加（投稿を追加）」のラベルを「ブログの新規追加」に変更
+  $labels->edit_item = $name . 'の編集';  //「編集（投稿を編集）」のラベルを「ブログの編集」に変更（タブの箇所）
+  $labels->new_item = '新規' . $name; //「新規」のラベルを「新規ブログ」に変更 → 現行UIでは目立つ場所に現れないため、「新規ブログ」という可視テキストは基本出てこない 25.9.28
+  $labels->view_item = $name . 'を表示'; //「表示（投稿を表示）」のラベルを「ブログを表示」に変更（アドミンバーの箇所）
+  $labels->search_items = $name . 'を検索'; //「検索（投稿を検索）」のラベルを「ブログを検索」に変更（ブログ一覧画面の右上）
+  //「見つからなかった」メッセージを「ブログが見つかりませんでした」に変更
+  $labels->not_found = $name . 'が見つかりませんでした';
   // ゴミ箱に見つからなかった場合のメッセージを「ゴミ箱にブログは見つかりませんでした」に変更
-  $labels->not_found_in_trash = 'ゴミ箱に'.$name.'は見つかりませんでした';
+  $labels->not_found_in_trash = 'ゴミ箱に' . $name . 'は見つかりませんでした';
+  $labels->name_admin_bar = $name;  //「+ 新規 > 投稿」→「+ 新規 > ブログ」に変更（アドミンバーのサブメニュー表示名） 25.9.28
 }
 // add_action関数を使って、Change_objectlabel関数をWordPressの初期化（init）のタイミングで実行するように登録
-add_action( 'init', 'Change_objectlabel' );
+add_action( 'init', 'Change_objectlabel' ); // initアクション：投稿タイプが登録されるタイミング
 // Change_menulabel関数をWordPressの管理画面のメニュー（admin_menu）が読み込まれたときに実行するように登録
-add_action( 'admin_menu', 'Change_menulabel' );
+add_action( 'admin_menu', 'Change_menulabel' ); // admin_menuアクション：管理画面メニューが組み立てられるタイミング
 
 // add_theme_support関数は特定のテーマ機能を有効化するためのもの。
 // この関数により、テーマが特定の機能をサポートしていることをWPに知らせることができる
@@ -536,27 +536,27 @@ function add_custom_button_labels() {
 add_action('admin_head', 'add_custom_button_labels');
 
 // GETパラメータを受け取って、フォームのセレクトボックスのデフォルト値として設定
-function custom_wpcf7_select_filter($tag) {
-  // $tagが配列かどうかを確認。配列でないなら、そのまま返して関数の処理を終了
-  if (!is_array($tag)) return $tag;
+function custom_wpcf7_select_filter( $tag ) {
+  // $tagが配列かどうかを確認。配列でないなら、そのまま返して関数の処理を終了（$tag：Contact Form 7 側で用意されている引数。$tagの中には対象のフォーム部品に関する情報（名前・値・オプションなど）が配列として入っている）
+  if ( ! is_array( $tag ) ) return $tag;
 
   $form_field_name = 'menu-464'; // CF7のセレクトボックス名（ショートコード内のname）
   // URLにselect_planというパラメータがあるかどうかを確認（$_GET：URLのクエリパラメータ（GETパラメータ → ?の後ろの部分）を取得するための配列。例：https://example.com/?key=value だとkeyを指定してvalueを取得）
-  if (isset($_GET['select_plan']) && isset($tag['values'])) { // isset() は「変数が存在するか」を調べる関数
+  if ( isset( $_GET['select_plan'] ) && isset( $tag['values'] ) ) { // isset() は「変数が存在するか」を調べる関数
     // urldecode()を使ってURLエンコードされている文字（例: %20 → スペース）を元の形に戻す
-    $selected_value = urldecode($_GET['select_plan']); // GETパラメータをデコード
+    $selected_value = urldecode( $_GET['select_plan'] ); // GETパラメータをデコード
     // $tag['name']（現在のフォームのフィールド名）が $form_field_name（指定したセレクトボックス）と同じかを確認
-    if ($tag['name'] === $form_field_name) {
+    if ( $tag['name'] === $form_field_name ) {
       // $tag['values'] には、セレクトボックスの選択肢（プルダウンの中身）が入っている
-      foreach ($tag['values'] as $key => $value) {  // $keyは選択肢の番号（0から始まる）、$valueは選択肢の文字（ライセンス講習など）
+      foreach ( $tag['values'] as $key => $value ) {  // $keyは選択肢の番号（0から始まる）、$valueは選択肢の文字（ライセンス取得など）
         // もしGETパラメータの値と、今見ている選択肢のvalueが同じなら…
-        if ($value === $selected_value) {
+        if ( $value === $selected_value ) {
           // $tag['options']はデフォルトでは空の配列である可能性が高いが、初めから存在しない（未定義）可能性もあるので、安全にコードを動作させるためには以下のチェックをした方がよい
-          if (!isset($tag['options'])) {
+          if ( ! isset( $tag['options'] ) ) {
             $tag['options'] = []; // `options`が未定義なら空の配列をセット
           }
           // default: をつけて、CF7のデフォルト値として設定。CF7の仕様では1から始まるため+1（[] を使うことで、配列の最後に値を追加できる）
-          $tag['options'][] = 'default:' . ($key + 1); // 例えば、$key = 0 なら、'default:1' となり、1番目の選択肢がデフォルトになる
+          $tag['options'][] = 'default:' . ( $key + 1 ); // 例えば、$key = 0 なら、'default:1' となり、1番目の選択肢がデフォルトになる（Contact Form 7 は default:数字 を指定すると、その順番の選択肢を selected にしてくれる仕組みになっている）
         }
       }
     }
@@ -565,4 +565,4 @@ function custom_wpcf7_select_filter($tag) {
   return $tag;
 }
 // add_filter()を使って、CF7のフォームタグをカスタマイズする処理を追加（'wpcf7_form_tag'はCF7 のフォームタグを変更するためのフィルターフック）
-add_filter('wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2);
+add_filter( 'wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2 );
