@@ -1,25 +1,25 @@
 <?php
 function enqueue_custom_scripts() {
   // Google Fontsの読み込み
-  wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', array(), null );
+  wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', [], null );
 
   // SwiperのCSS読み込み
-  wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css', array(), null );
+  wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css', [], null );
 
   // テーマのメインCSS読み込み
-  wp_enqueue_style( 'main-style', get_theme_file_uri( '/assets/css/style.css' ), array(), null );
+  wp_enqueue_style( 'main-style', get_theme_file_uri( '/assets/css/style.css' ), [], null );
 
   // jQueryの読み込み（defer属性付き）
-  wp_enqueue_script( 'jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', array(), '3.7.1', true );
+  wp_enqueue_script( 'jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', [], '3.7.1', true );
 
   // jQuery.inviewプラグインの読み込み（defer属性付き）
-  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), array( 'jquery-cdn' ), 'null', true );
+  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), [ 'jquery-cdn' ], 'null', true );
 
   // SwiperのJavaScript読み込み（defer属性付き）
-  wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', array(), '8.0.0', true );
+  wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', [], '8.0.0', true );
 
   // テーマのメインJavaScriptファイル読み込み（defer属性付き）
-  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), array( 'jquery-cdn' ), null, true );
+  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), [ 'jquery-cdn' ], null, true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_custom_scripts' );
 
@@ -88,13 +88,13 @@ function my_setup() {
 	add_theme_support( 'title-tag' ); /* タイトルタグ自動生成 */
 	add_theme_support(
 		'html5',
-		array( /* HTML5のタグで出力 */
+		[ /* HTML5のタグで出力 */
 			'search-form',
 			'comment-form',
 			'comment-list',
 			'gallery',
 			'caption',
-		)
+    ]
 	);
 }
 add_action( 'after_setup_theme', 'my_setup' );
@@ -123,48 +123,48 @@ add_filter( 'campaign_rewrite_rules', '__return_empty_array' );
 add_filter( 'voice_rewrite_rules', '__return_empty_array' );
 
 // 投稿の閲覧数をカウントする関数を作成
-function set_post_views($postID) {
+function set_post_views( $postID ) {
   // カスタムフィールド（特別なデータの保存場所）の名前を設定。「post_views_count」という名前で、各投稿の閲覧数を保存
   $count_key = 'post_views_count';
   // $postID で指定された投稿のカスタムフィールドから、閲覧数を取得。true は1つの値だけを取得する指定
-  $count = get_post_meta($postID, $count_key, true);
-  // もし、カウントのデータがまだ存在しない（空の値が返ってきた）場合、初期値として0を設定
+  $count = get_post_meta( $postID, $count_key, true );
+  // もし、カウントのデータがまだ存在しない（空の値が返ってきた）場合、初期値として1を設定（0 → 1に修正）
   if ( $count == '' ) {
-    $count = 0;
+    $count = 1; // 0 → 1に修正（この関数は投稿が表示されたときに呼び出されるので、初回は1として設定）
     // delete_post_meta()：念のため、既存のカスタムフィールドを削除
-    delete_post_meta($postID, $count_key);
+    delete_post_meta( $postID, $count_key );  // 通常のWPの運用では「キーが存在するのに値が空」という状態はほとんど発生しないのでこの行は削除しても問題ない（ →「安全性を優先したい」ので残すことにする）
     // add_post_meta()：新しく投稿に「0」という初期値の閲覧数を登録
-    add_post_meta($postID, $count_key, '0');
+    add_post_meta( $postID, $count_key, $count );
     // もしすでにカウントが存在している場合、カウントを1増やす
   } else {
     $count++;
     // update_post_meta()：カスタムフィールドの閲覧数を新しい値に更新（1つ増やす）
-    update_post_meta($postID, $count_key, $count);
+    update_post_meta( $postID, $count_key, $count );
   }
 }
 
 // 投稿が表示されたときにset_post_views()関数を呼び出してカウントを増やす
-function track_post_views($post_id) {
+function track_post_views( $post_id ) {
   // もし今表示されているページが「単一の投稿ページ」でなければ、何もせずにこの関数を終了（ブログ一覧ページなどではカウントしない）
-  if ( !is_single() ) return;
+  if ( ! is_single() ) return;
   // もし投稿IDが指定されていなければ、global $post を使って現在表示している投稿のIDを取得
-  if ( empty($post_id) ) {
+  if ( empty( $post_id ) ) {
     global $post;
     $post_id = $post->ID;
   }
-  // set_post_views($post_id) で、現在の投稿の閲覧数をカウント
-  set_post_views($post_id);
+  // set_post_views( $post_id ) で、現在の投稿の閲覧数をカウント
+  set_post_views( $post_id );
 }
 // add_action()：wp_head というWordPressの特定の場所（ページのヘッダー）で track_post_views() 関数を呼び出すように設定
-// （これにより、ページが表示されるたびに閲覧数がカウントされる）
-add_action('wp_head', 'track_post_views');
+//（これにより、ページが表示されるたびに閲覧数がカウントされる）
+add_action( 'wp_head', 'track_post_views' );
 
 // 投稿カスタムフィールドから閲覧数を取得する関数
-function get_post_views($postID) {  // 指定された投稿（記事）の閲覧数を取得して表示するための関数
+function get_post_views( $postID ) {  // 指定された投稿（記事）の閲覧数を取得して表示するための関数
   // $count_key：前と同じく、閲覧数のカスタムフィールドの名前
   $count_key = 'post_views_count';
   // get_post_meta()：これも前と同じく、指定した投稿の閲覧数をカスタムフィールドから取得
-  $count = get_post_meta($postID, $count_key, true);
+  $count = get_post_meta( $postID, $count_key, true );
   // もし閲覧数がまだ存在しなければ、0を返す（「0 View」を表示する）。最初は誰も見ていない投稿には0が設定される
   if ( $count == '' ) {
     return "0 View";
@@ -173,68 +173,71 @@ function get_post_views($postID) {  // 指定された投稿（記事）の閲�
   return $count . ' Views';
 }
 
-// 管理画面に閲覧数のカラムを追加し、順序を調整
-function customize_views_column($columns) {
+// 管理画面に閲覧数とアイキャッチのカラムを追加し、順序を調整
+function customize_views_column( $columns ) {
   // 現在の画面が投稿一覧（post）の場合だけ処理を行う
   $screen = get_current_screen(); // get_current_screen()：現在の管理画面がどの画面なのかを取得
   // $screen->post_type === 'post'：現在表示している管理画面が「通常の投稿」（postタイプ）の場合のみ、「閲覧数」カラムを追加
   if ( $screen->post_type === 'post' ) { // 'post'のみで閲覧数を表示する
     // 新しいカラムを追加し、順序を調整
-    $reordered_columns = array(); // 新しいカラムの順序を保持するための配列を準備
+    $reordered_columns = []; // 新しいカラムの順序を保持するための配列を準備
 
     // 元々のカラム（$columns）を一つ一つ処理する。$keyにはカラムの名前、$valueにはカラムの表示名が入る
-    foreach ($columns as $key => $value) {
-      // もしカラムが「日付（date）」だったら･･･
-      if ( $key === 'date' ) {
-        // 「日付」の前に「閲覧数（post_views）」カラムを追加
+    foreach ( $columns as $key => $value ) {
+      if ( $key === 'date' ) {  // もしカラムが「日付（date）」だったら･･･
+        //「日付」の前に「閲覧数（post_views）」カラムを追加
         $reordered_columns['post_views'] = '閲覧数';
+      } elseif ( $key === 'title' ) { // もしカラムが「タイトル（title）」だったら･･･
+        //「タイトル」の前に「アイキャッチ（thumbnail）」カラムを追加
+        $reordered_columns['thumbnail'] = 'アイキャッチ';
       }
       // 元のカラムを順番に$reordered_columnsに追加。これで、他のカラムも保持される
-      $reordered_columns[$key] = $value; // 既存のカラムをそのまま追加
+      $reordered_columns[ $key ] = $value; // 既存のカラムをそのまま追加
     }
-    // return：新しく並べ替えたカラムを返す。これにより、「閲覧数」が日付の左側に追加される
+    // return：新しく並べ替えたカラムを返す。これにより、「閲覧数」が日付の左側に、「アイキャッチ」がタイトルの左側に追加される
     return $reordered_columns;
   }
 
   return $columns; // 'post'以外（例えばcampaignやvoiceなど）の時はそのままカラムを返す
 }
-// manage_posts_columnsというフィルターに、このcustomize_views_column関数を登録 → 投稿一覧画面のカラムが変更される
-add_filter('manage_posts_columns', 'customize_views_column');
+// manage_posts_columnsというフィルター（管理画面の投稿一覧のカラムを決める直前に実行されるフィルター）に、このcustomize_views_column関数を登録 → 投稿一覧画面のカラムが変更される
+add_filter( 'manage_posts_columns', 'customize_views_column' );
 
-// カラムに投稿の閲覧数を表示
-function display_views_column($column_name, $post_id) {
-  // もしカラムが「閲覧数（post_views）」なら、その投稿のIDを使ってget_post_views()で取得した閲覧数を表示
-  if ( $column_name === 'post_views' ) {
-    echo get_post_views($post_id);
+// カラムに投稿の閲覧数とアイキャッチを表示
+function display_views_column( $column_name, $post_id ) {
+  if ( $column_name === 'post_views' ) {  // もしカラムが「閲覧数（post_views）」なら、その投稿のIDを使ってget_post_views()で取得した閲覧数を表示
+    echo esc_html( get_post_views( $post_id ) );  // get_post_views()は作成済み
+  } elseif ( $column_name === 'thumbnail' ) { // もしカラムが「アイキャッチ（thumbnail）」なら、その投稿のIDを使ってアイキャッチを表示
+    echo get_the_post_thumbnail( $post_id, [ 100, 100 ], 'thumbnail' );
   }
 }
-// manage_posts_custom_columnアクションを使って、display_views_column関数を実行する → カラムに閲覧数が表示される
-add_action('manage_posts_custom_column', 'display_views_column', 10, 2);
+// manage_posts_custom_columnアクション（管理画面の投稿一覧のカラムに値を表示するときに実行されるアクション）を使って、display_views_column関数を実行する → カラムに閲覧数とアイキャッチが表示される
+add_action( 'manage_posts_custom_column', 'display_views_column', 10, 2 );
 
 // カラムの並び替えを可能にする
-function make_views_column_sortable($columns) { // 管理画面で「閲覧数」カラムをクリックすると、閲覧数順に並び替えができるようにする関数
+function make_views_column_sortable( $columns ) { // 管理画面で「閲覧数」カラムをクリックすると、閲覧数順に並び替えができるようにする関数
   // post_viewsというカラムが、post_views_count（カスタムフィールドに保存された閲覧数）で並び替えができるように設定
-  // （カスタムフィールド（特別なデータの保存場所）は「post_views_count」という名前で、各投稿の閲覧数を保存）
-  $columns['post_views'] = 'post_views_count';
+  //（カスタムフィールド（特別なデータの保存場所）は「post_views_count」という名前で、各投稿の閲覧数を保存）
+  $columns['post_views'] = 'post_views_count';  //「post_views カラムをクリックしたら orderby=post_views_count を使う」設定（左辺：post_views → カラムID（「どのカラムか」）、右辺：post_views_count → 並び替え時に orderby の「値」として使われる。管理画面で「閲覧数」カラムをクリックするとURLに「?orderby=post_views_count」が付与される）
   return $columns;
 }
-// manage_edit-post_sortable_columnsフィルターにこの関数を登録し、投稿一覧画面で閲覧数カラムの並び替えが可能になる
-add_filter('manage_edit-post_sortable_columns', 'make_views_column_sortable');
+// manage_edit-post_sortable_columnsフィルター（「どのカラムをクリック可能にするか（並び替え対象にするか）」を決めるときに実行されるフィルター）にこの関数を登録し、投稿一覧画面で閲覧数カラムの並び替えが可能になる
+add_filter( 'manage_edit-post_sortable_columns', 'make_views_column_sortable' );
 
 // 閲覧数で並び替え
-function order_by_views($query) { // 投稿のクエリ（データベースから情報を取得する処理）を、閲覧数順に並び替えるための関数
+function order_by_views( $query ) { // 投稿のクエリ（データベースから情報を取得する処理）を、「閲覧数」で並び替えるように書き換えるための関数
   // 管理画面以外ではこの関数を実行しない
-  if ( !is_admin() ) return;
+  if ( ! is_admin() ) return;
 
-  $orderby = $query->get('orderby');  // $orderby：現在の並び替え条件を確認
-  // もし並び替え条件がpost_views_countなら、meta_keyにpost_views_countを設定し、meta_value_numで数値として並び替えを行う
+  $orderby = $query->get( 'orderby' );  // $orderby：現在の並び替え条件を確認
+  // もし並び替え条件がpost_views_countなら、meta_keyにpost_views_countを設定し、meta_value_numで数値として並び替えを行う（$orderby が 'post_views_count' なら、「閲覧数」で並び替えるようにクエリを書き換える）
   if ( 'post_views_count' == $orderby ) {
-    $query->set('meta_key', 'post_views_count');
-    $query->set('orderby', 'meta_value_num');
+    $query->set( 'meta_key', 'post_views_count' );
+    $query->set( 'orderby', 'meta_value_num' );
   }
 }
 // pre_get_postsアクションで、この関数を実行する → クエリが実行される前に並び替え条件を適用
-add_action('pre_get_posts', 'order_by_views');
+add_action( 'pre_get_posts', 'order_by_views' );
 
 // アーカイブタイトルの「月: 」や「年: 」などのプレフィックスを削除
 add_filter('get_the_archive_title', function ($title) {
