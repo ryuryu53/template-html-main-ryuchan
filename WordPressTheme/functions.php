@@ -76,9 +76,9 @@ function Change_objectlabel() {
   $labels->name_admin_bar = $name;  //「+ 新規 > 投稿」→「+ 新規 > ブログ」に変更（アドミンバーのサブメニュー表示名） 25.9.28
 }
 // add_action関数を使って、Change_objectlabel関数をWordPressの初期化（init）のタイミングで実行するように登録
-add_action( 'init', 'Change_objectlabel' ); // initアクション：投稿タイプが登録されるタイミング
+add_action( 'init', 'Change_objectlabel' ); // initアクション：WordPressの初期化が完了したタイミングで呼ばれるアクション（カスタム投稿タイプ・タクソノミー・リライトルールを登録するのに最適）
 // Change_menulabel関数をWordPressの管理画面のメニュー（admin_menu）が読み込まれたときに実行するように登録
-add_action( 'admin_menu', 'Change_menulabel' ); // admin_menuアクション：管理画面メニューが組み立てられるタイミング
+add_action( 'admin_menu', 'Change_menulabel' ); // admin_menuアクション：管理画面にメニューを追加・編集できるタイミングで実行されるアクション
 
 // add_theme_support関数は特定のテーマ機能を有効化するためのもの。
 // この関数により、テーマが特定の機能をサポートしていることをWPに知らせることができる
@@ -97,7 +97,7 @@ function my_setup() {
     ]
 	);
 }
-add_action( 'after_setup_theme', 'my_setup' );
+add_action( 'after_setup_theme', 'my_setup' );  // after_setup_themeアクション：テーマが読み込まれた直後に実行されるアクション（プラグインは全部読み込まれたけど、まだWordPress本体の初期化（init）には入っていないタイミング）
 
 //アーカイブの表示件数変更  $query ↓ 現在のページでどの投稿が表示されるかを決定するための情報が入っている
 function change_posts_per_page( $query ) {
@@ -208,7 +208,11 @@ function display_views_column( $column_name, $post_id ) {
   if ( $column_name === 'post_views' ) {  // もしカラムが「閲覧数（post_views）」なら、その投稿のIDを使ってget_post_views()で取得した閲覧数を表示
     echo esc_html( get_post_views( $post_id ) );  // get_post_views()は作成済み
   } elseif ( $column_name === 'thumbnail' ) { // もしカラムが「アイキャッチ（thumbnail）」なら、その投稿のIDを使ってアイキャッチを表示
-    echo get_the_post_thumbnail( $post_id, [ 100, 100 ], 'thumbnail' );
+    if ( has_post_thumbnail( $post_id ) ) {
+      echo get_the_post_thumbnail( $post_id, [ 100, 100 ] ); // 100x100サイズでアイキャッチを表示
+    } else {
+      echo 'なし'; // アイキャッチ未設定時は「なし」と表示
+    }
   }
 }
 // manage_posts_custom_columnアクション（管理画面の投稿一覧のカラムに値を表示するときに実行されるアクション）を使って、display_views_column関数を実行する → カラムに閲覧数とアイキャッチが表示される
@@ -232,21 +236,21 @@ function order_by_views( $query ) { // 投稿のクエリ（データベース�
   $orderby = $query->get( 'orderby' );  // $orderby：現在の並び替え条件を確認
   // もし並び替え条件がpost_views_countなら、meta_keyにpost_views_countを設定し、meta_value_numで数値として並び替えを行う（$orderby が 'post_views_count' なら、「閲覧数」で並び替えるようにクエリを書き換える）
   if ( 'post_views_count' == $orderby ) {
-    $query->set( 'meta_key', 'post_views_count' );
-    $query->set( 'orderby', 'meta_value_num' );
+    $query->set( 'meta_key', 'post_views_count' );  // meta_key = 'post_views_count' →「post_views_count というカスタムフィールドを基準にする」と指定
+    $query->set( 'orderby', 'meta_value_num' ); // orderby = 'meta_value_num' →「数値として並び替えを行う」と指定
   }
 }
 // pre_get_postsアクションで、この関数を実行する → クエリが実行される前に並び替え条件を適用
 add_action( 'pre_get_posts', 'order_by_views' );
 
-// アーカイブタイトルの「月: 」や「年: 」などのプレフィックスを削除
-add_filter('get_the_archive_title', function ($title) {
-  if ( is_day()) {
-    $title = get_the_date('Y年n月j日'); // 年月日を「2024年8月31日」の形式で表示
+// アーカイブタイトルの「月: 」や「年: 」などのプレフィックスを削除（「無名関数」を登録 → 登録したフィルターを後から解除（remove_filter）できない）
+add_filter( 'get_the_archive_title', function ( $title ) {
+  if ( is_day() ) {  // 現在のページが「日別アーカイブ」かを判定
+    $title = get_the_date( 'Y年n月j日' ); // 年月日を「2024年8月31日」の形式で表示
   } elseif ( is_month() ) {
-    $title = get_the_date('Y年n月'); // 年月を「2024年8月」の形式で表示
+    $title = get_the_date( 'Y年n月' ); // 年月を「2024年8月」の形式で表示
   } elseif ( is_year() ) {
-    $title = get_the_date('Y年'); // 年を「2024年」の形式で表示
+    $title = get_the_date( 'Y年' ); // 年を「2024年」の形式で表示
   }
   return $title;
 });
@@ -569,3 +573,39 @@ function custom_wpcf7_select_filter( $tag ) {
 }
 // add_filter()を使って、CF7のフォームタグをカスタマイズする処理を追加（'wpcf7_form_tag'はCF7 のフォームタグを変更するためのフィルターフック）
 add_filter( 'wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2 );
+
+// 管理画面のカスタム投稿一覧にもカラムを追加（順番を調整）
+function add_custom_post_thumbnail_columns( $columns ) {
+  $new_columns = []; // 新しいカラムの順序を保持するための配列を準備
+
+  foreach ( $columns as $key => $value ) {
+      if ( $key === 'title' ) {
+          // タイトルの前にサムネイルを追加（thumbnailだと同じカラムが2回追加されてしまう → thumbnail_customに変更。なぜ？すでにブログ一覧でthumbnailを使っているから？ ⇒ ChatGPT見解：$new_columns['thumbnail'] を入れたあと、$new_columns[$key] = $value; で $keyが'thumbnail'だった場合、再度追加されてしまう。つまりWordPress側で既に「thumbnail」というカラムキーを暗黙的に使っていた → それがぶつかって二重に表示されている可能性がある  25.10.02）
+          $new_columns['thumbnail_custom'] = 'アイキャッチ';
+      }
+      $new_columns[ $key ] = $value; // 既存のカラムをそのまま追加
+  }
+
+  return $new_columns; // 新しく並べ替えたカラムを返す。これにより、「アイキャッチ」がタイトルの左側に追加される
+}
+
+// campaign用
+add_filter( 'manage_campaign_posts_columns', 'add_custom_post_thumbnail_columns' );
+// voice用
+add_filter( 'manage_voice_posts_columns', 'add_custom_post_thumbnail_columns' );
+
+// カラムの中身を出力
+function add_custom_post_thumbnail_column_content( $column_name, $post_id ) {
+  if ( $column_name === 'thumbnail_custom' ) {
+      if ( has_post_thumbnail( $post_id ) ) {
+          echo get_the_post_thumbnail( $post_id, [ 100, 100 ] ); // 100x100サイズでアイキャッチを表示
+      } else {
+          echo 'なし'; // アイキャッチ未設定時は「なし」と表示
+      }
+  }
+}
+
+// campaign用
+add_action( 'manage_campaign_posts_custom_column', 'add_custom_post_thumbnail_column_content', 10, 2 );
+// voice用
+add_action( 'manage_voice_posts_custom_column', 'add_custom_post_thumbnail_column_content', 10, 2 );

@@ -8,7 +8,7 @@
   </section>
 
   <!-- パンくず -->
-  <?php get_template_part('parts/breadcrumbs'); ?>
+  <?php get_template_part( 'parts/breadcrumbs' ); ?>
 
   <!-- ブログ一覧 -->
   <div class="layout-two-column two-column">
@@ -21,7 +21,7 @@
                 <picture class="blog-card__img">
                   <?php if ( get_the_post_thumbnail() ) : ?>
                     <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
-                    <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                    <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">  <!-- 最初の画像はfetchpriority="high"、2、3枚目の画像はdecoding="async"だけ、4枚目以降はloading="lazy" -->
                   <?php else : ?>
                     <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
                   <?php endif; ?>
@@ -31,32 +31,40 @@
                   <h3 class="blog-card__title text--medium"><?php the_title(); ?></h3>
                   <p class="blog-card__text text--black-pc">
                     <?php
-                      // 投稿本文を取得
-                      // $postオブジェクトには、その投稿に関連するさまざまな情報が格納されている
-                      // post_contentは、投稿オブジェクト（$post）のプロパティの一つで、その投稿の本文（記事の内容）が保存されている
-                      $content = $post->post_content;
+                    // 投稿本文を取得（$postはグローバル変数なので、ループ外や別テンプレートで呼ぶと内容がずれることがある → get_the_content() は WordPressの関数で安全に本文を取得できる）
+                    // $postオブジェクトには、その投稿に関連するさまざまな情報が格納されている
+                    // post_contentは、投稿オブジェクト（$post）のプロパティの一つで、その投稿の本文（記事の内容）が保存されている
+                    // $content = $post->post_content;
+                    $content = get_the_content();
 
-                      // 文字数を制限（ここでは110文字 → これでカンプの文字数と一致する）
-                      // mb_strlen: 文字数を数える関数。UTF-8を指定することで日本語を正しく数えられる
-                      if ( mb_strlen( $content, 'UTF-8' ) > 110 ) {
-                        // mb_substr: 文字列の一部を取り出す関数（110文字取り出す）
-                        $content = mb_substr( $content, 0, 110, 'UTF-8' ) . '...';
-                      }
+                    // コメントや不要なタグを削除（HTMLタグは維持してもOKなら、2番目のパラメータに指定 → <p>タグOKだと.p-list-card__textの外に<p>タグができてそこにテキストが入ってしまう！）
+                    $content = strip_tags( $content, '<br>' );  // 改行するときは「Shift+Enter」を押して改行
 
-                      // コメントや不要なタグを削除（HTMLタグは維持してもOKなら、2番目のパラメータに指定 → <p>タグOKだと.blog-card__textの外に<p>タグができてそこにテキストが入ってしまう！）
-                        $content = strip_tags( $content );
+                    // 改行を<br>タグに変換 → <br>タグがテキストの上にできてしまう！ → 改行コードを削除
+                    // $content = str_replace( [ "\r\n", "\r", "\n" ], '', $content );
+                    // trim() で文字列の前後にある不要な空白や改行（\r\n、\n、\r）を削除
+                    // $content = trim( $content );
+                    // 残った改行は nl2br() で <br> に変換
+                    // $content_with_breaks = nl2br( $content );  // 管理画面での改行は nl2br()で変換できなかった
 
-                      // 改行を<br>タグに変換 → <br>タグがテキストの上にできてしまう！
-                      // $content_with_breaks = nl2br( $content );
+                    // 文字数を制限（ここでは90文字 → これでカンプの文字数と一致する）
+                    // mb_strlen: 文字数を数える関数。UTF-8を指定することで日本語を正しく数えられる
+                    if ( mb_strlen( $content, 'UTF-8' ) > 90 ) :
+                      // mb_substr: 文字列の一部を取り出す関数（90文字取り出す）
+                      $content = mb_substr( $content, 0, 90, 'UTF-8' ) . '...';
+                    endif;
 
-                      // 整形したコンテンツを出力
-                      echo $content;
+                    // 整形したコンテンツを出力（wp_kses_post - 投稿内容をサニタイズする）
+                    echo wp_kses_post( $content );
                     ?>
                   </p>
                 </div>
               </a>
             </article>
-          <?php endwhile; endif; ?>
+          <?php endwhile; ?>
+          <?php else : ?>
+            <p>投稿が見つかりませんでした。</p>
+          <?php endif; ?>
         </div>
 
         <!-- ページナビゲーション -->

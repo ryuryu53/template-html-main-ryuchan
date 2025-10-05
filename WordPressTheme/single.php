@@ -8,7 +8,7 @@
   </section>
 
   <!-- パンくず -->
-  <?php get_template_part('parts/breadcrumbs'); ?>
+  <?php get_template_part( 'parts/breadcrumbs' ); ?>
 
   <!-- ブログ詳細 -->
   <div class="layout-two-column two-column">
