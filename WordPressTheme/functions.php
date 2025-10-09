@@ -281,34 +281,51 @@ function custom_wpcf7_scripts() {
 add_action( 'wp_footer', 'custom_wpcf7_scripts' );
 
 // WordPressの特定の投稿タイプに対してWYSIWYGエディターを無効化する
-function remove_wysiwyg_for_post_type($post_type) {
-  remove_post_type_support($post_type, 'editor');
+function remove_wysiwyg_for_post_type( $post_type ) {
+  // 存在確認（存在しない場合はスキップ）→ 登録されていない投稿タイプを指定してもエラーにならず、安全に動作する 25.10.6
+  if ( post_type_exists( $post_type ) ) {
+    remove_post_type_support( $post_type, 'editor' );
+  }
   // 必要に応じて他の機能を削除
-  // remove_post_type_support($post_type, 'thumbnail');
+  // remove_post_type_support( $post_type, 'thumbnail' );
 }
 
-add_action('init', function() {
-  // エディターを無効にする投稿タイプのリスト
-  $post_types = ['campaign', 'voice'];
+add_action( 'init', function() {
+  // 管理画面でのみ実行（init アクションはサイトの表示側（front側）でも呼ばれるので、無駄に処理が走らないようにする） 25.10.6
+  if ( is_admin() ) {
+    // エディターを無効にする投稿タイプのリスト
+    $post_types = [ 'campaign', 'voice' ];
 
-  // 各投稿タイプに対してエディターを削除
-  foreach ($post_types as $post_type) {
-    remove_wysiwyg_for_post_type($post_type);
+    // 各投稿タイプに対してエディターを削除
+    foreach ( $post_types as $post_type ) {
+      remove_wysiwyg_for_post_type( $post_type );
+    }
   }
 });
 
 // 管理画面にカスタムCSSを追加する（Campaignページ、説明文の文字を赤くする）
 function my_acf_admin_styles() {
-  echo '
-  <style>
-    /* 「手順」欄に入力した文字を赤くする */
-    .acf-field .acf-label p.description {
-      color: red;
+  global $pagenow;  // 今開いている管理画面が「投稿編集」なのかなどを判定するためのグローバル変数
+
+  // 投稿編集画面 or 新規追加画面のとき
+  if ( $pagenow == 'post.php' || $pagenow == 'post-new.php' ) {
+    $screen = get_current_screen(); // 現在の管理画面の情報（投稿タイプなど）を取得
+
+    // 投稿タイプが 'campaign' のときだけCSSを出力
+    if ( $screen && $screen->post_type === 'campaign' ) { // $screen->post_type：編集している投稿の種類（例：post, page, campaign）を取得
+      echo '
+      <style>
+        /* 「手順」欄に入力した文字を赤くする */
+        .acf-field .acf-label p.description {
+          color: red;
+        }
+      </style>
+      ';
     }
-  </style>
-  ';
+  }
 }
-add_action('admin_head', 'my_acf_admin_styles');
+// admin_head は「管理画面の <head> タグが読み込まれるタイミング」で実行されるアクションフック → 管理画面が表示されるたびに my_acf_admin_styles() が呼び出され、CSSが <head> 内に挿入される
+add_action( 'admin_head', 'my_acf_admin_styles' );
 
 // 管理画面にカスタムCSSを追加する（Campaign、Voiceページ、サンプル画像を挿入）
 function my_custom_admin_styles() {
@@ -333,7 +350,7 @@ function my_custom_admin_styles() {
     </style>
   ';
 }
-add_action('admin_head', 'my_custom_admin_styles');
+add_action( 'admin_head', 'my_custom_admin_styles' );
 
 // // エディターのメインコンテンツエリアについて高さを調整
 // function custom_editor_styles_for_specific_page() {
@@ -381,8 +398,8 @@ add_action('admin_head', 'my_custom_admin_styles');
 function set_editor_initial_height() {
   $screen = get_current_screen();
 
-  if ( 'post' === $screen->base && isset($_GET['post']) ) {
-    $post_id = intval($_GET['post']);
+  if ( 'post' === $screen->base && isset( $_GET['post'] ) ) {
+    $post_id = intval( $_GET['post'] );
     if ( $post_id === 12 || $post_id === 16 ) {
       ?>
       <style>
@@ -394,18 +411,29 @@ function set_editor_initial_height() {
     }
   }
 }
-add_action('admin_head', 'set_editor_initial_height');
+add_action( 'admin_head', 'set_editor_initial_height' );
 
-// Priceページのエディターで「価格」欄の説明文の文字を赤くする
+// 管理画面にカスタムCSSを追加する（固定ページ、説明文の文字を赤くする）
 function my_scf_admin_styles() {
-  echo '<style>
-    /* SCFの「手順」欄に入力した文字を赤くする */
-    .smart-cf-meta-box-table td .instruction {
-      color: red;
+  global $pagenow;  // 今開いている管理画面が「投稿編集」なのかなどを判定するためのグローバル変数
+
+  // 投稿編集画面 or 新規追加画面のとき（投稿（post）、固定ページ（page）、カスタム投稿タイプ（campaign、voiceなど）の編集画面はいずれも post.php、新規追加はいずれも post-new.php）
+  if ( $pagenow == 'post.php' || $pagenow == 'post-new.php' ) {
+    $screen = get_current_screen(); // 現在の管理画面の情報（投稿タイプなど）を取得
+
+    // 投稿タイプが固定ページのときだけCSSを出力
+    if ( $screen && $screen->post_type === 'page' ) {
+      echo '<style>
+        /* SCFの「手順」欄に入力した文字を赤くする */
+        .smart-cf-meta-box-table td .instruction {
+          color: red;
+        }
+      </style>';
     }
-  </style>';
+  }
 }
-add_action('admin_head', 'my_scf_admin_styles');
+// admin_head は「管理画面の <head> タグが読み込まれるタイミング」で実行されるアクションフック → 管理画面が表示されるたびに my_scf_admin_styles() が呼び出され、CSSが <head> 内に挿入される
+add_action( 'admin_head', 'my_scf_admin_styles' );
 
 // ウィジェットの内容を定義する関数（アイコン付きリンクを追加）
 function my_custom_dashboard_widget() {

@@ -15,21 +15,21 @@
   </head>
 
   <?php
-    $home = esc_url( home_url( '/' ) );
-    $campaign = esc_url( home_url( '/campaign/' ) );
-    $campaign_fun_diving = esc_url( home_url( '/campaign_category/fun-diving/' ) );
-    $campaign_license = esc_url( home_url( '/campaign_category/license/' ) );
-    $campaign_experience_diving = esc_url( home_url( '/campaign_category/experience-diving/' ) );
-    $about = esc_url( home_url( '/about-us/' ) );
-    $information = esc_url( home_url( '/information/' ) );
-    $blog = esc_url( home_url( '/blog/' ) );
-    $voice = esc_url( home_url( '/voice/' ) );
-    $amount = esc_url( home_url( '/price/' ) );
-    $faq = esc_url( home_url( '/faq/' ) );
-    $contact = esc_url( home_url( '/contact/' ) );
-    $sitemap = esc_url( home_url( '/sitemap/' ) );
-    $privacy = esc_url( home_url( '/privacy-policy/' ) );
-    $terms = esc_url( home_url( '/terms-of-service/' ) );
+  $home = esc_url( home_url( '/' ) );
+  $campaign = esc_url( home_url( '/campaign/' ) );
+  $campaign_fun_diving = esc_url( home_url( '/campaign_category/fun-diving/' ) );
+  $campaign_license = esc_url( home_url( '/campaign_category/license/' ) );
+  $campaign_experience_diving = esc_url( home_url( '/campaign_category/experience-diving/' ) );
+  $about = esc_url( home_url( '/about-us/' ) );
+  $information = esc_url( home_url( '/information/' ) );
+  $blog = esc_url( home_url( '/blog/' ) );
+  $voice = esc_url( home_url( '/voice/' ) );
+  $amount = esc_url( home_url( '/price/' ) );
+  $faq = esc_url( home_url( '/faq/' ) );
+  $contact = esc_url( home_url( '/contact/' ) );
+  $sitemap = esc_url( home_url( '/sitemap/' ) );
+  $privacy = esc_url( home_url( '/privacy-policy/' ) );
+  $terms = esc_url( home_url( '/terms-of-service/' ) );
   ?>
 
   <body>
