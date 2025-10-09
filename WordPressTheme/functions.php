@@ -538,37 +538,48 @@ add_action( 'current_screen', 'my_remove_post_editor_support' );
 
 // 繰り返しフィールドの「＋」「×」ボタンにラベル追加
 function add_custom_button_labels() {
-  echo '
-  <style>
-  /* 「+」ボタンに「追加」ラベルを追加 */
-  .dashicons-plus-alt::after {
-    content: "追加";
-    font-size: 12px;
-    vertical-align: top;
-    margin-left: 5px;
-    padding-right: 10px;
-  }
+  global $pagenow;  // 今開いている管理画面が「投稿編集」なのかなどを判定するためのグローバル変数
 
-  .btn-add-repeat-group.dashicons.dashicons-plus-alt.smart-cf-repeat-btn {
-    color: green;
-  }
+  // 投稿編集画面 or 新規追加画面のとき（投稿（post）、固定ページ（page）、カスタム投稿タイプ（campaign、voiceなど）の編集画面はいずれも post.php、新規追加はいずれも post-new.php）
+  if ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) {
+    $screen = get_current_screen(); // 現在の管理画面の情報（投稿タイプなど）を取得
 
-  /* 「×」ボタンに「削除」ラベルを追加 */
-  .dashicons-dismiss::after {
-    content: "削除";
-    font-size: 12px;
-    vertical-align: top;
-    margin-left: 5px;
-    padding-right: 10px;
-  }
+    // 投稿タイプが固定ページのときだけCSSを出力
+    if ( $screen && $screen->post_type === 'page' ) {
+      echo '
+      <style>
+      /* 「+」ボタンに「追加」ラベルを追加 */
+      .dashicons-plus-alt::after {
+        content: "追加";
+        font-size: 12px;
+        vertical-align: top;
+        margin-left: 5px;
+        padding-right: 10px;
+      }
 
-  .btn-remove-repeat-group.dashicons.dashicons-dismiss.smart-cf-repeat-btn {
-    color: blue;
+      .btn-add-repeat-group.dashicons.dashicons-plus-alt.smart-cf-repeat-btn {
+        color: green;
+      }
+
+      /* 「×」ボタンに「削除」ラベルを追加 */
+      .dashicons-dismiss::after {
+        content: "削除";
+        font-size: 12px;
+        vertical-align: top;
+        margin-left: 5px;
+        padding-right: 10px;
+      }
+
+      .btn-remove-repeat-group.dashicons.dashicons-dismiss.smart-cf-repeat-btn {
+        color: blue;
+      }
+      </style>
+      ';
+    }
   }
-  </style>
-  ';
 }
-add_action('admin_head', 'add_custom_button_labels');
+// admin_head は「管理画面の <head> タグが読み込まれるタイミング」で実行されるアクションフック → 管理画面が表示されるたびに add_custom_button_labels() が呼び出され、CSSが <head> 内に挿入される
+add_action( 'admin_head', 'add_custom_button_labels' );
 
 // GETパラメータを受け取って、フォームのセレクトボックスのデフォルト値として設定
 function custom_wpcf7_select_filter( $tag ) {
