@@ -1,21 +1,21 @@
 <?php get_header(); ?>
 
   <?php
-  $home = esc_url( home_url('/') );
-  $campaign = esc_url( home_url('/campaign/') );
-  $campaign_fun_diving = esc_url( home_url('/campaign_category/fun-diving/') );
-  $campaign_license = esc_url( home_url('/campaign_category/license/') );
-  $campaign_experience_diving = esc_url( home_url('/campaign_category/experience-diving/') );
-  $about = esc_url( home_url('/about-us/') );
-  $information = esc_url( home_url('/information/') );
-  $blog = esc_url( home_url('/blog/') );
-  $voice = esc_url( home_url('/voice/') );
-  $amount = esc_url( home_url('/price/') );
-  $faq = esc_url( home_url('/faq/') );
-  $contact = esc_url( home_url('/contact/') );
-  $sitemap = esc_url( home_url('/sitemap/') );
-  $privacy = esc_url( home_url('/privacy-policy/') );
-  $terms = esc_url( home_url('/terms-of-service/') );
+  $home = esc_url( home_url( '/' ) );
+  $campaign = esc_url( home_url( '/campaign/' ) );
+  $campaign_fun_diving = esc_url( home_url( '/campaign_category/fun-diving/' ) );
+  $campaign_license = esc_url( home_url( '/campaign_category/license/' ) );
+  $campaign_experience_diving = esc_url( home_url( '/campaign_category/experience-diving/' ) );
+  $about = esc_url( home_url( '/about-us/' ) );
+  $information = esc_url( home_url( '/information/' ) );
+  $blog = esc_url( home_url( '/blog/' ) );
+  $voice = esc_url( home_url( '/voice/' ) );
+  $amount = esc_url( home_url( '/price/' ) );
+  $faq = esc_url( home_url( '/faq/' ) );
+  $contact = esc_url( home_url( '/contact/' ) );
+  $sitemap = esc_url( home_url( '/sitemap/' ) );
+  $privacy = esc_url( home_url( '/privacy-policy/' ) );
+  $terms = esc_url( home_url( '/terms-of-service/' ) );
   ?>
 
   <!-- 下層ページのメインビュー -->
@@ -26,7 +26,7 @@
   </section>
 
   <!-- パンくず -->
-  <?php get_template_part('parts/breadcrumbs'); ?>
+  <?php get_template_part( 'parts/breadcrumbs' ); ?>
 
   <!-- サイトマップ -->
   <div class="layout-page-site-map page-site-map">
@@ -60,13 +60,13 @@
               <a href="<?php echo $information; ?>" class="footer-nav__left-link footer-nav__left-link--icon-green">ダイビング情報</a>
               <ul class="footer-nav__left-detail-items">
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $information; ?>#tab1" class="footer-nav__left-detail-link">ライセンス講習</a>
+                  <a href="<?php echo $information; ?>?tab=tab1" class="footer-nav__left-detail-link">ライセンス講習</a>
                 </li>
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $information; ?>#tab3" class="footer-nav__left-detail-link">体験ダイビング</a>
+                  <a href="<?php echo $information; ?>?tab=tab3" class="footer-nav__left-detail-link">体験ダイビング</a>
                 </li>
                 <li class="footer-nav__left-detail-item">
-                  <a href="<?php echo $information; ?>#tab2" class="footer-nav__left-detail-link">ファンダイビング</a>
+                  <a href="<?php echo $information; ?>?tab=tab2" class="footer-nav__left-detail-link">ファンダイビング</a>
                 </li>
               </ul>
             </li>

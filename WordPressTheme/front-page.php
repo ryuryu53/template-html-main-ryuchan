@@ -1,18 +1,18 @@
 <?php get_header(); ?>
 
   <?php
-    $home = esc_url( home_url('/') );
-    $campaign = esc_url( home_url('/campaign/') );
-    $about = esc_url( home_url('/about-us/') );
-    $information = esc_url( home_url('/information/') );
-    $blog = esc_url( home_url('/blog/') );
-    $voice = esc_url( home_url('/voice/') );
-    $amount = esc_url( home_url('/price/') );
-    $faq = esc_url( home_url('/faq/') );
-    $contact = esc_url( home_url('/contact/') );
-    $sitemap = esc_url( home_url('/sitemap/') );
-    $privacy = esc_url( home_url('/privacy-policy/') );
-    $terms = esc_url( home_url('/terms-of-service/') );
+  $home = esc_url( home_url( '/' ) );
+  $campaign = esc_url( home_url( '/campaign/' ) );
+  $about = esc_url( home_url( '/about-us/' ) );
+  $information = esc_url( home_url( '/information/' ) );
+  $blog = esc_url( home_url( '/blog/' ) );
+  $voice = esc_url( home_url( '/voice/' ) );
+  $amount = esc_url( home_url( '/price/' ) );
+  $faq = esc_url( home_url( '/faq/' ) );
+  $contact = esc_url( home_url( '/contact/' ) );
+  $sitemap = esc_url( home_url( '/sitemap/' ) );
+  $privacy = esc_url( home_url( '/privacy-policy/' ) );
+  $terms = esc_url( home_url( '/terms-of-service/' ) );
   ?>
 
   <!-- ローディングアニメーション -->
@@ -37,21 +37,21 @@
       <div class="swiper mv__slider js-mv-swiper">
         <div class="swiper-wrapper">
           <?php
-            // 「mainview」というグループ名で繰り返しフィールドのデータを取得
-            $mv_images = SCF::get('mainview', get_the_ID());
-            // 画像が登録されている場合にループで表示
+          // 「mainview」というグループ名で繰り返しフィールドのデータを取得
+          $mv_images = SCF::get( 'mainview', get_the_ID() );
+          // 画像が登録されている場合にループで表示
           if ( $mv_images ) :
             // $counter = 0; // カウンターを初期化
             foreach ( $mv_images as $image ) :
               // 画像URLとalt属性を取得
               // wp_get_attachment_image_src()：画像に関する情報を配列で返す
               // false (デフォルト)は「アイコンを使わない」という意味、[0]：url（画像のurl）
-              $image_url_sp = wp_get_attachment_image_src($image['image_sp'], 'full')[0];
-              $image_url_pc = wp_get_attachment_image_src($image['image_pc'], 'full')[0];
+              $image_url_sp = wp_get_attachment_image_src( $image['image_sp'], 'full' )[0];
+              $image_url_pc = wp_get_attachment_image_src( $image['image_pc'], 'full' )[0];
               // get_post_meta()：特定の投稿（ポスト）やメディアに付属する追加情報（メタデータ）を取得する関数
               // $image['image_pc']は画像のIDを返す  _wp_attachment_image_alt：画像のaltテキストを表す特別なキー(メタデータキー)
               // true：一つの値だけが返される（falseだと複数の値が配列として返される）
-              $image_alt = get_post_meta($image['image_pc'], '_wp_attachment_image_alt', true);
+              $image_alt = get_post_meta( $image['image_pc'], '_wp_attachment_image_alt', true );
           ?>
             <div class="swiper-slide">
               <!-- ローディングアニメーション用 -->
@@ -63,11 +63,11 @@
                 </div> -->
               <?php // endif; ?>
               <picture class="mv__img">
-                <?php if ( !empty($image['image_sp']) && !empty($image['image_pc']) ) : ?>
+                <?php if ( ! empty( $image['image_sp'] ) && ! empty( $image['image_pc'] ) ) : ?>
                   <!-- spの画像 -->
-                  <source media="(max-width: 767px)" srcset="<?php echo esc_url($image_url_sp); ?>" width="375" height="667">
+                  <source media="(max-width: 767px)" srcset="<?php echo esc_url( $image_url_sp ); ?>" width="375" height="667">
                   <!-- pcの画像 -->
-                  <img src="<?php echo esc_url($image_url_pc); ?>" alt="<?php echo esc_attr($image_alt); ?>" width="1440" height="768">
+                  <img src="<?php echo esc_url( $image_url_pc ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" width="1440" height="768">
                 <?php endif; ?>
               </picture>
             </div>

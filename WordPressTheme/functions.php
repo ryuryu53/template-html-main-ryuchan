@@ -516,10 +516,10 @@ function my_remove_post_editor_support() {
   // その画面で編集している投稿タイプ（$screen->post_type）が固定ページ（page）、かつ現在の管理画面の「画面タイプ」（$screen->base）が編集画面（post）ならば
   if ( $screen->post_type === 'page' && $screen->base === 'post' ) {
     // 編集しているページのIDを取得（現在のページIDを取得（$_GET['post']）し、存在していればそれを整数値に変換して$post_idに保存し、IDがない場合は0を代入）
-    $post_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
+    $post_id = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : 0;
 
     // IDに基づいてページのスラッグを取得し、特定のページならエディタ削除をしない
-    $exclude_slugs = array('price', 'faq', 'privacy-policy', 'terms-of-service');
+    $exclude_slugs = [ 'price', 'faq', 'privacy-policy', 'terms-of-service' ];
     // get_post_field()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
     $post_slug = get_post_field( 'post_name', $post_id );
 
