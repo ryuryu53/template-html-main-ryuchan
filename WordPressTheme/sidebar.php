@@ -93,7 +93,6 @@
 
     <div class="column-aside__campaign">
       <h2 class="column-aside__title">キャンペーン</h2>
-      <ul class="column-aside__items campaign-cards">
         <?php
         // 最新のカスタム投稿（campaign）の2件を取得するクエリ
         $latest_campaign_args = [  // $latest_campaign_args：WP_Queryに渡すための条件を設定
@@ -104,49 +103,54 @@
         ];
         // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースからキャンペーン投稿を取得
         $latest_campaign_query = new WP_Query( $latest_campaign_args );
-        // サブループ開始   while文：投稿がある限り、このループで2件のキャンペーン情報を1件ずつ表示
-        if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post();
+        if ( $latest_campaign_query->have_posts() ) :
         ?>
-          <li class="campaign-cards__item campaign-card campaign-cards__item--blog-page">
+          <ul class="column-aside__items campaign-cards">
             <?php
-            $terms = get_the_terms( get_the_ID(), 'campaign_category' ); // 現在の投稿に紐付いた'term'を取得
-            if ( $terms && ! is_wp_error( $terms ) ) : // タームが存在し、エラーがない場合のみ処理を実行
-              // foreach ( $terms as $term ) : // 各タームについて繰り返し処理 → 各投稿は必ず1つのタームだけに属するので、最初の要素を取り出せばOK
-              $term = $terms[0]; // 最初のタームを取得
-              $term_link = get_term_link( $term ); // タームのリンクを取得
+            // サブループ開始   while文：投稿がある限り、このループで2件のキャンペーン情報を1件ずつ表示
+            while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post();
             ?>
-              <a href="<?php echo esc_url( $term_link ); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
-            <?php endif; ?>
-              <picture class="campaign-card__img campaign-card__img--blog-page">
-                <?php if ( get_the_post_thumbnail() ) : ?>
-                  <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
-                  <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
-                <?php else : ?>
-                  <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
+              <li class="campaign-cards__item campaign-card campaign-cards__item--blog-page">
+                <?php
+                $terms = get_the_terms( get_the_ID(), 'campaign_category' ); // 現在の投稿に紐付いた'term'を取得
+                if ( $terms && ! is_wp_error( $terms ) ) : // タームが存在し、エラーがない場合のみ処理を実行
+                  // foreach ( $terms as $term ) : // 各タームについて繰り返し処理 → 各投稿は必ず1つのタームだけに属するので、最初の要素を取り出せばOK
+                  $term = $terms[0]; // 最初のタームを取得
+                  $term_link = get_term_link( $term ); // タームのリンクを取得
+                ?>
+                  <a href="<?php echo esc_url( $term_link ); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
+                    <picture class="campaign-card__img campaign-card__img--blog-page">
+                      <?php if ( get_the_post_thumbnail() ) : ?>
+                        <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
+                        <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                      <?php else : ?>
+                        <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
+                      <?php endif; ?>
+                    </picture>
+                    <div class="campaign-card__body campaign-card__body--blog-page">
+                      <h3 class="campaign-card__title campaign-card__title--blog-page text--medium"><?php the_title(); ?></h3>
+                      <p class="campaign-card__text campaign-card__text--blog-page text--small-sp">全部コミコミ(お一人様)</p>
+                      <!-- キャンペーン価格 -->
+                      <div class="campaign-card__price campaign-card__price--blog-page">
+                        <?php
+                        $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
+                        $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                        $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                        ?>
+                        <?php if ( $price_before ) : ?>
+                          <span class="campaign-card__price-before campaign-card__price-before--blog-page">&yen;<?php echo esc_html( number_format( intval( $price_before ) ) ); ?></span>
+                        <?php endif; ?>
+                        <?php if ( $price_after ) : ?>
+                          <span class="campaign-card__price-after campaign-card__price-after--blog-page">&yen;<?php echo esc_html( number_format( intval( $price_after ) ) ); ?></span>
+                        <?php endif; ?>
+                      </div>
+                    </div>
+                  </a>
                 <?php endif; ?>
-              </picture>
-              <div class="campaign-card__body campaign-card__body--blog-page">
-                <h3 class="campaign-card__title campaign-card__title--blog-page text--medium"><?php the_title(); ?></h3>
-                <p class="campaign-card__text campaign-card__text--blog-page text--small-sp">全部コミコミ(お一人様)</p>
-                <!-- キャンペーン価格 -->
-                <div class="campaign-card__price campaign-card__price--blog-page">
-                  <?php
-                  $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
-                  $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
-                  $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
-                  ?>
-                  <?php if ( $price_before ) : ?>
-                    <span class="campaign-card__price-before campaign-card__price-before--blog-page">&yen;<?php echo esc_html( number_format( intval( $price_before ) ) ); ?></span>
-                  <?php endif; ?>
-                  <?php if ( $price_after ) : ?>
-                    <span class="campaign-card__price-after campaign-card__price-after--blog-page">&yen;<?php echo esc_html( number_format( intval( $price_after ) ) ); ?></span>
-                  <?php endif; ?>
-                </div>
-              </div>
-            </a>
-          </li>
-        <?php endwhile; wp_reset_postdata(); endif; ?>
-      </ul>
+              </li>
+            <?php endwhile; wp_reset_postdata(); ?>
+          </ul>
+        <?php endif; ?>
       <div class="column-aside__btn-2">
         <!-- get_post_type_archive_link()：キャンペーンのカスタム投稿タイプ（campaign）のアーカイブページ（一覧ページ）へのリンクを生成 -->
         <a href="<?php echo esc_url( get_post_type_archive_link( 'campaign' ) ); ?>" class="button">

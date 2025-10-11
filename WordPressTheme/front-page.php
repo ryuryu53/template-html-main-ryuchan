@@ -94,67 +94,64 @@
       </div>
       <div class="campaign__swiper">
         <div class="swiper js-campaign-swiper">
-          <ul class="swiper-wrapper campaign__items campaign-cards">
-            <?php
-              // 最新のカスタム投稿（campaign）の8件を取得するクエリ
-              $latest_campaign_args = array(  // $latest_campaign_args：WP_Queryに渡すための条件を設定
-                'post_type' => 'campaign', // カスタム投稿タイプ「campaign」の指定
-                'posts_per_page' => 8, // 最新の8件を表示
-                'orderby' => 'date', // 日付順にソート
-                'order' => 'DESC' // 新しいものを先頭に･･･降順（DESC）
-              );
-              // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースからキャンペーン投稿を取得
-              $latest_campaign_query = new WP_Query($latest_campaign_args);
-
+          <?php
+          // 最新のカスタム投稿（campaign）の8件を取得するクエリ
+          $latest_campaign_args = [  // $latest_campaign_args：WP_Queryに渡すための条件を設定
+            'post_type' => 'campaign', // カスタム投稿タイプ「campaign」の指定
+            'posts_per_page' => 8, // 最新の8件を表示
+            'orderby' => 'date', // 日付順にソート
+            'order' => 'DESC' // 新しいものを先頭に･･･降順（DESC）
+          ];
+          // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースからキャンペーン投稿を取得
+          $latest_campaign_query = new WP_Query( $latest_campaign_args );
+          if ( $latest_campaign_query->have_posts() ) :
+          ?>
+            <ul class="swiper-wrapper campaign__items campaign-cards">
+              <?php
               // サブループ開始   while文：投稿がある限り、このループで8件のキャンペーン情報を1件ずつ表示
-              if ( $latest_campaign_query->have_posts() ) : while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post();
-            ?>
-              <li class="swiper-slide campaign-cards__item campaign-card">
-                <?php
-                  $terms = get_the_terms(get_the_ID(), 'campaign_category'); // 現在の投稿に紐付いた'term'を取得
-                  if ( $terms && !is_wp_error($terms) ) : // タームが存在し、エラーがない場合のみ処理を実行
-                    foreach ($terms as $term) : // 各タームについて繰り返し処理
-                      $term_link = get_term_link($term); // タームのリンクを取得
-                ?>
-                  <a href="<?php echo esc_url($term_link); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
-                <?php endforeach; endif; ?>
-                  <picture class="campaign-card__img">
-                    <?php if ( get_the_post_thumbnail() ) : ?>
-                      <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
-                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
-                    <?php else : ?>
-                      <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
-                    <?php endif; ?>
-                  </picture>
-                  <div class="campaign-card__body">
-                    <?php
-                      // カスタムタクソノミー「campaign_category」の取得
-                      $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                      if ( $terms && !is_wp_error($terms) ) :
-                    ?>
-                      <p class="campaign-card__category"><?php echo esc_html($terms[0]->name); ?></p>
-                    <?php endif; ?>
-                    <h3 class="campaign-card__title text--medium"><?php the_title(); ?></h3>
-                    <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
-                    <!-- キャンペーン価格 -->
-                    <div class="campaign-card__price">
-                      <?php
-                        $campaign_price = get_field('campaign_price');  // グループフィールドからデータを取得
-                        $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
-                        $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
-                      ?>
-                      <?php if ( $price_before ) : ?>
-                        <span class="campaign-card__price-before">&yen;<?php echo esc_html(number_format(intval($price_before))); ?></span>
-                      <?php endif; ?>
-                      <?php if ( $price_after ) : ?>
-                        <span class="campaign-card__price-after">&yen;<?php echo esc_html(number_format(intval($price_after))); ?></span>
-                      <?php endif; ?>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            <?php endwhile; endif; wp_reset_postdata(); ?>
-          </ul>
+              while ( $latest_campaign_query->have_posts() ) : $latest_campaign_query->the_post();
+              ?>
+                <li class="swiper-slide campaign-cards__item campaign-card">
+                  <?php
+                  $terms = get_the_terms( get_the_ID(), 'campaign_category' ); // 現在の投稿に紐付いた'term'を取得 → get_the_terms() の戻り値の型はタームオブジェクトの配列
+                  if ( $terms && ! is_wp_error( $terms ) ) : // タームが存在し、エラーがない場合のみ処理を実行
+                    // foreach ($terms as $term) : // 各タームについて繰り返し処理 → この投稿では 1つの投稿は 1つのタームにしか属さないので最初のタームオブジェクト $terms[0]を取得すればOK
+                    $term_link = get_term_link( $terms[0] ); // タームのリンクを取得
+                  ?>
+                    <a href="<?php echo esc_url( $term_link ); ?>" class="campaign-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
+                      <picture class="campaign-card__img">
+                        <?php if ( get_the_post_thumbnail() ) : ?>
+                          <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
+                          <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                        <?php else : ?>
+                          <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
+                        <?php endif; ?>
+                      </picture>
+                      <div class="campaign-card__body">
+                        <p class="campaign-card__category"><?php echo esc_html( $terms[0]->name ); ?></p>
+                        <h3 class="campaign-card__title text--medium"><?php the_title(); ?></h3>
+                        <p class="campaign-card__text text--small-sp">全部コミコミ(お一人様)</p>
+                        <!-- キャンペーン価格 -->
+                        <div class="campaign-card__price">
+                          <?php
+                          $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
+                          $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                          $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                          ?>
+                          <?php if ( $price_before ) : ?>
+                            <span class="campaign-card__price-before">&yen;<?php echo esc_html( number_format( intval( $price_before ) ) ); ?></span>
+                          <?php endif; ?>
+                          <?php if ( $price_after ) : ?>
+                            <span class="campaign-card__price-after">&yen;<?php echo esc_html( number_format( intval( $price_after ) ) ); ?></span>
+                          <?php endif; ?>
+                        </div>
+                      </div>
+                    </a>
+                  <?php endif; ?>
+                </li>
+              <?php endwhile; wp_reset_postdata(); ?> <!-- wp_reset_postdata(); → the_post() によって一時的に書き換えられたグローバル変数 $postを、メインクエリの状態に戻すための関数。サブループを実行すると、その中で the_post() が呼ばれるたびに $postが上書きされる。そのため、サブループが終わった直後に wp_reset_postdata() を実行して $postを元に戻す必要がある -->
+            </ul>
+          <?php endif; ?>
         </div>
       </div>
       <div class="campaign__swiper-btn">

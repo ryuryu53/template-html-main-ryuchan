@@ -22,10 +22,10 @@
         // 表示したい順番のスラッグを指定（FB：並び替え不要）
         // $custom_order = array('license', 'fun-diving', 'experience-diving');
 
-        $terms = get_terms( array( // get_terms：特定のタクソノミー（campaign_category）のカテゴリ情報を取得する関数
+        $terms = get_terms( [ // get_terms：特定のタクソノミー（campaign_category）のカテゴリ情報を取得する関数
           'taxonomy' => 'campaign_category',
           'hide_empty' => true, // 投稿が1つもないカテゴリを表示しないようにする
-        ) );
+        ] );
 
         // スラッグ順にタームを並び替える（FB：並び替え不要）
         if ( ! empty( $terms ) ) :
@@ -65,9 +65,9 @@
                 <div class="campaign-card__body campaign-card__body--sub-page">
                   <!-- get_the_terms()：投稿に関連するタクソノミー（分類）を取得するための関数、get_the_ID()：現在表示されている投稿のID（個別の識別番号）を取得 -->
                   <?php
-                    // カスタムタクソノミー「campaign_category」の取得
-                    $terms = get_the_terms( get_the_ID(), 'campaign_category' );
-                    if ( $terms && ! is_wp_error( $terms ) ) :
+                  // カスタムタクソノミー「campaign_category」の取得
+                  $terms = get_the_terms( get_the_ID(), 'campaign_category' );
+                  if ( $terms && ! is_wp_error( $terms ) ) :
                   ?>
                     <p class="campaign-card__category"><?php echo esc_html( $terms[0]->name ); ?></p>
                   <?php endif; ?>
@@ -76,9 +76,9 @@
                   <!-- キャンペーン価格 -->
                   <div class="campaign-card__price campaign-card__price--sub-page">
                     <?php
-                      $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
-                      $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
-                      $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
+                    $campaign_price = get_field( 'campaign_price' );  // グループフィールドからデータを取得
+                    $price_before = $campaign_price['campaign_1'];  // サブフィールドから通常価格を取得
+                    $price_after = $campaign_price['campaign_2']; // サブフィールドから割引価格を取得
                     ?>
                     <?php if ( $price_before ) : ?>
                       <!-- number_format（数値を「3桁ごとにカンマ区切り」にして文字列として返す関数）だけだと非推奨の警告、intval（文字列や小数を整数に変換する関数）で数値として扱う -->
@@ -96,20 +96,20 @@
                     <!-- キャンペーン期間 -->
                     <div class="campaign-card__information-period">
                       <?php
-                        $campaign_period = get_field( 'campaign_period' );  // グループフィールドからデータを取得
-                        $start_date = $campaign_period['campaign_4'] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
-                        $end_date = $campaign_period['campaign_5'] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
-                        // ACF戻り値の形式に合わせてDateTimeオブジェクトに変換（DateTime「日付や時間を便利に扱うためのクラス」、createFromFormat「DateTimeクラスが持っている「静的メソッド」、特定のフォーマットで書かれた文字列を、DateTimeに変換するための関数。DateTime::createFromFormat()と書く必要あり」、スコープ定義演算子（::）「クラスに属するメソッドや定数を呼び出す」ときに使う）
-                        $start_dt = $start_date ? DateTime::createFromFormat( 'Y/n/j', $start_date ) : false;
-                        $end_dt = $end_date ? DateTime::createFromFormat( 'Y/n/j', $end_date ) : false;
-                        // datetime属性用（ISO 8601形式）
-                        $start_datetime_attr = $start_dt ? $start_dt->format( 'Y-m-d' ) : '';
-                        $end_datetime_attr = $end_dt ? $end_dt->format( 'Y-m-d' ) : '';
-                        // 年だけ取得
-                        $start_year = $start_dt ? $start_dt->format( 'Y' ) : '';
-                        $end_year = $end_dt ? $end_dt->format( 'Y' ) : '';
-                        // 終了日の年を省略したものを取得
-                        $end_day = $end_dt ? $end_dt->format( 'n/j' ) : '';
+                      $campaign_period = get_field( 'campaign_period' );  // グループフィールドからデータを取得
+                      $start_date = $campaign_period['campaign_4'] ?? null; // 開始日(フォーマット済み: Y/n/j)を取得
+                      $end_date = $campaign_period['campaign_5'] ?? null; // 終了日(フォーマット済み: Y/n/j)を取得
+                      // ACF戻り値の形式に合わせてDateTimeオブジェクトに変換（DateTime「日付や時間を便利に扱うためのクラス」、createFromFormat「DateTimeクラスが持っている「静的メソッド」、特定のフォーマットで書かれた文字列を、DateTimeに変換するための関数。DateTime::createFromFormat()と書く必要あり」、スコープ定義演算子（::）「クラスに属するメソッドや定数を呼び出す」ときに使う）
+                      $start_dt = $start_date ? DateTime::createFromFormat( 'Y/n/j', $start_date ) : false;
+                      $end_dt = $end_date ? DateTime::createFromFormat( 'Y/n/j', $end_date ) : false;
+                      // datetime属性用（ISO 8601形式）
+                      $start_datetime_attr = $start_dt ? $start_dt->format( 'Y-m-d' ) : '';
+                      $end_datetime_attr = $end_dt ? $end_dt->format( 'Y-m-d' ) : '';
+                      // 年だけ取得
+                      $start_year = $start_dt ? $start_dt->format( 'Y' ) : '';
+                      $end_year = $end_dt ? $end_dt->format( 'Y' ) : '';
+                      // 終了日の年を省略したものを取得
+                      $end_day = $end_dt ? $end_dt->format( 'n/j' ) : '';
                       ?>
                       <?php if ( $start_dt ) : ?>
                         <time datetime="<?php echo esc_attr( $start_datetime_attr ); ?>">
@@ -122,12 +122,12 @@
                       <?php if ( $end_dt ) : ?>
                         <time datetime="<?php echo esc_attr( $end_datetime_attr ); ?>">
                           <?php
-                            // 開始日と終了日の年が同じ場合は終了日の年を省略
-                            if ( $start_year && $end_year && $start_year === $end_year ) {
-                              echo esc_html( $end_day ); //「n/j」だけ表示
-                            } else {
-                              echo esc_html( $end_date ); // 年が異なる場合はフルの日付「Y/n/j」を表示
-                            }
+                          // 開始日と終了日の年が同じ場合は終了日の年を省略
+                          if ( $start_year && $end_year && $start_year === $end_year ) {
+                            echo esc_html( $end_day ); //「n/j」だけ表示
+                          } else {
+                            echo esc_html( $end_date ); // 年が異なる場合はフルの日付「Y/n/j」を表示
+                          }
                           ?>
                         </time>
                       <?php else : ?>
@@ -137,9 +137,9 @@
                     <p class="campaign-card__information-inquiry">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign-card__btn">
                       <?php
-                        // 投稿タイトルを取得
-                        $campaign_title = get_the_title();
-                        // urlencode() で日本語タイトルをURLで使えるようにエンコード
+                      // 投稿タイトルを取得
+                      $campaign_title = get_the_title();
+                      // urlencode() で日本語タイトルをURLで使えるようにエンコード
                       ?>
                       <a href="<?php echo esc_url( home_url( '/contact?select_plan=' . urlencode( $campaign_title ) ) ); ?>" class="button">
                         <span class="button__text">Contact&nbsp;us</span>
