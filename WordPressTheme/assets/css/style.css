@@ -3680,7 +3680,7 @@ a[href^="tel:"] {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	bottom: 4.625rem;
+	bottom: -5.625rem;
 	content: "";
 	height: 11.3125rem;
 	position: absolute;

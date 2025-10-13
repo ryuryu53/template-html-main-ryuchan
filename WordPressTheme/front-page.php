@@ -166,7 +166,7 @@
   </section>
 
   <!-- About -->
-  <section class="layout-about about"></section>
+  <section class="layout-about about">
     <div class="about__inner inner">
       <div class="about__title section-header">
         <p class="section-header__engtitle">About&nbsp;us</p>
