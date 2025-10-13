@@ -4921,7 +4921,7 @@ a[href^="tel:"] {
 	height: 8.625rem;
 	left: calc(50% - min(48%, 38.75rem));
 	position: absolute;
-	top: 1.5rem;
+	top: -7.5rem;
 	width: 18.8125rem;
 }
 
@@ -4930,7 +4930,7 @@ a[href^="tel:"] {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	bottom: 4.5625rem;
+	bottom: -4.4375rem;
 	content: "";
 	height: 10.125rem;
 	position: absolute;

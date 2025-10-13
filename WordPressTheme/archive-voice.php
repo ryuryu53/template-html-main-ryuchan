@@ -20,10 +20,10 @@
         // 表示したい順番のスラッグを指定（FB：並び替え不要）
         // $custom_order = array('license', 'fun-diving', 'experience-diving');
 
-        $terms = get_terms( array(
+        $terms = get_terms( [
           'taxonomy' => 'voice_category',
           'hide_empty' => true,
-        ) );
+        ] );
 
         // スラッグ順にタームを並び替える（FB：並び替え不要）
         if ( ! empty( $terms ) ) :
@@ -42,6 +42,8 @@
         </a>
         <?php endforeach; endif; ?>
       </div>
+
+      <!-- お客様の声一覧 -->
       <?php if ( have_posts() ) : ?>
         <div class="page-campaign__items page-campaign__items--voice-page voice-cards">
           <?php while ( have_posts() ) : the_post(); ?>
@@ -53,9 +55,9 @@
                       <!-- 年代（性別） -->
                       <span class="voice-card__age">
                         <?php
-                          $voice_age_and_gender = get_field( 'voice_age_and_gender' );  // グループフィールドからデータを取得
-                          $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
-                          $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
+                        $voice_age_and_gender = get_field( 'voice_age_and_gender' );  // グループフィールドからデータを取得
+                        $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
+                        $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
                         ?>
                         <?php if ( $voice_age ) : ?>
                           <?php echo esc_html( $voice_age ); ?>
@@ -65,9 +67,9 @@
                         <?php endif; ?>
                       </span>
                       <?php
-                        // カスタムタクソノミー「voice_category」の取得
-                        $terms = get_the_terms( get_the_ID(), 'voice_category' );
-                        if ( $terms && ! is_wp_error( $terms ) ) :
+                      // カスタムタクソノミー「voice_category」の取得
+                      $terms = get_the_terms( get_the_ID(), 'voice_category' );
+                      if ( $terms && ! is_wp_error( $terms ) ) :
                       ?>
                         <p class="voice-card__category"><?php echo esc_html( $terms[0]->name ); ?></p>
                       <?php endif; ?>
@@ -99,6 +101,7 @@
     </div>
   </div>
 
+  <!-- ページナビゲーション -->
   <div class="layout-pagenavi layout-pagenavi--voice-page">
     <?php wp_pagenavi(); ?>
   </div>

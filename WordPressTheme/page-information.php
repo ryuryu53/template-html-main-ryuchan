@@ -8,7 +8,7 @@
   </section>
 
   <!-- パンくず -->
-  <?php get_template_part('parts/breadcrumbs'); ?>
+  <?php get_template_part( 'parts/breadcrumbs' ); ?>
 
   <!-- ダイビング情報 -->
   <section class="layout-page-information page-information">
@@ -27,8 +27,8 @@
                 <p class="information-card__text">泳げない人も、ちょっと水が苦手な人も、ダイビングを「安全に」楽しんでいただけるよう、スタッフがサポートいたします&#65281;スキューバダイビングを楽しむためには最低限の知識とスキルが要求されます。知識やスキルと言ってもそんなに難しい事ではなく、安全に楽しむ事を目的としたものです。プロダイバーの指導のもと知識とスキルを習得しCカードを取得して、ダイバーになろう&#65281;</p>
               </div>
               <picture class="information-card__img">
-                <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/info-license.webp" type="image/webp">
-                <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/info-license.jpg" alt="5人の人がエメラルドグリーンの海でスキューバダイビングを楽しんでいる様子">
+                <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-license.webp" type="image/webp">
+                <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-license.jpg" alt="5人の人がエメラルドグリーンの海でスキューバダイビングを楽しんでいる様子">
               </picture>
             </div>
           </li>
@@ -39,8 +39,8 @@
                 <p class="information-card__text">ブランクダイバー、ライセンスを取り立ての方も安心&#65281;沖縄本島を代表する「青の洞窟」（真栄田岬）やケラマ諸島などメジャーなポイントはモチロンのこと、最北端「辺戸岬」や最南端の「大渡海岸」等もご用意&#65281;</p>
               </div>
               <picture class="information-card__img">
-                <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/info-fundiving.webp" type="image/webp">
-                <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/info-fundiving.jpg" alt="薄いピンク色の多くの熱帯魚が泳いでいる様子">
+                <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-fundiving.webp" type="image/webp">
+                <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-fundiving.jpg" alt="薄いピンク色の多くの熱帯魚が泳いでいる様子">
               </picture>
             </div>
           </li>
@@ -51,8 +51,8 @@
                 <p class="information-card__text">ブランクダイバー、ライセンスを取り立ての方も安心&#65281;沖縄本島を代表する「青の洞窟」（真栄田岬）やケラマ諸島などメジャーなポイントはモチロンのこと、最北端「辺戸岬」や最南端の「大渡海岸」等もご用意&#65281;</p>
               </div>
               <picture class="information-card__img">
-                <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/info-diving.webp" type="image/webp">
-                <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/info-diving.jpg" alt="白とオレンジ色のツートンカラーの2匹の熱帯魚が泳いでいる様子">
+                <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-diving.webp" type="image/webp">
+                <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-diving.jpg" alt="白とオレンジ色のツートンカラーの2匹の熱帯魚が泳いでいる様子">
               </picture>
             </div>
           </li>

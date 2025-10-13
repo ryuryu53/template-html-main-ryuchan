@@ -40,7 +40,7 @@
   //「gallery」というグループ名で繰り返しフィールドのデータを取得
   $gallery_images = SCF::get( 'gallery', get_the_ID() );
 
-  // 画像が1枚以上あるかどうかを確認するためのフラグ
+  // 画像が 1枚以上あるかどうかを確認するためのフラグ
   $has_image = false;
 
   // 繰り返しフィールドが空でないかをチェック
@@ -48,7 +48,7 @@
     // 各ギャラリー画像のフィールドを確認し、画像があるかをチェック
     foreach ( $gallery_images as $image ) {
       if ( ! empty( $image['image'] ) ) {
-        $has_image = true;
+        $has_image = true;  //「画像が 1枚以上ある」とフラグを立てる
         break; // 1つでも画像があればループを終了
       }
     }

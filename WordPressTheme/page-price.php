@@ -23,9 +23,8 @@
           'table_prices4',
           'table_prices5'
         ];
-
         $counter = 1; // タイトルID用カウンター
-        $has_any_price = false; // ← 1つでも料金表があればtrueにする
+        $has_any_price = false; // ← 1つでも料金表があれば true にする
 
         // コースデータの有効性をチェックする関数
         function is_valid_course( $price, $key_suffix ) {
@@ -42,12 +41,12 @@
 
           // テーブルタイトルと料金表情報が存在するか確認
           if ( ! empty( $table_title ) && ! empty( $table_prices ) && is_array( $table_prices ) ) :
-            // 各項目が空でないことを確認
+            // 有効な料金が 1つ以上あるかどうかを確認するためのフラグ
             $has_valid_price = false;
-            //「料金表の中に、有効なコースが1つでもあるか」を確認する
+            //「料金表の中に、有効なコースが1つでもあるか」を確認する（各項目が空でないことを確認）
             foreach ( $table_prices as $price ) { // $price：1行分のコースデータ（コース名・価格）が入った連想配列
               if ( is_valid_course( $price, $key_suffix ) ) {
-                $has_valid_price = true;  // 「有効な料金がある」とフラグを立てる
+                $has_valid_price = true;  //「有効な料金がある」とフラグを立てる
                 break;  // 1つ見つかったらすぐループを抜ける
               }
             }

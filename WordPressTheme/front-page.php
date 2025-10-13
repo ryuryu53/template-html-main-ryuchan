@@ -53,7 +53,9 @@
               // true：一つの値だけが返される（falseだと複数の値が配列として返される）
               $image_alt = get_post_meta( $image['image_pc'], '_wp_attachment_image_alt', true );
           ?>
-            <div class="swiper-slide">
+            <!-- SP画像とPC画像の両方あった場合にのみ表示（どちらかがあったら表示される、というふうにしない → あくまでセットで考える。画像が入ってないのに表示する動きおかしい 24.10.15のFB） -->
+            <?php if ( ! empty( $image['image_sp'] ) && ! empty( $image['image_pc'] ) ) : ?>
+              <div class="swiper-slide">
               <!-- ローディングアニメーション用 -->
               <!-- 1つ目のスライドにのみmv__imagesを表示 -->
               <?php // if ( $counter === 0 ) : ?>
@@ -62,15 +64,14 @@
                   <div class="mv__img-right js-mv-img-right"></div>
                 </div> -->
               <?php // endif; ?>
-              <picture class="mv__img">
-                <?php if ( ! empty( $image['image_sp'] ) && ! empty( $image['image_pc'] ) ) : ?>
+                <picture class="mv__img">
                   <!-- spの画像 -->
                   <source media="(max-width: 767px)" srcset="<?php echo esc_url( $image_url_sp ); ?>" width="375" height="667">
                   <!-- pcの画像 -->
                   <img src="<?php echo esc_url( $image_url_pc ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" width="1440" height="768">
-                <?php endif; ?>
-              </picture>
-            </div>
+                </picture>
+              </div>
+            <?php endif; ?>
           <?php
             // $counter++; // カウンターをインクリメント
             endforeach;
@@ -165,7 +166,7 @@
   </section>
 
   <!-- About -->
-  <section class="layout-about about">
+  <section class="layout-about about"></section>
     <div class="about__inner inner">
       <div class="about__title section-header">
         <p class="section-header__engtitle">About&nbsp;us</p>
@@ -173,12 +174,12 @@
       </div>
       <div class="about__img-box">
         <picture class="about__img-left">
-          <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/about_1.webp" type="image/webp">
-          <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/about_1.jpg" alt="赤い屋根瓦の上でトラのような置物がこちらを向いている様子">
+          <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/about_1.webp" type="image/webp">
+          <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/about_1.jpg" alt="赤い屋根瓦の上でトラのような置物がこちらを向いている様子">
         </picture>
         <picture class="about__img-right">
-          <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/about_2.webp" type="image/webp">
-          <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/about_2.jpg" alt="黒い頭に黄色いお腹の二匹の魚が泳いでいる様子">
+          <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/about_2.webp" type="image/webp">
+          <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/about_2.jpg" alt="黒い頭に黄色いお腹の二匹の魚が泳いでいる様子">
         </picture>
       </div>
       <div class="about__text-body">
@@ -205,8 +206,8 @@
       <div class="information__content">
         <div class="colorbox js-colorbox">
           <picture class="information__img">
-            <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/information.webp" type="image/webp">
-            <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/information.jpg" alt="オレンジ色や水色の魚がサンゴ礁の中を泳いでいる様子">
+            <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/information.webp" type="image/webp">
+            <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/information.jpg" alt="オレンジ色や水色の魚がサンゴ礁の中を泳いでいる様子">
           </picture>
         </div>
         <div class="information__text-body">
@@ -229,48 +230,48 @@
       </div>
       <div class="blog__items blog-cards">
         <?php
-          $posts_args = array(
-          'post_type' => 'post',
-          'posts_per_page' => 3
-          );
-          $posts_query = new WP_Query($posts_args);
-          if ( $posts_query->have_posts() ) : while ( $posts_query->have_posts() ) : $posts_query->the_post();
+        $posts_args = [
+        'post_type' => 'post',
+        'posts_per_page' => 3
+        ];
+        $posts_query = new WP_Query( $posts_args );
+        if ( $posts_query->have_posts() ) : while ( $posts_query->have_posts() ) : $posts_query->the_post();
         ?>
           <article class="blog-cards__item blog-card">
             <a href="<?php the_permalink(); ?>" class="blog-card__link">
               <picture class="blog-card__img">
                 <?php if ( get_the_post_thumbnail() ) : ?>
-                  <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
-                  <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                  <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
+                  <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                 <?php else : ?>
-                  <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
+                  <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
                 <?php endif; ?>
               </picture>
               <div class="blog-card__body">
-                <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m.d'); ?></time>
+                <time datetime="<?php the_time( 'c' ); ?>" class="blog-card__date"><?php the_time( 'Y.m.d' ); ?></time>
                 <h3 class="blog-card__title text--medium"><?php the_title(); ?></h3>
                 <p class="blog-card__text text--black-pc">
                   <?php
-                    // 投稿本文を取得
-                    $content = $post->post_content;
+                  // 投稿本文を取得
+                  $content = get_the_content();
 
-                    // 文字数を制限
-                    if (mb_strlen($content, 'UTF-8') > 110) {
-                      // 110文字で切り取る
-                      $content = mb_substr($content, 0, 110, 'UTF-8') . '...';
-                    }
+                  // コメントや不要なタグを削除
+                  $content = strip_tags( $content, '<br>' );
 
-                    // コメントや不要なタグを削除
-                      $content = strip_tags($content);
+                  // 文字数を制限
+                  if ( mb_strlen( $content, 'UTF-8' ) > 90 ) {
+                    // 90文字で切り取る
+                    $content = mb_substr( $content, 0, 90, 'UTF-8' ) . '...';
+                  }
 
-                    // 整形したコンテンツを出力
-                    echo $content;
+                  // 整形したコンテンツを出力
+                  echo wp_kses_post( $content );
                   ?>
                 </p>
               </div>
             </a>
           </article>
-        <?php endwhile; endif; wp_reset_postdata(); ?>
+        <?php endwhile; wp_reset_postdata(); endif; ?>
       </div>
       <div class="blog__btn">
         <a href="<?php echo $blog; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
@@ -287,72 +288,66 @@
       </div>
       <div class="voice__items voice-cards">
         <?php
-          // 最新のカスタム投稿（voice）の2件を取得するクエリ
-          $latest_voice_args = array( // $latest_voice_args：WP_Queryに渡すための条件を設定
-            'post_type' => 'voice', // カスタム投稿タイプ「voice」の指定
-            'posts_per_page' => 2, // 最新の2件だけ表示
-            'orderby' => 'date', // 日付順にソート
-            'order' => 'DESC' // 新しいものを先頭に
-          );
-          // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースから「口コミ」の投稿を取得
-          $latest_voice_query = new WP_Query($latest_voice_args);
-
-          // サブループ開始   while文：投稿がある限り、このループで1件ずつ口コミの情報を表示。今回は最新の2件なので2回だけ実行される
-          if ( $latest_voice_query->have_posts() ) : while ( $latest_voice_query->have_posts() ) : $latest_voice_query->the_post();
+        // 最新のカスタム投稿（voice）の2件を取得するクエリ
+        $latest_voice_args = [ // $latest_voice_args：WP_Queryに渡すための条件を設定
+          'post_type' => 'voice', // カスタム投稿タイプ「voice」の指定
+          'posts_per_page' => 2, // 最新の2件だけ表示
+          'orderby' => 'date', // 日付順にソート
+          'order' => 'DESC' // 新しいものを先頭に
+        ];
+        // WP_Query：WordPressのクエリ機能を使って、指定した条件でデータベースから「口コミ」の投稿を取得
+        $latest_voice_query = new WP_Query( $latest_voice_args );
+        // サブループ開始   while文：投稿がある限り、このループで1件ずつ口コミの情報を表示。今回は最新の2件なので2回だけ実行される
+        if ( $latest_voice_query->have_posts() ) : while ( $latest_voice_query->have_posts() ) : $latest_voice_query->the_post();
         ?>
           <article class="voice-cards__item voice-card">
             <?php
-              $terms = get_the_terms(get_the_ID(), 'voice_category'); // 現在の投稿に紐付いた'term'を取得
-              if ( $terms && !is_wp_error($terms) ) : // タームが存在し、エラーがない場合のみ処理を実行
-                foreach ($terms as $term) : // 各タームについて繰り返し処理
-                  $term_link = get_term_link($term); // タームのリンクを取得
+            $terms = get_the_terms( get_the_ID(), 'voice_category' ); // 現在の投稿に紐付いた'term'を取得
+            if ( $terms && ! is_wp_error( $terms ) ) : // タームが存在し、エラーがない場合のみ処理を実行
+              // foreach ( $terms as $term ) : // 各タームについて繰り返し処理 → この投稿では 1つの投稿は 1つのタームにしか属さないので最初のタームオブジェクト $terms[0]を取得すればOK
+                $term_link = get_term_link( $terms[0] ); // タームのリンクを取得
             ?>
-              <a href="<?php echo esc_url($term_link); ?>" class="voice-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
-            <?php endforeach; endif; ?>
-              <div class="voice-card__head">
-                <div class="voice-card__meta">
-                  <div class="voice-card__label">
-                    <!-- 年代（性別） -->
-                    <span class="voice-card__age">
-                      <?php
-                        $voice_age_and_gender = get_field('voice_age_and_gender');  // グループフィールドからデータを取得
+              <a href="<?php echo esc_url( $term_link ); ?>" class="voice-card__link">  <!-- 詳細投稿ページはなし → その投稿が属するカテゴリーのタブへ飛ぶ -->
+                <div class="voice-card__head">
+                  <div class="voice-card__meta">
+                    <div class="voice-card__label">
+                      <!-- 年代（性別） -->
+                      <span class="voice-card__age">
+                        <?php
+                        $voice_age_and_gender = get_field( 'voice_age_and_gender' );  // グループフィールドからデータを取得
                         $voice_age = $voice_age_and_gender['voice_1'];  // サブフィールドから年代を取得
                         $voice_gender = $voice_age_and_gender['voice_2']; // サブフィールドから性別を取得
-                      ?>
-                      <?php if ( $voice_age ) : ?>
-                        <?php echo esc_html($voice_age); ?>
-                      <?php endif; ?>
-                      <?php if ( $voice_gender ) : ?>
-                        (<?php echo esc_html($voice_gender); ?>)
-                      <?php endif; ?>
-                    </span>
-                    <?php
-                      // カスタムタクソノミー「voice_category」の取得
-                      $terms = get_the_terms(get_the_ID(), 'voice_category');
-                      if ( $terms && !is_wp_error($terms) ) :
-                    ?>
-                      <p class="voice-card__category"><?php echo esc_html($terms[0]->name); ?></p>
-                    <?php endif; ?>
+                        ?>
+                        <?php if ( $voice_age ) : ?>
+                          <?php echo esc_html( $voice_age ); ?>
+                        <?php endif; ?>
+                        <?php if ( $voice_gender ) : ?>
+                          (<?php echo esc_html( $voice_gender ); ?>)
+                        <?php endif; ?>
+                      </span>
+                      <p class="voice-card__category"><?php echo esc_html( $terms[0]->name ); ?></p>
+                    </div>
+                    <h3 class="voice-card__title"><?php the_title(); ?></h3>
                   </div>
-                  <h3 class="voice-card__title"><?php the_title(); ?></h3>
+                  <div class="voice-card__img colorbox js-colorbox">
+                    <picture>
+                      <?php if ( get_the_post_thumbnail() ) : ?>
+                        <source srcset="<?php the_post_thumbnail_url( 'full' ); ?>">  <!-- jpg使用のため「type="image/webp"」を削除 -->
+                        <img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                      <?php else : ?>
+                        <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/noimage.png" alt="noimage">
+                      <?php endif; ?>
+                    </picture>
+                  </div>
                 </div>
-                <div class="voice-card__img colorbox js-colorbox">
-                  <picture>
-                    <?php if ( get_the_post_thumbnail() ) : ?>
-                      <source srcset="<?php the_post_thumbnail_url('full'); ?>" type="image/webp">
-                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
-                    <?php else : ?>
-                      <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/noimage.png" alt="noimage">
-                    <?php endif; ?>
-                  </picture>
-                </div>
-              </div>
-              <?php if ( get_field('voice_3') ) : ?>
-                <p class="voice-card__text text--black-sp"><?php the_field('voice_3'); ?></p>
-              <?php endif; ?>
-            </a>
+                <!-- コメント -->
+                <?php if ( get_field( 'voice_3' ) ) : ?>
+                  <p class="voice-card__text text--black-sp"><?php the_field( 'voice_3' ); ?></p>
+                <?php endif; ?>
+              </a>
+            <?php endif; ?>
           </article>
-        <?php endwhile; endif; wp_reset_postdata(); ?>
+        <?php endwhile; wp_reset_postdata(); endif; ?>
       </div>
       <div class="voice__btn">
         <a href="<?php echo $voice; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
@@ -370,74 +365,85 @@
       <div class="price__contents">
         <div class="price__img colorbox js-colorbox">
           <picture>
-            <source media="(min-width: 768px)" srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/price-pc.webp" type="image/webp">
-            <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/price-sp.webp" type="image/webp">
-            <source srcset="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/price-sp.jpg">
-            <img src="<?php echo esc_url(get_theme_file_uri()); ?>/assets/images/common/price-pc.jpg" alt="サンゴの周りを多くの赤い小さな熱帯魚が泳いでいる様子">
+            <source media="(min-width: 768px)" srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/price-pc.webp" type="image/webp">
+            <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/price-sp.webp" type="image/webp">
+            <source srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/price-sp.jpg">
+            <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/price-pc.jpg" alt="サンゴの周りを多くの赤い小さな熱帯魚が泳いでいる様子">
           </picture>
         </div>
         <div class="price__table price-table">
           <?php
-            // 料金表のフィールド名をリスト化
-            $price_tables = [
-              'table_prices1',
-              'table_prices2',
-              'table_prices3',
-              'table_prices4',
-              'table_prices5'
-            ];
+          // 料金表のフィールド名をリスト化
+          $price_tables = [
+            'table_prices1',
+            'table_prices2',
+            'table_prices3',
+            'table_prices4',
+            'table_prices5'
+          ];
+          $has_any_price = false; // ← 1つでも料金表があれば true にする
 
-            // コースデータの有効性をチェックする関数
-            function is_valid_course($price, $key_suffix) {
-              return !empty($price["course_name{$key_suffix}"]) && !empty($price["course_price{$key_suffix}"]);
+          // コースデータの有効性をチェックする関数
+          function is_valid_course( $price, $key_suffix ) {
+            //「コース名が空でない」かつ「価格が空でない」なら true、それ以外なら falseを返す
+            return ! empty( $price["course_name{$key_suffix}"] ) && ! empty( $price["course_price{$key_suffix}"] );
           }
 
-            // 各料金表について処理
-            foreach ( $price_tables as $price_table_key ) :
-              // PriceページのID
-              $page_price_id = 12;
-              // テーブルタイトルと料金表情報を取得
-              $key_suffix = substr($price_table_key, -1); // キーの末尾番号を取得
-              $table_title = SCF::get("table_title{$key_suffix}", $page_price_id);  // ここではSCF::getメソッドに$page_price_id引数が必要
-              $table_prices = SCF::get($price_table_key, $page_price_id);
+          // 各料金表について処理
+          foreach ( $price_tables as $price_table_key ) :
+            // PriceページのID
+            $page_price_id = 12;
+            // テーブルタイトルと料金表情報を取得
+            $key_suffix = substr( $price_table_key, -1 ); // キーの末尾番号を取得
+            $table_title = SCF::get( "table_title{$key_suffix}", $page_price_id );  // ここでは SCF::getメソッドに $page_price_id引数が必要
+            $table_prices = SCF::get( $price_table_key, $page_price_id );
 
-              // テーブルタイトルと料金表情報が存在するか確認
-              if ( !empty($table_title) && !empty($table_prices) && is_array($table_prices) ) :
-                // 各項目が空でないことを確認
-                $has_valid_price = false;
-                foreach ( $table_prices as $price ) {
-                  if ( is_valid_course($price, $key_suffix) ) {
-                    $has_valid_price = true;
-                    break;
-                  }
+            // テーブルタイトルと料金表情報が存在するか確認
+            if ( ! empty( $table_title ) && ! empty( $table_prices ) && is_array( $table_prices ) ) :
+              // 有効な料金が 1つ以上あるかどうかを確認するためのフラグ
+              $has_valid_price = false;
+              //「料金表の中に、有効なコースが1つでもあるか」を確認する（各項目が空でないことを確認）
+              foreach ( $table_prices as $price ) { // $price：1行分のコースデータ（コース名・価格）が入った連想配列
+                if ( is_valid_course( $price, $key_suffix ) ) {
+                  $has_valid_price = true;  //「有効な料金がある」とフラグを立てる
+                  break;  // 1つ見つかったらすぐループを抜ける
                 }
+              }
               // 有効な料金情報が存在する場合のみ表示
               if ( $has_valid_price ) :
+                $has_any_price = true; // ← 1つでも表示されたら true にする
           ?>
-              <div class="price-table__content">
-                <h3 class="price-table__title text--bold"><?php echo esc_html($table_title); ?></h3>
-                <dl class="price-table__items text--small-sp">
-                  <?php foreach ( $table_prices as $price ) : ?>
-                    <?php
-                      // コース名と価格が空でないことを確認
-                      if ( is_valid_course($price, $key_suffix) ) :
-                    ?>
+            <div class="price-table__content">
+              <h3 class="price-table__title text--bold"><?php echo esc_html( $table_title ); ?></h3>
+              <dl class="price-table__items text--small-sp">
+                <?php foreach ( $table_prices as $price ) : ?>
+                  <?php
+                  // コース名と価格が空でないことを確認
+                  if ( is_valid_course( $price, $key_suffix ) ) :
+                  ?>
                     <div class="price-table__item">
                       <dt>
                         <?php
-                          $course_name = esc_html($price["course_name{$key_suffix}"]);
-                          echo $course_name;  // トップページではSP版でも改行しない、HTMLエスケープのみ
+                        $course_name = esc_html( $price["course_name{$key_suffix}"] );
+                        echo $course_name;  // トップページではSP版でも改行しない、HTMLエスケープのみ
                         ?>
                       </dt>
-                      <dd>&yen;<?php echo esc_html(number_format(intval($price["course_price{$key_suffix}"]))); ?></dd>
+                      <dd>&yen;<?php echo esc_html( number_format( intval( $price["course_price{$key_suffix}"] ) ) ); ?></dd>
                     </div>
-                    <?php endif; ?>
-                  <?php endforeach; ?>
-                </dl>
-              </div>
-              <?php endif; ?>
-            <?php endif; ?>
-          <?php endforeach; ?>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </dl>
+            </div>
+          <?php
+              endif;
+            endif;
+          endforeach;
+
+          // ここで出力が一度もなかった場合にメッセージを表示
+          if ( ! $has_any_price ) :
+            echo '<p>現在、料金情報は登録されていません。</p>';
+          endif;
+          ?>
         </div>
       </div>
       <div class="price__btn">

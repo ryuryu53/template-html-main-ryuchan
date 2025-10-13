@@ -48,6 +48,8 @@
         </a>
         <?php endforeach; endif; ?>
       </div>
+
+      <!-- キャンペーン一覧 -->
       <?php if ( have_posts() ) : ?>
         <ul class="page-campaign__items campaign-list">
           <?php while ( have_posts() ) : the_post(); ?>
@@ -156,6 +158,7 @@
     </div>
   </section>
 
+  <!-- ページナビゲーション -->
   <div class="layout-pagenavi">
     <?php wp_pagenavi(); ?>
   </div>
