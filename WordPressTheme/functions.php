@@ -474,10 +474,10 @@ function my_custom_dashboard_styles() {
 }
 
 // ダッシュボード用のCSSを読み込む
-add_action('admin_head', 'my_custom_dashboard_styles');
+add_action( 'admin_head', 'my_custom_dashboard_styles' );
 
 // フックを使ってダッシュボードにウィジェットを追加
-add_action('wp_dashboard_setup', 'add_my_custom_dashboard_widget');
+add_action( 'wp_dashboard_setup', 'add_my_custom_dashboard_widget' );
 
 // すべての固定ページのエディターを削除
 // function my_remove_post_editor_support() {
@@ -648,3 +648,134 @@ function add_custom_post_thumbnail_column_content( $column_name, $post_id ) {
 add_action( 'manage_campaign_posts_custom_column', 'add_custom_post_thumbnail_column_content', 10, 2 );
 // voice用
 add_action( 'manage_voice_posts_custom_column', 'add_custom_post_thumbnail_column_content', 10, 2 );
+
+/* --------------------------------------------
+ *   ログイン画面のロゴをオリジナルに変更
+ * -------------------------------------------- */
+function custom_login_logo() {
+  ?>
+  <style type="text/css">
+    /* ログインページ全体の背景色をカスタム（任意） */
+    body.login {
+        background-color: #DDF0F1; /* お好みで色変更 */
+    }
+
+    /* ロゴの配置を変更 */
+    .login h1 a {
+      background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/footer-logo.svg');
+      background-size: contain; /* 画像を枠に収める */
+      width: 300px;  /* ロゴの幅（必要に応じて調整） */
+        /* height: auto; ロゴの高さ（必要に応じて調整）「height: auto;」だとロゴが極端に小さくなってしまう！デフォルトの「height: 84px;」を使用 */
+      margin-bottom: 25px; /* ログインフォームとの余白 */
+    }
+  </style>
+  <?php
+}
+// login_enqueue_scriptsアクションフック：ログインページの CSS・JSを読み込む直前に実行される
+// add_action( 'login_enqueue_scripts', 'custom_login_logo' );  // このタイミングでは WP本体の CSS（login.min.css）に上書きされてしまう
+// login_headアクションフック：ログインページ（wp-login.php）の <head> タグ内で、1.WP標準のログインCSS（login.min.css など）が読み込まれる。2.login_head アクションが発火（ここで custom_login_logoの<style>…</style> が出力される）3.その後に <head> を閉じて本文へ（WPの標準CSSが読み込まれた後にCSSが追加される）
+add_action( 'login_head', 'custom_login_logo' );
+
+// ロゴクリック時のリンク先を自サイトに変更（デフォルト：WordPress公式サイト「https://wordpress.org/」）
+function custom_login_logo_url() {
+  return home_url(); // サイトのトップページ
+}
+// login_headerurlフィルターフック：ロゴのリンクURLを出力する直前に実行される（WPがロゴのリンク先（https://wordpress.org/）を出力しようとする → login_headerurl フィルタが呼ばれる！ → custom_login_logo_url() が実行され、home_url() に書き換わる）
+add_filter( 'login_headerurl', 'custom_login_logo_url' );
+
+// ロゴの titleテキスト（ツールチップテキスト：マウスカーソルを要素の上に乗せたときに、ふわっと表示される小さな説明のこと）を変更（デフォルト：title="Powered by WordPress" という文字を入れている）
+function custom_login_logo_url_title() {
+  return get_bloginfo( 'name' ); //「サイトのタイトル」を表示
+}
+// login_headertextフィルターフック：ロゴの titleテキスト（「Powered by WordPress」）を出力する直前に実行される（get_bloginfo('name') に置き換わる）⇒ WP6.5以降はtitle属性がなくなった。「リンクテキスト自体がサイト名」になった → これにより、login_headertextフィルターの出番がなくなった → 削除してOK！？ → ダメ！削除したらリンクテキストが「Powered by WordPress」になってしまう！！ → login_headertextフィルターを残しておく（バージョン 6.8.3）
+add_filter( 'login_headertext', 'custom_login_logo_url_title' );
+
+/* --------------------------------------------
+ *   ログイン画面の背景に画像を設定
+ * -------------------------------------------- */
+function my_login_custom_background_images() {
+  ?>
+  <style>
+    body.login {
+      background: none;
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* === デフォルト（モバイル）用 === */
+    body.login::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+      /* スマホ版の4枚を配置 */
+      background:
+        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_1.webp') 0% 0% / 50% 50% no-repeat,
+        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_2.webp') 100% 0% / 50% 50% no-repeat,
+        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_3.webp') 0% 100% / 50% 50% no-repeat,
+        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_4.webp') 100% 100% / 50% 50% no-repeat;
+      background-repeat: no-repeat;
+      background-size: 50% 50%;
+    }
+
+    /* === PC（768px以上）用 === */
+    @media (min-width: 768px) {
+      body.login::before {
+        background:
+          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_1.webp') 0% 0% / 50% 50% no-repeat,
+          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_2.webp') 100% 0% / 50% 50% no-repeat,
+          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_3.webp') 0% 100% / 50% 50% no-repeat,
+          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_4.webp') 100% 100% / 50% 50% no-repeat;
+      }
+    }
+  </style>
+  <?php
+}
+add_action( 'login_head', 'my_login_custom_background_images' );
+
+function my_login_text_color_adjust() {
+  ?>
+  <style>
+    /* 「パスワードをお忘れですか？」リンク */
+    #nav a {
+      color: rgba(255, 255, 255, 0.9) !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: color 0.3s ease;
+    }
+    #nav a:hover {
+      color: #fff !important;
+    }
+
+    /* 「← TeamDevelopment へ移動」リンク */
+    #backtoblog a {
+      color: rgba(255, 255, 255, 0.85) !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: color 0.3s ease;
+    }
+    #backtoblog a:hover {
+      color: #fff !important;
+    }
+
+    /* リンクが背景に埋もれないよう、軽く下地を追加 */
+    .login #nav, .login #backtoblog {
+      background: rgba(0,0,0,0.25);
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: block;
+    }
+
+    /* レイアウト調整（中央寄せ） */
+    .login #nav, .login #backtoblog {
+      text-align: center;
+      margin: 10px auto;
+      width: fit-content;
+    }
+  </style>
+  <?php
+}
+add_action( 'login_head', 'my_login_text_color_adjust' );
