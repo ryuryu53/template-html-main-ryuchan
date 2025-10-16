@@ -1,4 +1,7 @@
 <?php
+/* --------------------------------------------
+ *   CSSとJSをfunctions.phpから読み込む
+ * -------------------------------------------- */
 function enqueue_custom_scripts() {
   // Google Fontsの読み込み
   wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Gotu&family=Lato:wght@400;700&family=Noto+Sans+JP:wght@100..900&display=swap', [], null );
@@ -39,11 +42,13 @@ EOT;
 
 add_filter( 'style_loader_tag', 'add_rel_preconnect', 10, 4 );
 
-// 管理画面：投稿 → ブログに名称変更
+/* --------------------------------------------
+ *   管理画面：投稿 → ブログに名称変更
+ * -------------------------------------------- */
 // 管理画面のメニューにある「投稿」というラベルを「ブログ」に変更する関数を定義
 function Change_menulabel() {
   // globalは、WordPressのグローバル変数（$menuと$submenu）を使うための宣言
-  // $menuと$submenuは、WordPressの管理画面のメニューの情報を持っている
+  // $menuと$submenuは、管理画面のメニューの情報を持っている
   global $menu;
   global $submenu;
   $name = 'ブログ'; // $nameという変数に、「ブログ」という新しい名前を設定
@@ -77,10 +82,12 @@ function Change_objectlabel() {
 }
 // add_action関数を使って、Change_objectlabel関数をWordPressの初期化（init）のタイミングで実行するように登録
 add_action( 'init', 'Change_objectlabel' ); // initアクション：WordPressの初期化が完了したタイミングで呼ばれるアクション（カスタム投稿タイプ・タクソノミー・リライトルールを登録するのに最適）
-// Change_menulabel関数をWordPressの管理画面のメニュー（admin_menu）が読み込まれたときに実行するように登録
+// Change_menulabel関数を管理画面のメニュー（admin_menu）が読み込まれたときに実行するように登録
 add_action( 'admin_menu', 'Change_menulabel' ); // admin_menuアクション：管理画面にメニューを追加・編集できるタイミングで実行されるアクション
 
-// add_theme_support関数は特定のテーマ機能を有効化するためのもの。
+/* --------------------------------------------
+ *   add_theme_support関数により特定のテーマ機能を有効化する
+ * -------------------------------------------- */
 // この関数により、テーマが特定の機能をサポートしていることをWPに知らせることができる
 function my_setup() {
 	add_theme_support( 'post-thumbnails' ); /* アイキャッチ */  // 管理画面で記事やページに画像を追加できるようになる
@@ -99,7 +106,10 @@ function my_setup() {
 }
 add_action( 'after_setup_theme', 'my_setup' );  // after_setup_themeアクション：テーマが読み込まれた直後に実行されるアクション（プラグインは全部読み込まれたけど、まだWordPress本体の初期化（init）には入っていないタイミング）
 
-//アーカイブの表示件数変更  $query ↓ 現在のページでどの投稿が表示されるかを決定するための情報が入っている
+/* --------------------------------------------
+ *   アーカイブの表示件数変更
+ * -------------------------------------------- */
+// $query：現在のページでどの投稿が表示されるかを決定するための情報が入っている
 function change_posts_per_page( $query ) {
   // 管理画面やメインクエリでない場合は処理しない
   if ( is_admin() || ! $query->is_main_query() )
@@ -116,12 +126,18 @@ function change_posts_per_page( $query ) {
 }
 add_action( 'pre_get_posts', 'change_posts_per_page' );
 
+/* --------------------------------------------
+ *   カスタム投稿タイプのリライトルールを空にして、詳細ページを生成しない
+ * -------------------------------------------- */
 // カスタム投稿タイプ「campaign」のリライトルールを空にして、詳細ページを生成しない
 add_filter( 'campaign_rewrite_rules', '__return_empty_array' );
 
 // カスタム投稿タイプ「voice」のリライトルールを空にして、詳細ページを生成しない
 add_filter( 'voice_rewrite_rules', '__return_empty_array' );
 
+/* --------------------------------------------
+ *   管理画面の投稿一覧（ブログ一覧）に閲覧数とアイキャッチを表示するカラムを追加
+ * -------------------------------------------- */
 // 投稿の閲覧数をカウントする関数を作成
 function set_post_views( $postID ) {
   // カスタムフィールド（特別なデータの保存場所）の名前を設定。「post_views_count」という名前で、各投稿の閲覧数を保存
@@ -243,7 +259,10 @@ function order_by_views( $query ) { // 投稿のクエリ（データベース�
 // pre_get_postsアクションで、この関数を実行する → クエリが実行される前に並び替え条件を適用
 add_action( 'pre_get_posts', 'order_by_views' );
 
-// アーカイブタイトルの「月: 」や「年: 」などのプレフィックスを削除（「無名関数」を登録 → 登録したフィルターを後から解除（remove_filter）できない）
+/* --------------------------------------------
+ *   アーカイブタイトルの「月: 」や「年: 」などのプレフィックスを削除
+ * -------------------------------------------- */
+//「無名関数」を登録 → 登録したフィルターを後から解除（remove_filter）できない
 add_filter( 'get_the_archive_title', function ( $title ) {
   if ( is_day() ) {  // 現在のページが「日別アーカイブ」かを判定
     $title = get_the_date( 'Y年n月j日' ); // 年月日を「2024年8月31日」の形式で表示
@@ -255,6 +274,9 @@ add_filter( 'get_the_archive_title', function ( $title ) {
   return $title;
 });
 
+/* --------------------------------------------
+ *   Contact Form 7に関係する設定
+ * -------------------------------------------- */
 // Contact Form 7で自動挿入されるPタグ、brタグを削除
 add_filter( 'wpcf7_autop_or_not', 'wpcf7_autop_return_false' );
 function wpcf7_autop_return_false() {
@@ -280,30 +302,42 @@ function custom_wpcf7_scripts() {
 // 作成した関数「custom_wpcf7_scripts」を</body> タグの直前に追加する、という指示
 add_action( 'wp_footer', 'custom_wpcf7_scripts' );
 
-// WordPressの特定の投稿タイプに対してWYSIWYGエディターを無効化する
-function remove_wysiwyg_for_post_type( $post_type ) {
-  // 存在確認（存在しない場合はスキップ）→ 登録されていない投稿タイプを指定してもエラーにならず、安全に動作する 25.10.6
-  if ( post_type_exists( $post_type ) ) {
-    remove_post_type_support( $post_type, 'editor' );
-  }
-  // 必要に応じて他の機能を削除
-  // remove_post_type_support( $post_type, 'thumbnail' );
-}
+// GETパラメータを受け取って、フォームのセレクトボックスのデフォルト値として設定
+function custom_wpcf7_select_filter( $tag ) {
+  // $tagが配列かどうかを確認。配列でないなら、そのまま返して関数の処理を終了（$tag：Contact Form 7 側で用意されている引数。$tagの中には対象のフォーム部品に関する情報（名前・値・オプションなど）が配列として入っている）
+  if ( ! is_array( $tag ) ) return $tag;
 
-add_action( 'init', function() {
-  // 管理画面でのみ実行（init アクションはサイトの表示側（front側）でも呼ばれるので、無駄に処理が走らないようにする） 25.10.6
-  if ( is_admin() ) {
-    // エディターを無効にする投稿タイプのリスト
-    $post_types = [ 'campaign', 'voice' ];
-
-    // 各投稿タイプに対してエディターを削除
-    foreach ( $post_types as $post_type ) {
-      remove_wysiwyg_for_post_type( $post_type );
+  $form_field_name = 'menu-464'; // CF7のセレクトボックス名（ショートコード内のname）
+  // URLにselect_planというパラメータがあるかどうかを確認（$_GET：URLのクエリパラメータ（GETパラメータ → ?の後ろの部分）を取得するための配列。例：https://example.com/?key=value だとkeyを指定してvalueを取得）
+  if ( isset( $_GET['select_plan'] ) && isset( $tag['values'] ) ) { // isset() は「変数が存在するか」を調べる関数
+    // urldecode()を使ってURLエンコードされている文字（例: %20 → スペース）を元の形に戻す
+    $selected_value = urldecode( $_GET['select_plan'] ); // GETパラメータをデコード
+    // $tag['name']（現在のフォームのフィールド名）が $form_field_name（指定したセレクトボックス）と同じかを確認
+    if ( $tag['name'] === $form_field_name ) {
+      // $tag['values'] には、セレクトボックスの選択肢（プルダウンの中身）が入っている
+      foreach ( $tag['values'] as $key => $value ) {  // $keyは選択肢の番号（0から始まる）、$valueは選択肢の文字（ライセンス取得など）
+        // もしGETパラメータの値と、今見ている選択肢のvalueが同じなら…
+        if ( $value === $selected_value ) {
+          // $tag['options']はデフォルトでは空の配列である可能性が高いが、初めから存在しない（未定義）可能性もあるので、安全にコードを動作させるためには以下のチェックをした方がよい
+          if ( ! isset( $tag['options'] ) ) {
+            $tag['options'] = []; // `options`が未定義なら空の配列をセット
+          }
+          // default: をつけて、CF7のデフォルト値として設定。CF7の仕様では1から始まるため+1（[] を使うことで、配列の最後に値を追加できる）
+          $tag['options'][] = 'default:' . ( $key + 1 ); // 例えば、$key = 0 なら、'default:1' となり、1番目の選択肢がデフォルトになる（Contact Form 7 は default:数字 を指定すると、その順番の選択肢を selected にしてくれる仕組みになっている）
+        }
+      }
     }
   }
-});
+  // 変更を加えた$tagを返す → フォームのセレクトボックスのデフォルト値が変更される
+  return $tag;
+}
+// add_filter()を使って、CF7のフォームタグをカスタマイズする処理を追加（'wpcf7_form_tag'はCF7 のフォームタグを変更するためのフィルターフック）
+add_filter( 'wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2 );
 
-// 管理画面にカスタムCSSを追加する（Campaignページ、説明文の文字を赤くする）
+/* --------------------------------------------
+ *   管理画面にカスタムCSSを追加する（カスタム投稿タイプ、ACF）
+ * -------------------------------------------- */
+// Campaignページ、カスタムフィールドの説明文の文字を赤くする
 function my_acf_admin_styles() {
   global $pagenow;  // 今開いている管理画面が「投稿編集」なのかなどを判定するためのグローバル変数
 
@@ -327,7 +361,7 @@ function my_acf_admin_styles() {
 // admin_head は「管理画面の <head> タグが読み込まれるタイミング」で実行されるアクションフック → 管理画面が表示されるたびに my_acf_admin_styles() が呼び出され、CSSが <head> 内に挿入される
 add_action( 'admin_head', 'my_acf_admin_styles' );
 
-// 管理画面にカスタムCSSを追加する（Campaign、Voiceページ、サンプル画像を挿入）
+// Campaign、Voiceページ、サンプル画像を挿入
 function my_custom_admin_styles() {
   echo '
     <style>
@@ -413,7 +447,10 @@ function set_editor_initial_height() {
 }
 add_action( 'admin_head', 'set_editor_initial_height' );
 
-// 管理画面にカスタムCSSを追加する（固定ページ、説明文の文字を赤くする）
+/* --------------------------------------------
+ *   管理画面にカスタムCSSを追加する（固定ページ、SCF）
+ * -------------------------------------------- */
+// 繰り返しフィールドの説明文の文字を赤くする
 function my_scf_admin_styles() {
   global $pagenow;  // 今開いている管理画面が「投稿編集」なのかなどを判定するためのグローバル変数
 
@@ -434,107 +471,6 @@ function my_scf_admin_styles() {
 }
 // admin_head は「管理画面の <head> タグが読み込まれるタイミング」で実行されるアクションフック → 管理画面が表示されるたびに my_scf_admin_styles() が呼び出され、CSSが <head> 内に挿入される
 add_action( 'admin_head', 'my_scf_admin_styles' );
-
-// ウィジェットの内容を定義する関数（アイコン付きリンクを追加）
-function my_custom_dashboard_widget() {
-  // ウィジェット内に表示する内容をリスト化（CSSクラスを使う）
-  echo '<ul class="custom-dashboard-links">'; // クラスを割り当て
-  echo '<li><span class="dashicons dashicons-admin-home custom-icon"></span><a href="' . get_edit_post_link(25) . '">トップページ</a></li>';
-  echo '<li><span class="dashicons dashicons-format-gallery custom-icon"></span><a href="' . get_edit_post_link(8) . '">ギャラリー</a></li>';
-  echo '<li><span class="dashicons dashicons-money-alt custom-icon"></span><a href="' . get_edit_post_link(12) . '">料金一覧</a></li>';
-  echo '<li><span class="dashicons dashicons-editor-help custom-icon"></span><a href="' . get_edit_post_link(16) . '">よくある質問</a></li>';
-  echo '</ul>';
-}
-
-// ウィジェットをダッシュボードに追加する関数
-function add_my_custom_dashboard_widget() {
-  wp_add_dashboard_widget(
-      'custom_dashboard_widget',   // ウィジェットのID
-      '固定ページへのリンク',     // ウィジェットのタイトル
-      'my_custom_dashboard_widget' // ウィジェット内に表示する内容を作る関数
-  );
-}
-
-// カスタムCSSを追加する関数
-function my_custom_dashboard_styles() {
-  echo '
-  <style>
-      .custom-dashboard-links {
-          list-style: none;
-          padding-left: 0;
-      }
-      .custom-dashboard-links li {
-          font-size: 18px;
-          margin-bottom: 10px;
-      }
-      .custom-dashboard-links .custom-icon {
-          margin-right: 5px;
-      }
-  </style>';
-}
-
-// ダッシュボード用のCSSを読み込む
-add_action( 'admin_head', 'my_custom_dashboard_styles' );
-
-// フックを使ってダッシュボードにウィジェットを追加
-add_action( 'wp_dashboard_setup', 'add_my_custom_dashboard_widget' );
-
-// すべての固定ページのエディターを削除
-// function my_remove_post_editor_support() {
-// remove_post_type_support( 'page', 'editor' );//本文
-// }
-// add_action( 'init' , 'my_remove_post_editor_support' );
-
-// これでもOK！
-// 「料金一覧」「よくある質問」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（1）
-// 固定ページに対してブロックエディタを使用するかどうかを制御するフィルターフック
-// $use_block_editor（エディタを使うかどうかのブール値）と$post（現在の投稿情報）を引数として受け取る
-// add_filter('use_block_editor_for_post', function($use_block_editor, $post) {
-//   // 投稿のタイプが「固定ページ」であるかどうかをチェックする
-//   if ( $post->post_type === 'page' ) {
-//     // 表示するページスラッグのリスト
-//     $allowed_pages = ['price', 'faq', 'privacy-policy', 'terms-of-service'];
-
-//     // スラッグがリストに含まれていなければエディタを非表示にする
-//     // in_array()関数：指定した値が配列に含まれているかどうかを確認
-//     // ページスラッグが許可されたリストに含まれていない場合にtrueを返す
-//     if ( !in_array($post->post_name, $allowed_pages) ) {  // post_nameはページのスラッグを指す
-//       // 特定の投稿タイプからエディタのサポートを削除する
-//       remove_post_type_support('page', 'editor'); // エディタを非表示
-//       return false; // ブロックエディタを無効化
-//     }
-//   }
-//   // 条件に該当しない場合は、もともとのブロックエディタの設定を保持するために、この値をそのまま返す
-//   return $use_block_editor; // それ以外の場合はエディタを使用
-// }, 10, 2);
-
-// 「料金一覧」「よくある質問」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（2）
-function my_remove_post_editor_support() {
-  // 現在の画面が管理画面であり、編集しているのが固定ページの場合のみ処理を続ける
-  // 今表示している画面の情報を$screenという変数に保存
-  $screen = get_current_screen();
-  // その画面で編集している投稿タイプ（$screen->post_type）が固定ページ（page）、かつ現在の管理画面の「画面タイプ」（$screen->base）が編集画面（post）ならば
-  if ( $screen->post_type === 'page' && $screen->base === 'post' ) {
-    // 編集しているページのIDを取得（現在のページIDを取得（$_GET['post']）し、存在していればそれを整数値に変換して$post_idに保存し、IDがない場合は0を代入）
-    $post_id = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : 0;
-
-    // IDに基づいてページのスラッグを取得し、特定のページならエディタ削除をしない
-    $exclude_slugs = [ 'price', 'faq', 'privacy-policy', 'terms-of-service' ];
-    // get_post_field()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
-    $post_slug = get_post_field( 'post_name', $post_id );
-
-    // 除外リストにある場合はエディタ削除を行わない
-    if ( in_array( $post_slug, $exclude_slugs ) ) {
-      return;
-    }
-
-    // 条件に合わない場合はエディタを削除
-    // 固定ページからエディター（editor）機能を削除
-    remove_post_type_support( 'page', 'editor' );
-  }
-}
-// current_screen：現在の管理画面の画面情報が利用可能になるタイミングでフックされるアクションフック
-add_action( 'current_screen', 'my_remove_post_editor_support' );
 
 // 繰り返しフィールドの「＋」「×」ボタンにラベル追加
 function add_custom_button_labels() {
@@ -581,39 +517,139 @@ function add_custom_button_labels() {
 // admin_head は「管理画面の <head> タグが読み込まれるタイミング」で実行されるアクションフック → 管理画面が表示されるたびに add_custom_button_labels() が呼び出され、CSSが <head> 内に挿入される
 add_action( 'admin_head', 'add_custom_button_labels' );
 
-// GETパラメータを受け取って、フォームのセレクトボックスのデフォルト値として設定
-function custom_wpcf7_select_filter( $tag ) {
-  // $tagが配列かどうかを確認。配列でないなら、そのまま返して関数の処理を終了（$tag：Contact Form 7 側で用意されている引数。$tagの中には対象のフォーム部品に関する情報（名前・値・オプションなど）が配列として入っている）
-  if ( ! is_array( $tag ) ) return $tag;
+/* --------------------------------------------
+ *   ダッシュボードから固定ページの編集画面へのリンクを追加
+ * -------------------------------------------- */
+// ウィジェットの内容を定義する関数（アイコン付きリンクを追加）
+function my_custom_dashboard_widget() {
+  // ウィジェット内に表示する内容をリスト化（CSSクラスを使う）
+  echo '<ul class="custom-dashboard-links">'; // クラスを割り当て
+  echo '<li><span class="dashicons dashicons-admin-home custom-icon"></span><a href="' . get_edit_post_link(25) . '">トップページ</a></li>';
+  echo '<li><span class="dashicons dashicons-format-gallery custom-icon"></span><a href="' . get_edit_post_link(8) . '">ギャラリー</a></li>';
+  echo '<li><span class="dashicons dashicons-money-alt custom-icon"></span><a href="' . get_edit_post_link(12) . '">料金一覧</a></li>';
+  echo '<li><span class="dashicons dashicons-editor-help custom-icon"></span><a href="' . get_edit_post_link(16) . '">よくある質問</a></li>';
+  echo '</ul>';
+}
 
-  $form_field_name = 'menu-464'; // CF7のセレクトボックス名（ショートコード内のname）
-  // URLにselect_planというパラメータがあるかどうかを確認（$_GET：URLのクエリパラメータ（GETパラメータ → ?の後ろの部分）を取得するための配列。例：https://example.com/?key=value だとkeyを指定してvalueを取得）
-  if ( isset( $_GET['select_plan'] ) && isset( $tag['values'] ) ) { // isset() は「変数が存在するか」を調べる関数
-    // urldecode()を使ってURLエンコードされている文字（例: %20 → スペース）を元の形に戻す
-    $selected_value = urldecode( $_GET['select_plan'] ); // GETパラメータをデコード
-    // $tag['name']（現在のフォームのフィールド名）が $form_field_name（指定したセレクトボックス）と同じかを確認
-    if ( $tag['name'] === $form_field_name ) {
-      // $tag['values'] には、セレクトボックスの選択肢（プルダウンの中身）が入っている
-      foreach ( $tag['values'] as $key => $value ) {  // $keyは選択肢の番号（0から始まる）、$valueは選択肢の文字（ライセンス取得など）
-        // もしGETパラメータの値と、今見ている選択肢のvalueが同じなら…
-        if ( $value === $selected_value ) {
-          // $tag['options']はデフォルトでは空の配列である可能性が高いが、初めから存在しない（未定義）可能性もあるので、安全にコードを動作させるためには以下のチェックをした方がよい
-          if ( ! isset( $tag['options'] ) ) {
-            $tag['options'] = []; // `options`が未定義なら空の配列をセット
-          }
-          // default: をつけて、CF7のデフォルト値として設定。CF7の仕様では1から始まるため+1（[] を使うことで、配列の最後に値を追加できる）
-          $tag['options'][] = 'default:' . ( $key + 1 ); // 例えば、$key = 0 なら、'default:1' となり、1番目の選択肢がデフォルトになる（Contact Form 7 は default:数字 を指定すると、その順番の選択肢を selected にしてくれる仕組みになっている）
-        }
+// ウィジェットをダッシュボードに追加する関数
+function add_my_custom_dashboard_widget() {
+  wp_add_dashboard_widget(
+      'custom_dashboard_widget',   // ウィジェットのID
+      '固定ページへのリンク',     // ウィジェットのタイトル
+      'my_custom_dashboard_widget' // ウィジェット内に表示する内容を作る関数
+  );
+}
+
+// カスタムCSSを追加する関数
+function my_custom_dashboard_styles() {
+  echo '
+  <style>
+      .custom-dashboard-links {
+          list-style: none;
+          padding-left: 0;
       }
+      .custom-dashboard-links li {
+          font-size: 18px;
+          margin-bottom: 10px;
+      }
+      .custom-dashboard-links .custom-icon {
+          margin-right: 5px;
+      }
+  </style>';
+}
+
+// ダッシュボード用のCSSを読み込む
+add_action( 'admin_head', 'my_custom_dashboard_styles' );
+
+// フックを使ってダッシュボードにウィジェットを追加
+add_action( 'wp_dashboard_setup', 'add_my_custom_dashboard_widget' );
+
+/* --------------------------------------------
+ *   WYSIWYGエディターの無効化
+ * -------------------------------------------- */
+// 特定の投稿タイプに対してWYSIWYGエディターを無効化する
+function remove_wysiwyg_for_post_type( $post_type ) {
+  // 存在確認（存在しない場合はスキップ）→ 登録されていない投稿タイプを指定してもエラーにならず、安全に動作する 25.10.6
+  if ( post_type_exists( $post_type ) ) {
+    remove_post_type_support( $post_type, 'editor' );
+  }
+  // 必要に応じて他の機能を削除
+  // remove_post_type_support( $post_type, 'thumbnail' );
+}
+
+add_action( 'init', function() {
+  // 管理画面でのみ実行（init アクションはサイトの表示側（front側）でも呼ばれるので、無駄に処理が走らないようにする） 25.10.6
+  if ( is_admin() ) {
+    // エディターを無効にする投稿タイプのリスト
+    $post_types = [ 'campaign', 'voice' ];
+
+    // 各投稿タイプに対してエディターを削除
+    foreach ( $post_types as $post_type ) {
+      remove_wysiwyg_for_post_type( $post_type );
     }
   }
-  // 変更を加えた$tagを返す → フォームのセレクトボックスのデフォルト値が変更される
-  return $tag;
-}
-// add_filter()を使って、CF7のフォームタグをカスタマイズする処理を追加（'wpcf7_form_tag'はCF7 のフォームタグを変更するためのフィルターフック）
-add_filter( 'wpcf7_form_tag', 'custom_wpcf7_select_filter', 10, 2 );
+});
 
-// 管理画面のカスタム投稿一覧にもカラムを追加（順番を調整）
+//「料金一覧」「よくある質問」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（2）
+function my_remove_post_editor_support() {
+  // 現在の画面が管理画面であり、編集しているのが固定ページの場合のみ処理を続ける
+  // 今表示している画面の情報を$screenという変数に保存
+  $screen = get_current_screen();
+  // その画面で編集している投稿タイプ（$screen->post_type）が固定ページ（page）、かつ現在の管理画面の「画面タイプ」（$screen->base）が編集画面（post）ならば
+  if ( $screen->post_type === 'page' && $screen->base === 'post' ) {
+    // 編集しているページのIDを取得（現在のページIDを取得（$_GET['post']）し、存在していればそれを整数値に変換して$post_idに保存し、IDがない場合は0を代入）
+    $post_id = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : 0;
+
+    // IDに基づいてページのスラッグを取得し、特定のページならエディタ削除をしない
+    $exclude_slugs = [ 'price', 'faq', 'privacy-policy', 'terms-of-service' ];
+    // get_post_field()：指定した投稿IDに関連する特定のフィールド（ここではpost_name、すなわちスラッグ）を取得するための関数
+    $post_slug = get_post_field( 'post_name', $post_id );
+
+    // 除外リストにある場合はエディタ削除を行わない
+    if ( in_array( $post_slug, $exclude_slugs ) ) {
+      return;
+    }
+
+    // 条件に合わない場合はエディタを削除
+    // 固定ページからエディター（editor）機能を削除
+    remove_post_type_support( 'page', 'editor' );
+  }
+}
+// current_screen：現在の管理画面の画面情報が利用可能になるタイミングでフックされるアクションフック
+add_action( 'current_screen', 'my_remove_post_editor_support' );
+
+// すべての固定ページのエディターを削除
+// function my_remove_post_editor_support() {
+// remove_post_type_support( 'page', 'editor' );//本文
+// }
+// add_action( 'init' , 'my_remove_post_editor_support' );
+
+// これでもOK！
+// 「料金一覧」「よくある質問」「プライバシーポリシー」「利用規約」以外の固定ページのブロックエディタを非表示にする（1）
+// 固定ページに対してブロックエディタを使用するかどうかを制御するフィルターフック
+// $use_block_editor（エディタを使うかどうかのブール値）と$post（現在の投稿情報）を引数として受け取る
+// add_filter('use_block_editor_for_post', function($use_block_editor, $post) {
+//   // 投稿のタイプが「固定ページ」であるかどうかをチェックする
+//   if ( $post->post_type === 'page' ) {
+//     // 表示するページスラッグのリスト
+//     $allowed_pages = ['price', 'faq', 'privacy-policy', 'terms-of-service'];
+
+//     // スラッグがリストに含まれていなければエディタを非表示にする
+//     // in_array()関数：指定した値が配列に含まれているかどうかを確認
+//     // ページスラッグが許可されたリストに含まれていない場合にtrueを返す
+//     if ( !in_array($post->post_name, $allowed_pages) ) {  // post_nameはページのスラッグを指す
+//       // 特定の投稿タイプからエディタのサポートを削除する
+//       remove_post_type_support('page', 'editor'); // エディタを非表示
+//       return false; // ブロックエディタを無効化
+//     }
+//   }
+//   // 条件に該当しない場合は、もともとのブロックエディタの設定を保持するために、この値をそのまま返す
+//   return $use_block_editor; // それ以外の場合はエディタを使用
+// }, 10, 2);
+
+/* --------------------------------------------
+ *   管理画面のカスタム投稿一覧にもカラムを追加（順番を調整）
+ * -------------------------------------------- */
 function add_custom_post_thumbnail_columns( $columns ) {
   $new_columns = []; // 新しいカラムの順序を保持するための配列を準備
 
@@ -751,7 +787,7 @@ function my_login_text_color_adjust() {
       color: #fff !important;
     }
 
-    /* 「← TeamDevelopment へ移動」リンク */
+    /* 「← CodeUps diving へ移動」リンク */
     #backtoblog a {
       color: rgba(255, 255, 255, 0.85) !important;
       text-shadow: 0 1px 3px rgba(0,0,0,0.3);
