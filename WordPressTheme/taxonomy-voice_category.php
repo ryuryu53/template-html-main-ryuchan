@@ -45,7 +45,7 @@
 
       <!-- お客様の声一覧 -->
       <?php if ( have_posts() ) : ?>
-        <div class="page-campaign__items voice-cards">
+        <div class="page-campaign__items page-campaign__items--voice-page voice-cards">
           <?php while ( have_posts() ) : the_post(); ?>
             <article class="voice-cards__item voice-card">
               <div class="voice-card__link">
