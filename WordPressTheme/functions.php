@@ -293,7 +293,7 @@ function custom_wpcf7_scripts() {
     // 'wpcf7mailsent'：Contact Form 7 でフォームが正常に送信されたことを示すイベント
     document.addEventListener( 'wpcf7mailsent', function( event ) {
       // location.href は「ブラウザのURLを変更する」ためのもの → http:～ というURLにリダイレクト（ページ移動）する
-      location.href = 'http://codeupsforwordpress3.local/thanks/';
+      location.href = 'https://ryuryu53.cloudfree.jp/cu/thanks/';
     }, false ); // false はイベントがバブリング（親要素に伝わる）しないようにする設定
     </script>
     <?php
