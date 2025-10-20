@@ -292,7 +292,7 @@ function custom_wpcf7_scripts() {
     // フォームが送信された後に何かを行う「イベントリスナー」を追加
     // 'wpcf7mailsent'：Contact Form 7 でフォームが正常に送信されたことを示すイベント
     document.addEventListener( 'wpcf7mailsent', function( event ) {
-      // location.href は「ブラウザのURLを変更する」ためのもの → http:～ というURLにリダイレクト（ページ移動）する
+      // location.href は「ブラウザのURLを変更する」ためのもの → https:～ というURLにリダイレクト（ページ移動）する
       location.href = 'https://ryuryu53.cloudfree.jp/cu/thanks/';
     }, false ); // false はイベントがバブリング（親要素に伝わる）しないようにする設定
     </script>
@@ -733,7 +733,7 @@ function my_login_custom_background_images() {
   ?>
   <style>
     body.login {
-      background: none;
+      /* background: none; */
       position: relative;
       min-height: 100vh;
       overflow: hidden;
@@ -748,6 +748,7 @@ function my_login_custom_background_images() {
       width: 100%;
       height: 100%;
       z-index: -1;
+      animation: rotateBackground 20s ease-in-out infinite;
 
       /* スマホ版の4枚を配置 */
       background:
@@ -767,6 +768,26 @@ function my_login_custom_background_images() {
           url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_2.webp') 100% 0% / 50% 50% no-repeat,
           url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_3.webp') 0% 100% / 50% 50% no-repeat,
           url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_4.webp') 100% 100% / 50% 50% no-repeat;
+      }
+    }
+
+    /* === 時計回り + 停止付きアニメーション === */
+    @keyframes rotateBackground {
+      /* 各ステップごとに「止まる → 素早く移動」 */
+      0%, 20% {
+        background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%; /* 初期位置 */
+      }
+      25%, 45% {
+        background-position: 100% 0%, 100% 100%, 0% 100%, 0% 0%; /* 1段階回転 */
+      }
+      50%, 70% {
+        background-position: 100% 100%, 0% 100%, 0% 0%, 100% 0%; /* 2段階回転 */
+      }
+      75%, 95% {
+        background-position: 0% 100%, 0% 0%, 100% 0%, 100% 100%; /* 3段階回転 */
+      }
+      100% {
+        background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%; /* 戻る（1周） */
       }
     }
   </style>
