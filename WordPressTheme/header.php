@@ -9,6 +9,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
+    <?php
+    // 本番環境（ryuryu53.cloudfree.jp）だけでGTMを読み込む
+    if ( strpos( $_SERVER['HTTP_HOST'], 'ryuryu53.cloudfree.jp' ) !== false ) :
+    ?>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -16,6 +20,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-59TGKWHZ');</script>
     <!-- End Google Tag Manager -->
+    <?php endif; ?>
     <!-- ↓ 管理画面でnoindexの設定するためコメントアウト -->
     <!-- <meta name="robots" content="noindex" /> -->
     <?php wp_head(); ?>
@@ -40,10 +45,12 @@
   ?>
 
   <body>
+    <?php if ( strpos( $_SERVER['HTTP_HOST'], 'ryuryu53.cloudfree.jp' ) !== false ) : ?>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59TGKWHZ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <?php endif; ?>
     <!-- ヘッダー -->
     <header class="layout-header header js-header">
       <div class="header__inner">
