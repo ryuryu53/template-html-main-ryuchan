@@ -887,7 +887,7 @@ a {
 }
 
 .campaign {
-	overflow: hidden;
+	overflow-x: clip;
 }
 
 .campaign__inner {
@@ -911,7 +911,7 @@ a {
 .campaign__btn-prev {
 	height: 5rem;
 	position: absolute;
-	top: 23px;
+	top: 1.4375rem;
 	transition: opacity 0.3s;
 	width: 5rem;
 }
