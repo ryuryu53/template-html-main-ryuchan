@@ -1326,6 +1326,7 @@ a {
 
 .hamburger {
 	height: 2rem;
+	outline: revert;
 	padding: 0;
 	position: absolute;
 	right: 0.875rem;
@@ -1334,16 +1335,12 @@ a {
 	z-index: 100;
 }
 
-.hamburger:focus {
-	outline: 0.125rem solid #391E88;
-}
-
 .hamburger span {
 	background-color: #fff;
 	height: 0.0625rem;
 	position: absolute;
 	right: 0;
-	transition: transform 0.3s;
+	transition: transform 0.3s, top 0.3s, right 0.3s, width 0.3s;
 	width: inherit;
 }
 
