@@ -66,7 +66,7 @@
             </picture>
           </a>
         </<?php echo $tag; ?>>
-        <button class="header__drawer hamburger js-hamburger" aria-label="メニューを開く">
+        <button class="header__drawer hamburger js-hamburger" type="button" aria-label="メニューを開く">
           <span></span>
           <span></span>
           <span></span>
