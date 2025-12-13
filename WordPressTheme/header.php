@@ -66,12 +66,12 @@
             </picture>
           </a>
         </<?php echo $tag; ?>>
-        <button class="header__drawer hamburger js-hamburger" type="button" aria-label="メニューを開く">
+        <button class="header__drawer hamburger js-hamburger" type="button" aria-label="メニューを開閉する" aria-controls="drawer-nav" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <nav class="header__pc-nav pc-nav" aria-label="ヘッダーナビゲーション">
+        <nav class="header__pc-nav pc-nav js-pc-nav" aria-label="ヘッダーナビゲーション" aria-hidden="true">
           <ul class="pc-nav__items">
             <li class="pc-nav__item">
               <a href="<?php echo $campaign; ?>" class="pc-nav__link">
@@ -123,7 +123,7 @@
             </li>
           </ul>
         </nav>
-        <nav class="header__sp-nav sp-nav js-sp-nav" aria-label="モバイル版ヘッダーナビゲーション">
+        <nav class="header__sp-nav sp-nav js-sp-nav" id="drawer-nav" aria-label="ヘッダーナビゲーション" aria-hidden="true">
           <div class="sp-nav__inner">
             <div class="sp-nav__container">
               <div class="sp-nav__left-content">
