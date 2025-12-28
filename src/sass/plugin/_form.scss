@@ -153,7 +153,7 @@ button,
 	}
 }
 
-[type="checkbox"] {
+[type="checkbox"] {	// appearance: none; は_reset.scssで設定している
 	// display: none;
 
 	+ span {
@@ -205,11 +205,15 @@ button,
 
 		}
 	}
+
+	&:focus + span::before {
+		border: 1px solid $border-cr;
+	}
 }
 
-[type="checkbox"]:focus + span::before {
-  outline: 1px solid #391E88;
-}
+// [type="checkbox"]:focus + span::before {
+//   border: 1px solid $border-cr;
+// }
 
 select {
 	/*↓リセットCSS */

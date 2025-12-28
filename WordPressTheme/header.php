@@ -44,7 +44,8 @@
   $terms = esc_url( home_url( '/terms-of-service/' ) );
   ?>
 
-  <body>
+  <body><!-- body_class()があるとブログ一覧ページでblogクラスが付いてしまい、blogセクションの.blog::beforeと.blog::afterがブログ一覧ページで表示されてしまうので、body_class()を削除した -->
+    <?php wp_body_open(); ?>
     <?php if ( strpos( $_SERVER['HTTP_HOST'], 'ryuryu53.cloudfree.jp' ) !== false ) : ?>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59TGKWHZ"
