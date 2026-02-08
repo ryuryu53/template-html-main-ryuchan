@@ -3503,6 +3503,15 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	display: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+
+a[href^="tel:"] {
+	cursor: default;
+	pointer-events: none;
+}
+
+}
+
 @media (any-hover: hover) {
 
 a:hover {
@@ -3556,11 +3565,6 @@ a:hover {
 
 html {
 	font-size: 1.4814814815vw;
-}
-
-a[href^="tel:"] {
-	cursor: default;
-	pointer-events: none;
 }
 
 .layout-about {

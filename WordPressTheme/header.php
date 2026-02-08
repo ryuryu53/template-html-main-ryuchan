@@ -217,4 +217,4 @@
       </div>
     </header>
 
-    <main>
+    <main class="js-main">

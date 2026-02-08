@@ -48,8 +48,9 @@
 
 /* pcの電話番号発信対応（追加 25.8.5） */
 a[href^="tel:"] {
-  @include mq("md") {
-    pointer-events: none;
-    cursor: default;
+  // ホバーが使えて、細かい操作ができるポインター = マウス操作のPCを想定･･･@include mq("md")から修正  26.1.29
+  @media (hover: hover) and (pointer: fine) {
+    pointer-events: none; // クリック・タップ・ホバーを完全無効化
+    cursor: default;  // マウスを乗せても指マーク（ポインター）にならない
   }
 }
