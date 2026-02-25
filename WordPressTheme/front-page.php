@@ -68,7 +68,7 @@
                   <!-- spの画像 -->
                   <source media="(max-width: 767px)" srcset="<?php echo esc_url( $image_url_sp ); ?>" width="375" height="667" type="image/webp">
                   <!-- pcの画像 -->
-                  <img src="<?php echo esc_url( $image_url_pc ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" width="1440" height="768">
+                  <img src="<?php echo esc_url( $image_url_pc ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" width="1440" height="768" loading="eager">
                 </picture>
               </div>
             <?php endif; ?>
