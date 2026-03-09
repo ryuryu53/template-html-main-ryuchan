@@ -26,6 +26,12 @@
   }
 }
 
+.gallery-photo__button[type="button"] {
+  display: block;
+  padding: 0;
+  outline: revert;
+}
+
 .gallery-photo__img {
   display: block;
   aspect-ratio: 345 / 219;

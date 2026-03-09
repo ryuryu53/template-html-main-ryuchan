@@ -5,7 +5,7 @@
 
 jQuery(function ($) { // この中であればWordpressでも「$」が使用可能になる
   /* --------------------------------------------
-   *   スクロールしてmvを過ぎたらヘッダーの背景色を変える
+   *  スクロールしてmvを過ぎたらヘッダーの背景色を変える
    * -------------------------------------------- */
   let header = $('.js-header');
   let headerheight = $('.js-header').height();
@@ -23,7 +23,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   // /* --------------------------------------------
-  //  *   ドロワーメニュー
+  //  *  ドロワーメニュー
   //  * -------------------------------------------- */
   // $(".js-hamburger, .js-sp-nav").click(function () {
   //   if ($(".js-hamburger").hasClass('is-active')) {
@@ -136,7 +136,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   /* --------------------------------------------
-   *   画面幅による aria-hidden の切り替え（SPはドロワーメニューの開閉で切り替えるので、PCのみ）
+   *  画面幅による aria-hidden の切り替え（SPはドロワーメニューの開閉で切り替えるので、PCのみ）
    * -------------------------------------------- */
   // const $pcNav = $('.js-pc-nav');  // 上記で定義したので、ここでは定義しない  26.2.8
   // これは（ ↓ ） “今、PC表示なの？SP表示なの？” を判定する装置。matchMedia() は MediaQueryList（メディアクエリリスト） というオブジェクトを返し、このオブジェクトの中に含まれているのが matchesプロパティ（trueまたはfalseの値を持つ）
@@ -159,7 +159,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   mq.addEventListener('change', updateAria);
 
   /* --------------------------------------------
-   *   mvスワイパー
+   *  mvスワイパー
    * -------------------------------------------- */
   // スワイパーの自動再生を一時停止 → ローディングアニメーションを「jQuery(function ($) {}」の中に書くやり方へ変更したので、通常通りスワイパーを自動再生 25.3.16
   const mv_swiper = new Swiper('.js-mv-swiper', { // ここで「var」を削除して、グローバルに宣言したmv_swiperを使用 → 使用せず
@@ -174,7 +174,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   /* --------------------------------------------
-   *   campaignスワイパー
+   *  campaignスワイパー
    * -------------------------------------------- */
   const campaign_swiper = new Swiper('.js-campaign-swiper', {
     slidesPerView: 'auto',
@@ -197,7 +197,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   /* --------------------------------------------
-   *   背景色の後に画像が表示されるエフェクト
+   *  背景色の後に画像が表示されるエフェクト
    * -------------------------------------------- */
   //要素の取得とスピードの設定
   var box = $('.js-colorbox'),
@@ -226,7 +226,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   /* --------------------------------------------
-   *   スクロールしながらページトップへ戻るボタン
+   *  スクロールしながらページトップへ戻るボタン
    * -------------------------------------------- */
   let topBtn = $('.js-to-top');
   topBtn.hide();
@@ -287,7 +287,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   /* --------------------------------------------
-   *   ボックスシャドウを更新する関数
+   *  ボックスシャドウを更新する関数
    * -------------------------------------------- */
   function updateBoxShadow() {
     let browserW = window.innerWidth;
@@ -306,7 +306,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   }
 
   /* --------------------------------------------
-   *   ダイビング情報のタブ切り替え
+   *  ダイビング情報のタブ切り替え
    * -------------------------------------------- */
   // 最初に表示されるタブの設定
   $('.js-tab-item:first-child').addClass('is-active');
@@ -341,7 +341,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   });
 
   /* --------------------------------------------
-   *   特定のタブへダイレクトリンクできるようにする
+   *  特定のタブへダイレクトリンクできるようにする
    * -------------------------------------------- */
   // URLのクエリパラメータ（の値）を取得する関数
   function getQueryParam(name) {
@@ -377,22 +377,74 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   }
 
   /* --------------------------------------------
-   *   モーダル
+   *  モーダル（キーボード対応 + フォーカス制御）
    * -------------------------------------------- */
-  const open = $('.js-modal-open'),
-    modal = $('.js-modal');
-  let scrollTop;
+  // jQueryオブジェクト取得
+  const $open = $('.js-modal-open'),
+    $modal = $('.js-modal'),
+    $modalImg = $('.js-modal-img');
 
-  //   スクロールバーの幅を計算する関数
+  let scrollTop;  // 背景固定解除後に戻すスクロール位置
+  let $lastFocusedElement = null;  // モーダルを開く直前にフォーカスしていた要素（モーダルを閉じたらフォーカスを戻す）
+  let focusTimeoutId = null;  // modal.focus() のタイマーID（closeModal時にキャンセルするため）
+  let clearImgTimeoutId = null;  // src: '' のタイマーID（openModal時にキャンセルするため）
+
+  /**
+   * スクロールバーの幅を計算する関数
+   * モーダル表示時の横ズレを防ぐために使用
+   */
   function getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
   }
 
-  //Gallery画像をクリックしたらモーダルを表示する
-  open.on('click', function () {
-    let imgsrc = $(this).find('img').attr('src');
-    $('.modal__img').children().attr('src', imgsrc);
-    modal.addClass('is-open');
+  /**
+   * モーダル内のフォーカス可能要素を取得する関数
+   * 今後ボタンなどを追加した場合にも再利用できるよう関数化
+   * ※ modal 自身は .find() の対象ではない点に注意
+   */
+  function getFocusableElements($container) {
+    return $container.find(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex]:not([tabindex="-1"]), [contenteditable]'
+    ).filter(':visible');
+  }
+
+  /**
+   * モーダルを開く処理
+   * @param {jQuery} $trigger - 開くきっかけになったボタン要素
+   */
+  function openModal($trigger) {
+    // すでに開いている場合の二重起動を防ぐ
+    if ($modal.hasClass('is-open')) {
+      closeModal();
+      return;
+    }
+
+    // closeModal() が予約した src: '' のタイマーが残っていればキャンセル
+    clearTimeout(clearImgTimeoutId);
+
+    // 閉じたときにフォーカスを戻すため、開いた元の要素を記録
+    $lastFocusedElement = $trigger;
+
+    // トリガー要素内の画像情報を取得
+    const $img = $trigger.find('img'),
+      imgSrc = $img.attr('src'),
+      imgAlt = $img.attr('alt');
+
+    // モーダル内画像を差し替え
+    $modalImg.attr({
+      src: imgSrc,
+      alt: imgAlt,
+      id: 'modal-image',
+    });
+
+    // モーダルのアクセシブルネームを画像要素（id: modal-image）に関連付ける
+    $modal.attr({
+      'aria-labelledby': 'modal-image',
+      'aria-hidden': 'false',
+    });
+
+    // モーダルを表示
+    $modal.addClass('is-open');
 
     // スクロールバーの幅を取得
     const scrollbarWidth = getScrollbarWidth();
@@ -405,24 +457,151 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
       top: -scrollTop,
       left: 0,
       // right: 0,
-      width: `calc(100% - ${scrollbarWidth}px)` // スクロールバーの幅を考慮する
+      width: `calc(100% - ${scrollbarWidth}px)`, // スクロールバーの幅を考慮する
     });
-  });
 
-  //モーダルをクリックしたらモーダルを閉じる
-  modal.on("click", function () {
-    modal.removeClass("is-open");
+    // 表示アニメーション後にフォーカスをモーダルへ移す（visibility: hidden → visible のトランジション完了後に実行）
+    focusTimeoutId = setTimeout(function () {
+      $modal.focus(); // tabindex="-1" が付いているので focus() 可能
+    }, 300);  // _modal.scss の transition: 0.3s に合わせる
+  }
 
-    // 背景の固定を解除する
+  /**
+   * モーダルを閉じる処理
+   * （クリック/Enter/ESC すべてここに集約）
+   */
+  function closeModal() {
+    // まだ focus() 予約が残っていればキャンセル（$modal.focus() のタイマーをキャンセル）
+    clearTimeout(focusTimeoutId);
+
+    // モーダルのアクセシビリティ状態を非表示に戻す
+    $modal.attr({
+      'aria-labelledby': '',
+      'aria-hidden': 'true',
+    });
+
+    // モーダルを非表示にする
+    $modal.removeClass('is-open');
+
+    // フェードアウト完了後にモーダル内画像を初期化（transition: 0.3s に合わせる）
+    // ※ is-open 削除と同時に src: '' にすると、transition 中に白い空枠が一瞬表示されるため
+    clearImgTimeoutId = setTimeout(function () {
+      $modalImg.attr({
+        src: '',
+        alt: '',
+        id: '',
+      });
+    }, 300); // _modal.scss の transition: 0.3s に合わせる
+
+    // 背景の固定を解除し、スクロール位置を元に戻す
     $('body').css({
       position: '',
       top: '',
       left: '',
       // right: '',
-      width: ''
+      width: '',
     });
 
     $(window).scrollTop(scrollTop);
+
+    // 開いた元のボタンへフォーカスを戻す
+    if ($lastFocusedElement && $lastFocusedElement.length) {
+      $lastFocusedElement.focus();
+    }
+  }
+
+  // ===============================================
+  //  1) ボタン（Gallery画像）をクリックしてモーダルを開く
+  // ===============================================
+  $open.on('click', function () {
+    openModal($(this));
+  });
+
+  // ===============================================
+  //  2) モーダルをクリックして閉じる
+  // ===============================================
+  $modal.on('click', () => {
+    closeModal();
+  });
+
+  // ===============================================
+  //  3) モーダル表示中、Enter/Spaceで閉じる
+  // ===============================================
+  $modal.on('keydown', (e) => {
+    if (!$modal.hasClass('is-open')) return;  // 現在のコードでは「モーダル表示されているのに is-open がない」状況は基本的には発生しないが、「トランジション中、将来のJS変更、想定外イベント」などを考慮して安全ガードを入れる（この1行を見るだけで「このイベントはモーダルが開いているとき専用」と理解できる）
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+
+  // ===============================================
+  //  4) モーダル表示中、ESCで閉じる
+  // ===============================================
+  $(document).on('keydown', (e) => {
+    if (e.key === 'Escape' && $modal.hasClass('is-open')) {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+
+  // ===============================================
+  //  5) フォーカストラップ
+  // ===============================================
+  /* モーダルが開いている間に Tab / Shift+Tab を押したら、
+   * フォーカスがモーダル外へ逃げないようにする
+   */
+  $(document).on('keydown', function (e) {
+    if (!$modal.hasClass('is-open')) return;
+    if (e.key !== 'Tab') return;
+
+    const $focusableElements = getFocusableElements($modal);
+
+    // 今回のモーダルのように内部にボタンやリンクが無い場合は、モーダルコンテナ自身にフォーカスを固定する
+    if ($focusableElements.length === 0) {
+      e.preventDefault();
+      $modal.focus();
+      return;
+    }
+
+    const firstElement = $focusableElements.get(0);
+    const lastElement = $focusableElements.get($focusableElements.length - 1);
+    const activeElement = document.activeElement;
+
+    // Shift + Tab：先頭にいるときは末尾へ戻す
+    if (e.shiftKey) {
+      if (activeElement === firstElement || activeElement === $modal.get(0)) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+    } else {
+      // Tab：末尾にいる時は先頭へ戻す
+      if (activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+
+      // 万一モーダル外にフォーカスがあれば、モーダルへ戻す
+      if (!$modal.get(0).contains(activeElement)) {
+        // e.preventDefault();  // Tab移動を止める目的だが、「フォーカスが既に外にある」状況の修正なので不要と判断
+        $modal.focus();
+      }
+    }
+  });
+
+  // ===============================================
+  //  6) フォーカス逸脱の保険
+  // ===============================================
+  /* 何らかの理由でモーダル表示中にフォーカスが外へ移動したら
+   * モーダルへ戻す
+   */
+  $(document).on('focusin', function (e) {
+    if (!$modal.hasClass('is-open')) return;
+
+    if (!$modal.get(0).contains(e.target)) {
+      $modal.focus();
+    }
   });
 
   /* --------------------------------------------

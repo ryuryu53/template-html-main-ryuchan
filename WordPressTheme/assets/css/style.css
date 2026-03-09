@@ -1298,6 +1298,12 @@ a {
 	gap: 0.5rem;
 }
 
+.gallery-photo__button[type=button] {
+	display: block;
+	outline: revert;
+	padding: 0;
+}
+
 .gallery-photo__img {
 	aspect-ratio: 345/219;
 	cursor: pointer;
