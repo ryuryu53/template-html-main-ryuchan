@@ -295,7 +295,7 @@ jQuery(function ($) {
    * -------------------------------------------- */
   function updateBoxShadow() {
     var browserW = window.innerWidth;
-    $('.js-tab-item').each(function () {
+    $('.js-tab-button').each(function () {
       if (browserW >= 768) {
         if (!$(this).hasClass('is-active')) {
           $(this).css('box-shadow', 'none');
@@ -312,36 +312,75 @@ jQuery(function ($) {
   /* --------------------------------------------
    *  ダイビング情報のタブ切り替え
    * -------------------------------------------- */
-  // 最初に表示されるタブの設定
-  $('.js-tab-item:first-child').addClass('is-active');
-  $('.js-tab-content:first-child').addClass('is-active');
+  $(".js-tab").each(function () {
+    // .js-tabごとにスコープを分ける
+    var $tab = $(this); // 今の.js-tabだけを対象にする
+    var $tabButton = $tab.find(".js-tab-button");
+    var $tabContent = $tab.find(".js-tab-content");
 
-  // タブによる切り替え
-  $('.js-tab-item').click(function () {
-    // タブのアクティブクラスを切り替え
-    $('.js-tab-item').removeClass('is-active');
-    $(this).addClass('is-active');
+    // 最初に表示されるタブの設定
+    $tabButton.first().addClass('is-active');
+    $tabContent.first().addClass('is-active');
+    function activateTab(index) {
+      $tabButton.removeClass("is-active").attr("aria-selected", "false");
+      $tabButton.eq(index).addClass("is-active").attr("aria-selected", "true");
+      $tabContent.prop("hidden", true).removeClass("is-active");
+      $tabContent.eq(index).prop("hidden", false).addClass("is-active");
+    }
 
-    // 画像の切り替え
-    $('.js-tab-content').removeClass('is-active');
-    // $(this).data('target')で取得される値は "tab1" のような文字列
-    // その文字列をjQueryセレクタとして使用するために、$()で囲む必要がある
-    // $('#' + $(this).data('target'))とすることで、正しくDOM要素を選択してaddClass()メソッドが実行できるようになる
-    $('#' + $(this).data('target')).addClass('is-active');
-    // $()で囲まないと文字列に対して直接addClass()メソッドを実行することになり、コンテンツが正しく表示されない
-    // ※ 始めから"#tab1"と#をつけると「タブ切り替え」だけを考えれば $( $(this).data('target') )とシンプルにできていいが、
-    // 「特定のタブへダイレクトリンク」まで考えると、そのタブが選択された状態でページ遷移できない！
-    // 同一ページ内でdata-target属性の値が#tab1、id="tab1"でうまくいかなくなるのでは･･･
+    // -----------------------------
+    // クリックでタブ切り替え
+    // -----------------------------
+    $tabButton.on('click', function () {
+      var index = $tabButton.index(this);
+      activateTab(index);
+      updateBoxShadow();
+    });
 
+    // -----------------------------
+    // キーボード操作でタブ切り替え
+    // -----------------------------
+    $tabButton.on("keydown", function (e) {
+      var currentIndex = $tabButton.index(this);
+      // ↓ 初期値を入れておく（もしどのcaseにも入らなかったら今の位置を維持できる）
+      var nextIndex = currentIndex;
+      switch (e.key) {
+        case "ArrowRight":
+          e.preventDefault();
+          // 右キー: 次のタブへ。最後なら先頭へ戻る
+          nextIndex = (currentIndex + 1) % $tabButton.length;
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          // 左キー: 前のタブへ。先頭なら最後へ移動
+          nextIndex = (currentIndex - 1 + $tabButton.length) % $tabButton.length;
+          break;
+        case "Home":
+          e.preventDefault();
+          // Homeキー: 先頭タブへ
+          nextIndex = 0;
+          break;
+        case "End":
+          e.preventDefault();
+          // Endキー: 最後のタブへ
+          nextIndex = $tabButton.length - 1;
+          break;
+        default:
+          // それ以外のキーは何もしない
+          return;
+      }
+      $tabButton.eq(nextIndex).focus();
+      activateTab(nextIndex);
+      updateBoxShadow();
+    });
+
+    // 初期状態のボックスシャドウを更新
     updateBoxShadow();
-  });
 
-  // 初期状態のボックスシャドウを更新
-  updateBoxShadow();
-
-  // ウィンドウがリサイズされたときにボックスシャドウを更新
-  $(window).resize(function () {
-    updateBoxShadow();
+    // ウィンドウがリサイズされたときにボックスシャドウを更新
+    $(window).resize(function () {
+      updateBoxShadow();
+    });
   });
 
   /* --------------------------------------------
@@ -353,7 +392,7 @@ jQuery(function ($) {
     // new URLSearchParams(...) でクエリパラメータを簡単に操作できるオブジェクトに変換
     var params = new URLSearchParams(window.location.search);
     // params.get(name) で、name に対応するパラメータの値を取得
-    // 例えば getQueryParam('tab') を呼び出すと、"tab1" などの値が返ってくる
+    // 例えば getQueryParam('tab') を呼び出すと、"panel-1" などの値が返ってくる
     return params.get(name);
   }
 
@@ -361,11 +400,11 @@ jQuery(function ($) {
   function selectTab(target) {
     // target（どのタブを選択するかの情報）を受け取る
     // すべてのタブとタブコンテンツの "is-active" クラスを削除
-    $('.js-tab-item').removeClass('is-active');
+    $('.js-tab-button').removeClass('is-active');
     $('.js-tab-content').removeClass('is-active');
 
     // data-target属性が target の値と一致するタブを取得し、そのタブに "is-active" クラスを追加
-    $(".js-tab-item[data-target=\"".concat(target, "\"]")).addClass('is-active');
+    $(".js-tab-button[data-target=\"".concat(target, "\"]")).addClass('is-active');
 
     // targetのIDを持つタブのコンテンツを取得し、そのコンテンツに "is-active" クラスを追加
     $("#".concat(target)).addClass('is-active');
@@ -373,7 +412,7 @@ jQuery(function ($) {
 
   // クエリパラメータ "tab" を取得
   var tabParam = getQueryParam('tab'); // getQueryParam('tab') を呼び出して、URLの ?tab=... の値を取得
-  // tabParamには、tab1、tab2、tab3のどれかが入る
+  // tabParamには、panel-1、panel-2、panel-3のどれかが入る
 
   // クエリパラメータが存在すればタブを選択
   if (tabParam) {

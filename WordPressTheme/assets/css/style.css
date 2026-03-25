@@ -1459,14 +1459,6 @@ a {
 	object-fit: cover;
 }
 
-.information-cards__item {
-	display: none;
-}
-
-.information-cards__item.is-active {
-	display: block;
-}
-
 .information {
 	background-color: #DDF0F1;
 	padding-bottom: 5.25rem;
@@ -2777,26 +2769,26 @@ a {
 	grid-template-columns: repeat(3, 1fr);
 }
 
-.tab__item {
+.tab__button[type=button] {
 	background-color: #DDF0F1;
 	box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
 	color: #408F95;
-	cursor: pointer;
 	font-size: 0.875rem;
 	font-weight: 400;
 	line-height: 1.44;
+	outline: revert;
 	padding: 0.625rem 0;
 	position: relative;
 	text-align: center;
 	transition: background-color 0.3s;
 }
 
-.tab__item:hover {
+.tab__button:hover {
 	background-color: #408F95;
 	color: #fff;
 }
 
-.tab__item.is-active {
+.tab__button.is-active {
 	background-color: #408F95;
 	color: #fff;
 }
@@ -4736,7 +4728,7 @@ html {
 	width: 100%;
 }
 
-.tab__item {
+.tab__button[type=button] {
 	align-items: center;
 	display: flex;
 	font-size: 1.5rem;
@@ -4745,13 +4737,13 @@ html {
 	padding: 0.8125rem 0.1875rem 0.8125rem 0.1875rem;
 }
 
-.tab__item:nth-child(2) {
+.tab__button:nth-child(2) {
 	gap: 0.5625rem;
 	padding-bottom: 0.875rem;
 	padding-top: 0.75rem;
 }
 
-.tab__item::before {
+.tab__button::before {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -4760,49 +4752,49 @@ html {
 	width: 4rem;
 }
 
-.tab__item:first-child::before {
+.tab__button:first-child::before {
 	background-image: url(../images/common/whale-icon.svg);
 }
 
-.tab__item:nth-child(2)::before {
+.tab__button:nth-child(2)::before {
 	background-image: url(../images/common/fish-icon_1.svg);
 	height: 3.9375rem;
 	width: 3.9375rem;
 }
 
-.tab__item:nth-child(3)::before {
+.tab__button:nth-child(3)::before {
 	background-image: url(../images/common/fish-icon_2.svg);
 }
 
-.tab__item:first-child:hover::before {
+.tab__button:first-child:hover::before {
 	background-image: url(../images/common/whale-icon-white.svg);
 }
 
-.tab__item:nth-child(2):hover::before {
+.tab__button:nth-child(2):hover::before {
 	background-image: url(../images/common/fish-icon_1-white.svg);
 }
 
-.tab__item:nth-child(3):hover::before {
+.tab__button:nth-child(3):hover::before {
 	background-image: url(../images/common/fish-icon_2-white.svg);
 }
 
-.tab__item:first-child.is-active::before {
+.tab__button:first-child.is-active::before {
 	background-image: url(../images/common/whale-icon-white.svg);
 }
 
-.tab__item:nth-child(2).is-active::before {
+.tab__button:nth-child(2).is-active::before {
 	background-image: url(../images/common/fish-icon_1-white.svg);
 }
 
-.tab__item:nth-child(3).is-active::before {
+.tab__button:nth-child(3).is-active::before {
 	background-image: url(../images/common/fish-icon_2-white.svg);
 }
 
-.tab__item span {
+.tab__button span {
 	padding-top: 0.3125rem;
 }
 
-.tab__item:nth-child(2) span {
+.tab__button:nth-child(2) span {
 	padding-top: 0.375rem;
 }
 

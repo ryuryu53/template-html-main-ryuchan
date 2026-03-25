@@ -12,7 +12,7 @@
   }
 }
 
-.tab__item {
+.tab__button[type="button"] {
   position: relative;
   font-size: rem(14);
   font-weight: $normal;
@@ -22,8 +22,8 @@
   background-color: $green2;
   padding: rem(10) 0;
   box-shadow: rem(2) rem(2) rem(4) rgba($color: $black, $alpha: 25%);
-  cursor: pointer;
   transition: background-color 0.3s;
+  outline: revert;  // _reset.scssに outline: none; があるため、ここだけその影響を打ち消しデフォルトのフォーカスリングに戻す
 
   @include mq(md) {
     display: flex;
@@ -35,7 +35,7 @@
   }
 }
 
-.tab__item:nth-child(2) {
+.tab__button:nth-child(2) {
   @include mq(md) {
     gap: rem(9);
     padding-top: rem(12);
@@ -43,12 +43,12 @@
   }
 }
 
-.tab__item:hover {
+.tab__button:hover {
   color: $white;
   background-color: $greenaccent;
 }
 
-.tab__item::before {
+.tab__button::before {
   @include mq(md) {
     content: "";
     width: rem(64);
@@ -59,13 +59,13 @@
   }
 }
 
-.tab__item:first-child::before {
+.tab__button:first-child::before {
   @include mq(md) {
     background-image: url(../images/common/whale-icon.svg);
   }
 }
 
-.tab__item:nth-child(2)::before {
+.tab__button:nth-child(2)::before {
   @include mq(md) {
     width: rem(63);
     height: rem(63);
@@ -73,60 +73,60 @@
   }
 }
 
-.tab__item:nth-child(3)::before {
+.tab__button:nth-child(3)::before {
   @include mq(md) {
     background-image: url(../images/common/fish-icon_2.svg);
   }
 }
 
-.tab__item:first-child:hover::before {
+.tab__button:first-child:hover::before {
   @include mq(md) {
     background-image: url(../images/common/whale-icon-white.svg);
   }
 }
 
-.tab__item:nth-child(2):hover::before {
+.tab__button:nth-child(2):hover::before {
   @include mq(md) {
     background-image: url(../images/common/fish-icon_1-white.svg);
   }
 }
 
-.tab__item:nth-child(3):hover::before {
+.tab__button:nth-child(3):hover::before {
   @include mq(md) {
     background-image: url(../images/common/fish-icon_2-white.svg);
   }
 }
 
-.tab__item.is-active {
+.tab__button.is-active {
   color: $white;
   background-color: $greenaccent;
 }
 
-.tab__item:first-child.is-active::before {
+.tab__button:first-child.is-active::before {
   @include mq(md) {
     background-image: url(../images/common/whale-icon-white.svg);
   }
 }
 
-.tab__item:nth-child(2).is-active::before {
+.tab__button:nth-child(2).is-active::before {
   @include mq(md) {
     background-image: url(../images/common/fish-icon_1-white.svg);
   }
 }
 
-.tab__item:nth-child(3).is-active::before {
+.tab__button:nth-child(3).is-active::before {
   @include mq(md) {
     background-image: url(../images/common/fish-icon_2-white.svg);
   }
 }
 
-.tab__item span {
+.tab__button span {
   @include mq(md) {
     padding-top: rem(5);
   }
 }
 
-.tab__item:nth-child(2) span {
+.tab__button:nth-child(2) span {
   @include mq(md) {
     padding-top: rem(6);
   }

@@ -1,9 +1,9 @@
 @use "global" as *;
 
-.information-cards__item {
-  display: none;
-}
+// .information-cards__item {
+//   display: none; // hidden属性に任せるのでコメントアウト
+// }
 
-.information-cards__item.is-active {
-  display: block;
-}
+// .information-cards__item.is-active {
+//   display: block;  // hidden属性に任せるのでコメントアウト
+// }

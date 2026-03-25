@@ -13,14 +13,49 @@
   <!-- ダイビング情報 -->
   <section class="layout-page-information page-information">
     <div class="page-information__inner inner">
-      <div class="page-information__container tab">
-        <ul class="tab__list">
-          <li data-target="tab1" class="tab__item js-tab-item"><span>ライセンス<br class="u-mobile">講習</span></li>
-          <li data-target="tab2" class="tab__item js-tab-item"><span>ファン<br class="u-mobile">ダイビング</span></li>
-          <li data-target="tab3" class="tab__item js-tab-item"><span>体験<br class="u-mobile">ダイビング</span></li>
-        </ul>
-        <ul class="tab__cards information-cards">
-          <li id="tab1" class="information-cards__item information-card js-tab-content">
+      <div class="page-information__container tab js-tab">
+        <div class="tab__list" role="tablist">
+          <button
+            class="tab__button js-tab-button"
+            id="tab-1"
+            type="button"
+            data-target="panel-1"
+            role="tab"
+            aria-controls="panel-1"
+            aria-selected="true"
+          >
+            <span>ライセンス<br class="u-mobile">講習</span>
+          </button>
+          <button
+            class="tab__button js-tab-button"
+            id="tab-2"
+            type="button"
+            data-target="panel-2"
+            role="tab"
+            aria-controls="panel-2"
+            aria-selected="false"
+          >
+            <span>ファン<br class="u-mobile">ダイビング</span>
+          </button>
+          <button
+            class="tab__button js-tab-button"
+            id="tab-3"
+            type="button"
+            data-target="panel-3"
+            role="tab"
+            aria-controls="panel-3"
+            aria-selected="false"
+          >
+            <span>体験<br class="u-mobile">ダイビング</span>
+          </button>
+        </div>
+        <div class="tab__cards information-cards">
+          <div
+            class="information-cards__item information-card js-tab-content"
+            id="panel-1"
+            role="tabpanel"
+            aria-labelledby="tab-1"
+          >
             <div class="information-card__content">
               <div class="information-card__body">
                 <h2 class="information-card__title">ライセンス講習</h2>
@@ -31,8 +66,14 @@
                 <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-license.jpg" alt="5人の人がエメラルドグリーンの海でスキューバダイビングを楽しんでいる様子">
               </picture>
             </div>
-          </li>
-          <li id="tab2" class="information-cards__item information-card js-tab-content">
+          </div>
+          <div
+            class="information-cards__item information-card js-tab-content"
+            id="panel-2"
+            role="tabpanel"
+            aria-labelledby="tab-2"
+            hidden
+          >
             <div class="information-card__content">
               <div class="information-card__body">
                 <h2 class="information-card__title">ファンダイビング</h2>
@@ -43,8 +84,14 @@
                 <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-fundiving.jpg" alt="薄いピンク色の多くの熱帯魚が泳いでいる様子">
               </picture>
             </div>
-          </li>
-          <li id="tab3" class="information-cards__item information-card js-tab-content">
+          </div>
+          <div
+            class="information-cards__item information-card js-tab-content"
+            id="panel-3"
+            role="tabpanel"
+            aria-labelledby="tab-3"
+            hidden
+          >
             <div class="information-card__content">
               <div class="information-card__body">
                 <h2 class="information-card__title">体験ダイビング</h2>
@@ -55,8 +102,8 @@
                 <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/info-diving.jpg" alt="白とオレンジ色のツートンカラーの2匹の熱帯魚が泳いでいる様子">
               </picture>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
