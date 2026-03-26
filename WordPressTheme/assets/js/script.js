@@ -324,10 +324,22 @@ jQuery(function ($) {
     // 最初に表示されるタブの設定
     $tabButton.first().addClass('is-active');
     $tabContent.first().addClass('is-active');
+
+    /**
+     * 指定したインデックスのタブをアクティブにする
+     * @param {number} index - アクティブにするタブの0始まりのインデックス
+     */
     function activateTab(index) {
+      // 全ボタンの選択状態をリセット
       $tabButton.removeClass('is-active').attr('aria-selected', 'false');
+
+      // 対象ボタンをアクティブにし、スクリーンリーダーへ選択済みを通知
       $tabButton.eq(index).addClass('is-active').attr('aria-selected', 'true');
+
+      // 全コンテンツを非表示にリセット
       $tabContent.removeClass('is-active').prop('hidden', true);
+
+      // 対象コンテンツを表示
       $tabContent.eq(index).addClass('is-active').prop('hidden', false);
     }
 
