@@ -1,4 +1,4 @@
-"use strict";
+// 'use strict';
 
 // 宣言を jQuery(function ($) {}); の外側でする
 // var mv_swiper;
@@ -191,8 +191,8 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
       disableOnInteraction: false   // falseを設定すると、自動再生はユーザーの操作（スワイプ）後に無効にならず、操作後に毎回再起動される
     },
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
     }
   });
 
@@ -308,10 +308,10 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   /* --------------------------------------------
    *  ダイビング情報のタブ切り替え
    * -------------------------------------------- */
-  $(".js-tab").each(function () { // .js-tabごとにスコープを分ける
+  $('.js-tab').each(function () { // .js-tabごとにスコープを分ける
 		const $tab = $(this); // 今の.js-tabだけを対象にする
-    const $tabButton = $tab.find(".js-tab-button");
-    const $tabContent = $tab.find(".js-tab-content");
+    const $tabButton = $tab.find('.js-tab-button');
+    const $tabContent = $tab.find('.js-tab-content');
 
     // 最初に表示されるタブの設定
     $tabButton.first().addClass('is-active');
@@ -319,22 +319,22 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
     function activateTab(index) {
       $tabButton
-        .removeClass("is-active")
-        .attr("aria-selected", "false");
+        .removeClass('is-active')
+        .attr('aria-selected', 'false');
 
       $tabButton
         .eq(index)
-        .addClass("is-active")
-        .attr("aria-selected", "true");
+        .addClass('is-active')
+        .attr('aria-selected', 'true');
 
       $tabContent
-        .prop("hidden", true)
-        .removeClass("is-active");
+        .removeClass('is-active')
+        .prop('hidden', true);
 
       $tabContent
         .eq(index)
-        .prop("hidden", false)
-        .addClass("is-active");
+        .addClass('is-active')
+        .prop('hidden', false);
     }
 
     // -----------------------------
@@ -350,31 +350,31 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
     // -----------------------------
 	  // キーボード操作でタブ切り替え
 	  // -----------------------------
-    $tabButton.on("keydown", function (e) {
+    $tabButton.on('keydown', function (e) {
       const currentIndex = $tabButton.index(this);
       // ↓ 初期値を入れておく（もしどのcaseにも入らなかったら今の位置を維持できる）
       let nextIndex = currentIndex;
 
       switch (e.key) {
-        case "ArrowRight":
+        case 'ArrowRight':
           e.preventDefault();
           // 右キー: 次のタブへ。最後なら先頭へ戻る
           nextIndex = (currentIndex + 1) % $tabButton.length;
           break;
 
-        case "ArrowLeft":
+        case 'ArrowLeft':
           e.preventDefault();
           // 左キー: 前のタブへ。先頭なら最後へ移動
           nextIndex = (currentIndex - 1 + $tabButton.length) % $tabButton.length;
           break;
 
-        case "Home":
+        case 'Home':
           e.preventDefault();
           // Homeキー: 先頭タブへ
           nextIndex = 0;
           break;
 
-        case "End":
+        case 'End':
           e.preventDefault();
           // Endキー: 最後のタブへ
           nextIndex = $tabButton.length - 1;
@@ -415,15 +415,23 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
   // タブを選択する関数
   function selectTab(target) {  // target（どのタブを選択するかの情報）を受け取る
-    // すべてのタブとタブコンテンツの "is-active" クラスを削除
-    $('.js-tab-button').removeClass('is-active');
-    $('.js-tab-content').removeClass('is-active');
+    // すべてのタブボタンを非選択状態にし、タブコンテンツを非表示にする
+    $('.js-tab-button')
+      .removeClass('is-active')
+      .attr('aria-selected', 'false');
+    $('.js-tab-content')
+      .removeClass('is-active')
+      .prop('hidden', true);
 
-    // data-target属性が target の値と一致するタブを取得し、そのタブに "is-active" クラスを追加
-    $(`.js-tab-button[data-target="${target}"]`).addClass('is-active');
+    // data-target属性が target の値と一致するタブボタンを選択状態にする
+    $(`.js-tab-button[data-target="${target}"]`)
+      .addClass('is-active')
+      .attr('aria-selected', 'true');
 
-    // targetのIDを持つタブのコンテンツを取得し、そのコンテンツに "is-active" クラスを追加
-    $(`#${target}`).addClass('is-active');
+    // targetのIDを持つタブコンテンツを表示する
+    $(`#${target}`)
+      .addClass('is-active')
+      .prop('hidden', false);
   }
 
   // クエリパラメータ "tab" を取得
