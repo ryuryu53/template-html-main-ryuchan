@@ -84,6 +84,7 @@
   background-size: 200% 100%; /* 横幅を2倍にして、左右で分割 */
   background-position: center;
   transition: transform 1.5s ease; // 1.5秒かけてtransformをアニメーション
+
   @include mq(md) {
   background-image: url('../images/common/mv-pc_1.webp');
   }

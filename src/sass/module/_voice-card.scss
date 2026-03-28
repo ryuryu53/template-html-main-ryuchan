@@ -16,6 +16,7 @@
 .voice-card__link { // FB：追加
   display: block;
   padding: rem(10) rem(16) rem(24);
+
   @include mq(md) {
     padding: rem(24);
   }
