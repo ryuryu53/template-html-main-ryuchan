@@ -400,6 +400,7 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 }
 
 .form__campaign {
+	padding-right: rem(24);	// ▼が余白の中に入るようにした  26.3.30
 	font-size: rem(12);
 	font-weight: $normal;
 	color: $black;
