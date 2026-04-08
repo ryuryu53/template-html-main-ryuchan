@@ -143,7 +143,7 @@
                       $campaign_title = get_the_title();
                       // urlencode() で日本語タイトルをURLで使えるようにエンコード
                       ?>
-                      <a href="<?php echo esc_url( home_url( '/contact?select_plan=' . urlencode( $campaign_title ) ) ); ?>" class="button">
+                      <a href="<?php echo esc_url( home_url( '/contact?select_plan=' . urlencode( $campaign_title ) ) ); ?>" class="button" aria-label="お問い合わせページへ移動">
                         <span class="button__text">Contact&nbsp;us</span>
                       </a>
                     </div>

@@ -160,7 +160,7 @@
         <div class="swiper-button-prev campaign__btn-prev u-desktop"></div>
       </div>
       <div class="campaign__btn">
-        <a href="<?php echo $campaign; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="<?php echo $campaign; ?>" class="button" aria-label="キャンペーン一覧を見る"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
@@ -189,7 +189,7 @@
             ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト<!-- PC版だとこの後さらに「が入ります。」が続く -->
           </p>
           <div class="about__btn">
-            <a href="<?php echo $about; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+            <a href="<?php echo $about; ?>" class="button" aria-label="私たちについてのページを見る"><span class="button__text">View&nbsp;more</span></a>
           </div>
         </div>
       </div>
@@ -214,7 +214,7 @@
           <h3 class="information__subtitle">ライセンス講習</h3>
           <p class="information__text text--black-pc">当店はダイビングライセンス（Cカード）世界最大の教育機関PADIの「正規店」として店舗登録されています。<br>正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。</p>
           <div class="information__btn">
-            <a href="<?php echo $information; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+            <a href="<?php echo $information; ?>" class="button" aria-label="ダイビング情報のページを見る"><span class="button__text">View&nbsp;more</span></a>
           </div>
         </div>
       </div>
@@ -274,7 +274,7 @@
         <?php endwhile; wp_reset_postdata(); endif; ?>
       </div>
       <div class="blog__btn">
-        <a href="<?php echo $blog; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="<?php echo $blog; ?>" class="button" aria-label="ブログ一覧を見る"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
@@ -350,7 +350,7 @@
         <?php endwhile; wp_reset_postdata(); endif; ?>
       </div>
       <div class="voice__btn">
-        <a href="<?php echo $voice; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="<?php echo $voice; ?>" class="button" aria-label="お客様の声一覧を見る"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>
@@ -447,7 +447,7 @@
         </div>
       </div>
       <div class="price__btn">
-        <a href="<?php echo $amount; ?>" class="button"><span class="button__text">View&nbsp;more</span></a>
+        <a href="<?php echo $amount; ?>" class="button" aria-label="料金一覧のページを見る"><span class="button__text">View&nbsp;more</span></a>
       </div>
     </div>
   </section>

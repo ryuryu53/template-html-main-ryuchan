@@ -72,7 +72,7 @@
           <span></span>
           <span></span>
         </button>
-        <nav class="header__pc-nav pc-nav js-pc-nav" aria-label="ヘッダーナビゲーション" aria-hidden="false">
+        <nav class="header__pc-nav pc-nav js-pc-nav" aria-label="ヘッダーのメインメニュー" aria-hidden="false">
           <ul class="pc-nav__items">
             <li class="pc-nav__item">
               <a href="<?php echo $campaign; ?>" class="pc-nav__link">
@@ -124,7 +124,7 @@
             </li>
           </ul>
         </nav>
-        <nav class="header__sp-nav sp-nav js-sp-nav" id="drawer-nav" aria-label="ヘッダーナビゲーション" aria-hidden="true">
+        <nav class="header__sp-nav sp-nav js-sp-nav" id="drawer-nav" aria-label="ヘッダーのメインメニュー" aria-hidden="true">
           <div class="sp-nav__inner">
             <div class="sp-nav__container">
               <div class="sp-nav__left-content">
