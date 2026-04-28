@@ -4,9 +4,9 @@
   margin-top: rem(40);
 }
 
-.accordion__title {
+.accordion__title[type="button"] {
   position: relative;
-  padding: rem(16) rem(44) rem(15) rem(16);
+  padding: rem(16) rem(48) rem(15) rem(16);
   cursor: pointer;
   background-color: $greenaccent;
   width: 100%;
@@ -14,7 +14,7 @@
   text-align: left;
 
   @include mq(md) {
-    padding: rem(26) rem(72) rem(24) rem(40);
+    padding: rem(26) rem(76) rem(24) rem(40);
   }
 }
 
@@ -29,7 +29,7 @@
   background-color: $white;
   transition: transform 0.3s, opacity 0.3s;
 
-  @include mq("md") {
+  @include mq(md) {
     top: 50%;
     right: rem(40);
     width: rem(32);
@@ -85,6 +85,11 @@
   @include mq(md) {
     padding-bottom: rem(38);
   }
+}
+
+// hidden属性が付いている時は非表示
+.accordion__content[hidden] {
+  display: none;
 }
 
 .accordion__text {

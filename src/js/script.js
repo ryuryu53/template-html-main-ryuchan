@@ -691,9 +691,54 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   /* --------------------------------------------
    *   アコーディーン
    * -------------------------------------------- */
-  $('.js-accordion-title').on('click', function () {
-    $(this).toggleClass('is-close');
-    $(this).next().slideToggle(300);
+  // $('.js-accordion-title').on('click', function () {
+  //   $(this).toggleClass('is-close');
+  //   $(this).next().slideToggle(300);
+  // });
+
+  // すべてのアコーディオン項目を順番に処理
+  $(".js-accordion-item").each(function () { // .each() → 同じクラスを持つ複数の要素を1つずつ処理するためのもの
+    // この項目の中にあるボタンとコンテンツを取得
+    const $title = $(this).find(".js-accordion-title");
+    const $content = $(this).find(".js-accordion-content");
+
+    // 初期状態を aria-expanded から判定する
+    const isExpanded = $title.attr("aria-expanded") === "true";
+
+    if (isExpanded) {
+      // 開いている状態なら hidden を外し、見た目用クラスも外す
+      $content.prop("hidden", false);
+      $title.removeClass("is-close");
+    } else {
+      // 閉じている状態なら hidden を付け、見た目用クラスを付ける
+      $content.prop("hidden", true);
+      $title.addClass("is-close");
+    }
+  });
+
+  // ボタンをクリックした時の処理
+  $(".js-accordion-title").on("click", function () {
+    const $title = $(this);
+    const $content = $("#" + $title.attr("aria-controls"));
+
+    // 現在の開閉状態を取得
+    const isExpanded = $title.attr("aria-expanded") === "true";
+
+    if (isExpanded) {
+      // 開いている → 閉じる
+      $title.attr("aria-expanded", "false").addClass("is-close");
+
+      $content.slideUp(300, function () {
+        // アニメーションが終わった後に hidden を付ける
+        $content.prop("hidden", true);
+      });
+    } else {
+      // 閉じている → 開く
+      $title.attr("aria-expanded", "true").removeClass("is-close");
+
+      // slideDown する前に hidden を外す
+      $content.prop("hidden", false).hide().slideDown(300); // .hide()は必要！
+    }
   });
 
   /* --------------------------------------------
