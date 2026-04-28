@@ -1,8 +1,13 @@
 @use "global" as *;
 
 // .information-cards__item {
-//   display: none; // hidden属性に任せるのでコメントアウト
+//   display: none; // hidden属性に任せるのでコメントアウト → だが、以下の方が better！
 // }
+
+// これは状態管理をCSSに持たせているわけではない。CSSは「hiddenという状態の見た目をどうするか」を書いているだけ（hidden属性は「意味的には非表示」だが、ブラウザは内部で [hidden] { display: none; } というスタイルを持っている。ただし、リセットCSSで上書きされることがある、チーム開発で誰かが消す可能性がある、明示しておいた方が安全（保守性）→「仕様に依存せず、自分で定義する」がベスト） 26.4.23
+.information-cards__item[hidden] {
+  display: none;
+}
 
 // .information-cards__item.is-active {
 //   display: block;  // hidden属性に任せるのでコメントアウト
