@@ -393,7 +393,7 @@ a {
 	opacity: 1;
 }
 
-.accordion__title:focus {
+.accordion__title:focus-visible {
 	outline: 0.125rem solid #391E88;
 }
 
@@ -1459,6 +1459,10 @@ a {
 	object-fit: cover;
 }
 
+.information-cards__item[hidden] {
+	display: none;
+}
+
 .information {
 	background-color: #DDF0F1;
 	padding-bottom: 5.25rem;
@@ -2431,6 +2435,7 @@ a {
 
 .section-header__title {
 	font-size: 1.5rem;
+	font-weight: 500;
 }
 
 .section-header__404-title {
