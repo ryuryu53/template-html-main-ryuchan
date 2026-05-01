@@ -538,7 +538,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
     // 表示アニメーション後にフォーカスをモーダルへ移す（visibility: hidden → visible のトランジション完了後に実行）
     focusTimeoutId = setTimeout(function () {
-      $modal.focus(); // tabindex="-1" が付いているので focus() 可能
+      $modal.focus(); // tabindex="-1" が付いているので focus() 可能（tabindex="-1" は「Tabキーによる順次移動からは外すが、JavaScriptの .focus() で明示的にフォーカス可能にする」という意味）
     }, 300);  // _modal.scss の transition: 0.3s に合わせる
   }
 
@@ -660,7 +660,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
       // 万一モーダル外にフォーカスがあれば、モーダルへ戻す
       if (!$modal.get(0).contains(activeElement)) {
-        // e.preventDefault();  // Tab移動を止める目的だが、「フォーカスが既に外にある」状況の修正なので不要と判断
+        e.preventDefault();  // Tab移動を止める目的だが、「フォーカスが既に外にある」状況の修正とはいえ、フォーカスをそれ以上動かさず即座にモーダルへ戻す方がアクセシビリティ的により堅牢なため書いておく
         $modal.focus();
       }
     }
