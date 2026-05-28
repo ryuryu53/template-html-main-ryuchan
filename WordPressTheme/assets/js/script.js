@@ -6,22 +6,35 @@
 // var mv_swiper;
 
 jQuery(function ($) {
+  var _this = this;
   // この中であればWordpressでも「$」が使用可能になる
   /* --------------------------------------------
    *  スクロールしてmvを過ぎたらヘッダーの背景色を変える
    * -------------------------------------------- */
-  var header = $('.js-header');
-  var headerheight = $('.js-header').height();
-  var height = $('.js-mv-height').height();
-  console.log('ヘッダーの高さ：' + headerheight);
-  console.log('メインビューの高さ：' + height);
-  console.log(height - headerheight);
+  var $header = $('.js-header');
+  var $mv = $('.js-mv');
+
+  // console.log('ヘッダーの高さ：' + headerHeight);
+  // console.log('メインビューの高さ：' + mvHeight);
+  // console.log(mvHeight - headerHeight);
   // ヘッダークラス名付与
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > height - headerheight) {
-      header.addClass('is-color');
+  // $(window).scroll(function () {
+  //   if ($(this).scrollTop() > (mvHeight - headerHeight)) {
+  //     $header.addClass('is-color');
+  //   } else {
+  //     $header.removeClass('is-color');
+  //   }
+  // });
+
+  $(window).on('scroll resize', function () {
+    // headerHeightやmvHeightもscrollイベントやresizeイベントの中で取得することにより、スクロール中に高さを変えたり、SPとPCの切り替えを行ったりしても正しい値を取得できるようにする
+    var headerHeight = $header.height();
+    var mvHeight = $mv.height();
+    var scrollTop = $(_this).scrollTop();
+    if (scrollTop > mvHeight - headerHeight) {
+      $header.addClass('is-color');
     } else {
-      header.removeClass('is-color');
+      $header.removeClass('is-color');
     }
   });
 

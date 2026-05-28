@@ -32,7 +32,7 @@
   </div>
 
   <!-- メインビュー -->
-  <section class="layout-mv mv js-mv-height">
+  <section class="layout-mv mv js-mv">
     <div class="mv__inner">
       <div class="swiper mv__slider js-mv-swiper">
         <div class="swiper-wrapper">
