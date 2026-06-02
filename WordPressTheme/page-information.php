@@ -14,7 +14,7 @@
   <section class="layout-page-information page-information">
     <div class="page-information__inner inner">
       <div class="page-information__container tab js-tab">
-        <div class="tab__list" role="tablist">
+        <div class="tab__list" role="tablist" aria-label="ダイビング情報">
           <button
             class="tab__button js-tab-button"
             id="tab-1"
