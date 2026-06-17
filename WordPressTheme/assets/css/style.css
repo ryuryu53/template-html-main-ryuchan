@@ -2278,14 +2278,6 @@ a {
 	width: 80%;
 }
 
-.pc-nav__link:hover {
-	opacity: 1;
-}
-
-.pc-nav__link:hover::after {
-	transform: scale(1, 1);
-}
-
 .pc-nav__item:first-child .pc-nav__link {
 	padding-left: 0;
 }
@@ -3544,6 +3536,14 @@ a:hover {
 }
 
 .button:hover::after {
+	transform: scale(1, 1);
+}
+
+.pc-nav__link:hover {
+	opacity: 1;
+}
+
+.pc-nav__link:hover::after {
 	transform: scale(1, 1);
 }
 
