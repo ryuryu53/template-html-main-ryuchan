@@ -19,7 +19,7 @@
   ?>
 
   <!-- 下層ページのメインビュー -->
-  <section class="layout-sub-mv sub-mv sub-mv--site-map js-mv-height">
+  <section class="layout-sub-mv sub-mv sub-mv--site-map js-mv">
     <div class="sub-mv__header">
       <h1 class="sub-mv__title">Site&nbsp;<span>map</span></h1>
     </div>

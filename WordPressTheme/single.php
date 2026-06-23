@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
   <!-- 下層ページのメインビュー -->
-  <section class="layout-sub-mv sub-mv sub-mv--blog-single js-mv-height">
+  <section class="layout-sub-mv sub-mv sub-mv--blog-single js-mv">
     <div class="sub-mv__header">
       <div class="sub-mv__title">Blog</div>
     </div>

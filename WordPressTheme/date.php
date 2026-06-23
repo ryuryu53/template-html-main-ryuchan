@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
   <!-- 下層ページのメインビュー -->
-  <section class="layout-sub-mv sub-mv sub-mv--blog js-mv-height">
+  <section class="layout-sub-mv sub-mv sub-mv--blog js-mv">
     <div class="sub-mv__header">
       <!-- 日付アーカイブのタイトルを表示 -->
       <h1 class="sub-mv__title"><?php the_archive_title(); ?></h1>
