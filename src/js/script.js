@@ -5,6 +5,38 @@
 
 jQuery(function ($) { // この中であればWordpressでも「$」が使用可能になる
   /* --------------------------------------------
+   *  背景スクロール禁止のヘルパー  26.6.25
+   *  iOS Safari は html / body に overflow: hidden を指定しても
+   *  慣性スクロール（モメンタムスクロール）がビューポート側で発生してしまい、
+   *  ドロワーやローディング表示中に背景が動いてしまう既知の不具合がある。
+   *  そのため、現在のスクロール位置を保存したうえで body を position: fixed で固定し、
+   *  解除時に元のスクロール位置へ復帰させる方式に変更した。
+   * -------------------------------------------- */
+  let scrollLockY = 0;
+
+  function lockBodyScroll() {
+    scrollLockY = window.scrollY;
+    $('body').css({
+      position: 'fixed',
+      top: `-${scrollLockY}px`,
+      left: 0,
+      right: 0,
+      width: '100%'
+    });
+  }
+
+  function unlockBodyScroll() {
+    $('body').css({
+      position: '',
+      top: '',
+      left: '',
+      right: '',
+      width: ''
+    });
+    window.scrollTo(0, scrollLockY);
+  }
+
+  /* --------------------------------------------
    *  スクロールしてmvを過ぎたらヘッダーの背景色を変える
    * -------------------------------------------- */
   const $header = $('.js-header');
@@ -93,8 +125,10 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
       $drawer.attr('aria-hidden', isExpanded.toString());
 
       // 3) スクロール制御とドロワーの表示切り替え
+      // iOSでoverflow:hiddenが効かないため、position:fixed方式の lockBodyScroll() / unlockBodyScroll() に変更  26.6.25
       if (isActive) {
-        $('body, html').css('overflow', 'auto');
+        // $('body, html').css('overflow', 'auto');
+        unlockBodyScroll(); // 背景スクロール禁止を解除
         $drawer.fadeOut(300);
 
         // inert属性を削除（フォーカスを有効化）
@@ -102,7 +136,8 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
         $main.removeAttr('inert');
         $footer.removeAttr('inert');
       } else {
-        $('body, html').css('overflow', 'hidden'); // 背景スクロール禁止
+        // $('body, html').css('overflow', 'hidden'); // 背景スクロール禁止
+        lockBodyScroll(); // 背景スクロール禁止
         $drawer.fadeIn(300);
 
         // inert属性を設定（フォーカスを無効化）
@@ -136,8 +171,9 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
         $drawer.fadeOut(300);
         $drawer.attr('aria-hidden', 'true');
 
-        // 3) 背景スクロール禁止を解除
-        $('body, html').css('overflow', 'auto');
+        // 3) 背景スクロール禁止を解除（iOS対応のため lockBodyScroll() と対になる解除処理に変更  26.6.25）
+        // $('body, html').css('overflow', 'auto');
+        unlockBodyScroll();
 
         // 4) inert属性を削除（フォーカスを有効化）
         $pcNav.removeAttr('inert');
@@ -842,7 +878,9 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
       return;
     }
     // ローディングアニメーション開始時にスクロール禁止の処理を実行
-    $("html, body").css("overflow", "hidden");
+    // iOSでoverflow:hiddenが効かないため、position:fixed方式の lockBodyScroll() に変更  26.6.25
+    // $("html, body").css("overflow", "hidden");
+    lockBodyScroll();
     // ローディングアニメーションの処理を実行
     $loading.delay(1000).queue(function (next) {  // 1秒待機
       $title.fadeIn(1000, function () { // フェードイン（1秒） → 「50);」の下にあるnext(); を呼ぶ
@@ -863,9 +901,10 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
       $images.delay(1000).fadeOut(1000);
     });
 
-    // ローディングアニメーション終了時にスクロール許可の処理を実行
+    // ローディングアニメーション終了時にスクロール許可の処理を実行（iOS対応のため lockBodyScroll() と対になる解除処理に変更  26.6.25）
     setTimeout(function () {
-      $("html, body").css("overflow", "auto");
+      // $("html, body").css("overflow", "auto");
+      unlockBodyScroll();
     }, 6000);
   }
 
