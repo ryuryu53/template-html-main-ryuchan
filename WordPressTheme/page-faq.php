@@ -32,11 +32,11 @@
                   aria-expanded="true"
                   aria-controls="accordion-content-<?php echo $i; ?>"
                 >
-                  <p class="accordion__title-text">
+                  <span class="accordion__title-text">
                     <?php
                     echo nl2br( esc_html( $fields['question'] ) );
                     ?>
-                  </p>
+                  </span>
                 </button>
                 <div
                   class="accordion__content js-accordion-content"
