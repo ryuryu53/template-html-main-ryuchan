@@ -368,7 +368,7 @@ function my_custom_admin_styles() {
       /* ACFグループの右側にサンプル画像を挿入 */
       /* Campaignページ */
       #acf-group_66f03c54687bd .acf-fields.-top {
-        background-image: url(' . get_template_directory_uri() . '/assets/images/common/campaign-sample.webp);
+        background-image: url(' . esc_url( get_template_directory_uri() . '/assets/images/common/campaign-sample.webp' ) . ');
         background-position: top right 8px;
         background-size: contain;
         background-repeat: no-repeat;
@@ -376,7 +376,7 @@ function my_custom_admin_styles() {
 
       /* Voiceページ */
       #acf-group_66f123ca28191 .acf-fields.-top {
-        background-image: url(' . get_template_directory_uri() . '/assets/images/common/voice-sample.webp);
+        background-image: url(' . esc_url( get_template_directory_uri() . '/assets/images/common/voice-sample.webp' ) . ');
         background-position: top 24px right 8px;
         background-size: 320px;
         background-repeat: no-repeat;
@@ -698,7 +698,7 @@ function custom_login_logo() {
 
     /* ロゴの配置を変更 */
     .login h1 a {
-      background-image: url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/footer-logo.svg');
+      background-image: url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/footer-logo.svg' ); ?>');
       background-size: contain; /* 画像を枠に収める */
       width: 300px;  /* ロゴの幅（必要に応じて調整） */
         /* height: auto; ロゴの高さ（必要に応じて調整）「height: auto;」だとロゴが極端に小さくなってしまう！デフォルトの「height: 84px;」を使用 */
@@ -752,10 +752,10 @@ function my_login_custom_background_images() {
 
       /* スマホ版の4枚を配置 */
       background:
-        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_1.webp') 0% 0% / 50% 50% no-repeat,
-        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_2.webp') 100% 0% / 50% 50% no-repeat,
-        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_3.webp') 0% 100% / 50% 50% no-repeat,
-        url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv_4.webp') 100% 100% / 50% 50% no-repeat;
+        url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv_1.webp' ); ?>') 0% 0% / 50% 50% no-repeat,
+        url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv_2.webp' ); ?>') 100% 0% / 50% 50% no-repeat,
+        url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv_3.webp' ); ?>') 0% 100% / 50% 50% no-repeat,
+        url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv_4.webp' ); ?>') 100% 100% / 50% 50% no-repeat;
       background-repeat: no-repeat;
       background-size: 50% 50%;
     }
@@ -764,10 +764,10 @@ function my_login_custom_background_images() {
     @media (min-width: 768px) {
       body.login::before {
         background:
-          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_1.webp') 0% 0% / 50% 50% no-repeat,
-          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_2.webp') 100% 0% / 50% 50% no-repeat,
-          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_3.webp') 0% 100% / 50% 50% no-repeat,
-          url('<?php echo get_stylesheet_directory_uri(); ?>/assets/images/common/mv-pc_4.webp') 100% 100% / 50% 50% no-repeat;
+          url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv-pc_1.webp' ); ?>') 0% 0% / 50% 50% no-repeat,
+          url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv-pc_2.webp' ); ?>') 100% 0% / 50% 50% no-repeat,
+          url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv-pc_3.webp' ); ?>') 0% 100% / 50% 50% no-repeat,
+          url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/common/mv-pc_4.webp' ); ?>') 100% 100% / 50% 50% no-repeat;
       }
     }
 
