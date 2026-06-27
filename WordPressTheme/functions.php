@@ -10,19 +10,19 @@ function enqueue_custom_scripts() {
   wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css', [], null );
 
   // テーマのメインCSS読み込み
-  wp_enqueue_style( 'main-style', get_theme_file_uri( '/assets/css/style.css' ), [], null );
+  wp_enqueue_style( 'main-style', get_theme_file_uri( '/assets/css/style.css' ), [], filemtime( get_theme_file_path( '/assets/css/style.css' ) ) );
 
   // jQueryの読み込み（defer属性付き）
   wp_enqueue_script( 'jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', [], '3.7.1', true );
 
   // jQuery.inviewプラグインの読み込み（defer属性付き）
-  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), [ 'jquery-cdn' ], 'null', true );
+  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), [ 'jquery-cdn' ], filemtime( get_theme_file_path( '/assets/js/jquery.inview.min.js' ) ), true );
 
   // SwiperのJavaScript読み込み（defer属性付き）
   wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', [], '8.0.0', true );
 
   // テーマのメインJavaScriptファイル読み込み（defer属性付き）
-  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), [ 'jquery-cdn' ], null, true );
+  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), [ 'jquery-cdn', 'jquery-inview', 'swiper-js' ], filemtime( get_theme_file_path( '/assets/js/script.js' ) ), true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_custom_scripts' );
 
