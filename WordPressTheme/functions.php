@@ -12,17 +12,19 @@ function enqueue_custom_scripts() {
   // テーマのメインCSS読み込み
   wp_enqueue_style( 'main-style', get_theme_file_uri( '/assets/css/style.css' ), [], filemtime( get_theme_file_path( '/assets/css/style.css' ) ) );
 
-  // jQueryの読み込み（defer属性付き）
-  wp_enqueue_script( 'jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', [], '3.7.1', true );
+  // jQueryはWordPress同梱版（ハンドル名 'jquery'）を利用する 26.06.30
+  // 依存配列に 'jquery' を指定しておけばWPが自動で読み込むため、ここでの明示的なenqueueは不要
+  // 読み込み位置（<head>）は古いプラグインとの後方互換性を考慮したWPデフォルトのまま尊重する
+  // wp_enqueue_script( 'jquery-cdn', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', [], '3.7.1', true );
 
-  // jQuery.inviewプラグインの読み込み（defer属性付き）
-  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), [ 'jquery-cdn' ], filemtime( get_theme_file_path( '/assets/js/jquery.inview.min.js' ) ), true );
+  // jQuery.inviewプラグインの読み込み（依存をWP同梱版jQueryに変更） 26.06.30
+  wp_enqueue_script( 'jquery-inview', get_theme_file_uri( '/assets/js/jquery.inview.min.js' ), [ 'jquery' ], filemtime( get_theme_file_path( '/assets/js/jquery.inview.min.js' ) ), true );
 
-  // SwiperのJavaScript読み込み（defer属性付き）
+  // SwiperのJavaScript読み込み
   wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js', [], '8.0.0', true );
 
-  // テーマのメインJavaScriptファイル読み込み（defer属性付き）
-  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), [ 'jquery-cdn', 'jquery-inview', 'swiper-js' ], filemtime( get_theme_file_path( '/assets/js/script.js' ) ), true );
+  // テーマのメインJavaScriptファイル読み込み（依存をWP同梱版jQueryに変更） 26.06.30
+  wp_enqueue_script( 'main-script', get_theme_file_uri( '/assets/js/script.js' ), [ 'jquery', 'jquery-inview', 'swiper-js' ], filemtime( get_theme_file_path( '/assets/js/script.js' ) ), true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_custom_scripts' );
 
