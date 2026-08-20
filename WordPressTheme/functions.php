@@ -60,6 +60,9 @@ function Change_menulabel() {
   // $submenu['edit.php'][10][0]は「新規追加（投稿を追加）」を指し、「新しいブログ」に変更
   $submenu['edit.php'][10][0] = '新しい' . $name;
 }
+// Change_menulabel関数を管理画面のメニュー（admin_menu）が読み込まれたときに実行するように登録
+add_action( 'admin_menu', 'Change_menulabel' ); // admin_menuアクション：管理画面にメニューを追加・編集できるタイミングで実行されるアクション
+
 // 投稿オブジェクトのラベルを「ブログ」に変更する関数を定義
 function Change_objectlabel() {
   // グローバル変数を使ってWordPressの投稿タイプ（ここでは「投稿」）にアクセス
@@ -84,27 +87,25 @@ function Change_objectlabel() {
 }
 // add_action関数を使って、Change_objectlabel関数をWordPressの初期化（init）のタイミングで実行するように登録
 add_action( 'init', 'Change_objectlabel' ); // initアクション：WordPressの初期化が完了したタイミングで呼ばれるアクション（カスタム投稿タイプ・タクソノミー・リライトルールを登録するのに最適）
-// Change_menulabel関数を管理画面のメニュー（admin_menu）が読み込まれたときに実行するように登録
-add_action( 'admin_menu', 'Change_menulabel' ); // admin_menuアクション：管理画面にメニューを追加・編集できるタイミングで実行されるアクション
 
 /* --------------------------------------------
  *   add_theme_support関数により特定のテーマ機能を有効化する
  * -------------------------------------------- */
 // この関数により、テーマが特定の機能をサポートしていることをWPに知らせることができる
 function my_setup() {
-	add_theme_support( 'post-thumbnails' ); /* アイキャッチ */  // 管理画面で記事やページに画像を追加できるようになる
-	add_theme_support( 'automatic-feed-links' ); /* RSSフィード */
-	add_theme_support( 'title-tag' ); /* タイトルタグ自動生成 */
-	add_theme_support(
-		'html5',
-		[ /* HTML5のタグで出力 */
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
+  add_theme_support( 'post-thumbnails' ); /* アイキャッチ */  // 管理画面で記事やページに画像を追加できるようになる
+  add_theme_support( 'automatic-feed-links' ); /* RSSフィード */
+  add_theme_support( 'title-tag' ); /* タイトルタグ自動生成 */
+  add_theme_support(
+    'html5',
+    [ /* HTML5のタグで出力 */
+      'search-form',
+      'comment-form',
+      'comment-list',
+      'gallery',
+      'caption',
     ]
-	);
+  );
 }
 add_action( 'after_setup_theme', 'my_setup' );  // after_setup_themeアクション：テーマが読み込まれた直後に実行されるアクション（プラグインは全部読み込まれたけど、まだWordPress本体の初期化（init）には入っていないタイミング）
 
