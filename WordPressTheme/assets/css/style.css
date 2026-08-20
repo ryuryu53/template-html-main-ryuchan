@@ -1954,20 +1954,20 @@ a {
 	background-image: url(../images/common/next-vector.svg);
 }
 
-.page-link__prev:hover,
-.page-link__next:hover {
+.page-link__prev:focus-visible,
+.page-link__next:focus-visible {
 	background-color: #408F95;
 	border-color: transparent;
 	color: #fff;
 	opacity: 1;
 }
 
-.page-link__prev:hover::before {
+.page-link__prev:focus-visible::before,
+.page-link__next:focus-visible::before {
 	background-image: url(../images/common/prev-vector-white.svg);
 }
 
-.page-link__next:hover::before {
-	background-image: url(../images/common/prev-vector-white.svg);
+.page-link__next:focus-visible::before {
 	transform: translate(-50%, -50%) scale(-1, 1);
 }
 
@@ -3477,19 +3477,19 @@ textarea.wpcf7-form-control.wpcf7-textarea.wpcf7-validates-as-required {
 	background-image: url(../images/common/next-vector.svg);
 }
 
-.wp-pagenavi a:hover {
+.wp-pagenavi a:focus-visible {
 	background-color: #408F95;
 	border-color: transparent;
 	color: #fff;
 	opacity: 1;
 }
 
-.wp-pagenavi .previouspostslink:hover::before {
+.wp-pagenavi .previouspostslink:focus-visible::before,
+.wp-pagenavi .nextpostslink:focus-visible::before {
 	background-image: url(../images/common/prev-vector-white.svg);
 }
 
-.wp-pagenavi .nextpostslink:hover::before {
-	background-image: url(../images/common/prev-vector-white.svg);
+.wp-pagenavi .nextpostslink:focus-visible::before {
 	transform: translate(-50%, -50%) scale(-1, 1);
 }
 
@@ -3539,6 +3539,23 @@ a:hover {
 	transform: scale(1, 1);
 }
 
+.page-link__prev:hover,
+.page-link__next:hover {
+	background-color: #408F95;
+	border-color: transparent;
+	color: #fff;
+	opacity: 1;
+}
+
+.page-link__prev:hover::before,
+.page-link__next:hover::before {
+	background-image: url(../images/common/prev-vector-white.svg);
+}
+
+.page-link__next:hover::before {
+	transform: translate(-50%, -50%) scale(-1, 1);
+}
+
 .pc-nav__link:hover {
 	opacity: 1;
 }
@@ -3557,6 +3574,22 @@ a:hover {
 
 .form__btn-submit:hover [type=submit] {
 	color: #408F95;
+}
+
+.wp-pagenavi a:hover {
+	background-color: #408F95;
+	border-color: transparent;
+	color: #fff;
+	opacity: 1;
+}
+
+.wp-pagenavi .previouspostslink:hover::before,
+.wp-pagenavi .nextpostslink:hover::before {
+	background-image: url(../images/common/prev-vector-white.svg);
+}
+
+.wp-pagenavi .nextpostslink:hover::before {
+	transform: translate(-50%, -50%) scale(-1, 1);
 }
 
 }
