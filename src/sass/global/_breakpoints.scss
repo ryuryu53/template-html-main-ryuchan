@@ -59,14 +59,14 @@ $mediaquerys: (
   .u-desktop {
     display: none;
 
-    @include mq("md") {
+    @include mq(md) {
       display: block;
     }
   }
 
   //モバイルのみ表示
   .u-mobile {
-    @include mq("md") {
+    @include mq(md) {
       display: none;
     }
   }
@@ -78,7 +78,7 @@ $mediaquerys: (
   .u-desktop {
     display: block;
 
-    @include mq("md") {
+    @include mq(md) {
       display: none;
     }
   }
@@ -87,7 +87,7 @@ $mediaquerys: (
   .u-mobile {
     display: none;
 
-    @include mq("md") {
+    @include mq(md) {
       display: block;
     }
   }
