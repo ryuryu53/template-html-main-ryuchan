@@ -152,7 +152,7 @@ function set_post_views( $postID ) {
     $count = 1; // 0 → 1に修正（この関数は投稿が表示されたときに呼び出されるので、初回は1として設定）
     // delete_post_meta()：念のため、既存のカスタムフィールドを削除
     delete_post_meta( $postID, $count_key );  // 通常のWPの運用では「キーが存在するのに値が空」という状態はほとんど発生しないのでこの行は削除しても問題ない（ →「安全性を優先したい」ので残すことにする）
-    // add_post_meta()：新しく投稿に「0」という初期値の閲覧数を登録
+    // add_post_meta()：新しく投稿に初回閲覧分の「1」を閲覧数として登録
     add_post_meta( $postID, $count_key, $count );
     // もしすでにカウントが存在している場合、カウントを1増やす
   } else {
@@ -197,6 +197,7 @@ function customize_views_column( $columns ) {
   // 現在の画面が投稿一覧（post）の場合だけ処理を行う
   $screen = get_current_screen(); // get_current_screen()：現在の管理画面がどの画面なのかを取得
   // $screen->post_type === 'post'：現在表示している管理画面が「通常の投稿」（postタイプ）の場合のみ、「閲覧数」カラムを追加
+  //（ ↑ ）$screen から現在の画面が扱う投稿タイプを取り出し（$screen->post_type）、それが通常の投稿（post）だった場合のみ true になる  26.8.28
   if ( $screen->post_type === 'post' ) { // 'post'のみで閲覧数を表示する
     // 新しいカラムを追加し、順序を調整
     $reordered_columns = []; // 新しいカラムの順序を保持するための配列を準備
@@ -241,6 +242,7 @@ add_action( 'manage_posts_custom_column', 'display_views_column', 10, 2 );
 function make_views_column_sortable( $columns ) { // 管理画面で「閲覧数」カラムをクリックすると、閲覧数順に並び替えができるようにする関数
   // post_viewsというカラムが、post_views_count（カスタムフィールドに保存された閲覧数）で並び替えができるように設定
   //（カスタムフィールド（特別なデータの保存場所）は「post_views_count」という名前で、各投稿の閲覧数を保存）
+  // manage_edit-post_sortable_columns フィルターに渡ってくる $columns は「並び替え可能なカラムの一覧表」で、キー＝カラムID、値＝orderbyに使う値という約束事（WordPressが決めた仕様）になっている  26.8.28
   $columns['post_views'] = 'post_views_count';  //「post_views カラムをクリックしたら orderby=post_views_count を使う」設定（左辺：post_views → カラムID（「どのカラムか」）、右辺：post_views_count → 並び替え時に orderby の「値」として使われる。管理画面で「閲覧数」カラムをクリックするとURLに「?orderby=post_views_count」が付与される）
   return $columns;
 }
