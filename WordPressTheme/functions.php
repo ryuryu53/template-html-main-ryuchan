@@ -253,9 +253,16 @@ function order_by_views( $query ) { // 投稿のクエリ（データベース�
   if ( ! is_admin() ) return;
 
   $orderby = $query->get( 'orderby' );  // $orderby：現在の並び替え条件を確認
-  // もし並び替え条件がpost_views_countなら、meta_keyにpost_views_countを設定し、meta_value_numで数値として並び替えを行う（$orderby が 'post_views_count' なら、「閲覧数」で並び替えるようにクエリを書き換える）
+  // もし並び替え条件がpost_views_countなら、meta_queryで「閲覧数データが有る投稿・無い投稿」の両方を対象にし、meta_value_numで数値として並び替えを行う
+  //（meta_keyの直接指定だとINNER JOINになり、post_views_countカスタムフィールドを持たない未閲覧の投稿（0 View）が一覧から除外されてしまうため、meta_queryのEXISTS/NOT EXISTSを使う）
   if ( 'post_views_count' == $orderby ) {
-    $query->set( 'meta_key', 'post_views_count' );  // meta_key = 'post_views_count' →「post_views_count というカスタムフィールドを基準にする」と指定
+    $query->set( 'meta_query', [
+      'relation' => 'OR',  // 下記2つの条件のどちらかを満たす投稿を対象にする（＝全投稿が対象になる）
+      // カスタムフィールドが存在しない投稿（未閲覧の投稿）も結果に含める。NULL（実質最小値）として扱われ、0 View扱いで並ぶ
+      [ 'key' => 'post_views_count', 'compare' => 'NOT EXISTS' ],
+      // カスタムフィールドが存在する投稿（閲覧済みの投稿）
+      [ 'key' => 'post_views_count', 'compare' => 'EXISTS' ],
+    ] );
     $query->set( 'orderby', 'meta_value_num' ); // orderby = 'meta_value_num' →「数値として並び替えを行う」と指定
   }
 }
