@@ -877,6 +877,14 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
     if ($loading.length === 0) {
       return;
     }
+
+    // 同一セッション内での2回目以降はローディングをスキップ（初回表示時のみ実行）
+    if (sessionStorage.getItem('loadingShown')) {
+      $loading.hide();
+      return;
+    }
+    sessionStorage.setItem('loadingShown', 'true');
+
     // ローディングアニメーション開始時にスクロール禁止の処理を実行
     // iOSでoverflow:hiddenが効かないため、position:fixed方式の lockBodyScroll() に変更  26.6.25
     // $("html, body").css("overflow", "hidden");
