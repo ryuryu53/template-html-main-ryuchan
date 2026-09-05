@@ -29,8 +29,8 @@ dd {
 }
 
 /* Set core root defaults */
-.html1 { // CSSでのスムーススクロールは「price」だけにする。モーダルのあるページにこのCSSがあるとモーダルを閉じたとき背景がスムーススクロールされてしまうから
-  scroll-behavior: smooth;
+html { // CSSでのスムーススクロールは「price」だけにする。モーダルのあるページにこのCSSがあるとモーダルを閉じたとき背景がスムーススクロールされてしまうから →「price」でもアニメーションを無効にする（.html1 → htmlに変更） 26.9.5
+  // scroll-behavior: smooth;
   scroll-padding-top: rem(90);  // 追加
 }
 

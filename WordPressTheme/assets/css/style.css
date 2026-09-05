@@ -46,8 +46,7 @@ dd {
 
 /* Set core root defaults */
 
-.html1 {
-	scroll-behavior: smooth;
+html {
 	scroll-padding-top: 5.625rem;
 }
 
