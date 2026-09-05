@@ -2834,6 +2834,7 @@ a {
 	border: 0.0625rem solid #408F95;
 	border-radius: 50%;
 	bottom: 1rem;
+	display: none;
 	overflow: hidden;
 	position: fixed;
 	right: 0.9375rem;
@@ -2847,8 +2848,10 @@ a {
 
 .to-top__link {
 	background-color: #fff;
+	border-radius: 50%;
 	display: block;
 	height: 2.875rem;
+	outline-offset: 0;
 	position: relative;
 	width: 2.875rem;
 }

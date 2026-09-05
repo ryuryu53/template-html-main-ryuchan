@@ -32,9 +32,15 @@
 
 // 自作の方がピクパ画像と一致する
 .to-top {
+  // script.jsはフッター読み込みのため、JSが実行されるまでの一瞬だけボタンが描画されてしまう。
+  // ページ下部でリロードするとフッター内に表示されてから正しい位置へ移動して見えるため、
+  // 初期状態はCSSで非表示にしておき、表示はJS側のfadeIn()に任せる  26.9.5
+  display: none;
+  // positionとbottomはscript.jsが常にインラインスタイルで上書きするため、ここの値は画面に反映されない。
+  // rightとz-indexを効かせるためのpositionの宣言と、JSが無い場合の初期値としての記述を兼ねて残している
   position: fixed;
   right: rem(15);
-  bottom: rem(16);
+  bottom: rem(16); // 変更してもここは効かない（script.jsの数値を修正すること）
   z-index: 30;
   border-radius: 50%;
   overflow: hidden;
@@ -43,7 +49,7 @@
 
   @include mq(md) {
     right: rem(20);
-    bottom: rem(20);
+    bottom: rem(20); // 変更してもここは効かない（script.jsの数値を修正すること）
     box-shadow: 0 rem(4) rem(4) rgba($color: $black, $alpha: 25%);
   }
 }
@@ -58,6 +64,8 @@
   width: rem(46);
   height: rem(46);
   background-color: $white;
+  border-radius: 50%; // フォーカスリングを円形にするため追加  26.9.5
+  outline-offset: 0;  // フォーカスリングを見えるようにするため追加  26.9.5
 
   @include mq(md) {
     width: rem(78);

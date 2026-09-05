@@ -64,12 +64,6 @@
         </section>
       <?php endif; ?>
 
-      <!-- ページトップへ戻るボタン -->
-      <?php if ( ! is_404() ) : ?>
-        <div class="to-top js-to-top">
-          <a href="#top" class="to-top__link" aria-label="ページトップへ戻る"></a>
-        </div>
-      <?php endif; ?>
     </main>
 
     <!-- フッター -->
@@ -188,6 +182,15 @@
         </div>
       </div>
     </footer>
+
+    <!-- ページトップへ戻るボタン -->
+    <!-- 全ページ共通の操作UIのためmainの外に置く。フッターを読み終えた後にフォーカスが当たるよう、footerの直後に配置  26.9.5 -->
+    <?php if ( ! is_404() ) : ?>
+      <div class="to-top js-to-top">
+        <a href="#top" class="to-top__link" aria-label="ページトップへ戻る"></a>
+      </div>
+    <?php endif; ?>
+
     <?php wp_footer(); ?>
   </body>
 
