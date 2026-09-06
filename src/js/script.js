@@ -746,7 +746,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
   /* 何らかの理由でモーダル表示中にフォーカスが外へ移動したら
    * モーダルへ戻す
    */
-  $(document).on('focusin', function (e) {
+  $(document).on('focusin', function (e) {  // focusin：要素がフォーカスを得たときに発生。このイベントはバブリングする
     if (!$modal.hasClass('is-open')) return;
 
     if (!$modal.get(0).contains(e.target)) {

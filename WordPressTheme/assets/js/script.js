@@ -724,6 +724,7 @@ jQuery(function ($) {
    * モーダルへ戻す
    */
   $(document).on('focusin', function (e) {
+    // focusin：要素がフォーカスを得たときに発生。このイベントはバブリングする
     if (!$modal.hasClass('is-open')) return;
     if (!$modal.get(0).contains(e.target)) {
       $modal.focus();
