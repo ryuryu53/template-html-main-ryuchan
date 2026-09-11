@@ -60,7 +60,7 @@
         $tag = ( is_front_page() ) ? 'h1' : 'div';
         ?>
         <<?php echo $tag; ?> class="header__logo">
-          <a href="<?php echo $home; ?>" class="header__logo-link">
+          <a href="<?php echo $home; ?>" class="header__logo-link js-header-logo">
             <picture>
               <source media="(max-width: 767px)" srcset="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/header-logo.svg">
               <img src="<?php echo esc_url( get_theme_file_uri() ); ?>/assets/images/common/header-logo-pc.svg" alt="CodeUps">

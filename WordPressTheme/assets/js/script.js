@@ -17,7 +17,13 @@ jQuery(function ($) {
    *  解除時に元のスクロール位置へ復帰させる方式に変更した。
    * -------------------------------------------- */
   var scrollLockY = 0;
+  // 二重ロック・二重解除を防ぐためのフラグ  26.09.11
+  // body が position: fixed の間は window.scrollY が 0 になるため、ロック中に再度
+  // lockBodyScroll() が走ると scrollLockY が 0 で上書きされ、解除時にページ先頭へ飛んでしまう。
+  var isBodyScrollLocked = false;
   function lockBodyScroll() {
+    if (isBodyScrollLocked) return;
+    isBodyScrollLocked = true;
     scrollLockY = window.scrollY;
     $('body').css({
       position: 'fixed',
@@ -28,6 +34,8 @@ jQuery(function ($) {
     });
   }
   function unlockBodyScroll() {
+    if (!isBodyScrollLocked) return;
+    isBodyScrollLocked = false;
     $('body').css({
       position: '',
       top: '',
@@ -114,9 +122,11 @@ jQuery(function ($) {
   // ページトップへ戻るボタンはmain・footerのどちらにも属さないため、inertの対象として個別に取得する。
   // 「スクロールしながらページトップへ戻るボタン」の処理でも同じ変数を使用する  26.9.5
   var $topBtn = $('.js-to-top');
+  // 768px以上になってドロワーを閉じたときの、フォーカスの退避先として使用する  26.09.11
+  var $headerLogo = $('.js-header-logo');
   if ($hamburger.length && $drawer.length) {
     // ハンバーガーとドロワーをどちらをクリックしても同じ動きにする
-    $('.js-hamburger, .js-sp-nav').on('click', function () {
+    $('.js-hamburger, .js-sp-nav').on('click', function (e) {
       // 現在の状態（開いているか閉じているか）を取得
       var isActive = $hamburger.hasClass('is-active');
       var isExpanded = $hamburger.attr('aria-expanded') === 'true';
@@ -132,15 +142,43 @@ jQuery(function ($) {
       // iOSでoverflow:hiddenが効かないため、position:fixed方式の lockBodyScroll() / unlockBodyScroll() に変更  26.6.25
       if (isActive) {
         // $('body, html').css('overflow', 'auto');
-        unlockBodyScroll(); // 背景スクロール禁止を解除
-        $drawer.fadeOut(300);
+        // stop(true, true) で待機中のアニメを破棄し、実行中のアニメは最終状態まで飛ばす。
+        // 連打時にフェードがキューへ積み重なり、見た目が状態から遅れるのを防ぐ  26.09.11
+        if ($(e.target).closest('a[href]').length) {
+          // ドロワー内のリンクで閉じる場合は、その場で解除する  26.09.11
+          // unlockBodyScroll() は「ロック前のスクロール位置を復元する」処理のため、
+          // 遅延させると、同一ページ内アンカー（例：/price/#title1）で移動した後に
+          // 復元が走り、移動を打ち消してしまう。
+          // なお、リンククリック時は遷移・移動するため遅延解除の目的自体が成立しない。
+          unlockBodyScroll(); // 背景スクロール禁止を解除
+          $drawer.stop(true, true).fadeOut(300);
+        } else {
+          // fadeOut は非同期なので解除処理を次行に書くと、ドロワーが見えている300msの間に
+          // 背景がスクロールできてしまう。完了コールバックへ移し、開く側と対称にする  26.09.11
+          $drawer.stop(true, true).fadeOut(300, function () {
+            unlockBodyScroll(); // 背景スクロール禁止を解除
+          });
+        }
 
         // inert属性を削除（フォーカスを有効化）
         $main.removeAttr('inert');
         $footer.removeAttr('inert');
         $topBtn.removeAttr('inert');
+
+        // フォーカスをハンバーガー（開閉ボタン）へ戻す  26.09.11
+        // ドロワーには上で aria-hidden="true" を付けているため、その内側にフォーカスが
+        // 残ったままだと「支援技術から隠した要素にフォーカスがある」状態になってしまう。
+        // preventScroll: true …… focus() の自動スクロールが、スクロール位置の復元や
+        // ページ内アンカーの移動先を上書きしてしまわないようにする
+        $hamburger[0].focus({
+          preventScroll: true
+        });
       } else {
         // $('body, html').css('overflow', 'hidden'); // 背景スクロール禁止
+        // 開く側は第2引数を false にして実行中のフェードをその場で止める。
+        // true にすると閉じる側の完了コールバック（unlockBodyScroll）が発火し、
+        // 直後の lockBodyScroll() を打ち消してしまうため  26.09.11
+        $drawer.stop(true, false);
         lockBodyScroll(); // 背景スクロール禁止
         $drawer.fadeIn(300);
 
@@ -149,6 +187,16 @@ jQuery(function ($) {
         $footer.attr('inert', '');
         $topBtn.attr('inert', '');
       }
+    });
+
+    // Escキーでドロワーを閉じる  26.09.11
+    // 開閉に必要な処理（クラス・ARIA属性・フェード・スクロール制御・inert・フォーカス復帰）は
+    // すべて上のクリックハンドラに集約されているため、それを呼び出すだけにして重複を避ける
+    $(document).on('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (!$hamburger.hasClass('is-active')) return; // 開いているときのみ閉じる
+
+      $hamburger.trigger('click');
     });
   }
 
@@ -169,17 +217,34 @@ jQuery(function ($) {
         $hamburger.attr('aria-expanded', 'false');
 
         // 2) ドロワーナビの状態リセット
-        $drawer.fadeOut(300);
-        $drawer.attr('aria-hidden', 'true');
-
         // 3) 背景スクロール禁止を解除（iOS対応のため lockBodyScroll() と対になる解除処理に変更  26.6.25）
+        //    ドロワー開閉時の処理と揃え、解除はフェードアウト完了後に行うためここにまとめている  26.09.11
         // $('body, html').css('overflow', 'auto');
-        unlockBodyScroll();
+        $drawer.stop(true, true).fadeOut(300, function () {
+          unlockBodyScroll();
+        });
+        $drawer.attr('aria-hidden', 'true');
 
         // 4) inert属性を削除（フォーカスを有効化）
         $main.removeAttr('inert');
         $footer.removeAttr('inert');
         $topBtn.removeAttr('inert');
+
+        // 5) フォーカスをヘッダーロゴへ移す  26.09.11
+        //    ハンバーガーは768px以上で display: none になり、ドロワー内の要素も
+        //    フェードアウト完了時に display: none になる。どちらもフォーカスが行き場を
+        //    失って body へ落ちてしまうため、確実に操作できる位置へ退避させる
+        var activeEl = document.activeElement;
+
+        // 無関係な要素（PCナビや入力欄など）を操作中にフォーカスを奪わないためのガード
+        var shouldMoveFocus = !activeEl || activeEl === document.body || $hamburger[0].contains(activeEl) || $drawer[0].contains(activeEl);
+        if ($headerLogo.length && shouldMoveFocus) {
+          // preventScroll: true …… body がまだ position: fixed のため、focus() による
+          // 自動スクロールと 300ms 後の scrollTo が競合しないようにする
+          $headerLogo[0].focus({
+            preventScroll: true
+          });
+        }
       }
     }
   });
