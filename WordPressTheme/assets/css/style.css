@@ -208,6 +208,7 @@ a {
 }
 
 .layout-mv {
+	height: 100vh;
 	height: 100svh;
 	width: 100%;
 }
@@ -2534,6 +2535,7 @@ a {
 .sp-nav {
 	background-color: #408F95;
 	display: none;
+	height: 100vh;
 	height: 100dvh;
 	left: 0;
 	padding-top: 5rem;

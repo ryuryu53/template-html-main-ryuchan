@@ -2,5 +2,6 @@
 
 .layout-mv { // .mvから移した（25.7.9）
   width: 100%;
+  height: 100vh;  // svh未対応ブラウザ用  26.10.11
   height: 100svh; // vh → svh
 }
