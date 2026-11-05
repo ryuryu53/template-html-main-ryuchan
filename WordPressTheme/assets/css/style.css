@@ -597,27 +597,39 @@ a {
 }
 
 .breadcrumbs {
-	color: #0D2936;
-	font-size: 0.875rem;
-	font-weight: 400;
 	margin-top: 0.5rem;
 	position: relative;
-	text-transform: uppercase;
 	z-index: 10;
 }
 
-.breadcrumbs__inner {
+.breadcrumbs__list {
 	align-items: center;
+	color: #0D2936;
 	display: flex;
-	gap: 0.4375rem;
+	flex-wrap: wrap;
+	font-size: 0.875rem;
+	font-weight: 400;
+	gap: 1.3125rem;
+	letter-spacing: 0;
+	line-height: 1.5;
+	text-transform: uppercase;
 }
 
-.breadcrumbs__inner--white {
+.breadcrumbs__inner--white .breadcrumbs__list {
 	color: #fff;
 }
 
-.breadcrumbs__inner--white span {
-	color: #fff;
+.breadcrumbs__list > li {
+	position: relative;
+}
+
+.breadcrumbs__list > li:not(:last-child)::after {
+	content: ">";
+	content: ">"/"";
+	position: absolute;
+	right: -0.875rem;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .button {

@@ -4,53 +4,92 @@
   margin-top: rem(8);
   position: relative; // パンくずを画像の前に持ってくる 24.09.25
   z-index: 10;
-  // liから移動
+}
+
+// bcn_display_list() が出力する li にはクラスを付けられないため、子セレクタで指定する
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(21);
+  align-items: center;
   font-size: rem(14);
   font-weight: $normal;
   color: $green;
+  letter-spacing: 0;
+  line-height: 1.5;
   text-transform: uppercase;
 }
 
-.breadcrumbs__inner {
-  display: flex;
-  align-items: center;
-  gap: rem(7);
+.breadcrumbs__inner--white .breadcrumbs__list {
+  color: $white;
 }
 
-// プラグインにはulなし
-// .breadcrumbs ul {
-//   display: flex;
-//   align-items: center;
-//   gap: rem(21);
-// }
+.breadcrumbs__list > li {
+  position: relative;
+}
 
-// .breadcrumbs li {
-//   position: relative;
+// 代替テキストを空にして、スクリーンリーダーに「>」を読み上げさせない（1行目は代替テキスト未対応ブラウザ用）
+.breadcrumbs__list > li:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: rem(-14);
+  content: ">";
+  content: ">" / "";
+  transform: translateY(-50%);
+}
+
+// ---------- 旧コード ----------
+// .breadcrumbs {
+//   margin-top: rem(8);
+//   position: relative; // パンくずを画像の前に持ってくる 24.09.25
+//   z-index: 10;
+//   // liから移動
 //   font-size: rem(14);
 //   font-weight: $normal;
 //   color: $green;
 //   text-transform: uppercase;
 // }
-
-// これがないとWP化したとき「＞」が白くならない 24.09.25
-.breadcrumbs__inner--white {
-  color: $white;
-}
-
-.breadcrumbs__inner--white span {
-  color: $white;
-}
-
-// .breadcrumbs li:not(:last-child)::after {
-//   content: "";
-//   position: absolute;
-//   top: 50%;
-//   right: rem(-12);
-//   width: rem(4);
-//   height: rem(8);
-//   background-image: url(../images/common/breadcrumb-vector.svg);
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-size: contain;
-//   transform: translateY(-50%);
+//
+// .breadcrumbs__inner {
+//   display: flex;
+//   align-items: center;
+//   gap: rem(7);
 // }
+//
+// // プラグインにはulなし
+// // .breadcrumbs ul {
+// //   display: flex;
+// //   align-items: center;
+// //   gap: rem(21);
+// // }
+//
+// // .breadcrumbs li {
+// //   position: relative;
+// //   font-size: rem(14);
+// //   font-weight: $normal;
+// //   color: $green;
+// //   text-transform: uppercase;
+// // }
+//
+// // これがないとWP化したとき「＞」が白くならない 24.09.25
+// .breadcrumbs__inner--white {
+//   color: $white;
+// }
+//
+// .breadcrumbs__inner--white span {
+//   color: $white;
+// }
+//
+// // .breadcrumbs li:not(:last-child)::after {
+// //   content: "";
+// //   position: absolute;
+// //   top: 50%;
+// //   right: rem(-12);
+// //   width: rem(4);
+// //   height: rem(8);
+// //   background-image: url(../images/common/breadcrumb-vector.svg);
+// //   background-repeat: no-repeat;
+// //   background-position: center;
+// //   background-size: contain;
+// //   transform: translateY(-50%);
+// // }
