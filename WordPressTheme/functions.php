@@ -848,3 +848,11 @@ function my_login_text_color_adjust() {
   <?php
 }
 add_action( 'login_head', 'my_login_text_color_adjust' );
+
+/* --------------------------------------------
+ *  「リンクなし」テンプレートで使う <span> に bcn-aria-current 属性を許可  26.11.5
+ * -------------------------------------------- */
+add_filter( 'bcn_allowed_html', function( $tags ) {
+  $tags['span']['bcn-aria-current'] = true;
+  return $tags;
+});
