@@ -1,7 +1,7 @@
 @use "global" as *;
 
 // 最終_FB：追加
-.campaign-category {
+.archive-category {
   display: flex;
   flex-wrap: wrap;
   gap: rem(16) rem(21);
@@ -12,7 +12,7 @@
   }
 }
 
-.campaign-category__link {
+.archive-category__link {
   position: relative; // これがないとボタンの上に魚のロゴが来てしまう
   width: calc((100% - rem(21)) / 2);
   font-size: rem(14);
@@ -32,13 +32,13 @@
   }
 }
 
-.campaign-category__link.is-active {
+.archive-category__link.is-active {
   color: $white;
   border-color: transparent;
   background-color: $greenaccent;
 }
 
-.campaign-category__link:hover {
+.archive-category__link:hover {
   color: $white;
   border-color: transparent;
   background-color: $greenaccent;

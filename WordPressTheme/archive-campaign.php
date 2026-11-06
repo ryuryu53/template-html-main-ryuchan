@@ -13,11 +13,11 @@
   <!-- キャンペーン -->
   <section class="layout-page-campaign page-campaign">
     <div class="page-campaign__inner inner">
-      <div class="page-campaign__category campaign-category">
+      <div class="page-campaign__category archive-category">
         <!-- タクソノミーのタブを生成 -->
         <!-- get_post_type_archive_link('campaign') →「キャンペーン」というカスタム投稿タイプのアーカイブページ（一覧ページ）のリンクを取得 -->
         <!-- if ( !is_tax() ) echo 'is-active' → 今表示されているページが特定のカテゴリ（タクソノミー）に属していない場合、is-activeというクラスを付与 -->
-        <a href="<?php echo esc_url( get_post_type_archive_link( 'campaign' ) ); ?>" class="campaign-category__link <?php if ( ! is_tax() ) echo 'is-active'; ?>">All</a>
+        <a href="<?php echo esc_url( get_post_type_archive_link( 'campaign' ) ); ?>" class="archive-category__link <?php if ( ! is_tax() ) echo 'is-active'; ?>">All</a>
         <?php
         // 表示したい順番のスラッグを指定（FB：並び替え不要）
         // $custom_order = array('license', 'fun-diving', 'experience-diving');
@@ -44,7 +44,7 @@
             $term_link = get_term_link( $term );  // 各カテゴリ（タクソノミー）のリンク先URLを取得
             // is_tax('campaign_category', $term->slug)：「今表示しているページが、このループで処理しているカテゴリ（$term->slug）かどうか？」を判定
         ?>
-        <a href="<?php echo esc_url( $term_link ); ?>" class="campaign-category__link <?php echo ( is_tax( 'campaign_category', $term->slug ) ? 'is-active' : '' ); ?>">
+        <a href="<?php echo esc_url( $term_link ); ?>" class="archive-category__link <?php echo ( is_tax( 'campaign_category', $term->slug ) ? 'is-active' : '' ); ?>">
           <?php echo esc_html( $term->name ); ?>
         </a>
         <?php endforeach; endif; ?>
